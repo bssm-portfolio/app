@@ -1,3 +1,4 @@
+import { MainLayout } from '@/layouts';
 import Head from 'next/head';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -6,7 +7,7 @@ interface SigninForm {
   password: string;
 }
 
-export default function Home() {
+function Home() {
   const { register, handleSubmit } = useForm<SigninForm>();
   const onSubmit: SubmitHandler<SigninForm> = (data) => console.log(data);
 
@@ -35,5 +36,13 @@ export default function Home() {
         <button>Naver Login</button>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <MainLayout>
+      <Home />
+    </MainLayout>
   );
 }

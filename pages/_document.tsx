@@ -1,19 +1,17 @@
-import { Html, Head, Main, NextScript } from 'next/document';
-import { Header, Navigator } from '../components';
-import { MainLayout } from '../layouts';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-export default function Document() {
-  return (
-    <Html>
-      <Head />
-      <body>
-        <Header />
-        <Navigator />
-        <MainLayout>
+class MyDocument extends Document {
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
           <Main />
-        </MainLayout>
-        <NextScript />
-      </body>
-    </Html>
-  );
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
+
+export default MyDocument;

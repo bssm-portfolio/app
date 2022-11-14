@@ -1,6 +1,8 @@
 import Head from 'next/head';
+import { AppLayout } from '@/layouts';
+import { AppDetail, AppPortfolio, AppSideMenu } from '@/components';
 
-export default function Home() {
+function Home() {
   return (
     <div>
       <Head>
@@ -9,6 +11,15 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1>메인페이지 입니다.</h1>
+      <AppLayout
+        app={<AppPortfolio />}
+        sidebar={<AppSideMenu />}
+        detail={<AppDetail />}
+      />
     </div>
   );
+}
+
+export default function Page() {
+  return <Home />;
 }
