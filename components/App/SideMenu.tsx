@@ -27,6 +27,19 @@ const SideMenu = () => {
       >
         naver webtoon
       </button>
+      <div>
+        url 입력해서 되는지 테스트
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const { testurl } = e.target as any;
+            if (testurl?.value) setUrl(testurl.value);
+          }}
+        >
+          <input name='testurl' />
+          <input type='submit' value='입력한 url 띄우기' />
+        </form>
+      </div>
     </div>
   );
 };
