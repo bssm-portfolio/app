@@ -1,6 +1,15 @@
 import Head from 'next/head';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+interface SigninForm {
+  username: string;
+  password: string;
+}
 
 export default function Home() {
+  const { register, handleSubmit } = useForm<SigninForm>();
+  const onSubmit: SubmitHandler<SigninForm> = (data) => console.log(data);
+
   return (
     <div>
       <Head>
@@ -9,6 +18,22 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1>로그인 페이지 입니다.</h1>
+      <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
+        <input
+          className='border-2'
+          placeholder='username'
+          {...register('username')}
+        />
+        <input
+          className='border-2'
+          placeholder='password'
+          {...register('password')}
+        />
+      </form>
+      <div className='flex flex-col items-start'>
+        <button>Google Login</button>
+        <button>Naver Login</button>
+      </div>
     </div>
   );
 }
