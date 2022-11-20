@@ -1,32 +1,33 @@
-import { urlState } from '@/store';
-import { useRecoilState } from 'recoil';
+import { urlState } from "@/store";
+import { useRecoilState } from "recoil";
+import { Button } from "@/components";
 
-const SideMenu = () => {
+export default function SideMenu() {
   const [_, setUrl] = useRecoilState(urlState);
   return (
-    <div className='bg-blue-100 w-full h-full flex flex-col gap-2'>
-      <button
-        className='bg-blue-50 p-10'
-        onClick={() => setUrl('https://www.nexon.com/Home/Game')}
+    <div className="bg-blue-100 w-full h-full flex flex-col gap-2">
+      <Button
+        className="bg-blue-50 p-10"
+        onClick={() => setUrl("https://www.nexon.com/Home/Game")}
       >
         nexon
-      </button>
-      <button
-        className='bg-blue-50 p-10'
+      </Button>
+      <Button
+        className="bg-blue-50 p-10"
         onClick={() =>
           setUrl(
-            'https://section.blog.naver.com/BlogHome.naver?directoryNo=0&currentPage=1&groupId=0'
+            "https://section.blog.naver.com/BlogHome.naver?directoryNo=0&currentPage=1&groupId=0",
           )
         }
       >
         naver blog
-      </button>
-      <button
-        className='bg-blue-50 p-10'
-        onClick={() => setUrl('https://comic.naver.com/webtoon/weekday')}
+      </Button>
+      <Button
+        className="bg-blue-50 p-10"
+        onClick={() => setUrl("https://comic.naver.com/webtoon/weekday")}
       >
         naver webtoon
-      </button>
+      </Button>
       <div>
         url 입력해서 되는지 테스트
         <form
@@ -36,12 +37,10 @@ const SideMenu = () => {
             if (testurl?.value) setUrl(testurl.value);
           }}
         >
-          <input name='testurl' />
-          <input type='submit' value='입력한 url 띄우기' />
+          <input name="testurl" />
+          <input type="submit" value="입력한 url 띄우기" />
         </form>
       </div>
     </div>
   );
-};
-
-export default SideMenu;
+}

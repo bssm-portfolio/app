@@ -7,10 +7,7 @@ export default function Header() {
   const [user] = useRecoilState(userState);
 
   return (
-    <div
-      className="flex justify-between items-center m-4"
-      onClick={(e) => console.log("outer")}
-    >
+    <div className="flex justify-between items-center m-4">
       <Link href="/">
         <Logo />
       </Link>
