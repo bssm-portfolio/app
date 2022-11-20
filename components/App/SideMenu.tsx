@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { Button } from "@/components";
 
 export default function SideMenu() {
-  const [_, setUrl] = useRecoilState(urlState);
+  const [url, setUrl] = useRecoilState(urlState);
   return (
     <div className="bg-blue-100 w-full h-full flex flex-col gap-2">
       <Button
@@ -29,7 +29,7 @@ export default function SideMenu() {
         naver webtoon
       </Button>
       <div>
-        url 입력해서 되는지 테스트
+        url 입력해서 되는지 테스트 : 선택된 url : {url}
         <form
           onSubmit={(e) => {
             e.preventDefault();

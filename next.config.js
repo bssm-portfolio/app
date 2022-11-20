@@ -7,9 +7,8 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "pbs.twimg.com",
-        port: "",
       },
-      { protocol: "https", hostname: "img1.daumcdn.net", port: "" },
+      { protocol: "https", hostname: "img1.daumcdn.net" },
     ],
   },
 };

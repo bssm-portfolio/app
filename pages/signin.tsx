@@ -41,9 +41,5 @@ function Home() {
 }
 
 export default function Page() {
-  return (
-    <MainLayout>
-      <Home />
-    </MainLayout>
-  );
+  return <MainLayout app={<Home />} />;
 }
