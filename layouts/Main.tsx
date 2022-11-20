@@ -1,12 +1,11 @@
 import { ReactNode } from "react";
-import { Header, Navigator } from "@/components";
+import { Header } from "@/components";
 
-export default function MainLayout({ children }: { children: ReactNode }) {
+export default function MainLayout({ app }: { app: ReactNode }) {
   return (
     <>
       <Header />
-      <Navigator />
-      <div className="m-6">{children}</div>
+      <div className="m-6">{app}</div>
     </>
   );
 }
