@@ -26,5 +26,6 @@ module.exports = {
     "jsx-a11y/no-static-element-interactions": 0,
     "import/no-cycle": 0,
     "react/require-default-props": 0,
+    "react/jsx-props-no-spreading": 0,
   },
 };
