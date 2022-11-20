@@ -9,4 +9,4 @@ export { default as AppPortfolio } from "./app/Portfolio";
 export { default as AppSideMenu } from "./app/SideMenu";
 export { default as PortfolioList } from "./main/PortfolioList";
 
-export { default as Button } from "./atom/Button";
+export { default as Button } from "./atoms/Button";
