@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { Logo, SearchBar, Avatar } from "@/components";
-import { useRecoilState } from "recoil";
-import { userState } from "@/store";
 
-export default function Header() {
-  const [user] = useRecoilState(userState);
+interface HeaderProps {
+  avatarUrl?: string;
+}
 
+export default function HeaderView({ avatarUrl }: HeaderProps) {
   return (
     <div className="flex justify-between items-center m-4">
       <Link href="/">
         <Logo />
       </Link>
       <SearchBar />
-      <Avatar imageUrl={user.avatarUrl} />
+      <Avatar imageUrl={avatarUrl} />
     </div>
   );
 }
