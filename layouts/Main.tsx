@@ -5,7 +5,9 @@ export default function MainLayout({ app }: { app: ReactNode }) {
   return (
     <>
       <Header />
-      <div className="m-6">{app}</div>
+      <div className="w-full flex justify-center">
+        <div className="m-6 w-70">{app}</div>
+      </div>
     </>
   );
 }
