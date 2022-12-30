@@ -14,3 +14,4 @@ export { default as MyPagePortfolioList } from "./app/MyPagePortfolioList";
 export { default as PortfolioList } from "./main/PortfolioList";
 
 export { default as Button } from "./atoms/Button";
+export { default as Chip } from "./atoms/Chip";
