@@ -1,9 +1,18 @@
-import { Portfolio } from "@/types/portfolio.interface";
+import { Comment, Portfolio } from "@/types/portfolio.interface";
 
 const avatarUrl =
   "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg";
 
 const portfolioUrl = "/assets/images/testPortfolioThumbnail.png";
+
+const comment: Comment = {
+  commentId: 0,
+  userProfile:
+    "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg",
+  userName: "사람 이름1",
+  content: "댓글 내용입니다.",
+  createdDate: new Date("2022-12-01"),
+};
 
 const portfolio: Portfolio = {
   portfolioId: 0,
@@ -16,13 +25,13 @@ const portfolio: Portfolio = {
   portfolioType: "VIDEO",
   title: "포트폴리오 제목입니다.",
   description: "string",
+  portfolioUrl: portfolioUrl,
   video: {
     fileName: "string",
     filePath: "string",
     fileUid: "string",
     fileSize: 0,
   },
-  portfolioUrl: portfolioUrl,
   thumbnail: {
     fileName: "string",
     filePath: "string",
@@ -53,11 +62,19 @@ const portfolioList = Array(10)
     return portfolio;
   });
 
+const commentList = Array(10)
+  .fill(null)
+  .map((_, idx) => {
+    comment.commentId = idx;
+    return comment;
+  });
+
 const fixture = {
   avatarUrl,
   portfolioUrl,
   portfolio,
   portfolioList,
+  commentList,
 };
 
 export default fixture;
