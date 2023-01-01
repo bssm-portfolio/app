@@ -62,7 +62,8 @@ export default function Detail() {
             alt="프로필"
             width={40}
             height={40}
-            className="rounded-full"
+            sizes="100px"
+            className="rounded-full "
           />
           <input
             type="text"

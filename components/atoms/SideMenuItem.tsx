@@ -5,7 +5,7 @@ import Chip from "./Chip";
 
 export default function SideMenuItem() {
   return (
-    <div>
+    <div className="w-[420px]">
       {fixture.portfolioList.map((data) => {
         return (
           <div className="w-full h-full flex m-2" key={data.portfolioId}>
@@ -13,8 +13,8 @@ export default function SideMenuItem() {
               className="rounded-[10px]"
               src={data.portfolioUrl}
               alt={data.title}
-              width={240}
-              height={135}
+              width="240"
+              height="135"
             />
             <div className="ml-3">
               <h2 className="font-bold text-[14px] mb-[8px]">{data.title}</h2>

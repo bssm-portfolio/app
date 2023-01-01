@@ -9,10 +9,12 @@ interface FrameProps {
 
 function Frame({ app, sidebar, detail }: FrameProps) {
   return (
-    <div className="px-[134px] grid grid-cols-[minmax(0,_1fr)_460px] grid-rows-[minmax(400px,_1fr)_80%] p-[30px]">
-      <div className="w-full">{app}</div>
+    <div className="px-[134px] pt-[52px] flex justify-between">
+      <div className="w-full">
+        <div>{app}</div>
+        <div>{detail}</div>
+      </div>
       <div>{sidebar}</div>
-      <div>{detail}</div>
     </div>
   );
 }
