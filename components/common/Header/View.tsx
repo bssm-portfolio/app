@@ -8,11 +8,12 @@ interface HeaderModalMenuProps {
   menuPair: MenuPair[];
   toggleMenu?: () => void;
 }
+
 interface HeaderProps extends HeaderModalMenuProps {
   avatarUrl?: string;
 }
 
-function HeaderModalMenu({
+export function HeaderModalMenu({
   menuPair,
   menuOpen,
   toggleMenu,
@@ -40,7 +41,7 @@ function HeaderModalMenu({
   );
 }
 
-export default function HeaderView({ avatarUrl }: HeaderProps) {
+export default function HeaderView({ avatarUrl, ...props }: HeaderProps) {
   const isLogined = false;
   return (
     <div className="flex justify-center">
@@ -57,7 +58,7 @@ export default function HeaderView({ avatarUrl }: HeaderProps) {
         </div>
         <div className="relative">
           <Avatar imageUrl={avatarUrl} />
-          {/* <HeaderModalMenu/> */}
+          <HeaderModalMenu {...props} />
         </div>
       </div>
     </div>

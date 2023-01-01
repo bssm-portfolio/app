@@ -27,6 +27,6 @@ module.exports = {
     "import/no-cycle": 0,
     "react/require-default-props": 0,
     "react/jsx-props-no-spreading": 0,
-    "no-empty-interface": false,
+    "no-empty-interface": 0,
   },
 };

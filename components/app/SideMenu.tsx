@@ -33,7 +33,9 @@ export default function SideMenu() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            const { testurl } = e.target as any;
+            const { testurl } = e.target as unknown as {
+              testurl: { value: string };
+            };
             if (testurl?.value) setUrl(testurl.value);
           }}
         >
