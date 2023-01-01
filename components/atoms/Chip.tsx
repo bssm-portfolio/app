@@ -11,7 +11,9 @@ interface ChipProps {
 
 function Group({ children, className }: ChipGroupProps) {
   return (
-    <div className={`${classNames(className, "flex gap-1")}`}>{children}</div>
+    <div className={`${classNames(className, "flex gap-1 flex-wrap")}`}>
+      {children}
+    </div>
   );
 }
 

@@ -31,7 +31,7 @@ const portfolio: Portfolio = {
   },
   scope: "PUBLIC",
   gitUrl: "string",
-  skillList: ["REACT", "JAVA"],
+  skillList: ["REACT", "JAVA", "Node.js", "Type"],
   contributorList: [
     {
       memberId: 0,
@@ -48,7 +48,10 @@ const portfolio: Portfolio = {
 
 const portfolioList = Array(10)
   .fill(0)
-  .map(() => portfolio);
+  .map((_, idx) => {
+    portfolio.portfolioId = idx;
+    return portfolio;
+  });
 
 const fixture = {
   avatarUrl,
