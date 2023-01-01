@@ -1,12 +1,16 @@
-import { urlState } from "@/store";
-import { useRecoilState } from "recoil";
-import { Button } from "@/components";
+// import { urlState } from "@/store";
+// import { useRecoilState } from "recoil";
+// import { Button } from "@/components";
+
+import SideMenuItem from "../atoms/SideMenuItem";
 
 export default function SideMenu() {
-  const [url, setUrl] = useRecoilState(urlState);
+  // const [url, setUrl] = useRecoilState(urlState);
   return (
-    <div className="bg-blue-100 w-full h-full flex flex-col gap-2">
-      <Button
+    <div>
+      <h2 className="text-[16px] font-bold">추천 프로젝트</h2>
+      <SideMenuItem />
+      {/* <Button
         className="bg-blue-50 p-10"
         onClick={() => setUrl("https://www.nexon.com/Home/Game")}
       >
@@ -42,7 +46,7 @@ export default function SideMenu() {
           <input name="testurl" />
           <input type="submit" value="입력한 url 띄우기" />
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }
