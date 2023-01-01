@@ -10,7 +10,7 @@ interface SigninForm {
 
 function Home() {
   const { register, handleSubmit } = useForm<SigninForm>();
-  const onSubmit: SubmitHandler<SigninForm> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SigninForm> = (data) => data;
 
   return (
     <div>
