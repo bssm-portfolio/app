@@ -8,11 +8,11 @@ export default function SideMenuItem() {
     <div>
       {fixture.portfolioList.map((data, idx) => {
         return (
-          <div className="w-[400px] h-full shadow-md flex m-2" key={idx}>
+          <div className="w-full h-full flex m-2" key={idx}>
             <Image
               className="rounded-[10px]"
               src={data.portfolioUrl}
-              alt="dd"
+              alt={data.title}
               width={200}
               height={120}
             />
@@ -26,7 +26,7 @@ export default function SideMenuItem() {
                   return <Chip.Item>{skillData}</Chip.Item>;
                 })}
               </Chip.Group>
-              <div className="mb-2">
+              <div className="mb-2 text-[10px]">
                 {getKoreanDate(data.createdDate)} ·{" "}
                 {getTimeAgo(data.createdDate)}
               </div>

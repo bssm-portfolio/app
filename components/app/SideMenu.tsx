@@ -1,13 +1,12 @@
 // import { urlState } from "@/store";
 // import { useRecoilState } from "recoil";
 // import { Button } from "@/components";
-
 import SideMenuItem from "../atoms/SideMenuItem";
 
 export default function SideMenu() {
   // const [url, setUrl] = useRecoilState(urlState);
   return (
-    <div>
+    <div className="ml-[30px]">
       <h2 className="text-[16px] font-bold">추천 프로젝트</h2>
       <SideMenuItem />
       {/* <Button

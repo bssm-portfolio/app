@@ -9,9 +9,9 @@ interface FrameProps {
 
 function Frame({ app, sidebar, detail }: FrameProps) {
   return (
-    <div className="grid grid-cols-[minmax(0,_1fr)_300px] grid-rows-[minmax(900px,_1fr)_300px]">
-      <div className="w-[720px]">{app}</div>
-      <div className="row-span-2">{sidebar}</div>
+    <div className="grid grid-cols-[minmax(0,_1fr)_460px] grid-rows-[minmax(400px,_1fr)_66%] p-[30px]">
+      <div className="w-full">{app}</div>
+      <div>{sidebar}</div>
       <div>{detail}</div>
     </div>
   );
