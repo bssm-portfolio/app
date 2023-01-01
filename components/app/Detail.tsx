@@ -66,7 +66,7 @@ export default function Detail() {
           />
           <input
             type="text"
-            className="w-full ml-[16px] border-b-[1px] border-b-[#D9D9D9] hover:outline-none"
+            className="w-full ml-[16px] border-b-[1px] border-b-[#D9D9D9] outline-none"
             placeholder="댓글 추가.."
           />
         </div>
