@@ -9,7 +9,7 @@ export default function Detail() {
   const portfolioData = fixture.portfolio;
   return (
     <div className="mt-[12px]">
-      <div className="w-full h-full flex justify-between">
+      <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
           <h2 className="font-bold text-[20px]">{portfolioData.title}</h2>
           <span>{portfolioData.writer.name}</span>
@@ -25,7 +25,7 @@ export default function Detail() {
         </div>
 
         <div>
-          <div className="flex gap-[12px] mb-[16px]">
+          <div className="flex gap-[12px] mb-[21px]">
             <Button status="active">
               <HeartIcon className="mr-[6px]" />
               <span className="font-[12px]">{portfolioData.bookmarks}</span>
