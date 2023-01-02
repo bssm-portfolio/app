@@ -16,9 +16,7 @@ test("timeAgo test - after 2000", () => {
   expect(getTimeAgo(new Date("December 17, 2005"))).toBe("17년 전");
 });
 
-test("timeAgo test - today", () => {
-  expect(getTimeAgo(new Date("January 2, 2023"))).toBe("20시간 전");
-});
+// 깃허브 시간대와 한국 시간대가 달라서 N시간 전은 삭제했습니다
 
 test("timeAgo test - now", () => {
   expect(getTimeAgo(new Date())).toBe("방금");
