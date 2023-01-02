@@ -8,14 +8,13 @@ export default function SideMenuItem() {
     <div className="flex flex-col items-start xl:w-[26.25rem]">
       {fixture.portfolioList.map((data) => {
         return (
-          <div className="w-full h-full flex m-2" key={data.id}>
+          <div className="w-full h-full flex m-2" key={data.portfolioId}>
             <Image
-              className="rounded-xsmall"
+              className="rounded-xsmall object-cover "
               src={data.portfolioUrl}
               alt={data.title}
               width="240"
               height="135"
-              style={{ objectFit: "cover" }}
             />
             <div className="ml-3">
               <h2 className="font-bold text-middle mb-[.5rem]">{data.title}</h2>
