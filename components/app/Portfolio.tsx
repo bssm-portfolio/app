@@ -5,7 +5,12 @@ export default function Portfolio() {
   const [url] = useRecoilState(urlState);
   return (
     <div className="w-full h-[500px]">
-      <iframe className="w-full h-full" src={url} title="portfolio">
+      <iframe
+        className="w-full h-full"
+        src={url}
+        title="portfolio"
+        style={{ border: "1px solid black" }}
+      >
         portfolio 가 들어가야 할 곳
       </iframe>
     </div>

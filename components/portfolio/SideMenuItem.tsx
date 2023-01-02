@@ -1,11 +1,11 @@
 import Image from "next/image";
 import fixture from "@/fixtures";
 import { getTimeAgo } from "@/utils/date";
-import Chip from "./Chip";
+import Chip from "../atoms/Chip";
 
 export default function SideMenuItem() {
   return (
-    <div className="w-[420px]">
+    <div className="flex flex-col items-start xl:w-[420px]">
       {fixture.portfolioList.map((data) => {
         return (
           <div className="w-full h-full flex m-2" key={data.portfolioId}>
@@ -15,6 +15,7 @@ export default function SideMenuItem() {
               alt={data.title}
               width="240"
               height="135"
+              style={{ objectFit: "cover" }}
             />
             <div className="ml-3">
               <h2 className="font-bold text-[14px] mb-[8px]">{data.title}</h2>
