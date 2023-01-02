@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown";
 import fixture from "@/fixtures";
 import { getKoreanDate } from "@/utils/date";
 import Button from "../atoms/DetailButton";
@@ -6,7 +7,14 @@ import Group from "../atoms/Group";
 import { HeartIcon } from "../Icon";
 
 export default function Detail() {
-  const portfolioData = fixture.portfolio;
+  const portfolioData = {
+    ...fixture.portfolio,
+    content: `프로젝트 설명 및 사진 첨부
+  + 글의 길이에 따라서 박스 크기 변동 
+  * 프로젝트 기간 등 
+
+  글 또는 사진 첨부 가능`,
+  };
   return (
     <div className="mt-small">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
@@ -46,12 +54,7 @@ export default function Detail() {
         </div>
       </div>
       <div className="px-large py-small bg-primary-light_gray rounded">
-        프로젝트 설명 및 사진 첨부
-        <ul className="list-disc pl-large py-large">
-          <li>글의 길이에 따라서 박스 크기 변동 </li>
-          <li>프로젝트 기간 등 </li>
-        </ul>
-        글 또는 사진 첨부 가능
+        <ReactMarkdown>{portfolioData.content}</ReactMarkdown>
       </div>
     </div>
   );
