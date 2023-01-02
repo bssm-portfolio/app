@@ -13,6 +13,9 @@ module.exports = {
       },
       spacing: {
         74: "74rem",
+        header: "5rem",
+        footer: "5rem",
+        content: "calc(100vh - 10rem)",
       },
       padding: {
         1.875: "1.875rem",
@@ -23,10 +26,13 @@ module.exports = {
         somago_yellow: "#FAAF3D",
         black: "#000000",
         white: "#ffffff",
-        "gray-dark": "#3A3A3A",
-        "gray-light": "#F9F9F9",
-        "border-gray": "#D9D9D9",
-        gray: "#8492a6",
+        primary: {
+          dark_gray: "#3A3A3A",
+          light_gray: "#F9F9F9",
+          border_gray: "#D9D9D9",
+        },
+        secondary: {},
+        background: {},
       },
       borderWidth: {
         DEFAULT: "1px",

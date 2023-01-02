@@ -39,7 +39,7 @@ export default function Comment() {
                     {commentData.userName}
                   </h2>
                   ·{" "}
-                  <span className="text-gray-dark text-[10px]">
+                  <span className="text-primary-dark_gray text-[10px]">
                     {getTimeAgo(commentData.createdDate)}
                   </span>
                 </div>

@@ -9,8 +9,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const getButtonCss = (status: ButtonStatus): string => {
   return `
-    bg-${status === "active" ? "gray-light" : "gray-dark"}
-    text-${status === "active" ? "gray-dark" : "gray-light"}
+    bg-${status === "active" ? "primary-light_gray" : "primary-dark_gray"}
+    text-${status === "active" ? "primary-dark_gray" : "primary-light_gray"}
     rounded-[30px]
     px-[10.5px]
     py-[12px]

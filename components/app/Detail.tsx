@@ -45,7 +45,7 @@ export default function Detail() {
           </div>
         </div>
       </div>
-      <div className="px-[20px] py-[12px] bg-gray-light rounded">
+      <div className="px-[20px] py-[12px] bg-primary-light_gray rounded">
         프로젝트 설명 및 사진 첨부
         <ul className="list-disc pl-[20px] py-[20px]">
           <li>글의 길이에 따라서 박스 크기 변동 </li>

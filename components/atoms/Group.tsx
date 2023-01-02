@@ -4,7 +4,7 @@ interface GroupProps {
 
 export default function Group({ names }: GroupProps) {
   return (
-    <span className="rounded-[10px] bg-gray-light px-[12px] py-[10px]">
+    <span className="rounded-[10px] bg-primary-light_gray px-[12px] py-[10px]">
       {names.map((data, idx) => {
         return (
           <span
