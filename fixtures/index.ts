@@ -58,15 +58,13 @@ const portfolio: Portfolio = {
 const portfolioList = Array(10)
   .fill(0)
   .map((_, idx) => {
-    portfolio.portfolioId = idx;
-    return portfolio;
+    return { id: idx, ...portfolio };
   });
 
 const commentList = Array(10)
   .fill(null)
   .map((_, idx) => {
-    comment.commentId = idx;
-    return comment;
+    return { portfolioId: idx, ...comment };
   });
 
 const fixture = {

@@ -8,7 +8,7 @@ export default function SideMenuItem() {
     <div className="flex flex-col items-start xl:w-[26.25rem]">
       {fixture.portfolioList.map((data) => {
         return (
-          <div className="w-full h-full flex m-2" key={data.portfolioId}>
+          <div className="w-full h-full flex m-2" key={data.id}>
             <Image
               className="rounded-xsmall"
               src={data.portfolioUrl}
