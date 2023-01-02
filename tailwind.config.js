@@ -20,9 +20,13 @@ module.exports = {
       },
       colors: {
         blue: "#3E73FB",
-        somago_yellow: "FAAF3D",
+        somago_yellow: "#FAAF3D",
         black: "#000000",
         white: "#ffffff",
+        "gray-dark": "#3A3A3A",
+        "gray-light": "#F9F9F9",
+        "border-gray": "#D9D9D9",
+        gray: "#8492a6",
       },
       borderWidth: {
         DEFAULT: "1px",

@@ -28,15 +28,15 @@ export default function Detail() {
           <div className="flex gap-[12px] mb-[21px]">
             <Button status="active">
               <HeartIcon className="mr-[6px]" />
-              <span className="font-[12px]">{portfolioData.bookmarks}</span>
+              <span className="text-[12px]">{portfolioData.bookmarks}</span>
             </Button>
             <Button status="active">
               <HeartIcon className="mr-[6px]" />
-              <span className="font-[12px]">팔로잉</span>
+              <span className="text-[12px]">팔로잉</span>
             </Button>
             <Button status="active">
               <HeartIcon className="mr-[6px]" />
-              <span className="font-[12px]">공유</span>
+              <span className="text-[12px]">공유</span>
             </Button>
           </div>
 
@@ -45,7 +45,7 @@ export default function Detail() {
           </div>
         </div>
       </div>
-      <div className="px-[20px] py-[12px] bg-[#F9F9F9] rounded">
+      <div className="px-[20px] py-[12px] bg-gray-light rounded">
         프로젝트 설명 및 사진 첨부
         <ul className="list-disc pl-[20px] py-[20px]">
           <li>글의 길이에 따라서 박스 크기 변동 </li>

@@ -25,7 +25,7 @@ const portfolio: Portfolio = {
   portfolioType: "VIDEO",
   title: "포트폴리오 제목입니다.",
   description: "string",
-  portfolioUrl: portfolioUrl,
+  portfolioUrl,
   video: {
     fileName: "string",
     filePath: "string",

@@ -18,7 +18,7 @@ export default function Comment() {
         />
         <input
           type="text"
-          className="w-full ml-[16px] border-b-[1px] border-b-[#D9D9D9] outline-none"
+          className="w-full ml-[16px] border-b-[1px] border-b-border-gray outline-none"
           placeholder="댓글 추가.."
         />
       </div>
@@ -39,7 +39,7 @@ export default function Comment() {
                     {commentData.userName}
                   </h2>
                   ·{" "}
-                  <span className="color-[#3A3A3A] text-[10px]">
+                  <span className="text-gray-dark text-[10px]">
                     {getTimeAgo(commentData.createdDate)}
                   </span>
                 </div>
