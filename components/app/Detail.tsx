@@ -8,46 +8,46 @@ import { HeartIcon } from "../Icon";
 export default function Detail() {
   const portfolioData = fixture.portfolio;
   return (
-    <div className="mt-[12px]">
+    <div className="mt-small">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="font-bold text-[20px]">{portfolioData.title}</h2>
+          <h2 className="font-bold text-large">{portfolioData.title}</h2>
           <span>{portfolioData.writer.name}</span>
-          <Chip.Group className="mt-[12px]">
+          <Chip.Group className="mt-small">
             {portfolioData.skillList.map((skillData) => {
               return <Chip.Item key={skillData}>{skillData}</Chip.Item>;
             })}
           </Chip.Group>
-          <span className="block my-[12px]">
+          <span className="block my-small">
             조회수 {portfolioData.views}회 ·{" "}
             {getKoreanDate(portfolioData.createdDate)}
           </span>
         </div>
 
         <div>
-          <div className="flex gap-[12px] mb-[21px]">
+          <div className="flex gap-small mb-large">
             <Button status="active">
-              <HeartIcon className="mr-[6px]" />
-              <span className="text-[12px]">{portfolioData.bookmarks}</span>
+              <HeartIcon className="mr-2xsmall" />
+              <span className="text-small">{portfolioData.bookmarks}</span>
             </Button>
             <Button status="active">
-              <HeartIcon className="mr-[6px]" />
-              <span className="text-[12px]">팔로잉</span>
+              <HeartIcon className="mr-2xsmall" />
+              <span className="text-small">팔로잉</span>
             </Button>
             <Button status="active">
-              <HeartIcon className="mr-[6px]" />
-              <span className="text-[12px]">공유</span>
+              <HeartIcon className="mr-2xsmall" />
+              <span className="text-small">공유</span>
             </Button>
           </div>
 
-          <div className="mb-[21px]">
+          <div className="mb-large">
             <Group names={["참여자", "참여자1", "참여자2", "참여자3"]} />
           </div>
         </div>
       </div>
-      <div className="px-[20px] py-[12px] bg-primary-light_gray rounded">
+      <div className="px-large py-small bg-primary-light_gray rounded">
         프로젝트 설명 및 사진 첨부
-        <ul className="list-disc pl-[20px] py-[20px]">
+        <ul className="list-disc pl-large py-large">
           <li>글의 길이에 따라서 박스 크기 변동 </li>
           <li>프로젝트 기간 등 </li>
         </ul>

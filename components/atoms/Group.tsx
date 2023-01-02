@@ -4,14 +4,12 @@ interface GroupProps {
 
 export default function Group({ names }: GroupProps) {
   return (
-    <span className="rounded-[10px] bg-primary-light_gray px-[12px] py-[10px]">
+    <span className="rounded-[0.625rem] bg-primary-light_gray px-small py-xsmall">
       {names.map((data, idx) => {
         return (
           <span
             className={
-              idx === 0
-                ? "font-bold pr-[16px] last:pr-0"
-                : "pr-[16px] last:pr-0"
+              idx === 0 ? "font-bold pr-base last:pr-0" : "pr-base last:pr-0"
             }
             key={data}
           >

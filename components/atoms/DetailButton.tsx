@@ -11,9 +11,9 @@ const getButtonCss = (status: ButtonStatus): string => {
   return `
     bg-${status === "active" ? "primary-light_gray" : "primary-dark_gray"}
     text-${status === "active" ? "primary-dark_gray" : "primary-light_gray"}
-    rounded-[30px]
-    px-[10.5px]
-    py-[12px]
+    rounded-full
+    px-[0.65rem]
+    py-small
     shadow
     flex
     items-center

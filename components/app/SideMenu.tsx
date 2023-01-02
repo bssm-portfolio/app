@@ -6,8 +6,8 @@ import SideMenuItem from "../portfolio/SideMenuItem";
 export default function SideMenu() {
   // const [url, setUrl] = useRecoilState(urlState);
   return (
-    <div className="ml-0 xl:ml-[30px] ">
-      <h2 className="text-[16px] font-bold">추천 프로젝트</h2>
+    <div className="ml-0 xl:ml-xlarge ">
+      <h2 className="text-base font-bold">추천 프로젝트</h2>
       <SideMenuItem />
       {/* <Button
         className="bg-blue-50 p-10"

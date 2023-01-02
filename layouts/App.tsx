@@ -10,12 +10,12 @@ interface FrameProps {
 
 function Frame({ app, sidebar, detail, comment }: FrameProps) {
   return (
-    <div className="pt-[52px] grid grid-rows-[1fr] xl:grid-cols-[minmax(0,_1fr)_420px] xl:grid-rows-[minmax(1fr,_0)_300px] px-4 xl:px-[100px]">
+    <div className="pt-[3.25rem] grid grid-rows-[1fr] xl:grid-cols-[minmax(0,_1fr)_26.25rem] xl:grid-rows-[minmax(1fr,_0)_18.75rem] px-4 xl:px-[6.25rem]">
       <div>
         <div>{app}</div>
         <div>{detail}</div>
       </div>
-      <div className="mt-[16px] xl:mt-0 xl:row-span-2">{sidebar}</div>
+      <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
       <div>{comment}</div>
     </div>
   );
