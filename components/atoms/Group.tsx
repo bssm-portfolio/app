@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 interface GroupProps {
   names: string[];
 }
@@ -8,9 +10,9 @@ export default function Group({ names }: GroupProps) {
       {names.map((data, idx) => {
         return (
           <span
-            className={
-              idx === 0 ? "font-bold pr-base last:pr-0" : "pr-base last:pr-0"
-            }
+            className={classNames("pr-base", "last:pr-0", {
+              "font-bold": idx === 0,
+            })}
             key={data}
           >
             {data}
