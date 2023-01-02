@@ -8,10 +8,10 @@ interface FrameProps {
 
 function Frame({ profile, portfiloList }: FrameProps) {
   return (
-    <div className="flex">
+    <section className="flex">
       <div>{profile}</div>
       <div>{portfiloList}</div>
-    </div>
+    </section>
   );
 }
 

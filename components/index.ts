@@ -9,6 +9,7 @@ export { default as Portfolio } from "./common/Portfolio";
 export { default as AppDetail } from "./app/Detail";
 export { default as AppPortfolio } from "./app/Portfolio";
 export { default as AppSideMenu } from "./app/SideMenu";
+export { default as AppComment } from "./app/Comment";
 export { default as MyPageProfile } from "./app/MyPageProfile";
 export { default as MyPagePortfolioList } from "./app/MyPagePortfolioList";
 export { default as PortfolioList } from "./main/PortfolioList";

@@ -5,23 +5,27 @@ interface FrameProps {
   app: ReactNode;
   sidebar: ReactNode;
   detail: ReactNode;
+  comment: ReactNode;
 }
 
-function Frame({ app, sidebar, detail }: FrameProps) {
+function Frame({ app, sidebar, detail, comment }: FrameProps) {
   return (
-    <div className="grid grid-cols-[minmax(0,_1fr)_300px] grid-rows-[minmax(900px,_1fr)_300px]">
-      <div>{app}</div>
-      <div className="row-span-2">{sidebar}</div>
-      <div>{detail}</div>
+    <div className="pt-[3.25rem] grid grid-rows-[1fr] xl:grid-cols-[minmax(0,_1fr)_26.25rem] xl:grid-rows-[minmax(1fr,_0)_18.75rem] px-4 xl:px-[6.25rem]">
+      <div>
+        <div>{app}</div>
+        <div>{detail}</div>
+      </div>
+      <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
+      <div>{comment}</div>
     </div>
   );
 }
 
-export function AppLayout({ app, sidebar, detail }: FrameProps) {
+export function AppLayout({ app, sidebar, detail, comment }: FrameProps) {
   return (
     <>
       <Header />
-      <Frame app={app} sidebar={sidebar} detail={detail} />
+      <Frame app={app} sidebar={sidebar} detail={detail} comment={comment} />
     </>
   );
 }

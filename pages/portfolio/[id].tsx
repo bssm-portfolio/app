@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { AppLayout } from "@/layouts";
-import { AppDetail, AppPortfolio, AppSideMenu } from "@/components";
+import { AppComment, AppDetail, AppPortfolio, AppSideMenu } from "@/components";
 
 export default function Home() {
   return (
@@ -14,6 +14,7 @@ export default function Home() {
         app={<AppPortfolio />}
         sidebar={<AppSideMenu />}
         detail={<AppDetail />}
+        comment={<AppComment />}
       />
     </div>
   );

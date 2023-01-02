@@ -22,3 +22,11 @@ export type Portfolio = {
   comments: number;
   createdDate: Date;
 };
+
+export interface Comment {
+  commentId: number;
+  userProfile: string;
+  userName: string;
+  content: string;
+  createdDate: Date;
+}

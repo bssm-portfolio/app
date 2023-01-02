@@ -1,12 +1,13 @@
 import TimeAgo from "javascript-time-ago";
 import ko from "javascript-time-ago/locale/ko";
+
 TimeAgo.addDefaultLocale(ko);
 const timeAgo = new TimeAgo("ko-KR");
 
 export const getKoreanDate = (
   date: Date,
   options = {
-    year: "2-digit",
+    year: "numeric",
     month: "short",
     day: "numeric",
   } as Intl.DateTimeFormatOptions,
