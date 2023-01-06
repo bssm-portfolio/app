@@ -7,34 +7,30 @@ export default function SideMenuItem() {
   const { data } = usePortfolioList();
   return (
     <div className="flex flex-col items-start xl:w-[26.25rem]">
-      {data.map((portfolioData) => {
+      {data.map((portfolio) => {
         return (
-          <div
-            className="w-full h-full flex m-2"
-            key={portfolioData.portfolioId}
-          >
+          <div className="w-full h-full flex m-2" key={portfolio.portfolioId}>
             <Image
               className="rounded-xsmall"
-              src={portfolioData.portfolioUrl}
-              alt={portfolioData.title}
+              src={portfolio.portfolioUrl}
+              alt={portfolio.title}
               width="320"
               height="180"
             />
             <div className="ml-3">
               <h2 className="font-bold text-middle mb-[.5rem]">
-                {portfolioData.title}
+                {portfolio.title}
               </h2>
               <span className="font-bold text-small block mb-xsmall">
-                {portfolioData.writer.name}
+                {portfolio.writer.name}
               </span>
               <Chip.Group className="mb-xsmall">
-                {portfolioData.skillList.map((skillData) => {
+                {portfolio.skillList.map((skillData) => {
                   return <Chip.Item>{skillData}</Chip.Item>;
                 })}
               </Chip.Group>
               <div className="text-xsmall">
-                조회수 {portfolioData.views}회 ·{" "}
-                {getTimeAgo(portfolioData.createdDate)}
+                조회수 {portfolio.views}회 · {getTimeAgo(portfolio.createdDate)}
               </div>
             </div>
           </div>
