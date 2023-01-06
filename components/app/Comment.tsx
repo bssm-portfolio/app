@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import fixture from "@/fixtures";
 import { getTimeAgo } from "@/utils/date";
+import { useCommentList } from "@/models/portfolio";
 
 export default function Comment() {
-  const commentDataList = fixture.commentList;
+  const { data } = useCommentList();
   return (
     <div>
       <div className="flex mt-base">
@@ -23,7 +23,7 @@ export default function Comment() {
         />
       </div>
       <div className="mt-2xlarge">
-        {commentDataList.map((commentData) => {
+        {data.map((commentData) => {
           return (
             <div className="flex items-center mb-xlarge">
               <Image
