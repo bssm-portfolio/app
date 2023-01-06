@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { HeaderButton } from "@/components";
 import { MainLayout } from "@/layouts";
 import Head from "next/head";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -33,8 +33,8 @@ function Home() {
         />
       </form>
       <div className="flex flex-col items-start">
-        <Button>Google Login</Button>
-        <Button>Naver Login</Button>
+        <HeaderButton>Google Login</HeaderButton>
+        <HeaderButton>Naver Login</HeaderButton>
       </div>
     </div>
   );
