@@ -1,24 +1,25 @@
+import { MemberWithoutIntroduction } from "@/types/member.interface";
 import classNames from "classnames";
 
 interface GroupProps {
-  names: string[];
+  names: MemberWithoutIntroduction[];
 }
 
 export default function Group({ names }: GroupProps) {
   return (
-    <span className="rounded-[0.625rem] bg-primary-light_gray px-small py-xsmall">
+    <div className="inline rounded-[0.625rem] bg-primary-light_gray px-small py-xsmall">
       {names.map((data, idx) => {
         return (
           <span
             className={classNames("pr-base", "last:pr-0", {
               "font-bold": idx === 0,
             })}
-            key={data}
+            key={data.memberId}
           >
-            {data}
+            {data.name}
           </span>
         );
       })}
-    </span>
+    </div>
   );
 }

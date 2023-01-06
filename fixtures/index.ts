@@ -48,6 +48,18 @@ const portfolio: Portfolio = {
       profileImageUrl: "string",
       email: "string",
     },
+    {
+      memberId: 1,
+      name: "string1",
+      profileImageUrl: "string1",
+      email: "string1",
+    },
+    {
+      memberId: 2,
+      name: "string2",
+      profileImageUrl: "string2",
+      email: "string2",
+    },
   ],
   bookmarks: 120,
   views: 0,
