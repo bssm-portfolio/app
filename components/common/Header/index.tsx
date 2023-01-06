@@ -1,25 +1,25 @@
+import useModal from "@/hooks/useModal";
 import { userState } from "@/store";
-import { useRouter } from "next/router";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { MenuPair } from "../Menu";
+import UploadModal from "./UploadModal";
 import HeaderView from "./View";
 
 export default function Header() {
   const [user] = useRecoilState(userState);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter();
+  const { openModal } = useModal();
+  const isLogined = true;
 
-  const menuPair: MenuPair[] = [
-    { name: "마이페이지", onClick: () => router.push("/mypage") },
-    { name: "로그아웃", onClick: () => router.push("/signin") },
-  ];
+  const dummyFn = () => 0;
   return (
     <HeaderView
-      menuPair={menuPair}
       avatarUrl={user.avatarUrl}
-      menuOpen={menuOpen}
-      toggleMenu={() => setMenuOpen((s) => !s)}
+      isLogined={isLogined}
+      onLeftButtonClick={dummyFn}
+      onRightButtonClick={
+        isLogined
+          ? () => openModal({ title: "업로드", content: <UploadModal /> })
+          : dummyFn
+      }
     />
   );
 }
