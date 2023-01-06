@@ -30,3 +30,7 @@ export interface Comment {
   content: string;
   createdDate: Date;
 }
+
+export interface Description {
+  description: string;
+}
