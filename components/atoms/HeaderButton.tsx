@@ -10,19 +10,25 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const getButtonCss = (varient: ButtonVarient) => {
-  const bgColor = varient === "primary" ? "bg-blue" : "bg-black";
+  const borderColor = varient === "primary" ? "border-black" : "border-blue";
+  const bgColor = varient === "primary" ? "bg-white" : "bg-blue";
+  const color = varient === "primary" ? "text-black" : "text-white";
+
   return `
-    px-5
-    py-2.5 
-    ${bgColor}
-    text-white
-    rounded 
-    font-inter
-    text-sm
-  `;
+  px-1.875 
+  py-0.468 
+  border-0.5
+  ${borderColor}
+  ${bgColor}
+  ${color}
+  rounded-full 
+  font-inter
+  font-bold
+  text-sm
+`;
 };
 
-export default function Button({
+export default function HeaderButton({
   type = "button",
   varient = "primary",
   onClick,

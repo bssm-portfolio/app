@@ -10,6 +10,22 @@ module.exports = {
     extend: {
       width: {
         70: "70rem",
+        37.5: "37.5rem", // 600px;
+      },
+      maxWidth: {
+        37.5: "37.5rem", // 600px;
+      },
+      maxHeight: {
+        45: "45rem",
+      },
+      minWidth: {
+        27.5: "27.5rem", // 600px;
+      },
+      minHeight: {
+        35: "35rem",
+      },
+      height: {
+        45: "45rem",
       },
       spacing: {
         74: "74rem",
