@@ -1,13 +1,13 @@
 import { ModalState } from "@/types/modal.interface";
 import { atom } from "recoil";
 
-export const MODAL_STATE = "MODAL_STATE";
-
-export const modalState = atom<ModalState>({
-  key: MODAL_STATE,
+const modalState = atom<ModalState>({
+  key: "modal",
   default: {
     title: "",
     content: null,
     visible: false,
   },
 });
+
+export default { modalState };
