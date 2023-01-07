@@ -1,6 +1,8 @@
 import { atom } from "recoil";
 import fixture from "@/fixtures";
 
+export { default as modalState } from "./modal";
+
 export const userState = atom({
   key: "user",
   default: {

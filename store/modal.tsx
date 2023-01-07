@@ -10,4 +10,4 @@ const modalState = atom<ModalState>({
   },
 });
 
-export default { modalState };
+export default modalState;

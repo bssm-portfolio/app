@@ -1,4 +1,4 @@
-import { modalState } from "@/store/modal";
+import { modalState } from "@/store";
 import { ModalState } from "@/types/modal.interface";
 import { useRecoilState } from "recoil";
 
