@@ -10,15 +10,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const getButtonCss = (varient: ButtonVarient) => {
-  const bgColor = varient === "primary" ? "bg-blue" : "bg-black";
+  const bgColor = varient === "primary" ? "bg-blue" : "bg-primary-light_gray";
+  const textColor = varient === "primary" ? "text-white" : "text-black";
   return `
     px-5
     py-2.5 
     ${bgColor}
-    text-white
+    ${textColor}
     rounded 
     font-inter
     text-sm
+    font-bold
   `;
 };
 
