@@ -13,12 +13,7 @@ export default function Navigator({
   onSubmit,
 }: FileUploadViewProps) {
   return (
-    <div
-      className={classNames("flex mt-12 mb-9", {
-        "justify-end": !goPrev,
-        "justify-between": !!goPrev,
-      })}
-    >
+    <div>
       {!!goPrev && (
         <Button onClick={goPrev} varient="secondary">
           이전

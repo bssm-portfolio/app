@@ -24,7 +24,7 @@ export default function ModalView({
       <div
         className={classNames(
           { hidden: !visible },
-          "fixed top-1/2 left-1/2 flex flex-col bg-white max-h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 rounded-lg",
+          "fixed top-1/2 left-1/2 flex flex-col flex-wrap content-between bg-white h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 rounded-lg",
         )}
       >
         <div className="flex justify-between items-center w-full px-6 py-5 h-16 border-b-0.5 border-primary-border_gray">
