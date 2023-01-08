@@ -15,6 +15,7 @@ export default function ModalButton({ varient, ...props }: ButtonProps) {
         },
       )}
       {...props}
+      varient={varient}
     />
   );
 }
