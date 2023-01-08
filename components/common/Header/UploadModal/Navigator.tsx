@@ -1,6 +1,5 @@
 import Button from "@/components/atoms/Button";
 import classNames from "classnames";
-import React from "react";
 
 interface FileUploadViewProps {
   goPrev: (() => void) | null;

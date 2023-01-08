@@ -1,4 +1,3 @@
-import React from "react";
 import { Portfolio } from "@/components";
 import { useRouter } from "next/router";
 import { usePortfolioList } from "@/models/portfolio";

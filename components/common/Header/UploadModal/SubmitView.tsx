@@ -1,5 +1,4 @@
 import Radio from "@/components/atoms/Radio";
-import React from "react";
 
 export default function SubmitView() {
   return (

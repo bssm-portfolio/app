@@ -1,5 +1,3 @@
-import React from "react";
-
 interface RadioProps {
   id: string;
   label: string;

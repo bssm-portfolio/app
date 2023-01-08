@@ -1,5 +1,3 @@
-import React from "react";
-
 type InputVarient = "primary";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;

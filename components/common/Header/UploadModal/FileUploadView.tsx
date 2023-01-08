@@ -1,5 +1,4 @@
 import FileUploader from "@/components/atoms/FileUploader";
-import React from "react";
 
 export default function FileUploadView() {
   return (

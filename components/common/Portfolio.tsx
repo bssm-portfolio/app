@@ -1,6 +1,5 @@
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
-import React from "react";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
 import { Chip } from "@/components";
 import { getKoreanDate, getTimeAgo } from "@/utils/date";
