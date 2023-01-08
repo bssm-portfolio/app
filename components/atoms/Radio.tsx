@@ -16,6 +16,7 @@ const getRadioCss = () => {
     mr-2
     bg-white 
     rounded-full 
+    cursor-pointer
     outline 
     outline-primary-dark_gray 
     checked:bg-blue 
@@ -38,6 +39,7 @@ export default function Radio({
         className={getRadioCss()}
         name={name}
         defaultChecked={checked}
+        id={id}
       />
       <div className="flex flex-col mb-[1.93rem]">
         <label htmlFor={id} className="leading-3">
