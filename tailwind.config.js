@@ -38,6 +38,16 @@ module.exports = {
         xlarge: "2rem", // 32px
         "2xlarge": "2.25rem", // 36px
       },
+      fontSize: {
+        "2xsmall": "0.375rem", // 6px
+        xsmall: "0.625rem", // 10px
+        small: "0.75rem", // 12px
+        middle: "0.875rem", // 14px
+        base: "1rem", // 16px
+        large: "1.25rem", // 20px
+        xlarge: "2rem", // 32px
+        "2xlarge": "2.25rem", // 36px
+      },
       padding: {
         1.875: "1.875rem",
         0.468: "0.468rem",
