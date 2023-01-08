@@ -9,12 +9,12 @@ export default function CommentList() {
     <div>
       <div className="flex mt-base">
         <Image
-          src="https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg"
+          src={data[0].userProfile}
           alt="프로필"
           width={40}
           height={40}
           sizes="100px"
-          className="rounded-full "
+          className="rounded-full"
         />
         <input
           type="text"

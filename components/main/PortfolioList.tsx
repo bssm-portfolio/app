@@ -11,7 +11,11 @@ export default function PortfolioList() {
   return (
     <div className="flex gap-12 flex-wrap">
       {data.map((portfolio) => (
-        <Portfolio portfolio={portfolio} onClick={moveDetail} />
+        <Portfolio
+          portfolio={portfolio}
+          onClick={moveDetail}
+          key={portfolio.portfolioId}
+        />
       ))}
     </div>
   );
