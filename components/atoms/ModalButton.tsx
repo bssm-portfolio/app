@@ -2,7 +2,10 @@ import classNames from "classnames";
 import React from "react";
 import Button, { ButtonProps } from "./Button";
 
-export default function ModalButton({ varient, ...props }: ButtonProps) {
+export default function ModalButton({
+  varient = "primary",
+  ...props
+}: ButtonProps) {
   return (
     <Button
       className={classNames(
@@ -11,7 +14,7 @@ export default function ModalButton({ varient, ...props }: ButtonProps) {
           "left-10": varient === "secondary",
         },
         {
-          "right-10": varient !== "secondary",
+          "right-10": varient === "primary",
         },
       )}
       {...props}
