@@ -29,6 +29,7 @@ module.exports = {
       },
       spacing: {
         74: "74rem",
+
         "2xsmall": "0.375rem", // 6px
         xsmall: "0.625rem", // 10px
         small: "0.75rem", // 12px
@@ -39,6 +40,13 @@ module.exports = {
         "2xlarge": "2.25rem", // 36px
       },
       fontSize: {
+        sxx: [
+          "0.625rem",
+          {
+            lineHeight: "0.75rem",
+            fontWeight: "400",
+          },
+        ],
         "2xsmall": "0.375rem", // 6px
         xsmall: "0.625rem", // 10px
         small: "0.75rem", // 12px
@@ -71,15 +79,6 @@ module.exports = {
       },
       fontFamily: {
         inter: ["Inter var", "sans-serif"],
-      },
-      fontSize: {
-        sxx: [
-          "0.625rem",
-          {
-            lineHeight: "0.75rem",
-            fontWeight: "400",
-          },
-        ],
       },
     },
   },
