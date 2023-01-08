@@ -18,7 +18,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   const onSubmit = () => closeModal();
 
   return (
-    <>
+    <div className="h-40">
       {pageIndex === 0 && <FileUploadView />}
       {pageIndex === 1 && <FormView />}
       {pageIndex === 2 && <SubmitView />}
@@ -27,6 +27,6 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         goPrev={pageIndex > 0 ? goPrev : null}
         onSubmit={pageIndex === MAX_NAVIGATOR_LENGTH - 1 ? onSubmit : null}
       />
-    </>
+    </div>
   );
 }

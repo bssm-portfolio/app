@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react";
 
 type ButtonVarient = "primary" | "secondary";
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: "submit" | "button";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children?: ReactNode;
@@ -12,11 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const getButtonCss = (varient: ButtonVarient) => {
   const bgColor = varient === "primary" ? "bg-blue" : "bg-primary-light_gray";
   const textColor = varient === "primary" ? "text-white" : "text-black";
-  const left = varient === "primary" ? "right-12" : "left-12";
   return `
-    fixed
-    ${left}
-    bottom-12
     px-5
     py-2.5 
     ${bgColor}

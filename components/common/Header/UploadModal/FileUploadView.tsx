@@ -3,7 +3,7 @@ import FileUploader from "@/components/atoms/FileUploader";
 export default function FileUploadView() {
   return (
     <>
-      <div className="w-full border h-60 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
+      <div className="w-full border h-60 mb-2.5 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
         <FileUploader label="동영상 업로드" />
         <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
       </div>
