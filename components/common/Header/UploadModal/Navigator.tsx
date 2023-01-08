@@ -1,5 +1,4 @@
 import Button from "@/components/atoms/Button";
-import classNames from "classnames";
 
 interface FileUploadViewProps {
   goPrev: (() => void) | null;
