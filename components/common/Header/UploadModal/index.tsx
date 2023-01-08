@@ -15,9 +15,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   const goNext = () =>
     setPageIndex((idx) => (idx < MAX_NAVIGATOR_LENGTH ? idx + 1 : idx));
   const goPrev = () => setPageIndex((idx) => (idx > 0 ? idx - 1 : idx));
-  const onSubmit = () => {
-    closeModal();
-  };
+  const onSubmit = () => closeModal();
 
   return (
     <>
