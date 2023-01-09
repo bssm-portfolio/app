@@ -1,7 +1,6 @@
 import Input from "@/components/atoms/Input";
 import LabelForm from "@/components/atoms/LabelForm";
 import Textarea from "@/components/atoms/Textarea";
-import React from "react";
 
 export default function FormView() {
   return (

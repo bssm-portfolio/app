@@ -1,6 +1,4 @@
-import Button from "@/components/atoms/Button";
-import classNames from "classnames";
-import React from "react";
+import ModalButton from "@/components/atoms/ModalButton";
 
 interface FileUploadViewProps {
   goPrev: (() => void) | null;
@@ -14,22 +12,17 @@ export default function Navigator({
   onSubmit,
 }: FileUploadViewProps) {
   return (
-    <div
-      className={classNames("flex mt-12 mb-9", {
-        "justify-end": !goPrev,
-        "justify-between": !!goPrev,
-      })}
-    >
+    <>
       {!!goPrev && (
-        <Button onClick={goPrev} varient="secondary">
+        <ModalButton onClick={goPrev} varient="secondary">
           이전
-        </Button>
+        </ModalButton>
       )}
       {onSubmit ? (
-        <Button onClick={onSubmit}>완료</Button>
+        <ModalButton onClick={onSubmit}>완료</ModalButton>
       ) : (
-        <Button onClick={goNext}>다음</Button>
+        <ModalButton onClick={goNext}>다음</ModalButton>
       )}
-    </div>
+    </>
   );
 }

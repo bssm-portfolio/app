@@ -1,6 +1,5 @@
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
-import React from "react";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
 import { Chip } from "@/components";
 import { getKoreanDate, getTimeAgo } from "@/utils/date";
@@ -23,6 +22,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
         alt="포트폴리오이미지"
         width={320}
         height={180}
+        priority
       />
       <div className="flex w-full mt-3">
         <div className="flex flex-col w-full">

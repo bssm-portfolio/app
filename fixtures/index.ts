@@ -68,7 +68,7 @@ const portfolio: Portfolio = {
 };
 
 const portfolioList = Array(10)
-  .fill(0)
+  .fill(null)
   .map((_, idx) => {
     return { ...portfolio, portfolioId: idx };
   });

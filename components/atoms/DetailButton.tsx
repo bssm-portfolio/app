@@ -1,5 +1,3 @@
-import React from "react";
-
 type ButtonStatus = "active" | "disabled";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

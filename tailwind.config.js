@@ -25,10 +25,29 @@ module.exports = {
         35: "35rem",
       },
       height: {
+        40: "40rem",
         45: "45rem",
       },
       spacing: {
         74: "74rem",
+
+        "2xsmall": "0.375rem", // 6px
+        xsmall: "0.625rem", // 10px
+        small: "0.75rem", // 12px
+        middle: "0.875rem", // 14px
+        base: "1rem", // 16px
+        large: "1.25rem", // 20px
+        xlarge: "2rem", // 32px
+        "2xlarge": "2.25rem", // 36px
+      },
+      fontSize: {
+        sxx: [
+          "0.625rem",
+          {
+            lineHeight: "0.75rem",
+            fontWeight: "400",
+          },
+        ],
         "2xsmall": "0.375rem", // 6px
         xsmall: "0.625rem", // 10px
         small: "0.75rem", // 12px
@@ -61,15 +80,6 @@ module.exports = {
       },
       fontFamily: {
         inter: ["Inter var", "sans-serif"],
-      },
-      fontSize: {
-        sxx: [
-          "0.625rem",
-          {
-            lineHeight: "0.75rem",
-            fontWeight: "400",
-          },
-        ],
       },
     },
   },

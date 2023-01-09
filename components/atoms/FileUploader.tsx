@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import React from "react";
 
 type ButtonVarient = "primary" | "secondary";
 interface FileUploaderProps
