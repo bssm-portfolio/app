@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SearchIcon() {
+export default function SearchIcon({ ...props }) {
   return (
     <svg
       width="20"
@@ -8,6 +8,7 @@ export default function SearchIcon() {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         fillRule="evenodd"

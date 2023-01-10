@@ -1,15 +1,29 @@
-import React from "react";
+import React, { ReactNode, SelectHTMLAttributes } from "react";
 import DownIcon from "../Icon/DownIcon";
 
-export default function Select({ children }: { children: React.ReactNode }) {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  className?: string;
+  children: ReactNode;
+}
+
+export default function Select({
+  children,
+  onChange,
+  name,
+  className = "",
+}: SelectProps) {
   return (
-    <>
-      <select className="appearance-none border-r border-black">
-        {children}
-      </select>
-      <span>
-        <DownIcon />
-      </span>
-    </>
+    <div className={className}>
+      <div className="relative">
+        <select
+          name={name}
+          onChange={onChange}
+          className="appearance-none pr-[32px] text-center bg-inherit focus:outline-none"
+        >
+          {children}
+        </select>
+        <DownIcon className="absolute top-[7px] right-[12px] -z-10" />
+      </div>
+    </div>
   );
 }
