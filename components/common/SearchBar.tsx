@@ -18,8 +18,8 @@ const getSearchBarCss = () => {
   border
   border-primary-dark_gray
   rounded-full
-  px-[24px]
-  py-[8px]`;
+  px-xlarge
+  py-[0.5rem]`;
 };
 
 const xClick = (inputRef: RefObject<HTMLInputElement>) => {
@@ -57,12 +57,12 @@ export default function SearchBar() {
         <option>제작자</option>
         <option>추천순</option>
       </Select>
-      <span className="block border-r border-primary-dark_gray h-[17px]" />
-      <SearchIcon className="mx-[12px]" />
+      <span className="block border-r border-primary-dark_gray h-base" />
+      <SearchIcon className="mx-small" />
       <input
         ref={inputRef}
         name="keyword"
-        className="focus:outline-none w-[254px]"
+        className="focus:outline-none w-[15.875rem] pr-2"
         placeholder="검색"
         value={keyword}
         onChange={(event) => handleKeyword(event, setKeyword)}
@@ -74,7 +74,7 @@ export default function SearchBar() {
           className="absolute right-5"
           onClick={() => xClick(inputRef)}
         >
-          <XIcon className="w-[16px]" />
+          <XIcon className="w-base h-base" />
         </button>
       ) : null}
     </form>

@@ -18,11 +18,11 @@ export default function Select({
         <select
           name={name}
           onChange={onChange}
-          className="appearance-none pr-[32px] text-center bg-inherit focus:outline-none"
+          className="appearance-none pr-8 text-center bg-inherit focus:outline-none"
         >
           {children}
         </select>
-        <DownIcon className="absolute top-[7px] right-[12px] -z-10" />
+        <DownIcon className="absolute top-2 right-3 -z-10" />
       </div>
     </div>
   );
