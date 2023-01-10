@@ -1,5 +1,7 @@
+import { TextareaHTMLAttributes } from "react";
+
 type TextareaVarient = "primary";
-interface InputProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
   varient?: TextareaVarient;
 }

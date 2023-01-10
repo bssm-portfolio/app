@@ -1,9 +1,13 @@
-import React, { ReactNode } from "react";
+import React, {
+  ButtonHTMLAttributes,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 
 type ButtonVarient = "primary" | "secondary";
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: "submit" | "button";
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   children?: ReactNode;
   className?: string;
   varient?: ButtonVarient;

@@ -1,4 +1,6 @@
-interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
+import { HTMLAttributes } from "react";
+
+interface InputProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   label: string;
 }
