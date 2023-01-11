@@ -1,8 +1,18 @@
 import Head from "next/head";
 import { AppLayout } from "@/layouts";
 import { AppComment, AppDetail, AppPortfolio, AppSideMenu } from "@/components";
+import type { GetServerSideProps } from "next";
+import httpClient from "@/apis";
+import { Portfolio } from "@/types/portfolio.interface";
+import { getFileDownloadUrl } from "@/utils/file";
+import { getDateParsedData } from "@/utils/date";
 
-export default function Home() {
+interface PortfolioIdPageProps {
+  portfolio: Portfolio;
+}
+
+export default function Home({ portfolio }: PortfolioIdPageProps) {
+  const dateParsedPortfolio = getDateParsedData(portfolio);
   return (
     <div>
       <Head>
@@ -11,11 +21,32 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppLayout
-        app={<AppPortfolio />}
+        app={
+          <AppPortfolio
+            url={getFileDownloadUrl(dateParsedPortfolio.thumbnail)}
+          />
+        }
         sidebar={<AppSideMenu />}
-        detail={<AppDetail />}
+        detail={<AppDetail portfolio={dateParsedPortfolio} />}
         comment={<AppComment />}
       />
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.query;
+  if (Number.isNaN(Number(id)))
+    return {
+      notFound: true,
+    };
+
+  const portfolio = (await httpClient.portfolio.getById({ params: { id } }))
+    .data;
+
+  return {
+    props: {
+      portfolio: JSON.parse(JSON.stringify(portfolio)),
+    },
+  };
+};
