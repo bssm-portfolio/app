@@ -15,6 +15,7 @@ module.exports = {
     "airbnb-typescript",
     "plugin:prettier/recommended",
   ],
+  include: ["./.eslintrc.js"], // parsing error 지우기
   rules: {
     // 'React' must be in scope when using JSX 에러 지우기(Next.js)
     "react/react-in-jsx-scope": "off",

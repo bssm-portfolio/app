@@ -24,7 +24,6 @@ const getSearchBarCss = () => {
 
 const xClick = (inputRef: RefObject<HTMLInputElement>) => {
   if (inputRef.current) {
-    // eslint-disable-next-line no-param-reassign
     inputRef.current.value = "";
     inputRef.current.focus();
   }
