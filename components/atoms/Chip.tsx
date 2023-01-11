@@ -1,12 +1,13 @@
 import classNames from "classnames";
+import { ReactNode } from "react";
 
 interface ChipGroupProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 interface ChipProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 function Group({ children, className }: ChipGroupProps) {

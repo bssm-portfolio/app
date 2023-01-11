@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import { ChangeEventHandler, InputHTMLAttributes } from "react";
 
 type ButtonVarient = "primary" | "secondary";
-interface FileUploaderProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+interface FileUploaderProps extends InputHTMLAttributes<HTMLInputElement> {
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   className?: string;
   label?: string;
   varient?: ButtonVarient;

@@ -1,8 +1,10 @@
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
 type ButtonStatus = "active" | "disabled";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   status: ButtonStatus;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const getButtonCss = (status: ButtonStatus): string => {
