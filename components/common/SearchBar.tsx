@@ -62,7 +62,7 @@ export default function SearchBar() {
       <input
         ref={inputRef}
         name="keyword"
-        className="focus:outline-none w-[15.875rem] pr-2"
+        className="focus:outline-none w-[15.875rem]"
         placeholder="검색"
         value={keyword}
         onChange={(event) => handleKeyword(event, setKeyword)}
@@ -71,7 +71,7 @@ export default function SearchBar() {
       {keyword ? (
         <button
           type="button"
-          className="absolute right-5"
+          className="absolute right-3"
           onClick={() => xClick(inputRef)}
         >
           <XIcon className="w-base h-base" />
