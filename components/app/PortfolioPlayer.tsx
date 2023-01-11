@@ -1,8 +1,8 @@
-import { urlState } from "@/store";
-import { useRecoilState } from "recoil";
+interface PortfolioProps {
+  url: string;
+}
 
-export default function Portfolio() {
-  const [url] = useRecoilState(urlState);
+export default function PortfolioPlayer({ url }: PortfolioProps) {
   return (
     <div className="w-full h-[31.25rem]">
       <iframe className="w-full h-full" src={url} title="portfolio">
