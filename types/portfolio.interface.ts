@@ -11,7 +11,6 @@ export type Portfolio = {
   title: string;
   description: string;
   scope: PortfolioScope;
-  portfolioUrl: string;
   gitUrl: string;
   video: S3File;
   thumbnail: S3File;
@@ -22,6 +21,18 @@ export type Portfolio = {
   comments: number;
   createdDate: Date;
 };
+
+interface Pagination {
+  page: number;
+  size: number;
+  totalCount: number;
+  totalPages: number;
+}
+
+export interface PortfolioList {
+  list: Portfolio[];
+  pagination: Pagination;
+}
 
 export interface Comment {
   commentId: number;

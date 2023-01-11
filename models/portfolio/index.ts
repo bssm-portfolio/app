@@ -1,7 +1,13 @@
+import httpClient from "@/apis";
 import fixture from "@/fixtures";
+import { PortfolioList } from "@/types/portfolio.interface";
+import { useQuery } from "@tanstack/react-query";
 
 const usePortfolioList = () => {
-  return { data: fixture.portfolioList };
+  const { data } = useQuery<PortfolioList>(["portfolioList"], () =>
+    httpClient.portfolio.search({}).then((d) => d.data),
+  );
+  return data || { pagination: null, list: [] };
 };
 
 const usePortfolio = () => {

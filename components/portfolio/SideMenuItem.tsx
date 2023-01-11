@@ -1,18 +1,19 @@
 import Image from "next/image";
 import { getTimeAgo } from "@/utils/date";
 import { usePortfolioList } from "@/models/portfolio";
+import { getFileDownloadUrl } from "@/utils/file";
 import Chip from "../atoms/Chip";
 
 export default function SideMenuItem() {
-  const { data } = usePortfolioList();
+  const { list } = usePortfolioList();
   return (
     <div className="flex flex-col items-start xl:w-[26.25rem]">
-      {data.map((portfolio) => {
+      {list.map((portfolio) => {
         return (
           <div className="w-full h-full flex m-2" key={portfolio.portfolioId}>
             <Image
               className="rounded-xsmall"
-              src={portfolio.portfolioUrl}
+              src={getFileDownloadUrl(portfolio.thumbnail)}
               alt={portfolio.title}
               width="320"
               height="180"

@@ -4,15 +4,14 @@ import { usePortfolioList } from "@/models/portfolio";
 
 export default function PortfolioList() {
   const router = useRouter();
-  const moveDetail = () => router.push("/portfolio/123");
-  const { data } = usePortfolioList();
+  const { list } = usePortfolioList();
 
   return (
     <div className="flex gap-12 flex-wrap">
-      {data.map((portfolio) => (
+      {list.map((portfolio) => (
         <Portfolio
           portfolio={portfolio}
-          onClick={moveDetail}
+          onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
           key={portfolio.portfolioId}
         />
       ))}

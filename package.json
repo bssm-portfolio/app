@@ -12,6 +12,8 @@
     "dev:e2e": "NODE_ENV=development && playwright test"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.22.0",
+    "axios": "^1.2.2",
     "classnames": "^2.3.2",
     "javascript-time-ago": "^2.5.9",
     "next": "13.0.0",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.29.1",
+    "@tanstack/react-query-devtools": "^4.22.0",
     "@types/jest": "^29.2.4",
     "@types/node": "18.11.7",
     "@types/react": "18.0.24",

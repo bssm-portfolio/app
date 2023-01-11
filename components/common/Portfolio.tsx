@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
 import { Chip } from "@/components";
 import { getKoreanDate, getTimeAgo } from "@/utils/date";
+import { getFileDownloadUrl } from "@/utils/file";
 
 interface PortfolioProps {
   portfolio: Portfolio;
@@ -18,7 +19,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
     <div className="flex flex-col cursor-pointer" onClick={onClick}>
       <Image
         className="rounded"
-        src={portfolio.portfolioUrl}
+        src={getFileDownloadUrl(portfolio.thumbnail)}
         alt="포트폴리오이미지"
         width={320}
         height={180}
