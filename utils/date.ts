@@ -24,3 +24,26 @@ export const isISODateString = (value: string) => {
     /^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$/;
   return isISODateStringRegExp.test(value);
 };
+
+export const getDateParsedData = (data: unknown): any => {
+  if (data === null || data === undefined || typeof data !== "object") {
+    return data;
+  }
+
+  return Object.entries(data).reduce((acc: any, item: any) => {
+    const [key, value] = item;
+    if (Array.isArray(value)) {
+      return {
+        ...acc,
+        [key]: value.map((v) => getDateParsedData(v)),
+      };
+    }
+
+    if (isISODateString(value)) return { ...acc, [key]: new Date(value) };
+
+    return {
+      ...acc,
+      [key]: value,
+    };
+  }, {});
+};

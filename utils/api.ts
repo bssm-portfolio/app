@@ -1,28 +1,5 @@
-import { isISODateString } from "@/utils/date";
+import { getDateParsedData } from "@/utils/date";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-
-export const getDateParsedData = (data: unknown): any => {
-  if (data === null || data === undefined || typeof data !== "object") {
-    return data;
-  }
-
-  return Object.entries(data).reduce((acc: any, item: any) => {
-    const [key, value] = item;
-    if (Array.isArray(value)) {
-      return {
-        ...acc,
-        [key]: value.map((v) => getDateParsedData(v)),
-      };
-    }
-
-    if (isISODateString(value)) return { ...acc, [key]: new Date(value) };
-
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
 
 export const requestInterceptors = (requestConfig: AxiosRequestConfig) => {
   const urlParams = requestConfig.url?.split("/:") || [];
