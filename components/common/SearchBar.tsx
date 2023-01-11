@@ -46,7 +46,10 @@ export default function SearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <form className={getSearchBarCss()} method="get" action="/search">
+    <form
+      className={getSearchBarCss()}
+      onSubmit={(event) => event.preventDefault()}
+    >
       <Select
         className="text-middle"
         name="category"
