@@ -1,13 +1,14 @@
 import { S3File } from "./file.interface";
 import { MemberWithoutIntroduction } from "./member.interface";
 
-type PortfolioType = "VIDEO" | "URL";
+export type PortfolioType = "VIDEO" | "URL";
 type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
 export type PortfolioSidebarType = "main" | "portfolio";
 
 export type Portfolio = {
   portfolioId: number;
   writer: MemberWithoutIntroduction;
+  portfolioUrl: string;
   portfolioType: PortfolioType;
   title: string;
   description: string;
