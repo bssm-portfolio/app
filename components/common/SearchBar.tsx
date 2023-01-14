@@ -18,7 +18,7 @@ const getSearchBarCss = () => {
   border
   border-primary-dark_gray
   rounded-full
-  px-xlarge
+  px-[1.5rem]
   py-[0.5rem]`;
 };
 

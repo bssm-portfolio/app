@@ -30,7 +30,6 @@ module.exports = {
       },
       spacing: {
         74: "74rem",
-
         "2xsmall": "0.375rem", // 6px
         xsmall: "0.625rem", // 10px
         small: "0.75rem", // 12px
