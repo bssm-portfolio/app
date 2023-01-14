@@ -12,11 +12,11 @@ export default function SideMenuItem() {
         return (
           <div className="w-full h-full flex my-2" key={portfolio.portfolioId}>
             <Image
-              className="rounded-xsmall xl:w-320 xl:h-235 object-cover"
+              className="rounded-[0.625rem] object-cover"
               src={getFileDownloadUrl(portfolio.thumbnail)}
               alt={portfolio.title}
-              width="240"
-              height="135"
+              width={240}
+              height={135}
             />
             <div className="ml-3">
               <h2 className="font-bold text-middle mb-[.5rem]">
