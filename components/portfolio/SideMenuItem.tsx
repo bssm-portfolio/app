@@ -27,7 +27,7 @@ export default function SideMenuItem() {
               </span>
               <Chip.Group className="mb-xsmall">
                 {portfolio.skillList.map((skillData) => {
-                  return <Chip.Item>{skillData}</Chip.Item>;
+                  return <Chip.Item key={skillData}>{skillData}</Chip.Item>;
                 })}
               </Chip.Group>
               <div className="text-xsmall">
