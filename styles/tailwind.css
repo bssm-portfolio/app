@@ -2,7 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://rsms.me/inter/inter.css");
-
-img[height] {
-  height: revert-layer;
-}

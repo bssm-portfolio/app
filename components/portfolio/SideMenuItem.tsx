@@ -11,15 +11,17 @@ export default function SideMenuItem() {
       {list.map((portfolio) => {
         return (
           <div className="w-full h-full flex my-2" key={portfolio.portfolioId}>
-            <Image
-              className="rounded-[0.625rem] object-cover xl:!w-[15rem] xl:!h-[8.4rem]"
-              src={getFileDownloadUrl(portfolio.thumbnail)}
-              alt={portfolio.title}
-              width={320}
-              height={180}
-            />
+            <div className="relative w-[320px] h-[180px] xl:w-[240px] xl:h-[135px]">
+              <Image
+                className="rounded-[0.625rem] object-cover"
+                src={getFileDownloadUrl(portfolio.thumbnail)}
+                alt={portfolio.title}
+                fill
+              />
+            </div>
+
             <div className="ml-3">
-              <h2 className="font-bold text-middle mb-[.5rem]">
+              <h2 className="font-bold text-middle mb-[0.5rem]">
                 {portfolio.title}
               </h2>
               <span className="font-bold text-small block mb-xsmall">
