@@ -11,14 +11,14 @@ import SearchIcon from "../Icon/SearchIcon";
 import Select from "./Select";
 
 const getSearchBarCss = () => {
-  return `relative
+  return `
   flex 
   items-center 
   text-primary-dark_gray
   border
   border-primary-dark_gray
   rounded-full
-  px-xlarge
+  px-[1.5rem]
   py-[0.5rem]`;
 };
 
@@ -71,11 +71,7 @@ export default function SearchBar() {
       />
 
       {keyword ? (
-        <button
-          type="button"
-          className="absolute right-3"
-          onClick={() => xClick(inputRef)}
-        >
+        <button type="button" className="ml-3" onClick={() => xClick(inputRef)}>
           <XIcon className="w-base h-base" />
         </button>
       ) : null}

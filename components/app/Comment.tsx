@@ -24,7 +24,10 @@ export default function CommentList() {
       <div className="mt-2xlarge">
         {data.map((comment) => {
           return (
-            <div className="flex items-center mb-xlarge">
+            <div
+              className="flex items-center mb-xlarge"
+              key={comment.commentId}
+            >
               <Image
                 className="rounded-full mr-base"
                 src={comment.userProfile}

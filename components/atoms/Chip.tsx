@@ -12,7 +12,12 @@ interface ChipProps {
 
 function Group({ children, className }: ChipGroupProps) {
   return (
-    <div className={`${classNames(className, "flex gap-1 flex-wrap")}`}>
+    <div
+      className={`${classNames(
+        className,
+        "flex gap-1 flex-wrap xl:w-[8.4375rem]",
+      )}`}
+    >
       {children}
     </div>
   );
@@ -20,7 +25,7 @@ function Group({ children, className }: ChipGroupProps) {
 
 function Item({ children }: ChipProps) {
   return (
-    <div className="px-3 py-1 border border-blue rounded-full text-blue text-sxx ">
+    <div className="px-3 py-1 border border-blue rounded-full text-blue text-sxx">
       {children}
     </div>
   );
