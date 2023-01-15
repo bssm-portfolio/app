@@ -11,7 +11,7 @@ export default function SideMenuItem() {
       {list.map((portfolio) => {
         return (
           <div className="w-full h-full flex my-2" key={portfolio.portfolioId}>
-            <div className="relative w-[320px] h-[180px] xl:w-[240px] xl:h-[135px]">
+            <div className="relative w-[20rem] h-[11.25rem] xl:w-[15rem] xl:h-[8.4375rem]">
               <Image
                 className="rounded-[0.625rem] object-cover"
                 src={getFileDownloadUrl(portfolio.thumbnail)}
