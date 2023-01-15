@@ -5,7 +5,7 @@ import SearchIcon from "@/components/Icon/SearchIcon";
 
 export default function FormView() {
   return (
-    <div className="w-full h-[32.5rem] overflow-auto">
+    <div className="w-full h-[32.5rem] overflow-auto px-6">
       <LabelForm label="제목" className="mb-6">
         <Input className="w-full" placeholder="제목" />
       </LabelForm>
