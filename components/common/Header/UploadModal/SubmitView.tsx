@@ -2,7 +2,7 @@ import Radio from "@/components/atoms/Radio";
 
 export default function SubmitView() {
   return (
-    <div className="px-6">
+    <>
       <h2 className="text-base mb-large">공개범위</h2>
       <form>
         <Radio
@@ -25,6 +25,6 @@ export default function SubmitView() {
           description="나와 내가 선택한 사람만 볼 수 있습니다."
         />
       </form>
-    </div>
+    </>
   );
 }
