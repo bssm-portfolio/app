@@ -4,8 +4,23 @@ import Textarea from "@/components/atoms/Textarea";
 import SearchIcon from "@/components/Icon/SearchIcon";
 
 export default function FormView() {
+  const getFormViewCss = () => {
+    return `w-full 
+    h-[32.5rem] 
+    overflow-auto 
+    pr-6 
+    pl-[0.0625rem] 
+    scrollbar 
+    scrollbar-w-[0.3125rem] 
+    scrollbar-track-inherit 
+    scrollbar-thumb-gray-300 
+    scrollbar-thumb-rounded-md 
+    hover:scrollbar-thumb-[#989898]
+    `;
+  };
+
   return (
-    <div className="w-full h-[32.5rem] overflow-auto pr-6 scrollbar:none">
+    <div className={getFormViewCss()}>
       <LabelForm label="제목" className="mb-6">
         <Input className="w-full" placeholder="제목" />
       </LabelForm>

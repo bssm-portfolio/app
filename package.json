@@ -21,7 +21,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.3",
     "react-markdown": "^8.0.4",
-    "recoil": "^0.7.6"
+    "recoil": "^0.7.6",
+    "tailwind-scrollbar": "^2.1.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.29.1",
