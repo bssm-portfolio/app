@@ -15,7 +15,7 @@ export default function FormView() {
     scrollbar-track-inherit 
     scrollbar-thumb-gray-300 
     scrollbar-thumb-rounded-md 
-    hover:scrollbar-thumb-[#989898]
+    hover:scrollbar-thumb-primary-scroll_gray
     `;
   };
 

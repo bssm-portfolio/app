@@ -69,6 +69,7 @@ module.exports = {
           dark_gray: "#3A3A3A",
           light_gray: "#F9F9F9",
           border_gray: "#D9D9D9",
+          scroll_gray: "#989898",
         },
         secondary: {},
         background: {},
