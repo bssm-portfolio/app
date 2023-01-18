@@ -1,5 +1,6 @@
 import DataGrid from "@/components/contents/DataGrid";
 import DataGridTitle from "@/components/contents/DataGridTitle";
+import Filter from "@/components/contents/Filter";
 import ChannelContentLayout from "@/layouts/ChannelContent";
 import { usePortfolioList } from "@/models/portfolio";
 import Head from "next/head";
@@ -15,6 +16,7 @@ export default function Home() {
       </Head>
       <ChannelContentLayout
         title={<DataGridTitle />}
+        filter={<Filter />}
         datagrid={<DataGrid portfolioList={list} />}
       />
     </div>

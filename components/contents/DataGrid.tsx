@@ -35,7 +35,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
 
   return (
     <table className="w-full">
-      <thead className="border-y border-y-primary-dark_gray">
+      <thead className="border-y border-y-primary-border_gray">
         <tr>
           <th className="flex items-center py-6 pl-14 text-start">
             <CheckBox
@@ -59,7 +59,10 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
       </thead>
       <tbody className="text-center">
         {portfolioList?.map((portfolio) => (
-          <tr key={portfolio.portfolioId}>
+          <tr
+            key={portfolio.portfolioId}
+            className="border-b border-b-primary-border_gray"
+          >
             <td className="flex items-center py-4 pl-14 text-start">
               <CheckBox
                 value={portfolio.portfolioId}
@@ -83,7 +86,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
                   <Image
                     className="object-cover rounded"
                     src={getFileDownloadUrl(portfolio.thumbnail)}
-                    alt="펭수"
+                    alt={portfolio.title}
                     fill
                   />
                 </div>
