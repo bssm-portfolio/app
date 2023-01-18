@@ -17,9 +17,9 @@ const countViewCss = `
 export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
   return (
     <div className="flex flex-col cursor-pointer" onClick={onClick}>
-      <div className="relative w-[20rem] h-[11.25rem] ">
+      <div className="relative w-[20rem] h-[11.25rem]">
         <Image
-          className="rounded"
+          className="rounded object-cover"
           src={getFileDownloadUrl(portfolio.thumbnail)}
           alt="포트폴리오이미지"
           fill
