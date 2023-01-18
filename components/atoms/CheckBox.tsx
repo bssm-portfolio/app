@@ -1,24 +1,30 @@
 import classNames from "classnames";
-import React, { SelectHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLInputElement> {
+interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-const getSelectCss = () => {
-  return ``;
+const getCheckBoxCss = () => {
+  return `
+  appearance-none
+  w-5
+  h-5
+  border
+  border-primary-dark_gray
+  rounded-sm`;
 };
 
-export default function Select({
+export default function CheckBox({
   onClick,
   children,
   className = "",
   ...props
-}: SelectProps) {
+}: CheckBoxProps) {
   return (
     <input
       type="checkbox"
-      className={classNames(className, getSelectCss())}
+      className={classNames(className, getCheckBoxCss())}
       {...props}
     />
   );
