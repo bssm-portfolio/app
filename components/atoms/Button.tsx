@@ -2,7 +2,6 @@ import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
 type ButtonVarient = "primary" | "secondary";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  type?: "submit" | "button";
   onClick?: MouseEventHandler<HTMLButtonElement>;
   children?: ReactNode;
   className?: string;
@@ -30,9 +29,11 @@ export default function Button({
   onClick,
   children,
   className = "",
+  ...props
 }: ButtonProps) {
   return (
     <button
+      {...props}
       className={`${className} ${getButtonCss(varient)}`}
       onClick={onClick}
       type={type === "submit" ? "submit" : "button"}

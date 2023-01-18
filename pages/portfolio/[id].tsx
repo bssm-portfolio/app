@@ -1,6 +1,11 @@
 import Head from "next/head";
 import { AppLayout } from "@/layouts";
-import { AppComment, AppDetail, AppPortfolio, AppSideMenu } from "@/components";
+import {
+  AppComment,
+  AppDetail,
+  PortfolioPlayer,
+  AppSideMenu,
+} from "@/components";
 import type { GetServerSideProps } from "next";
 import httpClient from "@/apis";
 import { Portfolio } from "@/types/portfolio.interface";
@@ -12,7 +17,9 @@ interface PortfolioIdPageProps {
 }
 
 export default function Home({ portfolio }: PortfolioIdPageProps) {
-  const dateParsedPortfolio = getDateParsedData(portfolio);
+  const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
+  const type = dateParsedPortfolio.portfolioType;
+
   return (
     <div>
       <Head>
@@ -22,8 +29,13 @@ export default function Home({ portfolio }: PortfolioIdPageProps) {
       </Head>
       <AppLayout
         app={
-          <AppPortfolio
-            url={getFileDownloadUrl(dateParsedPortfolio.thumbnail)}
+          <PortfolioPlayer
+            url={
+              type === "VIDEO"
+                ? getFileDownloadUrl(dateParsedPortfolio.video)
+                : dateParsedPortfolio.portfolioUrl
+            }
+            type={type}
           />
         }
         sidebar={<AppSideMenu />}

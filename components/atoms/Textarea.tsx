@@ -1,9 +1,11 @@
 import { TextareaHTMLAttributes } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 type TextareaVarient = "primary";
 interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
   varient?: TextareaVarient;
+  registerReturn?: UseFormRegisterReturn;
 }
 
 const getTextareaCss = (varient: TextareaVarient) => {
@@ -24,11 +26,13 @@ export default function Textarea({
   onClick,
   children,
   className = "",
+  registerReturn,
   ...props
 }: InputProps) {
   return (
     <textarea
       className={`${className} ${getTextareaCss(varient)}`}
+      {...registerReturn}
       {...props}
     />
   );

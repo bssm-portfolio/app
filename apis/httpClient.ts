@@ -31,12 +31,12 @@ class HttpClient {
     return this.api.get(`/:id`, requestConfig);
   }
 
-  post(requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/", requestConfig);
+  post(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/", data, requestConfig);
   }
 
-  put(requestConfig?: AxiosRequestConfig) {
-    return this.api.put("/", requestConfig);
+  put(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.put("/", data, requestConfig);
   }
 
   delete(requestConfig?: AxiosRequestConfig) {

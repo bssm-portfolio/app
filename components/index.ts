@@ -7,7 +7,7 @@ export { default as SearchBar } from "./common/SearchBar";
 export { default as Portfolio } from "./common/Portfolio";
 
 export { default as AppDetail } from "./app/Detail";
-export { default as AppPortfolio } from "./app/PortfolioPlayer";
+export { default as PortfolioPlayer } from "./app/PortfolioPlayer";
 export { default as AppSideMenu } from "./app/SideMenu";
 export { default as AppComment } from "./app/Comment";
 export { default as MyPageProfile } from "./app/MyPageProfile";
