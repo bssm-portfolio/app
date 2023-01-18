@@ -64,7 +64,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
             key={portfolio.portfolioId}
             className="relative border-b border-b-primary-border_gray"
           >
-            <HamburgerIcon className="absolute left-[10px] top-2/4 -translate-y-2/4" />
+            <HamburgerIcon className="absolute left-[10px] top-2/4 -translate-y-2/4 cursor-pointer" />
             <td className="flex items-center py-4 pl-14 text-start">
               <CheckBox
                 value={portfolio.portfolioId}
