@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FileUploadView from "./FileUploadView";
 import FormView from "./FormView";
 import Navigator from "./Navigator";

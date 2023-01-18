@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import React from "react";
 import Button, { ButtonProps } from "./Button";
 
 export default function ModalButton({

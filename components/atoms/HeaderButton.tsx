@@ -1,8 +1,4 @@
-import React, {
-  ButtonHTMLAttributes,
-  MouseEventHandler,
-  ReactNode,
-} from "react";
+import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
 type ButtonVarient = "primary" | "secondary";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
