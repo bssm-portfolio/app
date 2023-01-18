@@ -12,7 +12,6 @@ export const requestInterceptors = (requestConfig: AxiosRequestConfig) => {
     .join("/");
 
   urlParams?.forEach((paramKey: string) => {
-    // eslint-disable-next-line no-param-reassign
     delete requestConfig.params[paramKey];
   }, {});
 
