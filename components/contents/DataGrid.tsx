@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import CheckBox from "../atoms/CheckBox";
+import HamburgerIcon from "../Icon/HamburgerIcon";
 
 interface DataGridProps {
   portfolioList: Portfolio[];
@@ -61,8 +62,9 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
         {portfolioList?.map((portfolio) => (
           <tr
             key={portfolio.portfolioId}
-            className="border-b border-b-primary-border_gray"
+            className="relative border-b border-b-primary-border_gray"
           >
+            <HamburgerIcon className="absolute left-[10px] top-2/4 -translate-y-2/4" />
             <td className="flex items-center py-4 pl-14 text-start">
               <CheckBox
                 value={portfolio.portfolioId}
