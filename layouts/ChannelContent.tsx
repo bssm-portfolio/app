@@ -1,15 +1,25 @@
 import { Header } from "@/components";
-import React from "react";
+import { ReactNode } from "react";
 
-function Frame() {
-  return <div>ㅇㅇ</div>;
+interface FrameProps {
+  title: ReactNode;
+  datagrid: ReactNode;
 }
 
-export default function ChannelContentLayout() {
+function Frame({ title, datagrid }: FrameProps) {
+  return (
+    <div className="px-[8.25rem] pt-10">
+      <div>{title}</div>
+      <div>{datagrid}</div>
+    </div>
+  );
+}
+
+export default function ChannelContentLayout({ title, datagrid }: FrameProps) {
   return (
     <>
       <Header />
-      <Frame />
+      <Frame title={title} datagrid={datagrid} />
     </>
   );
 }
