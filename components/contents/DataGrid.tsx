@@ -1,4 +1,5 @@
 import { Portfolio } from "@/types/portfolio.interface";
+import { getFileDownloadUrl } from "@/utils/file";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -81,7 +82,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
                 <div className="relative w-[7.5rem] h-[4.2rem] mx-3">
                   <Image
                     className="object-cover rounded"
-                    src="https://velog.velcdn.com/images/j1min/post/70786da5-54ae-44cc-a6c7-9e9c60751db0/image.png"
+                    src={getFileDownloadUrl(portfolio.thumbnail)}
                     alt="펭수"
                     fill
                   />
