@@ -10,9 +10,14 @@ const getCheckBoxCss = () => {
   appearance-none
   w-5
   h-5
-  border
-  border-primary-dark_gray
-  rounded-sm`;
+  outline
+  outline-primary-dark_gray
+  rounded-sm
+  box-border
+  checked:bg-blue
+  checked:border-[0.125rem]
+  checked:border-white
+  `;
 };
 
 export default function CheckBox({
