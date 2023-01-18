@@ -1,34 +1,54 @@
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import CheckBox from "../atoms/CheckBox";
 
 interface DataGridProps {
   portfolioList: Portfolio[];
 }
 
-interface Selected {
-  portfolioId: string;
-  isSelected: boolean;
-}
+const handleSingleCheck = (
+  isChecked: boolean,
+  id: number,
+  checkedItems: number[],
+  setCheckedItems: Dispatch<SetStateAction<number[]>>,
+) => {
+  if (isChecked) setCheckedItems((prev) => [...prev, id]);
+  else setCheckedItems(checkedItems.filter((el) => el !== id));
+};
+
+const handleAllCheck = (
+  portfolioList: Portfolio[],
+  isChecked: boolean,
+  setCheckedItems: Dispatch<SetStateAction<number[]>>,
+) => {
+  if (isChecked)
+    setCheckedItems(portfolioList.map((portfolio) => portfolio.portfolioId));
+  else setCheckedItems([]);
+};
 
 export default function DataGrid({ portfolioList }: DataGridProps) {
   const router = useRouter();
-  const [selected, setSelected] = useState<Selected[]>([]);
-
-  const selectPortfolio = (portfolioId: string) =>
-    setSelected((prev) => [...prev, { portfolioId, isSelected: false }]);
-
-  const moveToPortfolio = (portfolioId: number) =>
-    router.push(`/portfolio/${portfolioId}`);
+  const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
   return (
     <table className="w-full">
       <thead className="border-y border-y-primary-dark_gray">
         <tr>
           <th className="flex items-center py-6 pl-14 text-start">
-            <CheckBox id="select-all" className="mr-3" />
+            <CheckBox
+              id="select-all"
+              className="mr-3"
+              onChange={(event) =>
+                handleAllCheck(
+                  portfolioList,
+                  event.target.checked,
+                  setCheckedItems,
+                )
+              }
+              checked={checkedItems.length === portfolioList.length}
+            />
             <label htmlFor="select-all">전체선택</label>
           </th>
           <th className="py-6 w-[7.75rem]">조회수</th>
@@ -37,16 +57,26 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
         </tr>
       </thead>
       <tbody className="text-center">
-        {portfolioList.map((portfolio) => (
+        {portfolioList?.map((portfolio) => (
           <tr key={portfolio.portfolioId}>
             <td className="flex items-center py-4 pl-14 text-start">
               <CheckBox
                 value={portfolio.portfolioId}
-                onChange={(event) => selectPortfolio(event.target.value)}
+                checked={checkedItems.includes(portfolio.portfolioId)}
+                onChange={(event) =>
+                  handleSingleCheck(
+                    event.target.checked,
+                    portfolio.portfolioId,
+                    checkedItems,
+                    setCheckedItems,
+                  )
+                }
               />
               <div
                 className="flex items-center cursor-pointer"
-                onClick={() => moveToPortfolio(portfolio.portfolioId)}
+                onClick={() =>
+                  router.push(`/portfolio/${portfolio.portfolioId}`)
+                }
               >
                 <div className="relative w-[7.5rem] h-[4.2rem] mx-3">
                   <Image
