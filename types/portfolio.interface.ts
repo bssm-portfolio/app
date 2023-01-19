@@ -24,6 +24,19 @@ export type Portfolio = {
   createdDate: Date;
 };
 
+export type PortfolioForm = {
+  title: string;
+  description: string;
+  videoFileUid: string;
+  portfolioUrl: string;
+  thumbnailFileUid: string;
+  portfolioScope: PortfolioScope;
+  portfolioType: PortfolioType;
+  gitUrl: string;
+  skillList: string[];
+  contributorIdList: number[];
+};
+
 interface Pagination {
   page: number;
   size: number;
