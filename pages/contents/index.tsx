@@ -3,10 +3,18 @@ import DataGridTitle from "@/components/contents/DataGridTitle";
 import Filter from "@/components/contents/Filter";
 import ChannelContentLayout from "@/layouts/ChannelContent";
 import { usePortfolioList } from "@/models/portfolio";
+import { Portfolio } from "@/types/portfolio.interface";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { list } = usePortfolioList();
+  const [portfolioList, setPortfolioList] = useState<Portfolio[]>();
+
+  useEffect(() => {
+    setPortfolioList(list);
+  }, [list]);
+
   return (
     <div>
       <Head>
@@ -17,7 +25,12 @@ export default function Home() {
       <ChannelContentLayout
         title={<DataGridTitle />}
         filter={<Filter />}
-        datagrid={<DataGrid portfolioList={list} />}
+        datagrid={
+          <DataGrid
+            portfolioList={portfolioList as Portfolio[]}
+            setPortfolioList={setPortfolioList}
+          />
+        }
       />
     </div>
   );
