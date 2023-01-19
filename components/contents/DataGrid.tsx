@@ -102,22 +102,22 @@ export default function DataGrid({
                     >
                       <td className="flex items-center py-4 pl-14 text-start">
                         <HamburgerIcon className="absolute left-[10px] top-2/4 -translate-y-2/4 cursor-pointer" />
+                        <CheckBox
+                          value={portfolio.portfolioId}
+                          checked={checked?.includes(portfolio.portfolioId)}
+                          onChange={(event) =>
+                            handleSingleCheck(
+                              event.target.checked,
+                              portfolio.portfolioId,
+                            )
+                          }
+                        />
                         <div
                           className="flex items-center cursor-pointer"
                           onClick={() =>
                             router.push(`/portfolio/${portfolio.portfolioId}`)
                           }
                         >
-                          <CheckBox
-                            value={portfolio.portfolioId}
-                            checked={checked?.includes(portfolio.portfolioId)}
-                            onChange={(event) =>
-                              handleSingleCheck(
-                                event.target.checked,
-                                portfolio.portfolioId,
-                              )
-                            }
-                          />
                           <div className="relative w-[7.5rem] h-[4.2rem] mx-3">
                             <Image
                               className="object-cover rounded"
