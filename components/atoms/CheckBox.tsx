@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 
 interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
