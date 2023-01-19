@@ -9,6 +9,7 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
+import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
 import HamburgerIcon from "../Icon/HamburgerIcon";
 
@@ -143,6 +144,9 @@ export default function DataGrid({
           </table>
         )}
       </Droppable>
+      <div className="flex justify-end mt-20">
+        <Button className="bg-primary-dark_gray">삭제</Button>
+      </div>
     </DragDropContext>
   );
 }
