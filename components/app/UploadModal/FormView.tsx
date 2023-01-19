@@ -1,9 +1,18 @@
 import Input from "@/components/atoms/Input";
 import LabelForm from "@/components/atoms/LabelForm";
 import Textarea from "@/components/atoms/Textarea";
+import { PortfolioForm } from "@/types/portfolio.interface";
+import classNames from "classnames";
+import { UseFormRegister } from "react-hook-form";
 import SearchIcon from "@/components/Icon/SearchIcon";
 
-export default function FormView() {
+export default function FormView({
+  register,
+  className,
+}: {
+  register: UseFormRegister<PortfolioForm>;
+  className?: string;
+}) {
   const getFormViewCss = () => {
     return `w-full 
     h-[32.5rem] 
@@ -20,12 +29,20 @@ export default function FormView() {
   };
 
   return (
-    <div className={getFormViewCss()}>
+    <div className={classNames(getFormViewCss(), className)}>
       <LabelForm label="제목" className="mb-6">
-        <Input className="w-full" placeholder="제목" />
+        <Input
+          className="w-full"
+          placeholder="제목"
+          registerReturn={register("title", { required: true })}
+        />
       </LabelForm>
       <LabelForm label="설명" className="mb-6">
-        <Textarea className="w-full" placeholder="설명" />
+        <Textarea
+          className="w-full"
+          placeholder="설명"
+          registerReturn={register("description", { required: true })}
+        />
       </LabelForm>
       <LabelForm label="기술스택(중복선택 가능)" className="relative mb-6">
         <SearchIcon className="absolute top-9 left-3 w-[0.8125rem]" />
@@ -35,7 +52,11 @@ export default function FormView() {
         <Input className="w-full" placeholder="#해시태그" />
       </LabelForm>
       <LabelForm label="Github 주소" className="mb-6">
-        <Input className="w-full" placeholder="https://github.com/" />
+        <Input
+          className="w-full"
+          placeholder="https://github.com/"
+          registerReturn={register("gitUrl")}
+        />
       </LabelForm>
     </div>
   );
