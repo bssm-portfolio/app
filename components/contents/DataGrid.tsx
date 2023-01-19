@@ -12,17 +12,17 @@ interface DataGridProps {
 
 export default function DataGrid({ portfolioList }: DataGridProps) {
   const router = useRouter();
-  const [checkedItems, setCheckedItems] = useState<number[]>([]);
+  const [checked, setChecked] = useState<number[]>([]);
 
   const handleSingleCheck = (isChecked: boolean, id: number) => {
-    if (isChecked) setCheckedItems((prev) => [...prev, id]);
-    else setCheckedItems(checkedItems.filter((el) => el !== id));
+    if (isChecked) setChecked((prev) => [...prev, id]);
+    else setChecked(checked.filter((checkedItem) => checkedItem !== id));
   };
 
   const handleAllCheck = (isChecked: boolean) => {
     if (isChecked)
-      setCheckedItems(portfolioList.map((portfolio) => portfolio.portfolioId));
-    else setCheckedItems([]);
+      setChecked(portfolioList.map((portfolio) => portfolio.portfolioId));
+    else setChecked([]);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
               id="select-all"
               className="mr-3"
               onChange={(event) => handleAllCheck(event.target.checked)}
-              checked={checkedItems.length === portfolioList.length}
+              checked={checked.length === portfolioList.length}
             />
             <label htmlFor="select-all">전체선택</label>
           </th>
@@ -53,7 +53,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
             <td className="flex items-center py-4 pl-14 text-start">
               <CheckBox
                 value={portfolio.portfolioId}
-                checked={checkedItems.includes(portfolio.portfolioId)}
+                checked={checked.includes(portfolio.portfolioId)}
                 onChange={(event) =>
                   handleSingleCheck(event.target.checked, portfolio.portfolioId)
                 }
