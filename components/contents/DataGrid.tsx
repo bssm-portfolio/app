@@ -1,5 +1,5 @@
 import { Portfolio } from "@/types/portfolio.interface";
-import { getParsedDataGridList } from "@/utils/data";
+import { getParsedDataGridList, reorder } from "@/utils/data";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
@@ -43,9 +43,7 @@ export default function DataGrid({
   const onDragEnd = ({ source, destination }: DropResult): void => {
     if (!destination) return;
     const dataGridList: Portfolio[] = getParsedDataGridList(portfolioList);
-    const [targetItem] = dataGridList.splice(source.index, 1);
-    dataGridList.splice(destination.index, 0, targetItem);
-    setPortfolioList(dataGridList);
+    setPortfolioList(reorder(dataGridList, source.index, destination.index));
   };
 
   const getHeadCss = (): string => {
