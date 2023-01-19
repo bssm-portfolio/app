@@ -1,7 +1,5 @@
 import { Portfolio } from "@/types/portfolio.interface";
-import { getParsedDataGridItems } from "@/utils/data";
-import { getFileDownloadUrl } from "@/utils/file";
-import Image from "next/image";
+import { getParsedDataGridList } from "@/utils/data";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
@@ -12,7 +10,7 @@ import {
 } from "react-beautiful-dnd";
 import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
-import HamburgerIcon from "../Icon/HamburgerIcon";
+import DataGridItem from "./DataGridItem";
 
 interface DataGridProps {
   portfolioList: Portfolio[];
@@ -27,31 +25,30 @@ export default function DataGrid({
   const [checkedList, setCheckedList] = useState<number[]>([]);
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleSingleCheck = (isChecked: boolean, id: number) => {
-    if (isChecked) setCheckedList((prev) => [...(prev as number[]), id]);
+  const handleSingleCheck = (isChecked: boolean, portfolioId: number): void => {
+    if (isChecked)
+      setCheckedList((prev) => [...(prev as number[]), portfolioId]);
     else
       setCheckedList((prev) =>
-        prev.filter((checkedItem) => checkedItem !== id),
+        prev.filter((checkedItem) => checkedItem !== portfolioId),
       );
   };
 
-  const handleAllCheck = (isChecked: boolean) => {
+  const handleAllCheck = (isChecked: boolean): void => {
     if (isChecked)
       setCheckedList(portfolioList.map((portfolio) => portfolio.portfolioId));
     else setCheckedList([]);
   };
 
-  const onDragEnd = ({ source, destination }: DropResult) => {
+  const onDragEnd = ({ source, destination }: DropResult): void => {
     if (!destination) return;
-
-    const dataGridItems: Portfolio[] = getParsedDataGridItems(portfolioList);
-
-    const [targetItem] = dataGridItems.splice(source.index, 1);
-    dataGridItems.splice(destination.index, 0, targetItem);
-    setPortfolioList(dataGridItems);
+    const dataGridList: Portfolio[] = getParsedDataGridList(portfolioList);
+    const [targetItem] = dataGridList.splice(source.index, 1);
+    dataGridList.splice(destination.index, 0, targetItem);
+    setPortfolioList(dataGridList);
   };
 
-  const getHeadCss = () => {
+  const getHeadCss = (): string => {
     return `grid 
     grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
     py-6 
@@ -59,7 +56,8 @@ export default function DataGrid({
     border-y-primary-border_gray 
     text-center`;
   };
-  const getBodyCss = () => {
+
+  const getBodyCss = (): string => {
     return `grid 
     grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
     items-center 
@@ -121,38 +119,12 @@ export default function DataGrid({
                       {...draggableProvided.dragHandleProps}
                       className={getBodyCss()}
                     >
-                      <HamburgerIcon className="cursor-pointer ml-8" />
-                      <div className="flex items-center pl-6 text-start">
-                        <CheckBox
-                          value={portfolio.portfolioId}
-                          checked={checkedList.includes(portfolio.portfolioId)}
-                          onChange={(event) =>
-                            handleSingleCheck(
-                              event.target.checked,
-                              portfolio.portfolioId,
-                            )
-                          }
-                        />
-                        <div
-                          className="flex items-center cursor-pointer"
-                          onClick={() =>
-                            router.push(`/portfolio/${portfolio.portfolioId}`)
-                          }
-                        >
-                          <div className="relative w-[7.5rem] h-[4.2rem] mx-3">
-                            <Image
-                              className="object-cover rounded"
-                              src={getFileDownloadUrl(portfolio.thumbnail)}
-                              alt={portfolio.title}
-                              fill
-                            />
-                          </div>
-                          <h2 className="font-bold">{portfolio.title}</h2>
-                        </div>
-                      </div>
-                      <span>{portfolio.views}</span>
-                      <span>{portfolio.comments}</span>
-                      <span>{portfolio.bookmarks}</span>
+                      <DataGridItem
+                        portfolio={portfolio}
+                        checkedList={checkedList}
+                        handleSingleCheck={handleSingleCheck}
+                        router={router}
+                      />
                     </div>
                   )}
                 </Draggable>
