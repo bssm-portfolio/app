@@ -3,6 +3,7 @@ import { InputHTMLAttributes } from "react";
 
 interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
+  label?: string;
 }
 
 const getCheckBoxCss = () => {
@@ -24,13 +25,19 @@ export default function CheckBox({
   onClick,
   children,
   className = "",
+  id,
+  label,
   ...props
 }: CheckBoxProps) {
   return (
-    <input
-      type="checkbox"
-      className={classNames(className, getCheckBoxCss())}
-      {...props}
-    />
+    <>
+      <input
+        id={id}
+        type="checkbox"
+        className={classNames(className, getCheckBoxCss())}
+        {...props}
+      />
+      {label ? <label htmlFor={id}>{label}</label> : null}
+    </>
   );
 }

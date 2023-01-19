@@ -92,8 +92,8 @@ export default function DataGrid({
             className="mr-3"
             onChange={(event) => handleAllCheck(event.target.checked)}
             checked={checkedList.length === portfolioList.length}
+            label="전체선택"
           />
-          <label htmlFor="select-all">전체선택</label>
         </span>
         <span>조회수</span>
         <span>댓글</span>
