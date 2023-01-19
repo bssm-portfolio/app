@@ -64,7 +64,7 @@ export default function DataGrid({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="contents" direction="vertical">
-        {(provided) => (
+        {(droppableProvided) => (
           <table className="w-full table-fixed">
             <thead className="border-y border-y-primary-border_gray">
               <tr>
@@ -84,8 +84,8 @@ export default function DataGrid({
             </thead>
             <tbody
               className="text-center"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
+              ref={droppableProvided.innerRef}
+              {...droppableProvided.droppableProps}
             >
               {portfolioList?.map((portfolio, idx) => (
                 <Draggable
@@ -93,11 +93,11 @@ export default function DataGrid({
                   draggableId={portfolio.portfolioId.toString()}
                   index={idx}
                 >
-                  {(provided1) => (
+                  {(draggableProvided) => (
                     <tr
-                      ref={provided1.innerRef}
-                      {...provided1.draggableProps}
-                      {...provided1.dragHandleProps}
+                      ref={draggableProvided.innerRef}
+                      {...draggableProvided.draggableProps}
+                      {...draggableProvided.dragHandleProps}
                       className="relative border-b border-b-primary-border_gray select-none"
                     >
                       <td className="flex items-center py-4 pl-14 text-start">
@@ -138,7 +138,7 @@ export default function DataGrid({
                   )}
                 </Draggable>
               ))}
-              {provided.placeholder}
+              {droppableProvided.placeholder}
             </tbody>
           </table>
         )}
