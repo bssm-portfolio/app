@@ -27,7 +27,7 @@ export default function Home() {
         filter={<Filter />}
         datagrid={
           <DataGrid
-            portfolioList={portfolioList as Portfolio[]}
+            portfolioList={portfolioList}
             setPortfolioList={setPortfolioList}
           />
         }
