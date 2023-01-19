@@ -2,7 +2,7 @@ import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import CheckBox from "../atoms/CheckBox";
 import HamburgerIcon from "../Icon/HamburgerIcon";
 
@@ -10,29 +10,20 @@ interface DataGridProps {
   portfolioList: Portfolio[];
 }
 
-const handleSingleCheck = (
-  isChecked: boolean,
-  id: number,
-  checkedItems: number[],
-  setCheckedItems: Dispatch<SetStateAction<number[]>>,
-) => {
-  if (isChecked) setCheckedItems((prev) => [...prev, id]);
-  else setCheckedItems(checkedItems.filter((el) => el !== id));
-};
-
-const handleAllCheck = (
-  portfolioList: Portfolio[],
-  isChecked: boolean,
-  setCheckedItems: Dispatch<SetStateAction<number[]>>,
-) => {
-  if (isChecked)
-    setCheckedItems(portfolioList.map((portfolio) => portfolio.portfolioId));
-  else setCheckedItems([]);
-};
-
 export default function DataGrid({ portfolioList }: DataGridProps) {
   const router = useRouter();
   const [checkedItems, setCheckedItems] = useState<number[]>([]);
+
+  const handleSingleCheck = (isChecked: boolean, id: number) => {
+    if (isChecked) setCheckedItems((prev) => [...prev, id]);
+    else setCheckedItems(checkedItems.filter((el) => el !== id));
+  };
+
+  const handleAllCheck = (isChecked: boolean) => {
+    if (isChecked)
+      setCheckedItems(portfolioList.map((portfolio) => portfolio.portfolioId));
+    else setCheckedItems([]);
+  };
 
   return (
     <table className="w-full">
@@ -42,13 +33,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
             <CheckBox
               id="select-all"
               className="mr-3"
-              onChange={(event) =>
-                handleAllCheck(
-                  portfolioList,
-                  event.target.checked,
-                  setCheckedItems,
-                )
-              }
+              onChange={(event) => handleAllCheck(event.target.checked)}
               checked={checkedItems.length === portfolioList.length}
             />
             <label htmlFor="select-all">전체선택</label>
@@ -62,7 +47,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
         {portfolioList?.map((portfolio) => (
           <tr
             key={portfolio.portfolioId}
-            className="relative border-b border-b-primary-border_gray"
+            className="relative border-b border-b-primary-border_gray select-none"
           >
             <HamburgerIcon className="absolute left-[10px] top-2/4 -translate-y-2/4 cursor-pointer" />
             <td className="flex items-center py-4 pl-14 text-start">
@@ -70,12 +55,7 @@ export default function DataGrid({ portfolioList }: DataGridProps) {
                 value={portfolio.portfolioId}
                 checked={checkedItems.includes(portfolio.portfolioId)}
                 onChange={(event) =>
-                  handleSingleCheck(
-                    event.target.checked,
-                    portfolio.portfolioId,
-                    checkedItems,
-                    setCheckedItems,
-                  )
+                  handleSingleCheck(event.target.checked, portfolio.portfolioId)
                 }
               />
               <div
