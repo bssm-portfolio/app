@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const { list } = usePortfolioList();
-  const [portfolioList, setPortfolioList] = useState<Portfolio[]>();
+  const [portfolioList, setPortfolioList] = useState<Portfolio[]>([]);
 
   useEffect(() => {
     setPortfolioList(list);

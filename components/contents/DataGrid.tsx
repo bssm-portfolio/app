@@ -1,4 +1,5 @@
 import { Portfolio } from "@/types/portfolio.interface";
+import { getParsedDataGridItems } from "@/utils/data";
 import { getFileDownloadUrl } from "@/utils/file";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -14,8 +15,8 @@ import CheckBox from "../atoms/CheckBox";
 import HamburgerIcon from "../Icon/HamburgerIcon";
 
 interface DataGridProps {
-  portfolioList: Portfolio[] | undefined;
-  setPortfolioList: Dispatch<SetStateAction<Portfolio[] | undefined>>;
+  portfolioList: Portfolio[];
+  setPortfolioList: Dispatch<SetStateAction<Portfolio[]>>;
 }
 
 export default function DataGrid({
@@ -23,26 +24,27 @@ export default function DataGrid({
   setPortfolioList,
 }: DataGridProps) {
   const router = useRouter();
-  const [checked, setChecked] = useState<number[] | undefined>([]);
-  const [enabled, setEnabled] = useState(false);
+  const [checkedList, setCheckedList] = useState<number[]>([]);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   const handleSingleCheck = (isChecked: boolean, id: number) => {
-    if (isChecked) setChecked((prev) => [...(prev as number[]), id]);
-    else setChecked(checked?.filter((checkedItem) => checkedItem !== id));
+    if (isChecked) setCheckedList((prev) => [...(prev as number[]), id]);
+    else
+      setCheckedList((prev) =>
+        prev.filter((checkedItem) => checkedItem !== id),
+      );
   };
 
   const handleAllCheck = (isChecked: boolean) => {
     if (isChecked)
-      setChecked(portfolioList?.map((portfolio) => portfolio.portfolioId));
-    else setChecked([]);
+      setCheckedList(portfolioList.map((portfolio) => portfolio.portfolioId));
+    else setCheckedList([]);
   };
 
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
 
-    const dataGridItems = JSON.parse(
-      JSON.stringify(portfolioList),
-    ) as Portfolio[];
+    const dataGridItems: Portfolio[] = getParsedDataGridItems(portfolioList);
 
     const [targetItem] = dataGridItems.splice(source.index, 1);
     dataGridItems.splice(destination.index, 0, targetItem);
@@ -68,15 +70,15 @@ export default function DataGrid({
   };
 
   useEffect(() => {
-    const animation = requestAnimationFrame(() => setEnabled(true));
+    const animation = requestAnimationFrame(() => setIsEnabled(true));
 
     return () => {
       cancelAnimationFrame(animation);
-      setEnabled(false);
+      setIsEnabled(false);
     };
   }, []);
 
-  if (!enabled) {
+  if (!isEnabled) {
     return null;
   }
 
@@ -89,7 +91,7 @@ export default function DataGrid({
             id="select-all"
             className="mr-3"
             onChange={(event) => handleAllCheck(event.target.checked)}
-            checked={checked?.length === portfolioList?.length}
+            checked={checkedList.length === portfolioList.length}
           />
           <label htmlFor="select-all">전체선택</label>
         </span>
@@ -106,7 +108,7 @@ export default function DataGrid({
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
             >
-              {portfolioList?.map((portfolio, idx) => (
+              {portfolioList.map((portfolio, idx) => (
                 <Draggable
                   key={portfolio.portfolioId.toString()}
                   draggableId={portfolio.portfolioId.toString()}
@@ -123,7 +125,7 @@ export default function DataGrid({
                       <div className="flex items-center pl-6 text-start">
                         <CheckBox
                           value={portfolio.portfolioId}
-                          checked={checked?.includes(portfolio.portfolioId)}
+                          checked={checkedList.includes(portfolio.portfolioId)}
                           onChange={(event) =>
                             handleSingleCheck(
                               event.target.checked,
