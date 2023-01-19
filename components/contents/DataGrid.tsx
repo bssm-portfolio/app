@@ -49,6 +49,24 @@ export default function DataGrid({
     setPortfolioList(dataGridItems);
   };
 
+  const getHeadCss = () => {
+    return `grid 
+    grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
+    py-6 
+    border-y 
+    border-y-primary-border_gray 
+    text-center`;
+  };
+  const getBodyCss = () => {
+    return `grid 
+    grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
+    items-center 
+    py-4 
+    border-b 
+    border-b-primary-border_gray 
+    select-none`;
+  };
+
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
@@ -64,9 +82,9 @@ export default function DataGrid({
 
   return (
     <>
-      <div className="grid grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] border-y border-y-primary-border_gray text-center">
+      <div className={getHeadCss()}>
         <div />
-        <span className="flex items-center py-6 pl-6 text-start select-none">
+        <span className="flex items-center pl-6 text-start select-none">
           <CheckBox
             id="select-all"
             className="mr-3"
@@ -75,9 +93,9 @@ export default function DataGrid({
           />
           <label htmlFor="select-all">전체선택</label>
         </span>
-        <span className="py-6">조회수</span>
-        <span className="py-6">댓글</span>
-        <span className="py-6">좋아요</span>
+        <span>조회수</span>
+        <span>댓글</span>
+        <span>좋아요</span>
       </div>
 
       <DragDropContext onDragEnd={onDragEnd}>
@@ -99,10 +117,10 @@ export default function DataGrid({
                       ref={draggableProvided.innerRef}
                       {...draggableProvided.draggableProps}
                       {...draggableProvided.dragHandleProps}
-                      className="grid grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] items-center border-b border-b-primary-border_gray select-none"
+                      className={getBodyCss()}
                     >
                       <HamburgerIcon className="cursor-pointer ml-8" />
-                      <div className="flex items-center py-4 pl-6 text-start">
+                      <div className="flex items-center pl-6 text-start">
                         <CheckBox
                           value={portfolio.portfolioId}
                           checked={checked?.includes(portfolio.portfolioId)}
@@ -130,15 +148,9 @@ export default function DataGrid({
                           <h2 className="font-bold">{portfolio.title}</h2>
                         </div>
                       </div>
-                      <span className="py-4 w-[7.75rem]">
-                        {portfolio.views}
-                      </span>
-                      <span className="py-4 w-[7.75rem]">
-                        {portfolio.comments}
-                      </span>
-                      <span className="py-4 w-[7.75rem]">
-                        {portfolio.bookmarks}
-                      </span>
+                      <span>{portfolio.views}</span>
+                      <span>{portfolio.comments}</span>
+                      <span>{portfolio.bookmarks}</span>
                     </div>
                   )}
                 </Draggable>
