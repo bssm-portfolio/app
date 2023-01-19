@@ -1,28 +1,42 @@
-import ModalButton from "@/components/atoms/ModalButton";
+import Button from "@/components/atoms/Button";
+import classNames from "classnames";
 
 interface FileUploadViewProps {
   goPrev: (() => void) | null;
   goNext: () => void;
-  onSubmit: (() => void) | null;
+  isLast: boolean;
+  className?: string;
 }
 
 export default function Navigator({
   goPrev,
   goNext,
-  onSubmit,
+  isLast,
+  ...props
 }: FileUploadViewProps) {
   return (
-    <>
-      {!!goPrev && (
-        <ModalButton onClick={goPrev} varient="secondary">
+    <div
+      {...props}
+      className={classNames("flex justify-between", props.className)}
+    >
+      {goPrev ? (
+        <Button onClick={goPrev} varient="secondary">
           이전
-        </ModalButton>
-      )}
-      {onSubmit ? (
-        <ModalButton onClick={onSubmit}>완료</ModalButton>
+        </Button>
       ) : (
-        <ModalButton onClick={goNext}>다음</ModalButton>
+        <div />
       )}
-    </>
+
+      <Button className={classNames({ hidden: !isLast })} type="submit">
+        완료
+      </Button>
+      <Button
+        className={classNames({ hidden: isLast })}
+        type="button"
+        onClick={goNext}
+      >
+        다음
+      </Button>
+    </div>
   );
 }
