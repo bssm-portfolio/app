@@ -63,27 +63,27 @@ export default function DataGrid({
   }
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="contents" direction="vertical">
-        {(droppableProvided) => (
-          <table className="w-full table-fixed">
-            <thead className="border-y border-y-primary-border_gray">
-              <tr>
-                <th className="flex items-center py-6 pl-14 text-start select-none">
-                  <CheckBox
-                    id="select-all"
-                    className="mr-3"
-                    onChange={(event) => handleAllCheck(event.target.checked)}
-                    checked={checked?.length === portfolioList?.length}
-                  />
-                  <label htmlFor="select-all">전체선택</label>
-                </th>
-                <th className="py-6 w-[7.75rem]">조회수</th>
-                <th className="py-6 w-[7.75rem]">댓글</th>
-                <th className="py-6 w-[7.75rem]">좋아요</th>
-              </tr>
-            </thead>
-            <tbody
+    <>
+      <div className="grid grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] border-y border-y-primary-border_gray text-center">
+        <div />
+        <span className="flex items-center py-6 pl-6 text-start select-none">
+          <CheckBox
+            id="select-all"
+            className="mr-3"
+            onChange={(event) => handleAllCheck(event.target.checked)}
+            checked={checked?.length === portfolioList?.length}
+          />
+          <label htmlFor="select-all">전체선택</label>
+        </span>
+        <span className="py-6">조회수</span>
+        <span className="py-6">댓글</span>
+        <span className="py-6">좋아요</span>
+      </div>
+
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="contents" direction="vertical">
+          {(droppableProvided) => (
+            <div
               className="text-center"
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
@@ -95,14 +95,14 @@ export default function DataGrid({
                   index={idx}
                 >
                   {(draggableProvided) => (
-                    <tr
+                    <div
                       ref={draggableProvided.innerRef}
                       {...draggableProvided.draggableProps}
                       {...draggableProvided.dragHandleProps}
-                      className="relative border-b border-b-primary-border_gray select-none"
+                      className="grid grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] items-center border-b border-b-primary-border_gray select-none"
                     >
-                      <td className="flex items-center py-4 pl-14 text-start">
-                        <HamburgerIcon className="absolute left-[10px] top-2/4 -translate-y-2/4 cursor-pointer" />
+                      <HamburgerIcon className="cursor-pointer ml-8" />
+                      <div className="flex items-center py-4 pl-6 text-start">
                         <CheckBox
                           value={portfolio.portfolioId}
                           checked={checked?.includes(portfolio.portfolioId)}
@@ -129,24 +129,29 @@ export default function DataGrid({
                           </div>
                           <h2 className="font-bold">{portfolio.title}</h2>
                         </div>
-                      </td>
-                      <td className="py-4 w-[7.75rem]">{portfolio.views}</td>
-                      <td className="py-4 w-[7.75rem]">{portfolio.comments}</td>
-                      <td className="py-4 w-[7.75rem]">
+                      </div>
+                      <span className="py-4 w-[7.75rem]">
+                        {portfolio.views}
+                      </span>
+                      <span className="py-4 w-[7.75rem]">
+                        {portfolio.comments}
+                      </span>
+                      <span className="py-4 w-[7.75rem]">
                         {portfolio.bookmarks}
-                      </td>
-                    </tr>
+                      </span>
+                    </div>
                   )}
                 </Draggable>
               ))}
               {droppableProvided.placeholder}
-            </tbody>
-          </table>
-        )}
-      </Droppable>
-      <div className="flex justify-end mt-20">
-        <Button className="bg-primary-dark_gray">삭제</Button>
-      </div>
-    </DragDropContext>
+            </div>
+          )}
+        </Droppable>
+
+        <div className="flex justify-end mt-20">
+          <Button className="bg-primary-dark_gray">삭제</Button>
+        </div>
+      </DragDropContext>
+    </>
   );
 }
