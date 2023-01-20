@@ -2,12 +2,7 @@ import { Portfolio } from "@/types/portfolio.interface";
 import { getParsedDataGridList, reorder } from "@/utils/data";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
 import DataGridItem from "./DataGridItem";
@@ -55,16 +50,6 @@ export default function DataGrid({
     text-center`;
   };
 
-  const getBodyCss = (): string => {
-    return `grid 
-    grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
-    items-center 
-    py-4 
-    border-b 
-    border-b-primary-border_gray 
-    select-none`;
-  };
-
   useEffect(() => {
     const animation = requestAnimationFrame(() => setIsEnabled(true));
 
@@ -105,27 +90,13 @@ export default function DataGrid({
               {...droppableProvided.droppableProps}
             >
               {portfolioList.map((portfolio, idx) => (
-                <Draggable
-                  key={portfolio.portfolioId.toString()}
-                  draggableId={portfolio.portfolioId.toString()}
-                  index={idx}
-                >
-                  {(draggableProvided) => (
-                    <div
-                      ref={draggableProvided.innerRef}
-                      {...draggableProvided.draggableProps}
-                      {...draggableProvided.dragHandleProps}
-                      className={getBodyCss()}
-                    >
-                      <DataGridItem
-                        portfolio={portfolio}
-                        checkedList={checkedList}
-                        handleSingleCheck={handleSingleCheck}
-                        router={router}
-                      />
-                    </div>
-                  )}
-                </Draggable>
+                <DataGridItem
+                  portfolio={portfolio}
+                  checkedList={checkedList}
+                  handleSingleCheck={handleSingleCheck}
+                  router={router}
+                  idx={idx}
+                />
               ))}
               {droppableProvided.placeholder}
             </div>
