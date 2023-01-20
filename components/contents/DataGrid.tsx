@@ -95,6 +95,7 @@ export default function DataGrid({
                   checkedList={checkedList}
                   handleSingleCheck={handleSingleCheck}
                   router={router}
+                  key={portfolio.portfolioId}
                   idx={idx}
                 />
               ))}
