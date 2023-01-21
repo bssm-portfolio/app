@@ -1,7 +1,7 @@
 import { Portfolio } from "@/types/portfolio.interface";
 import { getParsedDataGridList, reorder } from "@/utils/data";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
@@ -18,6 +18,7 @@ export default function DataGrid({
 }: DataGridProps) {
   const router = useRouter();
   const [checkedList, setCheckedList] = useState<number[]>([]);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   const handleSingleCheck = (isChecked: boolean, portfolioId: number): void => {
     if (isChecked) setCheckedList((prev) => [...prev, portfolioId]);
@@ -47,6 +48,19 @@ export default function DataGrid({
     border-y-primary-border_gray 
     text-center`;
   };
+
+  useEffect(() => {
+    const animation = requestAnimationFrame(() => setIsEnabled(true));
+
+    return () => {
+      cancelAnimationFrame(animation);
+      setIsEnabled(false);
+    };
+  }, []);
+
+  if (!isEnabled) {
+    return null;
+  }
 
   return (
     <>
