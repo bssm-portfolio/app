@@ -1,14 +1,12 @@
-import { Portfolio } from "@/types/portfolio.interface";
-
-export const getParsedDataGridList = (portfolioList: Portfolio[]) => {
+export const deepcopy = <T>(portfolioList: T): T => {
   return JSON.parse(JSON.stringify(portfolioList));
 };
 
-export const reorder = (
-  dataGridList: Portfolio[],
+export const reorder = <T>(
+  dataGridList: T[],
   startIdx: number,
   endIdx: number,
-): Portfolio[] => {
+): T[] => {
   const [targetItem] = dataGridList.splice(startIdx, 1);
   dataGridList.splice(endIdx, 0, targetItem);
   return dataGridList;
