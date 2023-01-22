@@ -23,6 +23,7 @@ const portfolio: Portfolio = {
     email: "iu@koko.com",
   },
   portfolioType: "VIDEO",
+  portfolioUrl: "https://naver.com",
   title: "포트폴리오 제목입니다.",
   description: "string",
   video: {

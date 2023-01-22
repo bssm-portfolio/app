@@ -1,4 +1,4 @@
-import React, { ReactNode, SelectHTMLAttributes } from "react";
+import { ReactNode, SelectHTMLAttributes } from "react";
 import DownIcon from "../Icon/DownIcon";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {

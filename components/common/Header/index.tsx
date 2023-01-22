@@ -1,7 +1,7 @@
 import useModal from "@/hooks/useModal";
 import { userState } from "@/store";
 import { useRecoilState } from "recoil";
-import UploadModal from "./UploadModal";
+import UploadModal from "../../app/UploadModal";
 import HeaderView from "./View";
 
 export default function Header() {

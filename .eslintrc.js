@@ -29,5 +29,12 @@ module.exports = {
     "react/require-default-props": 0,
     "react/jsx-props-no-spreading": 0,
     "no-empty-interface": 0,
+    // id, htmlFor 이름 규칙 에러 지우기
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        labelAttributes: ["htmlFor"],
+      },
+    ],
   },
 };
