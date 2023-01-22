@@ -1,5 +1,5 @@
 import fixture from "@/fixtures";
-import PortfolioList from "../main/PortfolioList";
+import PortfolioList from "./PortfolioList";
 import ProfileDescription from "./ProfileDescription";
 
 export default function ProfileDetail() {
