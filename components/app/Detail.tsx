@@ -3,8 +3,10 @@ import type { Portfolio } from "@/types/portfolio.interface";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
-import { HeartIcon } from "../Icon";
 import Description from "../portfolio/Description";
+import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
+import ShareIcon from "../Icon/ShareIcon";
+import PeopleIcon from "../Icon/PeopleIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -30,15 +32,15 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
         <div>
           <div className="flex gap-small mb-large">
             <Button status="active">
-              <HeartIcon className="mr-2xsmall" />
+              <EmptyHeartIcon className="mr-2xsmall" />
               <span className="text-small">{portfolio.bookmarks}</span>
             </Button>
             <Button status="active">
-              <HeartIcon className="mr-2xsmall" />
+              <PeopleIcon className="mr-2xsmall" />
               <span className="text-small">팔로잉</span>
             </Button>
             <Button status="active">
-              <HeartIcon className="mr-2xsmall" />
+              <ShareIcon className="mr-2xsmall" />
               <span className="text-small">공유</span>
             </Button>
           </div>
