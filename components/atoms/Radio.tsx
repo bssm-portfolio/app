@@ -1,9 +1,13 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+
 interface RadioProps {
   id: string;
   label: string;
   description?: string;
-  name: string;
+  name?: string;
   checked?: boolean;
+  value?: string;
+  registerReturn?: UseFormRegisterReturn;
 }
 
 const getRadioCss = () => {
@@ -29,6 +33,8 @@ export default function Radio({
   description = "",
   name,
   checked,
+  registerReturn,
+  ...props
 }: RadioProps) {
   return (
     <div className="flex items-start">
@@ -38,6 +44,8 @@ export default function Radio({
         name={name}
         defaultChecked={checked}
         id={id}
+        {...props}
+        {...registerReturn}
       />
       <div className="flex flex-col mb-[1.93rem]">
         <label htmlFor={id} className="leading-3">

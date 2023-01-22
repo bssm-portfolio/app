@@ -1,9 +1,11 @@
 import { InputHTMLAttributes } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 type InputVarient = "primary";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   varient?: InputVarient;
+  registerReturn?: UseFormRegisterReturn;
 }
 
 const getInputCss = (varient: InputVarient) => {
@@ -23,9 +25,14 @@ export default function Input({
   onClick,
   children,
   className = "",
+  registerReturn,
   ...props
 }: InputProps) {
   return (
-    <input className={`${className} ${getInputCss(varient)}`} {...props} />
+    <input
+      className={`${className} ${getInputCss(varient)}`}
+      {...registerReturn}
+      {...props}
+    />
   );
 }
