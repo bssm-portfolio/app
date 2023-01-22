@@ -2,6 +2,7 @@ import { atom } from "recoil";
 import fixture from "@/fixtures";
 
 export { default as modalState } from "./modal";
+export { default as PopupState } from "./popup";
 
 export const userState = atom({
   key: "user",
