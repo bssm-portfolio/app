@@ -8,6 +8,7 @@ export default function Logo() {
         width={240}
         height={40}
         alt="BSSM LOGO"
+        priority
       />
     </div>
   );
