@@ -10,7 +10,7 @@ export default function LoginButton({
   children,
 }: LoginButtonProps) {
   const getButtonCss = () => {
-    return `border border-primary-dark_gray w-full rounded-full py-5 text-[1.125rem] font-bold flex justify-center items-center`;
+    return `border border-primary-dark_gray w-full rounded-full py-[1.125rem] text-[1.125rem] font-bold flex justify-center items-center`;
   };
 
   return (
