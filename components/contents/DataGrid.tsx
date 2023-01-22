@@ -1,5 +1,5 @@
 import { Portfolio } from "@/types/portfolio.interface";
-import { getParsedDataGridList, reorder } from "@/utils/data";
+import { deepcopy, reorder } from "@/utils/data";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
@@ -17,30 +17,40 @@ export default function DataGrid({
   setPortfolioList,
 }: DataGridProps) {
   const router = useRouter();
-  const [checkedList, setCheckedList] = useState<number[]>([]);
+  const [checkedPortfolioIdList, setCheckedPortfolioIdList] = useState<
+    number[]
+  >([]);
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleSingleCheck = (isChecked: boolean, portfolioId: number): void => {
-    if (isChecked) setCheckedList((prev) => [...prev, portfolioId]);
-    else
-      setCheckedList((prev) =>
-        prev.filter((checked) => checked !== portfolioId),
+  const handleSingleCheck = (isChecked: boolean, portfolioId: number) => {
+    if (isChecked) {
+      setCheckedPortfolioIdList((prev) => [...prev, portfolioId]);
+      return;
+    }
+    setCheckedPortfolioIdList((prev) =>
+      prev.filter((checked) => checked !== portfolioId),
+    );
+  };
+
+  const handleAllCheck = (isChecked: boolean) => {
+    if (isChecked) {
+      setCheckedPortfolioIdList(
+        portfolioList.map((portfolio) => portfolio.portfolioId),
       );
+      return;
+    }
+    setCheckedPortfolioIdList([]);
   };
 
-  const handleAllCheck = (isChecked: boolean): void => {
-    if (isChecked)
-      setCheckedList(portfolioList.map((portfolio) => portfolio.portfolioId));
-    else setCheckedList([]);
-  };
-
-  const onDragEnd = ({ source, destination }: DropResult): void => {
+  const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
-    const dataGridList: Portfolio[] = getParsedDataGridList(portfolioList);
-    setPortfolioList(reorder(dataGridList, source.index, destination.index));
+    const dataGridList = deepcopy<Portfolio[]>(portfolioList);
+    setPortfolioList(
+      reorder<Portfolio>(dataGridList, source.index, destination.index),
+    );
   };
 
-  const getHeadCss = (): string => {
+  const getHeadCss = () => {
     return `grid 
     grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
     py-6 
@@ -71,7 +81,7 @@ export default function DataGrid({
             id="select-all"
             className="mr-3"
             onChange={(event) => handleAllCheck(event.target.checked)}
-            checked={checkedList.length === portfolioList.length}
+            checked={checkedPortfolioIdList.length === portfolioList.length}
             label="전체선택"
           />
         </span>
@@ -91,7 +101,7 @@ export default function DataGrid({
               {portfolioList.map((portfolio, idx) => (
                 <DataGridItem
                   portfolio={portfolio}
-                  checkedList={checkedList}
+                  checkedList={checkedPortfolioIdList}
                   handleSingleCheck={handleSingleCheck}
                   router={router}
                   key={portfolio.portfolioId}
