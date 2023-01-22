@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Image from "next/image";
 
 interface AvatarProps {
@@ -5,6 +6,7 @@ interface AvatarProps {
   width?: number;
   height?: number;
   onClick?: () => void;
+  className?: string;
 }
 
 export default function Avatar({
@@ -12,11 +14,12 @@ export default function Avatar({
   width = 50,
   height = 50,
   onClick,
+  className,
 }: AvatarProps) {
   return (
     <Image
       onClick={onClick}
-      className="rounded-full"
+      className={classNames(className, "rounded-full")}
       src={imageUrl}
       alt="사용자 아바타"
       width={width}
