@@ -24,7 +24,9 @@ export default function ModalView({
       <div
         className={classNames(
           { hidden: !visible },
-          "fixed top-1/2 left-1/2 flex flex-col bg-white max-h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 rounded-lg overflow-auto overflow-x-hidden",
+          { "rounded-lg": title },
+          { "rounded-3xl": !title },
+          "fixed top-1/2 left-1/2 flex flex-col bg-white max-h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 overflow-auto overflow-x-hidden",
         )}
       >
         {title ? (
