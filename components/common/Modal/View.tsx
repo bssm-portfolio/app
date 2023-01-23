@@ -24,14 +24,19 @@ export default function ModalView({
       <div
         className={classNames(
           { hidden: !visible },
-          "fixed top-1/2 left-1/2 flex flex-col bg-white max-h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 rounded-lg overflow-scroll overflow-x-hidden",
+          { "rounded-lg": title },
+          { "rounded-3xl": !title },
+          "fixed top-1/2 left-1/2 flex flex-col bg-white max-h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 overflow-auto overflow-x-hidden",
         )}
       >
-        <div className="flex justify-between items-center w-full px-6 py-5 h-16 border-b-0.5 border-primary-border_gray">
-          <h1 className="font-bold text-xl">{title}</h1>
-          <XIcon className="cursor-pointer" onClick={onClose} />
-        </div>
-        <div className="flex flex-col mt-6 gap-2.5 px-10 pb-40">{content}</div>
+        {title ? (
+          <div className="flex justify-between items-center w-full px-6 py-5 h-16 border-b-0.5 border-primary-border_gray">
+            <h1 className="font-bold text-xl">{title}</h1>
+            <XIcon className="cursor-pointer" onClick={onClose} />
+          </div>
+        ) : null}
+
+        <div className="flex flex-col mt-6 gap-2.5 px-10">{content}</div>
       </div>
     </>
   );

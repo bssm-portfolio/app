@@ -25,8 +25,12 @@ module.exports = {
         35: "35rem",
       },
       height: {
+        39: "39rem",
         40: "40rem",
         45: "45rem",
+      },
+      borderRadius: {
+        "3xl": "1.875rem", // 30px
       },
       spacing: {
         74: "74rem",
