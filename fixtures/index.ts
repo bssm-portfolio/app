@@ -67,6 +67,27 @@ const portfolio: Portfolio = {
   createdDate: new Date("2022-12-01"),
 };
 
+const profileDescription = {
+  avatarUrl,
+  projectCount: 5,
+  followerCount: 6,
+  followingCount: 7,
+  username: "소마고",
+  role: "웹 / 앱 개발자",
+  description: `안녕하세요
+  코드코리아에서 앱과 웹 개발을 맡고있는 소마고입니다.
+  
+  디자이너 분들과 협업하고 싶습니다.
+  디자이너 분들과 협업하고 싶습니다.
+  디자이너 분들과 협업하고 싶습니다.
+  디자이너 분들과 협업하고 싶습니다.
+  디자이너 분들과 협업하고 싶습니다.
+  디자이너 분들과 협업하고 싶습니다.
+  디자이너 분들과 협업하고 싶습니다.
+  
+  somago@naver.com`,
+};
+
 const portfolioList = Array(10)
   .fill(null)
   .map((_, idx) => {
@@ -85,6 +106,7 @@ const fixture = {
   portfolio,
   portfolioList,
   commentList,
+  profileDescription,
 };
 
 export default fixture;
