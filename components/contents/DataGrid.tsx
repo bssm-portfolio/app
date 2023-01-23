@@ -28,7 +28,7 @@ export default function DataGrid({
       return;
     }
     setCheckedPortfolioIdList((prev) =>
-      prev.filter((checked) => checked !== portfolioId),
+      prev.filter((checkedPortfolioId) => checkedPortfolioId !== portfolioId),
     );
   };
 
@@ -40,6 +40,12 @@ export default function DataGrid({
       return;
     }
     setCheckedPortfolioIdList([]);
+  };
+
+  const isCheckedAll = () => {
+    if (checkedPortfolioIdList.length === 0) return false;
+    if (checkedPortfolioIdList.length === portfolioList.length) return true;
+    return false;
   };
 
   const onDragEnd = ({ source, destination }: DropResult) => {
@@ -81,7 +87,7 @@ export default function DataGrid({
             id="select-all"
             className="mr-3"
             onChange={(event) => handleAllCheck(event.target.checked)}
-            checked={checkedPortfolioIdList.length === portfolioList.length}
+            checked={isCheckedAll()}
             label="전체선택"
           />
         </span>
