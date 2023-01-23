@@ -22,16 +22,6 @@ export default function DataGrid({
   >([]);
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleSingleCheck = (isChecked: boolean, portfolioId: number) => {
-    if (isChecked) {
-      setCheckedPortfolioIdList((prev) => [...prev, portfolioId]);
-      return;
-    }
-    setCheckedPortfolioIdList((prev) =>
-      prev.filter((checkedPortfolioId) => checkedPortfolioId !== portfolioId),
-    );
-  };
-
   const handleAllCheck = (isChecked: boolean) => {
     if (isChecked) {
       setCheckedPortfolioIdList(
@@ -67,7 +57,6 @@ export default function DataGrid({
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setIsEnabled(true));
-
     return () => {
       cancelAnimationFrame(animation);
       setIsEnabled(false);
@@ -108,7 +97,7 @@ export default function DataGrid({
                 <DataGridItem
                   portfolio={portfolio}
                   checkedList={checkedPortfolioIdList}
-                  handleSingleCheck={handleSingleCheck}
+                  setCheckedPortfolioIdList={setCheckedPortfolioIdList}
                   router={router}
                   key={portfolio.portfolioId}
                   idx={idx}

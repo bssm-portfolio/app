@@ -2,6 +2,7 @@ import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import Image from "next/image";
 import { NextRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import CheckBox from "../atoms/CheckBox";
 import HamburgerIcon from "../Icon/HamburgerIcon";
@@ -9,7 +10,7 @@ import HamburgerIcon from "../Icon/HamburgerIcon";
 interface DataGridItemProps {
   portfolio: Portfolio;
   checkedList: number[];
-  handleSingleCheck: (isChecked: boolean, portfolioId: number) => void;
+  setCheckedPortfolioIdList: Dispatch<SetStateAction<number[]>>;
   router: NextRouter;
   idx: number;
 }
@@ -17,11 +18,11 @@ interface DataGridItemProps {
 export default function DataGridItem({
   portfolio,
   checkedList,
-  handleSingleCheck,
+  setCheckedPortfolioIdList,
   router,
   idx,
 }: DataGridItemProps) {
-  const getBodyCss = (): string => {
+  const getBodyCss = () => {
     return `grid 
     grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
     items-center 
@@ -29,6 +30,20 @@ export default function DataGridItem({
     border-b 
     border-b-primary-border_gray 
     select-none`;
+  };
+
+  const handleSingleCheck = (isChecked: boolean, portfolioId: number) => {
+    if (isChecked) {
+      setCheckedPortfolioIdList((prev) => [...prev, portfolioId]);
+      return;
+    }
+    setCheckedPortfolioIdList((prev) =>
+      prev.filter((checkedPortfolioId) => checkedPortfolioId !== portfolioId),
+    );
+  };
+
+  const isCheckedSingle = (portfolioId: number) => {
+    return checkedList.includes(portfolioId);
   };
 
   return (
@@ -48,7 +63,7 @@ export default function DataGridItem({
           <div className="flex items-center pl-6 text-start">
             <CheckBox
               value={portfolio.portfolioId}
-              checked={checkedList.includes(portfolio.portfolioId)}
+              checked={isCheckedSingle(portfolio.portfolioId)}
               onChange={(event) =>
                 handleSingleCheck(event.target.checked, portfolio.portfolioId)
               }
