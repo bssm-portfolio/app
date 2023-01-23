@@ -22,10 +22,16 @@ const getSearchBarCss = () => {
   py-[0.5rem]`;
 };
 
+const focusInput = (inputRef: RefObject<HTMLInputElement>) => {
+  if (inputRef.current) {
+    inputRef.current.focus();
+  }
+};
+
 const xClick = (inputRef: RefObject<HTMLInputElement>) => {
   if (inputRef.current) {
     inputRef.current.value = "";
-    inputRef.current.focus();
+    focusInput(inputRef);
   }
 };
 
@@ -60,11 +66,11 @@ export default function SearchBar() {
         <option>추천순</option>
       </Select>
       <span className="block border-r border-primary-dark_gray h-base" />
-      <SearchIcon className="mx-small" />
+      <SearchIcon className="mx-small" onClick={() => focusInput(inputRef)} />
       <input
         ref={inputRef}
         name="keyword"
-        className="focus:outline-none w-[15.875rem]"
+        className="focus:outline-none w-[13.875rem]"
         placeholder="검색"
         value={keyword}
         onChange={(event) => handleKeyword(event, setKeyword)}
@@ -74,7 +80,9 @@ export default function SearchBar() {
         <button type="button" className="ml-3" onClick={() => xClick(inputRef)}>
           <XIcon className="w-base h-base" />
         </button>
-      ) : null}
+      ) : (
+        <div className="w-4 h-4 ml-3" />
+      )}
     </form>
   );
 }
