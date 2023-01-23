@@ -1,13 +1,13 @@
-import usePopup from "@/hooks/usePopup";
+import useModal from "@/hooks/useModal";
 import LoginPopupView from "./LoginPopup";
 
 export default function LoginPopup() {
-  const { openPopup } = usePopup();
+  const { openModal } = useModal();
   return (
     <button
       type="button"
       onClick={() => {
-        openPopup({
+        openModal({
           content: <LoginPopupView />,
         });
       }}

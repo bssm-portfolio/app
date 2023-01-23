@@ -6,7 +6,7 @@ import KakaoIcon from "@/components/Icon/KakaoIcon";
 
 export default function LoginPopupView() {
   return (
-    <div className="pt-[7.75rem] pb-20 px-10">
+    <div className="pt-[6.25rem] pb-20">
       <div className="flex flex-col items-center">
         <BssmIcon />
         <h2 className="break-keep text-xlarge text-primary-dark_gray font-bold w-[17.5rem] text-center mt-10 mb-20 leading-[2.5rem]">
