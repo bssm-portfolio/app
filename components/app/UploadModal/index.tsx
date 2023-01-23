@@ -42,7 +42,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
 
   return (
     <form
-      className="h-40 flex flex-col"
+      className="h-39 flex flex-col"
       onSubmit={handleSubmit(onValid, onInvalid)}
     >
       <FileUploadView
