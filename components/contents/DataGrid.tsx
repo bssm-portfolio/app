@@ -34,8 +34,7 @@ export default function DataGrid({
 
   const isCheckedAll = () => {
     if (checkedPortfolioIdList.length === 0) return false;
-    if (checkedPortfolioIdList.length === portfolioList.length) return true;
-    return false;
+    return checkedPortfolioIdList.length === portfolioList.length;
   };
 
   const onDragEnd = ({ source, destination }: DropResult) => {
