@@ -22,16 +22,6 @@ export default function DataGrid({
   >([]);
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleSingleCheck = (isChecked: boolean, portfolioId: number) => {
-    if (isChecked) {
-      setCheckedPortfolioIdList((prev) => [...prev, portfolioId]);
-      return;
-    }
-    setCheckedPortfolioIdList((prev) =>
-      prev.filter((checked) => checked !== portfolioId),
-    );
-  };
-
   const handleAllCheck = (isChecked: boolean) => {
     if (isChecked) {
       setCheckedPortfolioIdList(
@@ -40,6 +30,11 @@ export default function DataGrid({
       return;
     }
     setCheckedPortfolioIdList([]);
+  };
+
+  const isCheckedAll = () => {
+    if (checkedPortfolioIdList.length === 0) return false;
+    return checkedPortfolioIdList.length === portfolioList.length;
   };
 
   const onDragEnd = ({ source, destination }: DropResult) => {
@@ -61,7 +56,6 @@ export default function DataGrid({
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setIsEnabled(true));
-
     return () => {
       cancelAnimationFrame(animation);
       setIsEnabled(false);
@@ -81,7 +75,7 @@ export default function DataGrid({
             id="select-all"
             className="mr-3"
             onChange={(event) => handleAllCheck(event.target.checked)}
-            checked={checkedPortfolioIdList.length === portfolioList.length}
+            checked={isCheckedAll()}
             label="전체선택"
           />
         </span>
@@ -102,7 +96,7 @@ export default function DataGrid({
                 <DataGridItem
                   portfolio={portfolio}
                   checkedList={checkedPortfolioIdList}
-                  handleSingleCheck={handleSingleCheck}
+                  setCheckedPortfolioIdList={setCheckedPortfolioIdList}
                   router={router}
                   key={portfolio.portfolioId}
                   idx={idx}
