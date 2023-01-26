@@ -1,83 +1,77 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  RefObject,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
+import { useRouter } from "next/router";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { XIcon } from "../Icon";
 import SearchIcon from "../Icon/SearchIcon";
 import Select from "./Select";
 
-const getSearchBarCss = () => {
-  return `
-  flex 
-  items-center 
-  text-primary-dark_gray
-  border
-  border-primary-dark_gray
-  rounded-full
-  px-[1.5rem]
-  py-[0.5rem]`;
-};
-
-const focusInput = (inputRef: RefObject<HTMLInputElement>) => {
-  if (inputRef.current) {
-    inputRef.current.focus();
-  }
-};
-
-const xClick = (inputRef: RefObject<HTMLInputElement>) => {
-  if (inputRef.current) {
-    inputRef.current.value = "";
-    focusInput(inputRef);
-  }
-};
-
-const handleKeyword = (
-  event: ChangeEvent<HTMLInputElement>,
-  setKeyword: Dispatch<SetStateAction<string>>,
-) => setKeyword(event.target.value);
-
-const handleSelect = (
-  event: ChangeEvent<HTMLSelectElement>,
-  setCategory: Dispatch<SetStateAction<string>>,
-) => setCategory(event.target.value);
-
 export default function SearchBar() {
+  const router = useRouter();
   const [keyword, setKeyword] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const getSearchBarCss = () => {
+    return `
+    flex 
+    items-center 
+    text-primary-dark_gray
+    border
+    border-primary-dark_gray
+    rounded-full
+    px-[1.5rem]
+    py-[0.5rem]`;
+  };
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const xClick = () => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      focusInput();
+    }
+  };
+
+  const handleKeyword = (event: ChangeEvent<HTMLInputElement>) =>
+    setKeyword(event.target.value);
+
+  const handleSelect = (event: ChangeEvent<HTMLSelectElement>) =>
+    setCategory(event.target.value);
+
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    router.push(`/search?keyword=${keyword}`);
+  };
+
   return (
-    <form
-      className={getSearchBarCss()}
-      onSubmit={(event) => event.preventDefault()}
-    >
+    <form className={getSearchBarCss()} onSubmit={handleSearch}>
       <Select
         className="text-middle"
         name="category"
         value={category}
-        onChange={(event) => handleSelect(event, setCategory)}
+        onChange={(event) => handleSelect(event)}
       >
-        <option>테마</option>
-        <option>제작자</option>
-        <option>추천순</option>
+        <option>전체</option>
+        <option>테마별</option>
+        <option>제작자별</option>
+        <option>학생별</option>
       </Select>
       <span className="block border-r border-primary-dark_gray h-base" />
-      <SearchIcon className="mx-small" onClick={() => focusInput(inputRef)} />
+      <SearchIcon className="mx-small" onClick={() => focusInput()} />
       <input
         ref={inputRef}
         name="keyword"
         className="focus:outline-none w-[13.875rem]"
         placeholder="검색"
         value={keyword}
-        onChange={(event) => handleKeyword(event, setKeyword)}
+        onChange={(event) => handleKeyword(event)}
       />
 
       {keyword ? (
-        <button type="button" className="ml-3" onClick={() => xClick(inputRef)}>
+        <button type="button" className="ml-3" onClick={xClick}>
           <XIcon className="w-base h-base" />
         </button>
       ) : (
