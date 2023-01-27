@@ -1,4 +1,4 @@
-import { Portfolio } from "@/types/portfolio.interface";
+import { Portfolio, PortfolioListType } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
@@ -8,7 +8,7 @@ import Chip from "../atoms/Chip";
 interface SideMenuPortfolioProps {
   portfolio: Portfolio;
   onClick: () => void;
-  type: "main" | "portfolio";
+  type: PortfolioListType;
 }
 
 export default function PortfolioItem({

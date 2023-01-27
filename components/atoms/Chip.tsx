@@ -1,11 +1,11 @@
-import { PortfolioSidebarType } from "@/types/portfolio.interface";
+import { PortfolioListType } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import { ReactNode } from "react";
 
 interface ChipGroupProps {
   children: ReactNode;
   className?: string;
-  type?: PortfolioSidebarType;
+  type?: PortfolioListType;
 }
 
 interface ChipProps {
