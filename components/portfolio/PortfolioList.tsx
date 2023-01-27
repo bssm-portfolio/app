@@ -1,9 +1,15 @@
-import { usePortfolioList } from "@/models/portfolio";
+import fixture from "@/fixtures";
+import { useSearch } from "@/models/search";
 import { useRouter } from "next/router";
 import PortfolioItem from "../app/PortfolioItem";
 
-export default function PortfolioList() {
-  const { list } = usePortfolioList();
+interface PortfolioListProps {
+  keyword?: string;
+}
+
+export default function PortfolioList({ keyword = "" }: PortfolioListProps) {
+  // const { list } = useSearch(keyword);
+  const list = fixture.portfolioList;
   const router = useRouter();
 
   return (
@@ -14,6 +20,7 @@ export default function PortfolioList() {
             key={portfolio.portfolioId}
             portfolio={portfolio}
             onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
+            type="main"
           />
         );
       })}
