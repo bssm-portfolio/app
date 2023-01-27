@@ -1,12 +1,12 @@
 import fixture from "@/fixtures";
-import PortfolioList from "./PortfolioList";
+import ProfilePortfolioList from "./ProfilePortfolioList";
 import ProfileDescription from "./ProfileDescription";
 
 export default function ProfileDetail() {
   return (
     <div className="flex gap-20">
       <ProfileDescription {...fixture.profileDescription} />
-      <PortfolioList />
+      <ProfilePortfolioList />
     </div>
   );
 }

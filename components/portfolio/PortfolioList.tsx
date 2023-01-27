@@ -1,8 +1,8 @@
 import { usePortfolioList } from "@/models/portfolio";
 import { useRouter } from "next/router";
-import SideMenuPortfolio from "../app/SideMenuPortfolio";
+import PortfolioItem from "../app/PortfolioItem";
 
-export default function SideMenuItem() {
+export default function PortfolioList() {
   const { list } = usePortfolioList();
   const router = useRouter();
 
@@ -10,7 +10,7 @@ export default function SideMenuItem() {
     <div className="flex flex-col items-start">
       {list.map((portfolio) => {
         return (
-          <SideMenuPortfolio
+          <PortfolioItem
             key={portfolio.portfolioId}
             portfolio={portfolio}
             onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
