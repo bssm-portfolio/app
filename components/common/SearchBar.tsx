@@ -1,3 +1,4 @@
+import { clearInput, focusInput } from "@/utils/input";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { XIcon } from "../Icon";
@@ -22,25 +23,11 @@ export default function SearchBar() {
     py-[0.5rem]`;
   };
 
-  const focusInput = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
-  const xClick = () => {
-    if (inputRef.current) {
-      inputRef.current.value = "";
-      focusInput();
-    }
-  };
-
   const handleKeyword = (event: ChangeEvent<HTMLInputElement>) =>
     setKeyword(event.target.value);
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) =>
     setCategory(event.target.value);
-
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     router.push(`/search?keyword=${keyword}`);
@@ -60,7 +47,7 @@ export default function SearchBar() {
         <option>학생별</option>
       </Select>
       <span className="block border-r border-primary-dark_gray h-base" />
-      <SearchIcon className="mx-small" onClick={() => focusInput()} />
+      <SearchIcon className="mx-small" onClick={() => focusInput(inputRef)} />
       <input
         ref={inputRef}
         name="keyword"
@@ -71,7 +58,11 @@ export default function SearchBar() {
       />
 
       {keyword ? (
-        <button type="button" className="ml-3" onClick={xClick}>
+        <button
+          type="button"
+          className="ml-3"
+          onClick={() => clearInput(inputRef)}
+        >
           <XIcon className="w-base h-base" />
         </button>
       ) : (
