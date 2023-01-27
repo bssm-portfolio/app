@@ -1,27 +1,28 @@
 import { Header } from "@/components";
-import Filter from "@/components/contents/Filter";
-import PortfolioList from "@/components/portfolio/PortfolioList";
 import { ReactNode } from "react";
 
-interface FrameProps {
+interface SearchPageLayoutProps {
   filter: ReactNode;
   portfolioList: ReactNode;
 }
 
-function Frame({ filter, portfolioList }: FrameProps) {
+function Frame({ filter, portfolioList }: SearchPageLayoutProps) {
   return (
-    <>
+    <div className="pt-8 px-32 flex flex-col justify-center">
       <div>{filter}</div>
       <div>{portfolioList}</div>
-    </>
+    </div>
   );
 }
 
-export default function SearchPageLayout() {
+export default function SearchPageLayout({
+  filter,
+  portfolioList,
+}: SearchPageLayoutProps) {
   return (
     <>
       <Header />
-      <Frame filter={<Filter />} portfolioList={<PortfolioList />} />
+      <Frame filter={filter} portfolioList={portfolioList} />
     </>
   );
 }

@@ -1,17 +1,20 @@
 import { Portfolio } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
+import classNames from "classnames";
 import Image from "next/image";
 import Chip from "../atoms/Chip";
 
 interface SideMenuPortfolioProps {
   portfolio: Portfolio;
   onClick: () => void;
+  type: "main" | "portfolio";
 }
 
 export default function PortfolioItem({
   portfolio,
   onClick,
+  type,
 }: SideMenuPortfolioProps) {
   return (
     <div
@@ -19,7 +22,11 @@ export default function PortfolioItem({
       key={portfolio.portfolioId}
       onClick={onClick}
     >
-      <div className="relative w-[320px] h-[180px] xl:w-[240px] xl:h-[135px]">
+      <div
+        className={classNames("relative w-[320px] h-[180px]", {
+          " xl:w-[240px] xl:h-[135px]": type === "portfolio",
+        })}
+      >
         <Image
           className="rounded-[0.625rem]"
           src={getFileDownloadUrl(portfolio.thumbnail)}
@@ -33,7 +40,7 @@ export default function PortfolioItem({
         <span className="font-bold text-small block mb-xsmall">
           {portfolio.writer.name}
         </span>
-        <Chip.Group className="mb-xsmall" type="portfolio">
+        <Chip.Group className="mb-xsmall" type={type}>
           {portfolio.skillList.map((skillData) => {
             return <Chip.Item>{skillData}</Chip.Item>;
           })}
