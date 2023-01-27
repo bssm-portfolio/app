@@ -12,7 +12,7 @@ export { default as AppSideMenu } from "./app/SideMenu";
 export { default as AppComment } from "./app/Comment";
 export { default as MyPageProfile } from "./app/MyPageProfile";
 export { default as MyPagePortfolioList } from "./app/MyPagePortfolioList";
-export { default as PortfolioList } from "./main/PortfolioList";
+export { default as MainPortfolioList } from "./main/MainPortfolioList";
 
 export { default as HeaderButton } from "./atoms/HeaderButton";
 export { default as Chip } from "./atoms/Chip";

@@ -28,6 +28,7 @@ export default function SearchBar() {
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) =>
     setCategory(event.target.value);
+
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     router.push(`/search?keyword=${keyword}`);
