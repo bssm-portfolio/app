@@ -27,10 +27,6 @@ class HttpClient {
     return this.api.get("/search", requestConfig);
   }
 
-  searchByKeyword(keyword: string, requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/search?search=${keyword}`, requestConfig);
-  }
-
   getById(requestConfig?: AxiosRequestConfig) {
     return this.api.get(`/:id`, requestConfig);
   }
