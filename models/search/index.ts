@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useSearch = (keyword: string) => {
   const { data } = useQuery<PortfolioList>(["search"], () =>
-    httpClient.portfolio.searchByKeyword(keyword, {}).then((d) => d.data),
+    httpClient.portfolio.search({ params: { keyword } }).then((d) => d.data),
   );
   return data || { pagination: null, list: [] };
 };
