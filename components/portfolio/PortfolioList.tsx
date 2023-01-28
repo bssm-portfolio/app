@@ -1,4 +1,3 @@
-import fixture from "@/fixtures";
 import { useSearch } from "@/models/search";
 import { useRouter } from "next/router";
 import PortfolioItem from "../app/PortfolioItem";
@@ -8,8 +7,7 @@ interface PortfolioListProps {
 }
 
 export default function PortfolioList({ keyword = "" }: PortfolioListProps) {
-  // const { list } = useSearch(keyword);
-  const list = fixture.portfolioList;
+  const { list } = useSearch(keyword);
   const router = useRouter();
 
   return (
