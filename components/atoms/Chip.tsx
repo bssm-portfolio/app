@@ -35,7 +35,7 @@ function Item({ children, type = "main" }: ChipProps) {
       className={classNames(
         "px-3 py-1 border border-blue rounded-full text-blue text-sxx",
         {
-          "max-w-[7.5rem] overflow-hidden text-ellipsis whitespace-nowrap":
+          "xl:max-w-[7.5rem] xl:overflow-hidden xl:text-ellipsis xl:whitespace-nowrap":
             type === "portfolio",
         },
       )}
