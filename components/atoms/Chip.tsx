@@ -16,9 +16,13 @@ interface ChipProps {
 function Group({ children, className, type = "main" }: ChipGroupProps) {
   return (
     <div
-      className={`${classNames(className, "flex gap-1 flex-wrap", {
-        "xl:w-[8.4375rem]": type === "portfolio",
-      })}`}
+      className={`${classNames(
+        className,
+        "flex gap-1 flex-wrap max-w-[20rem]",
+        {
+          "xl:w-[8.4375rem]": type === "portfolio",
+        },
+      )}`}
     >
       {children}
     </div>
@@ -31,7 +35,7 @@ function Item({ children, type = "main" }: ChipProps) {
       className={classNames(
         "px-3 py-1 border border-blue rounded-full text-blue text-sxx",
         {
-          "max-w-full overflow-hidden text-ellipsis whitespace-nowrap":
+          "max-w-[7.5rem] overflow-hidden text-ellipsis whitespace-nowrap":
             type === "portfolio",
         },
       )}
