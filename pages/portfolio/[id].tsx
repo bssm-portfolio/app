@@ -11,6 +11,7 @@ import httpClient from "@/apis";
 import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import { getDateParsedData } from "@/utils/date";
+import { deepcopy } from "@/utils/data";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
@@ -58,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      portfolio: JSON.parse(JSON.stringify(portfolio)),
+      portfolio: deepcopy(portfolio),
     },
   };
 };
