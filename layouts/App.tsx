@@ -15,7 +15,7 @@ const getLayoutCss = () => {
   px-4
   md:px-6
   xl:px-[6.25rem]
-  xl:grid-cols-[minmax(0,_1fr)_26.25rem] 
+  xl:grid-cols-[minmax(0,_1fr)_28.25rem] 
   xl:grid-rows-[minmax(1fr,_0)_18.75rem] 
   `;
 };

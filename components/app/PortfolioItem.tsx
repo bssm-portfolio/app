@@ -24,7 +24,7 @@ export default function PortfolioItem({
     >
       <div
         className={classNames("relative w-[320px] h-[180px]", {
-          " xl:w-[240px] xl:h-[135px]": type === "portfolio",
+          "xl:w-[240px] xl:h-[135px]": type === "portfolio",
         })}
       >
         <Image
@@ -42,7 +42,11 @@ export default function PortfolioItem({
         </span>
         <Chip.Group className="mb-xsmall" type={type}>
           {portfolio.skillList.map((skillData) => {
-            return <Chip.Item>{skillData}</Chip.Item>;
+            return (
+              <Chip.Item type={type} key={skillData}>
+                {skillData}
+              </Chip.Item>
+            );
           })}
         </Chip.Group>
         <div className="text-xsmall">

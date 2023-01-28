@@ -10,6 +10,7 @@ interface ChipGroupProps {
 
 interface ChipProps {
   children: ReactNode;
+  type?: PortfolioListType;
 }
 
 function Group({ children, className, type = "main" }: ChipGroupProps) {
@@ -24,9 +25,17 @@ function Group({ children, className, type = "main" }: ChipGroupProps) {
   );
 }
 
-function Item({ children }: ChipProps) {
+function Item({ children, type = "main" }: ChipProps) {
   return (
-    <div className="px-3 py-1 border border-blue rounded-full text-blue text-sxx">
+    <div
+      className={classNames(
+        "px-3 py-1 border border-blue rounded-full text-blue text-sxx",
+        {
+          "max-w-full overflow-hidden text-ellipsis whitespace-nowrap":
+            type === "portfolio",
+        },
+      )}
+    >
       {children}
     </div>
   );
