@@ -31,7 +31,7 @@ export default function SearchBar() {
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push(`/search?keyword=${keyword}`);
+    router.push({ pathname: `/search`, query: { keyword } });
   };
 
   return (
@@ -52,7 +52,7 @@ export default function SearchBar() {
       <input
         ref={inputRef}
         name="keyword"
-        className="focus:outline-none w-[13.875rem]"
+        className="w-[13.875rem] focus:outline-none "
         placeholder="검색"
         value={keyword}
         onChange={(event) => handleKeyword(event)}

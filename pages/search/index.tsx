@@ -13,6 +13,8 @@ export default function SearchPage() {
     setKeyword(router.query.keyword as string);
   }, [router.query]);
 
+  if (keyword === "") return null;
+
   return (
     <div>
       <Head>
