@@ -10,10 +10,8 @@ export default function SearchPage() {
   const [keyword, setKeyword] = useState<string>("");
 
   useEffect(() => {
-    setKeyword(router.query.keyword as string);
+    setKeyword((router.query.keyword as string) || "");
   }, [router.query]);
-
-  if (keyword === "") return null;
 
   return (
     <div>
