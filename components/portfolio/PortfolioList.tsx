@@ -4,12 +4,12 @@ import { useRouter } from "next/router";
 import PortfolioItem from "../app/PortfolioItem";
 
 interface PortfolioListProps {
-  keyword?: string;
+  keyword: string;
   type?: PortfolioListType;
 }
 
 export default function PortfolioList({
-  keyword = "",
+  keyword,
   type = "main",
 }: PortfolioListProps) {
   const router = useRouter();
