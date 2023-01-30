@@ -3,16 +3,15 @@ import BsmIcon from "@/components/Icon/BsmIcon";
 import BssmIcon from "@/components/Icon/BssmIcon";
 import GoogleIcon from "@/components/Icon/GoogleIcon";
 import KakaoIcon from "@/components/Icon/KakaoIcon";
-import { useLogin } from "@/models/login";
+import { useOauth } from "@/models/login";
 import { MouseEvent, useEffect, useState } from "react";
 
 export default function LoginPopupView() {
   const [platform, setPlatform] = useState<string>("");
-  const { token } = useLogin(platform);
+  const { token } = useOauth(platform);
 
   const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
     setPlatform(event.currentTarget.value);
-    console.log(event.currentTarget.value);
   };
 
   useEffect(() => {

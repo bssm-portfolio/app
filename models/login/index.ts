@@ -22,7 +22,7 @@ const getOauth = (platform: string): (() => Promise<Token>) => {
   }
 };
 
-const useLogin = (platform: string) => {
+const useOauth = (platform: string) => {
   const { data } = useQuery<Token>(
     [`${platform} Oauth`, platform],
     getOauth(platform),
@@ -32,4 +32,4 @@ const useLogin = (platform: string) => {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export { useLogin };
+export { useOauth };
