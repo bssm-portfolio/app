@@ -12,6 +12,7 @@ export default function LoginPopupView() {
 
   const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
     setPlatform(event.currentTarget.value);
+    console.log(event.currentTarget.value);
   };
 
   useEffect(() => {
@@ -31,8 +32,8 @@ export default function LoginPopupView() {
         <LoginButton value="kakao">
           <KakaoIcon className="mr-2" /> 카카오로 로그인
         </LoginButton>
-        <LoginButton value="google">
-          <GoogleIcon className="mr-2" onClick={handleLogin} /> 구글로 로그인
+        <LoginButton value="google" onClick={handleLogin}>
+          <GoogleIcon className="mr-2" /> 구글로 로그인
         </LoginButton>
         <LoginButton value="bsm">
           <BsmIcon className="mr-2" /> BSM 계정으로 로그인
