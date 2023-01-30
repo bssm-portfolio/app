@@ -3,7 +3,7 @@ import { MemberWithoutIntroduction } from "./member.interface";
 
 export type PortfolioType = "VIDEO" | "URL";
 type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
-export type PortfolioSidebarType = "main" | "portfolio";
+export type PortfolioListType = "main" | "portfolio";
 
 export type Portfolio = {
   portfolioId: number;

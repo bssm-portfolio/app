@@ -5,7 +5,7 @@ import useModal from "@/hooks/useModal";
 import PlusIcon from "../Icon/PlusIcon";
 import UploadModal from "../app/UploadModal";
 
-export default function PortfolioList() {
+export default function ProfilePortfolioList() {
   const router = useRouter();
   const { list } = usePortfolioList();
   const { openModal, closeModal } = useModal();
