@@ -23,12 +23,20 @@ class HttpClient {
     return this.api.get("", requestConfig);
   }
 
+  getById(requestConfig?: AxiosRequestConfig) {
+    return this.api.get(`/:id`, requestConfig);
+  }
+
   search(requestConfig?: AxiosRequestConfig) {
     return this.api.get("/search", requestConfig);
   }
 
-  getById(requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/:id`, requestConfig);
+  google() {
+    return this.api.get("/oauth2/code/google");
+  }
+
+  kakao() {
+    return this.api.get("/oauth2/code/kakao");
   }
 
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
@@ -66,4 +74,5 @@ const axiosConfig: HttpClientConfig = {
 
 export default {
   portfolio: new HttpClient("/portfolio", axiosConfig),
+  login: new HttpClient("/login", axiosConfig),
 };

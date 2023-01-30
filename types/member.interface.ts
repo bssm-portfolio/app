@@ -7,3 +7,8 @@ export interface Member {
 }
 
 export type MemberWithoutIntroduction = Omit<Member, "introduction">;
+
+export interface Token {
+  token: string;
+  validity: string;
+}
