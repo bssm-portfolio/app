@@ -10,8 +10,7 @@ test("검색 기능 테스트", async ({ page }) => {
   await page
     .locator("div")
     .filter({
-      hasText:
-        "포트폴리오4박정호Amazon Route 53Amazon WorkDocs조회수 0회 · 2023년 1월 28일0팔로잉공유포트폴리오4 설명",
+      hasText: "포트폴리오4",
     })
     .nth(2)
     .click();
