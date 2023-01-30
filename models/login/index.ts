@@ -4,9 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 
 const useGoogleOauth = () => {
   const { data } = useQuery<Token>(["google Oauth"], () =>
-    httpClient.login;
+    httpClient.login.google().then((r) => r.data),
   );
-  return data || { pagination: null, list: [] };
+  return data || { token: null, validity: null };
 };
 
 // eslint-disable-next-line import/prefer-default-export
