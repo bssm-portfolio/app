@@ -3,8 +3,21 @@ import BsmIcon from "@/components/Icon/BsmIcon";
 import BssmIcon from "@/components/Icon/BssmIcon";
 import GoogleIcon from "@/components/Icon/GoogleIcon";
 import KakaoIcon from "@/components/Icon/KakaoIcon";
+import { useLogin } from "@/models/login";
+import { MouseEvent, useEffect, useState } from "react";
 
 export default function LoginPopupView() {
+  const [platform, setPlatform] = useState<string>("");
+  const { token } = useLogin(platform);
+
+  const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
+    setPlatform(event.currentTarget.value);
+  };
+
+  useEffect(() => {
+    console.log(token);
+  }, [token]);
+
   return (
     <div className="pt-[6.1rem] pb-20">
       <div className="flex flex-col items-center">
@@ -15,13 +28,13 @@ export default function LoginPopupView() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <LoginButton>
+        <LoginButton value="kakao">
           <KakaoIcon className="mr-2" /> 카카오로 로그인
         </LoginButton>
-        <LoginButton>
-          <GoogleIcon className="mr-2" /> 구글로 로그인
+        <LoginButton value="google">
+          <GoogleIcon className="mr-2" onClick={handleLogin} /> 구글로 로그인
         </LoginButton>
-        <LoginButton>
+        <LoginButton value="bsm">
           <BsmIcon className="mr-2" /> BSM 계정으로 로그인
         </LoginButton>
       </div>
