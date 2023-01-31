@@ -28,7 +28,7 @@ export default function LoginPopupView() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <LoginButton value="kakao">
+        <LoginButton value="kakao" onClick={handleLogin}>
           <KakaoIcon className="mr-2" /> 카카오로 로그인
         </LoginButton>
         <LoginButton value="google" onClick={handleLogin}>

@@ -5,10 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 const handleGoogleOauth = (): Promise<Token> =>
   httpClient.login.google().then((r) => r.data);
 
+const handleKakaoOauth = (): Promise<Token> =>
+  httpClient.login.kakao().then((r) => r.data);
+
 const getOauth = (platform: string): (() => Promise<Token>) => {
   const oauthRequest = {
     google: handleGoogleOauth,
-    kakao: handleGoogleOauth,
+    kakao: handleKakaoOauth,
     bsm: handleGoogleOauth,
   };
 

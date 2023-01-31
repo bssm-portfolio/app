@@ -33,12 +33,14 @@ class HttpClient {
 
   google() {
     return this.api.get(
-      "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google",
+      "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google",
     );
   }
 
   kakao() {
-    return this.api.get("/oauth2/code/kakao");
+    return this.api.get(
+      "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao",
+    );
   }
 
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
