@@ -3,20 +3,19 @@ import BsmIcon from "@/components/Icon/BsmIcon";
 import BssmIcon from "@/components/Icon/BssmIcon";
 import GoogleIcon from "@/components/Icon/GoogleIcon";
 import KakaoIcon from "@/components/Icon/KakaoIcon";
-import { useOauth } from "@/models/login";
-import { MouseEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function LoginPopupView() {
-  const [platform, setPlatform] = useState<string>("");
-  const { token } = useOauth(platform);
+  const router = useRouter();
 
-  const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
-    setPlatform(event.currentTarget.value);
-  };
-
-  useEffect(() => {
-    console.log(token);
-  }, [token]);
+  const handleGoogleOauth = () =>
+    router.push(
+      "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google",
+    );
+  const handleKakaoOauth = () =>
+    router.push(
+      "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao",
+    );
 
   return (
     <div className="pt-[6.1rem] pb-20">
@@ -28,10 +27,10 @@ export default function LoginPopupView() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <LoginButton value="kakao" onClick={handleLogin}>
+        <LoginButton value="kakao" onClick={handleKakaoOauth}>
           <KakaoIcon className="mr-2" /> 카카오로 로그인
         </LoginButton>
-        <LoginButton value="google" onClick={handleLogin}>
+        <LoginButton value="google" onClick={handleGoogleOauth}>
           <GoogleIcon className="mr-2" /> 구글로 로그인
         </LoginButton>
         <LoginButton value="bsm">
