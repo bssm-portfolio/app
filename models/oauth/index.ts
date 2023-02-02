@@ -1,9 +1,9 @@
 import httpClient from "@/apis";
-import { Token } from "@/types/member.interface";
+import { Platform, Token } from "@/types/member.interface";
 import { useQuery } from "@tanstack/react-query";
 
 const getOauth = (
-  platform: string,
+  platform: Platform,
   authCode: string,
 ): (() => Promise<Token>) => {
   if (platform === "google")
@@ -13,7 +13,7 @@ const getOauth = (
   return () => httpClient.oauth.bsm({ authCode }).then((d) => d.data);
 };
 
-const useOauth = (platform: string, authCode: string) => {
+const useOauth = (platform: Platform, authCode: string) => {
   const { data } = useQuery<Token>(
     [`${platform} oauth`, authCode],
     getOauth(platform, authCode),
