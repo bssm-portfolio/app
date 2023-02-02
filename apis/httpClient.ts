@@ -33,7 +33,7 @@ class HttpClient {
   }
 
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/", data, requestConfig);
+    return this.api.post("", data, requestConfig);
   }
 
   google(data: Bsm, requestConfig?: AxiosRequestConfig) {
@@ -49,11 +49,11 @@ class HttpClient {
   }
 
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.put("/", data, requestConfig);
+    return this.api.put("", data, requestConfig);
   }
 
   delete(requestConfig?: AxiosRequestConfig) {
-    return this.api.delete("/", requestConfig);
+    return this.api.delete("", requestConfig);
   }
 
   private setting() {
@@ -78,6 +78,6 @@ const axiosConfig: HttpClientConfig = {
 };
 
 export default {
-  portfolio: new HttpClient("/portfolio", axiosConfig),
-  oauth: new HttpClient("/oauth", axiosConfig),
+  portfolio: new HttpClient("/api/portfolio", axiosConfig),
+  oauth: new HttpClient("/api/oauth", axiosConfig),
 };
