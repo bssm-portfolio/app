@@ -3,23 +3,21 @@ import BsmIcon from "@/components/Icon/BsmIcon";
 import BssmIcon from "@/components/Icon/BssmIcon";
 import GoogleIcon from "@/components/Icon/GoogleIcon";
 import KakaoIcon from "@/components/Icon/KakaoIcon";
+import config from "@/config";
+import { Platform } from "@/types/member.interface";
 import { useRouter } from "next/router";
 
 export default function LoginPopupView() {
   const router = useRouter();
 
-  const handleGoogleOauth = () =>
-    router.push(
-      "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google",
-    );
-  const handleKakaoOauth = () =>
-    router.push(
-      "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao",
-    );
-  const handleBsmOauth = () =>
-    router.push(
-      "https://auth.bssm.kro.kr/oauth?clientId=17283d0f&redirectURI=http://localhost:3000/oauth/callback/bsm",
-    );
+  const handleOauth = (platform: Platform) => {
+    const oauthCallbackUrlList = {
+      google: `${config.baseURL}/oauth2/authorization/google`,
+      kakao: `${config.baseURL}/oauth2/authorization/kakao`,
+      bsm: "https://auth.bssm.kro.kr/oauth?clientId=17283d0f&redirectURI=http://localhost:3000/oauth/callback/bsm",
+    };
+    return router.push(oauthCallbackUrlList[platform]);
+  };
 
   return (
     <div className="pt-[6.1rem] pb-20">
@@ -31,13 +29,13 @@ export default function LoginPopupView() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <LoginButton value="kakao" onClick={handleKakaoOauth}>
+        <LoginButton value="kakao" onClick={() => handleOauth("kakao")}>
           <KakaoIcon className="mr-2" /> 카카오로 로그인
         </LoginButton>
-        <LoginButton value="google" onClick={handleGoogleOauth}>
+        <LoginButton value="google" onClick={() => handleOauth("google")}>
           <GoogleIcon className="mr-2" /> 구글로 로그인
         </LoginButton>
-        <LoginButton value="bsm" onClick={handleBsmOauth}>
+        <LoginButton value="bsm" onClick={() => handleOauth("bsm")}>
           <BsmIcon className="mr-2" /> BSM 계정으로 로그인
         </LoginButton>
       </div>

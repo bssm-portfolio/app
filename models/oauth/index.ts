@@ -6,11 +6,12 @@ const getOauth = (
   platform: Platform,
   authCode: string,
 ): (() => Promise<Token>) => {
-  if (platform === "google")
-    return () => httpClient.oauth.google({ authCode }).then((d) => d.data);
-  if (platform === "kakao")
-    return () => httpClient.oauth.kakao({ authCode }).then((d) => d.data);
-  return () => httpClient.oauth.bsm({ authCode }).then((d) => d.data);
+  const oauthRequestList = {
+    google: () => httpClient.oauth.google({ authCode }).then((d) => d.data),
+    kakao: () => httpClient.oauth.kakao({ authCode }).then((d) => d.data),
+    bsm: () => httpClient.oauth.bsm({ authCode }).then((d) => d.data),
+  };
+  return oauthRequestList[platform];
 };
 
 const useOauth = (platform: Platform, authCode: string) => {
