@@ -16,6 +16,10 @@ export default function LoginPopupView() {
     router.push(
       "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao",
     );
+  const handleBsmOauth = () =>
+    router.push(
+      "https://auth.bssm.kro.kr/oauth?clientId=17283d0f&redirectURI=http://localhost:3000/oauth/callback/bsm",
+    );
 
   return (
     <div className="pt-[6.1rem] pb-20">
@@ -33,7 +37,7 @@ export default function LoginPopupView() {
         <LoginButton value="google" onClick={handleGoogleOauth}>
           <GoogleIcon className="mr-2" /> 구글로 로그인
         </LoginButton>
-        <LoginButton value="bsm">
+        <LoginButton value="bsm" onClick={handleBsmOauth}>
           <BsmIcon className="mr-2" /> BSM 계정으로 로그인
         </LoginButton>
       </div>

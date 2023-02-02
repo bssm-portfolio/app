@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import config from "@/config";
 import { AUTH_TOKEN } from "@/config/const";
 import { requestInterceptors, responseInterceptors } from "@/utils/api";
-import Router from "next/router";
+import { Bsm } from "@/types/member.interface";
 
 export interface HttpClientConfig {
   baseURL: string;
@@ -36,6 +36,10 @@ class HttpClient {
     return this.api.post("/", data, requestConfig);
   }
 
+  bsm(data: Bsm, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/bsm", data, requestConfig);
+  }
+
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
     return this.api.put("/", data, requestConfig);
   }
@@ -67,5 +71,5 @@ const axiosConfig: HttpClientConfig = {
 
 export default {
   portfolio: new HttpClient("/portfolio", axiosConfig),
-  login: new HttpClient("/login", axiosConfig),
+  oauth: new HttpClient("/oauth", axiosConfig),
 };
