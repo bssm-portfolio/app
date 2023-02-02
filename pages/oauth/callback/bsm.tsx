@@ -15,8 +15,9 @@ export default function Bsm() {
   useEffect(() => {
     if (token !== "") {
       localStorage.setItem(AUTH_TOKEN, token);
+      router.push("/");
     }
-  }, [token]);
+  }, [token, router]);
 
-  return <div>{token}</div>;
+  return <div />;
 }
