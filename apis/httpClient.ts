@@ -36,6 +36,14 @@ class HttpClient {
     return this.api.post("/", data, requestConfig);
   }
 
+  google(data: Bsm, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/bsm", data, requestConfig);
+  }
+
+  kakao(data: Bsm, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/bsm", data, requestConfig);
+  }
+
   bsm(data: Bsm, requestConfig?: AxiosRequestConfig) {
     return this.api.post("/bsm", data, requestConfig);
   }
