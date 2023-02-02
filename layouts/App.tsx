@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Header } from "@/components";
 
 interface FrameProps {
   app: ReactNode;
@@ -35,10 +34,7 @@ function Frame({ app, sidebar, detail, comment }: FrameProps) {
 
 export function AppLayout({ app, sidebar, detail, comment }: FrameProps) {
   return (
-    <>
-      <Header />
-      <Frame app={app} sidebar={sidebar} detail={detail} comment={comment} />
-    </>
+    <Frame app={app} sidebar={sidebar} detail={detail} comment={comment} />
   );
 }
 

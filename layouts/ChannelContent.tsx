@@ -1,4 +1,3 @@
-import { Header } from "@/components";
 import { ReactNode } from "react";
 
 interface FrameProps {
@@ -22,10 +21,5 @@ export default function ChannelContentLayout({
   filter,
   datagrid,
 }: FrameProps) {
-  return (
-    <>
-      <Header />
-      <Frame title={title} filter={filter} datagrid={datagrid} />
-    </>
-  );
+  return <Frame title={title} filter={filter} datagrid={datagrid} />;
 }

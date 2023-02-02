@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import config from "@/config";
+import { Header } from "@/components";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -21,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <QueryClientProvider client={client}>
         {config.nodeEnv === "development" ? <ReactQueryDevtools /> : null}
+        <Header />
         <Component {...pageProps} />
         <Modal />
       </QueryClientProvider>

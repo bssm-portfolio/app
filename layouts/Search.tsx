@@ -1,4 +1,3 @@
-import { Header } from "@/components";
 import { ReactNode } from "react";
 
 interface SearchPageLayoutProps {
@@ -19,10 +18,5 @@ export default function SearchPageLayout({
   filter,
   portfolioList,
 }: SearchPageLayoutProps) {
-  return (
-    <>
-      <Header />
-      <Frame filter={filter} portfolioList={portfolioList} />
-    </>
-  );
+  return <Frame filter={filter} portfolioList={portfolioList} />;
 }
