@@ -28,6 +28,14 @@ class HttpClient {
     return this.api.get(`/:id`, requestConfig);
   }
 
+  member(requestConfig?: AxiosRequestConfig) {
+    return this.api.get(`/member`, requestConfig);
+  }
+
+  self(requestConfig?: AxiosRequestConfig) {
+    return this.api.get(`/self`, requestConfig);
+  }
+
   search(requestConfig?: AxiosRequestConfig) {
     return this.api.get("/search", requestConfig);
   }
@@ -37,11 +45,11 @@ class HttpClient {
   }
 
   google(data: Bsm, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/bsm", data, requestConfig);
+    return this.api.post("/google", data, requestConfig);
   }
 
   kakao(data: Bsm, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/bsm", data, requestConfig);
+    return this.api.post("/kakao", data, requestConfig);
   }
 
   bsm(data: Bsm, requestConfig?: AxiosRequestConfig) {
