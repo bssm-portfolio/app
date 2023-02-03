@@ -21,7 +21,7 @@ class HttpClient {
   }
 
   get(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("", requestConfig);
+    return this.api.get("/", requestConfig);
   }
 
   getById(requestConfig?: AxiosRequestConfig) {
