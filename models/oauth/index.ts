@@ -6,12 +6,7 @@ const getOauth = (
   platform: Platform,
   authCode: string,
 ): (() => Promise<Token>) => {
-  const oauthRequestList = {
-    google: () => httpClient.oauth.google({ authCode }).then((d) => d.data),
-    kakao: () => httpClient.oauth.kakao({ authCode }).then((d) => d.data),
-    bsm: () => httpClient.oauth.bsm({ authCode }).then((d) => d.data),
-  };
-  return oauthRequestList[platform];
+  return () => httpClient.oauth[platform]({ authCode }).then((d) => d.data);
 };
 
 const useOauth = (platform: Platform, authCode: string) => {
