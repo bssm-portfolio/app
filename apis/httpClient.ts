@@ -28,10 +28,6 @@ class HttpClient {
     return this.api.get(`/:id`, requestConfig);
   }
 
-  member(requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/member`, requestConfig);
-  }
-
   self(requestConfig?: AxiosRequestConfig) {
     return this.api.get(`/self`, requestConfig);
   }
@@ -88,4 +84,5 @@ const axiosConfig: HttpClientConfig = {
 export default {
   portfolio: new HttpClient("/api/portfolio", axiosConfig),
   oauth: new HttpClient("/api/oauth", axiosConfig),
+  member: new HttpClient("/api/member", axiosConfig),
 };
