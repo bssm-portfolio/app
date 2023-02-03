@@ -8,6 +8,8 @@ interface LoginButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function LoginButton({
   type = "button",
   children,
+  value,
+  onClick,
 }: LoginButtonProps) {
   const getButtonCss = () => {
     return `border border-primary-dark_gray w-full rounded-full py-[1.125rem] text-[1.125rem] font-bold flex justify-center items-center`;
@@ -17,6 +19,8 @@ export default function LoginButton({
     <button
       type={type === "submit" ? "submit" : "button"}
       className={getButtonCss()}
+      onClick={onClick}
+      value={value}
     >
       {children}
     </button>

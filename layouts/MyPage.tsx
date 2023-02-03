@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Header } from "@/components";
 
 interface FrameProps {
   profile: ReactNode;
@@ -16,10 +15,5 @@ function Frame({ profile, portfiloList }: FrameProps) {
 }
 
 export default function MyPageLayout({ portfiloList, profile }: FrameProps) {
-  return (
-    <>
-      <Header />
-      <Frame profile={profile} portfiloList={portfiloList} />
-    </>
-  );
+  return <Frame profile={profile} portfiloList={portfiloList} />;
 }

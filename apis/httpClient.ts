@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import config from "@/config";
 import { AUTH_TOKEN } from "@/config/const";
 import { requestInterceptors, responseInterceptors } from "@/utils/api";
+import { Bsm } from "@/types/member.interface";
 
 export interface HttpClientConfig {
   baseURL: string;
@@ -20,19 +21,31 @@ class HttpClient {
   }
 
   get(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("", requestConfig);
-  }
-
-  search(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("/search", requestConfig);
+    return this.api.get("/", requestConfig);
   }
 
   getById(requestConfig?: AxiosRequestConfig) {
     return this.api.get(`/:id`, requestConfig);
   }
 
+  search(requestConfig?: AxiosRequestConfig) {
+    return this.api.get("/search", requestConfig);
+  }
+
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
     return this.api.post("/", data, requestConfig);
+  }
+
+  google(data: Bsm, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/bsm", data, requestConfig);
+  }
+
+  kakao(data: Bsm, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/bsm", data, requestConfig);
+  }
+
+  bsm(data: Bsm, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/bsm", data, requestConfig);
   }
 
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
@@ -65,5 +78,6 @@ const axiosConfig: HttpClientConfig = {
 };
 
 export default {
-  portfolio: new HttpClient("/portfolio", axiosConfig),
+  portfolio: new HttpClient("/api/portfolio", axiosConfig),
+  oauth: new HttpClient("/api/oauth", axiosConfig),
 };
