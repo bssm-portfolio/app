@@ -1,4 +1,4 @@
-import { MemberWithoutIntroduction } from "@/types/member.interface";
+import { MemberWithoutIntroduction } from "@/types/oauth.interface";
 import classNames from "classnames";
 
 interface GroupProps {

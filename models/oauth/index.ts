@@ -1,5 +1,5 @@
 import httpClient from "@/apis";
-import { Platform, Token } from "@/types/member.interface";
+import { Platform, Token } from "@/types/oauth.interface";
 import { useQuery } from "@tanstack/react-query";
 
 const getOauth = (

@@ -1,5 +1,5 @@
 import { S3File } from "./file.interface";
-import { MemberWithoutIntroduction } from "./member.interface";
+import { MemberWithoutIntroduction } from "./oauth.interface";
 
 export type PortfolioType = "VIDEO" | "URL";
 type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";

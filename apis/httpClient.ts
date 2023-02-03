@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import config from "@/config";
 import { AUTH_TOKEN } from "@/config/const";
 import { requestInterceptors, responseInterceptors } from "@/utils/api";
-import { Bsm } from "@/types/member.interface";
+import { Bsm } from "@/types/oauth.interface";
 
 export interface HttpClientConfig {
   baseURL: string;
