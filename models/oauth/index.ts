@@ -20,5 +20,4 @@ const useOauth = (platform: Platform, authCode: string) => {
   return data || { token: "", validity: "" };
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { useOauth };
+export default useOauth;
