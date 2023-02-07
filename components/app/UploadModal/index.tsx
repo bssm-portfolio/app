@@ -1,10 +1,11 @@
 import httpClient from "@/apis";
 import { PortfolioForm } from "@/types/portfolio.interface";
+import { Skill } from "@/types/skill.interface";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import FileUploadView from "./FileUploadView";
-import FormView from "./FormView";
+import FormView from "./Form";
 import Navigator from "./Navigator";
 import SubmitView from "./SubmitView";
 
@@ -16,6 +17,7 @@ const MAX_NAVIGATOR_LENGTH = 3;
 
 export default function UploadModal({ closeModal }: UploadModalProps) {
   const [pageIndex, setPageIndex] = useState(0);
+  const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
   const {
     register,
     handleSubmit,
@@ -23,11 +25,10 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
     // formState: { errors },
   } = useForm<PortfolioForm>();
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
-    console.log("submitted data : ", data);
     await httpClient.portfolio.post({
       ...data,
       portfolioType: "URL",
-      skillList: [],
+      skillList: selectedSkills,
       contributorIdList: [],
     });
     closeModal();
@@ -52,6 +53,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       <FormView
         className={classNames({ hidden: pageIndex !== 1 })}
         register={register}
+        selectedSkills={selectedSkills}
+        setSelectedSkills={setSelectedSkills}
       />
       <SubmitView
         className={classNames({ hidden: pageIndex !== 2 })}

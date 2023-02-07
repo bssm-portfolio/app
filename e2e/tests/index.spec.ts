@@ -48,5 +48,4 @@ test("마지막 페이지 테스트", async ({ page }) => {
   await page.getByLabel("비공개").check();
   await page.getByText("비공개").click();
   await page.getByText("나와 내가 선택한 사람만 볼 수 있습니다.").click();
-  await page.getByRole("button", { name: "완료" }).click();
 });
