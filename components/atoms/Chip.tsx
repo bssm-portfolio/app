@@ -11,6 +11,8 @@ interface ChipGroupProps {
 interface ChipProps {
   children: ReactNode;
   type?: PortfolioListType;
+  selected?: boolean;
+  onClick?: (v: unknown) => void;
 }
 
 function Group({ children, className, type = "main" }: ChipGroupProps) {
@@ -21,6 +23,7 @@ function Group({ children, className, type = "main" }: ChipGroupProps) {
         "flex gap-1 flex-wrap max-w-[20rem]",
         {
           "xl:w-[8.4375rem]": type === "portfolio",
+          "w-full max-w-none": type === "upload",
         },
       )}`}
     >
@@ -29,14 +32,19 @@ function Group({ children, className, type = "main" }: ChipGroupProps) {
   );
 }
 
-function Item({ children, type = "main" }: ChipProps) {
+function Item({ children, type = "main", selected, onClick }: ChipProps) {
   return (
     <div
+      onClick={() => onClick?.(children)}
       className={classNames(
-        "px-3 py-1 border border-blue rounded-full text-blue text-sxx",
+        "px-3 py-1 border border-blue rounded-full text-sxx",
         {
+          "text-blue": type === "main" || (type === "upload" && !selected),
           "xl:max-w-[7.5rem] xl:overflow-hidden xl:text-ellipsis xl:whitespace-nowrap":
             type === "portfolio",
+          "cursor-pointer h-[2.31rem] whitespace-nowrap text-ellipsis overflow-hidden text-[0.875rem] flex items-center":
+            type === "upload",
+          "bg-blue text-white": type === "upload" && selected,
         },
       )}
     >
