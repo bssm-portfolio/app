@@ -1,20 +1,21 @@
 import useModal from "@/hooks/useModal";
-import { userState } from "@/store";
-import { useRecoilState } from "recoil";
+import { useUser } from "@/hooks/useUser";
 import UploadModal from "../../app/UploadModal";
+import LoginPopupView from "../Login/LoginPopup";
 import HeaderView from "./View";
 
 export default function Header() {
-  const [user] = useRecoilState(userState);
+  const { user, isLogined, logout } = useUser();
   const { openModal, closeModal } = useModal();
-  const isLogined = true;
-
-  const dummyFn = () => 0;
+  const openLoginModal = () =>
+    openModal({
+      content: <LoginPopupView />,
+    });
   return (
     <HeaderView
-      avatarUrl={user.avatarUrl}
+      avatarUrl={user.profileImageUrl}
       isLogined={isLogined}
-      onLeftButtonClick={dummyFn}
+      onLeftButtonClick={isLogined ? logout : openLoginModal}
       onRightButtonClick={
         isLogined
           ? () =>
@@ -22,7 +23,7 @@ export default function Header() {
                 title: "업로드",
                 content: <UploadModal closeModal={closeModal} />,
               })
-          : dummyFn
+          : openLoginModal
       }
     />
   );

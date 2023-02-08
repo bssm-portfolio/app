@@ -1,5 +1,5 @@
-import { AUTH_TOKEN } from "@/config/const";
 import { useOauth } from "@/models/oauth";
+import { Storage } from "@/models/storage";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -14,7 +14,7 @@ export default function Bsm() {
 
   useEffect(() => {
     if (token !== "") {
-      localStorage.setItem(AUTH_TOKEN, token);
+      Storage.setItem("ACCESS_TOKEN", token);
       router.push("/");
     }
   }, [token, router]);

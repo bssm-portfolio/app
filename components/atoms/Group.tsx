@@ -1,8 +1,8 @@
-import { MemberWithoutIntroduction } from "@/types/member.interface";
+import { PortfolioWriter } from "@/types/member.interface";
 import classNames from "classnames";
 
 interface GroupProps {
-  names: MemberWithoutIntroduction[];
+  names: PortfolioWriter[];
 }
 
 export default function Group({ names }: GroupProps) {
