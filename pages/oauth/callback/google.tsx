@@ -1,4 +1,3 @@
-import { AUTH_TOKEN } from "@/config/const";
 import { useOauth } from "@/models/oauth";
 import { Storage } from "@/models/storage";
 import { useRouter } from "next/router";

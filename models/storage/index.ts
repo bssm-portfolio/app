@@ -5,7 +5,7 @@ export class Storage {
   }
 
   static setItem(key: LocalStorageKey, value: string) {
-    if (typeof window !== "undefined") return;
+    if (typeof window === "undefined") return;
     localStorage.setItem(key, value);
   }
 }
