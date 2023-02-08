@@ -4,13 +4,13 @@ import BssmIcon from "@/components/Icon/BssmIcon";
 import GoogleIcon from "@/components/Icon/GoogleIcon";
 import KakaoIcon from "@/components/Icon/KakaoIcon";
 import config from "@/config";
-import { Platform } from "@/types/member.interface";
+import { OAuthPlatform } from "@/types/member.interface";
 import { useRouter } from "next/router";
 
 export default function LoginPopupView() {
   const router = useRouter();
 
-  const handleOauth = (platform: Platform) => {
+  const handleOauth = (platform: OAuthPlatform) => {
     const oauthCallbackUrlList = {
       google: `${config.baseURL}/oauth2/authorization/google`,
       kakao: `${config.baseURL}/oauth2/authorization/kakao`,
