@@ -26,10 +26,7 @@ export const useUser = () => {
   };
 
   useEffect(() => {
-    HttpClient.setAccessToken();
-    if (userInfo) {
-      setUser(userInfo);
-    }
+    if (userInfo) setUser(userInfo);
   }, [router.query, setUser, userInfo]);
 
   return { user, isLogined: !!userInfo, logout };
