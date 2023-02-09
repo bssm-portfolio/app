@@ -8,7 +8,7 @@ const useSearch = (keyword: string) => {
     () =>
       httpClient.portfolio.search({ params: { keyword } }).then((d) => d.data),
     {
-      enabled: keyword !== "",
+      enabled: !!keyword,
     },
   );
   return data || { pagination: null, list: [] };
