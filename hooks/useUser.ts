@@ -12,7 +12,7 @@ export const useUser = () => {
   const router = useRouter();
   const { data: userInfo, remove } = useQuery<Member>(
     ["member"],
-    () => httpClient.member.self().then((res) => res.data),
+    () => httpClient.member.self().then((r) => r.data),
     { enabled: !!Storage.getItem("ACCESS_TOKEN") },
   );
 
