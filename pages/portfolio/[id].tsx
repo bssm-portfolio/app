@@ -12,7 +12,6 @@ import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import { getDateParsedData } from "@/utils/date";
 import { deepcopy } from "@/utils/data";
-import useAuthUser from "@/models/user";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
@@ -21,9 +20,6 @@ interface PortfolioIdPageProps {
 export default function Home({ portfolio }: PortfolioIdPageProps) {
   const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
   const type = dateParsedPortfolio.portfolioType;
-  const user = useAuthUser();
-
-  console.log(user);
 
   return (
     <div>
