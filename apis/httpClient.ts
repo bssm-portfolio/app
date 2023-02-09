@@ -1,63 +1,72 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import config from "@/config";
-import { AUTH_TOKEN } from "@/config/const";
 import { requestInterceptors, responseInterceptors } from "@/utils/api";
-import { Bsm } from "@/types/member.interface";
+import { Storage } from "@/models/storage";
 
 export interface HttpClientConfig {
-  baseURL: string;
+  baseURL?: string;
   timeout?: number;
+  headers?: { Token?: string };
 }
 
-class HttpClient {
+export class HttpClient {
   private api: AxiosInstance;
+
+  private static clientConfig: HttpClientConfig;
 
   constructor(url: string, axiosConfig: HttpClientConfig) {
     this.api = axios.create({
       ...axiosConfig,
       baseURL: `${axiosConfig.baseURL}${url}`,
     });
+    HttpClient.clientConfig = { headers: { Token: "" } };
     this.setting();
   }
 
   get(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("/", requestConfig);
+    return this.api.get("/", { ...HttpClient.clientConfig, ...requestConfig });
   }
 
   getById(requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/:id`, requestConfig);
-  }
-
-  self(requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/self`, requestConfig);
+    return this.api.get(`/:id`, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
   }
 
   search(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("/search", requestConfig);
+    return this.api.get("/search", {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
   }
 
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/", data, requestConfig);
-  }
-
-  google(data: Bsm, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/google", data, requestConfig);
-  }
-
-  kakao(data: Bsm, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/kakao", data, requestConfig);
-  }
-
-  bsm(data: Bsm, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/bsm", data, requestConfig);
+    return this.api.post("/", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
   }
 
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.put("/", data, requestConfig);
+    return this.api.put("/", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
   }
 
   delete(requestConfig?: AxiosRequestConfig) {
-    return this.api.delete("/", requestConfig);
+    return this.api.delete("/", {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
+  self(requestConfig?: AxiosRequestConfig) {
+    return this.api.get("/self", {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
   }
 
   private setting() {
@@ -65,9 +74,15 @@ class HttpClient {
   }
 
   static setAccessToken() {
-    const token = localStorage.getItem(AUTH_TOKEN);
-    if (!token) throw new Error("no access token");
-    axios.defaults.headers.Authorization = token;
+    const accessToken = Storage.getItem("ACCESS_TOKEN");
+    HttpClient.clientConfig.headers = {
+      ...HttpClient.clientConfig.headers,
+      Token: accessToken || undefined,
+    };
+  }
+
+  static removeAccessToken() {
+    Storage.setItem("ACCESS_TOKEN", "");
   }
 
   private static setCommonInterceptors(instance: AxiosInstance) {
@@ -83,6 +98,7 @@ const axiosConfig: HttpClientConfig = {
 
 export default {
   portfolio: new HttpClient("/api/portfolio", axiosConfig),
-  oauth: new HttpClient("/api/oauth", axiosConfig),
+  oauth: new HttpClient("/api/login/oauth2", axiosConfig),
+  skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
 };

@@ -14,5 +14,4 @@ test("검색 기능 테스트", async ({ page }) => {
     })
     .nth(2)
     .click();
-  await page.locator("video").click();
 });
