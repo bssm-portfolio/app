@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import config from "@/config";
 import { requestInterceptors, responseInterceptors } from "@/utils/api";
-import { Bsm } from "@/types/member.interface";
+import { Storage } from "@/models/storage";
 
 export interface HttpClientConfig {
   baseURL?: string;

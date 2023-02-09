@@ -1,7 +1,7 @@
 import httpClient, { HttpClient } from "@/apis/httpClient";
 import { Storage } from "@/models/storage";
 import { emptyUser, userState } from "@/store";
-import { Member } from "@/types/member.interface";
+import { Member } from "@/types/oauth.interface";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
