@@ -15,6 +15,8 @@ const nextConfig = {
         hostname: "ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com",
         port: "8080",
       },
+      { protocol: "http", hostname: "k.kakaocdn.net" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
   },
 };

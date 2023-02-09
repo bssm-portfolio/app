@@ -1,7 +1,6 @@
 import { Portfolio } from "@/components";
 import { useRouter } from "next/router";
 import { usePortfolioList } from "@/models/portfolio";
-import LoginPopup from "../common/Login";
 
 export default function MainPortfolioList() {
   const router = useRouter();
@@ -16,7 +15,6 @@ export default function MainPortfolioList() {
           key={portfolio.portfolioId}
         />
       ))}
-      <LoginPopup />
     </div>
   );
 }

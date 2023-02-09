@@ -1,4 +1,4 @@
-import { useSearch } from "@/models/search";
+import useSearch from "@/models/search";
 import { PortfolioListType } from "@/types/portfolio.interface";
 import { useRouter } from "next/router";
 import PortfolioItem from "../app/PortfolioItem";

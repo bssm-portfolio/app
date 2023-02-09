@@ -1,13 +1,14 @@
 import { S3File } from "./file.interface";
 import { MemberWithoutIntroduction } from "./oauth.interface";
+import { PortfolioWriter } from "./member.interface";
 
 export type PortfolioType = "VIDEO" | "URL";
 type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
-export type PortfolioListType = "main" | "portfolio";
+export type PortfolioListType = "main" | "portfolio" | "upload";
 
 export type Portfolio = {
   portfolioId: number;
-  writer: MemberWithoutIntroduction;
+  writer: PortfolioWriter;
   portfolioUrl: string;
   portfolioType: PortfolioType;
   title: string;
@@ -17,7 +18,7 @@ export type Portfolio = {
   video: S3File;
   thumbnail: S3File;
   skillList: string[];
-  contributorList: MemberWithoutIntroduction[];
+  contributorList: PortfolioWriter[];
   bookmarks: number;
   views: number;
   comments: number;

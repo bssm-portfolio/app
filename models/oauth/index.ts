@@ -1,15 +1,18 @@
-import httpClient from "@/apis";
-import { Platform, Token } from "@/types/oauth.interface";
 import { useQuery } from "@tanstack/react-query";
+import httpClient from "@/apis";
+import { OAuthPlatform, Token } from "@/types/oauth.interface";
 
 const getOauth = (
-  platform: Platform,
+  platform: OAuthPlatform,
   authCode: string,
 ): (() => Promise<Token>) => {
-  return () => httpClient.oauth[platform]({ authCode }).then((d) => d.data);
+  return () =>
+    httpClient.oauth
+      .post({ code: authCode, clientType: platform.toUpperCase() })
+      .then((d) => d.data);
 };
 
-const useOauth = (platform: Platform, authCode: string) => {
+const useOauth = (platform: OAuthPlatform, authCode: string) => {
   const { data } = useQuery<Token>(
     [`${platform} oauth`, authCode],
     getOauth(platform, authCode),
