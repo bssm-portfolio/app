@@ -1,20 +1,23 @@
 import { atom } from "recoil";
-import { User } from "@/types/user.interface";
+import fixture from "@/fixtures";
+import { Member } from "@/types/member.interface";
 
 export { default as modalState } from "./modal";
 
-export const userState = atom<User>({
+export const emptyUser: Member = {
+  memberId: 0,
+  name: "user",
+  email: "test@test.com",
+  profileImageUrl: fixture.avatarUrl,
+  description: null,
+  memberRoleType: "ROLE_NORMAL",
+  job: null,
+  phone: null,
+};
+
+export const userState = atom<Member>({
   key: "user",
-  default: {
-    memberId: "",
-    name: "",
-    profileImageUrl: "",
-    email: "",
-    description: "",
-    phone: "",
-    job: "",
-    memberRoleType: "ROLE_NORMAL",
-  },
+  default: emptyUser,
 });
 
 export const urlState = atom({
