@@ -12,7 +12,7 @@ const getOauth = (
       .then((d) => d.data);
 };
 
-export const useOauth = (platform: OAuthPlatform, authCode: string) => {
+const useOauth = (platform: OAuthPlatform, authCode: string) => {
   const { data } = useQuery<Token>(
     [`${platform} oauth`, authCode],
     getOauth(platform, authCode),
@@ -23,4 +23,5 @@ export const useOauth = (platform: OAuthPlatform, authCode: string) => {
   return data || { token: "", validity: "" };
 };
 
-export default useOauth;
+// eslint-disable-next-line import/prefer-default-export
+export { useOauth };
