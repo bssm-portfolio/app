@@ -101,4 +101,5 @@ export default {
   oauth: new HttpClient("/api/login/oauth2", axiosConfig),
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
+  comment: new HttpClient("/api/comment", axiosConfig),
 };
