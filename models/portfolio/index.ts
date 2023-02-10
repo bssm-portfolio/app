@@ -14,8 +14,28 @@ const usePortfolio = () => {
   return { data: fixture.portfolio };
 };
 
-const useCommentList = () => {
-  return { data: fixture.commentList };
+interface Comment {
+  writer: {
+    memberId: number;
+    name: string;
+    profileImageUrl: string;
+    email: string;
+  };
+  commentId: number;
+  content: string;
+  createdDate: string;
+  editable: boolean;
+}
+
+interface CommentList {
+  list: Comment[];
+}
+
+const useCommentList = (id: number) => {
+  const { data } = useQuery<CommentList>(["comment", id], () =>
+    httpClient.comment.getById({ params: id }).then((d) => d.data),
+  );
+  return data || { list: [] };
 };
 
 export { usePortfolioList, usePortfolio, useCommentList };
