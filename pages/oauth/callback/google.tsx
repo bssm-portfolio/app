@@ -1,4 +1,4 @@
-import { useOauth } from "@/models/oauth";
+import useOauth from "@/models/oauth";
 import { Storage } from "@/models/storage";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

@@ -100,6 +100,17 @@ const commentList = Array(10)
     return { ...comment, portfolioId: idx };
   });
 
+const user = {
+  memberId: "",
+  name: "",
+  profileImageUrl: "",
+  email: "",
+  description: "",
+  phone: "",
+  job: "",
+  memberRoleType: "ROLE_NORMAL",
+};
+
 const fixture = {
   avatarUrl,
   portfolioUrl,
@@ -107,6 +118,7 @@ const fixture = {
   portfolioList,
   commentList,
   profileDescription,
+  user,
 };
 
 export default fixture;

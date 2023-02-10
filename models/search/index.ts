@@ -14,5 +14,4 @@ const useSearch = (keyword: string) => {
   return data || { pagination: null, list: [] };
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { useSearch };
+export default useSearch;

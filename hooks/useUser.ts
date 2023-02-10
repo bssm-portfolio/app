@@ -11,8 +11,11 @@ export const useUser = () => {
   const [user, setUser] = useRecoilState(userState);
   const router = useRouter();
   const { data: userInfo, remove } = useQuery<Member>(
-    ["member"],
-    () => httpClient.member.self().then((res) => res.data),
+    ["get userData"],
+    () => {
+      HttpClient.setAccessToken();
+      return httpClient.member.self().then((r) => r.data);
+    },
     { enabled: !!Storage.getItem("ACCESS_TOKEN") },
   );
 
@@ -23,10 +26,7 @@ export const useUser = () => {
   };
 
   useEffect(() => {
-    HttpClient.setAccessToken();
-    if (userInfo) {
-      setUser(userInfo);
-    }
+    if (userInfo) setUser(userInfo);
   }, [router.query, setUser, userInfo]);
 
   return { user, isLogined: !!userInfo, logout };
