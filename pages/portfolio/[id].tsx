@@ -44,7 +44,9 @@ export default function Home({ portfolio }: PortfolioIdPageProps) {
         }
         sidebar={<AppSideMenu />}
         detail={<AppDetail portfolio={dateParsedPortfolio} />}
-        comment={<AppComment portfolioId={parseInt(id as string, 10)} />}
+        comment={
+          <AppComment portfolioId={parseInt((id as string) || "0", 10)} />
+        }
       />
     </div>
   );
