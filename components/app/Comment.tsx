@@ -65,7 +65,7 @@ export default function CommentList({
                   </h2>
                   ·{" "}
                   <span className="text-primary-dark_gray text-xsmall">
-                    {getTimeAgo(new Date(comment.createdDate))}
+                    {getTimeAgo(comment.createdDate)}
                   </span>
                 </div>
                 <p className="text-middle">{comment.content}</p>

@@ -23,7 +23,7 @@ interface Comment {
   };
   commentId: number;
   content: string;
-  createdDate: string;
+  createdDate: Date;
   editable: boolean;
 }
 
@@ -35,7 +35,7 @@ const useCommentList = (portfolioId: number) => {
   const { data } = useQuery<CommentList>(["comment", portfolioId], () =>
     httpClient.comment
       .getById({ params: { id: portfolioId } })
-      .then((d) => d.data),
+      .then((r) => r.data),
   );
   return data || { list: [] };
 };
