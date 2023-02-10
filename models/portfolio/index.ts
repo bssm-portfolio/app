@@ -31,9 +31,11 @@ interface CommentList {
   list: Comment[];
 }
 
-const useCommentList = (id: number) => {
-  const { data } = useQuery<CommentList>(["comment", id], () =>
-    httpClient.comment.getById({ params: id }).then((d) => d.data),
+const useCommentList = (portfolioId: number) => {
+  const { data } = useQuery<CommentList>(["comment", portfolioId], () =>
+    httpClient.comment
+      .getById({ params: { id: portfolioId } })
+      .then((d) => d.data),
   );
   return data || { list: [] };
 };

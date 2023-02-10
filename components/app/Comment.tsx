@@ -17,11 +17,6 @@ export default function CommentList({
 }) {
   const { user } = useUser();
   const { list } = useCommentList(portfolioId);
-
-  useEffect(() => {
-    console.log(list);
-  }, [list]);
-
   const { register, handleSubmit } = useForm<CommentForm>();
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
