@@ -27,8 +27,9 @@ export class HttpClient {
     return this.api.get("/", { ...HttpClient.clientConfig, ...requestConfig });
   }
 
-  getById(requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/:id`, {
+  getById(requestConfig: AxiosRequestConfig) {
+    const { params } = requestConfig;
+    return this.api.get(`/${"id" in params ? params.id : "/:id"}`, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
@@ -93,7 +94,7 @@ export class HttpClient {
 
 const axiosConfig: HttpClientConfig = {
   baseURL: config.baseURL,
-  timeout: 2500,
+  timeout: 25000,
 };
 
 export default {
