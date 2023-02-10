@@ -1,14 +1,41 @@
 import Image from "next/image";
 import { getTimeAgo } from "@/utils/date";
 import { useCommentList } from "@/models/portfolio";
+import { SubmitHandler, useForm } from "react-hook-form";
+import httpClient from "@/apis";
+import { useUser } from "@/hooks/useUser";
+import { useEffect } from "react";
 
-export default function CommentList() {
-  const { data } = useCommentList();
+interface CommentForm {
+  content: string;
+}
+
+export default function CommentList({
+  portfolioId = 0,
+}: {
+  portfolioId: number;
+}) {
+  const { user } = useUser();
+  const { register, handleSubmit } = useForm<CommentForm>();
+
+  const { list } = useCommentList(portfolioId);
+
+  useEffect(() => {
+    console.log("list", list);
+  }, [list]);
+
+  const onValid: SubmitHandler<CommentForm> = async (submitData) => {
+    await httpClient.comment.post({
+      portfolioId,
+      ...submitData,
+    });
+  };
+
   return (
     <div>
-      <div className="flex mt-base">
+      <form className="flex mt-base" onSubmit={handleSubmit(onValid)}>
         <Image
-          src={data[0].userProfile}
+          src={user.profileImageUrl}
           alt="프로필"
           width={40}
           height={40}
@@ -19,10 +46,11 @@ export default function CommentList() {
           type="text"
           className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none"
           placeholder="댓글 추가.."
+          {...register("content")}
         />
-      </div>
+      </form>
       <div className="mt-2xlarge">
-        {data.map((comment) => {
+        {list.map((comment) => {
           return (
             <div
               className="flex items-center mb-xlarge"
@@ -30,7 +58,7 @@ export default function CommentList() {
             >
               <Image
                 className="rounded-full mr-base"
-                src={comment.userProfile}
+                src={comment.writer.profileImageUrl}
                 alt="프로필 사진"
                 width={40}
                 height={40}
@@ -38,11 +66,11 @@ export default function CommentList() {
               <div>
                 <div className="flex items-center">
                   <h2 className="font-bold text-small mr-xsmall">
-                    {comment.userName}
+                    {comment.writer.name}
                   </h2>
                   ·{" "}
                   <span className="text-primary-dark_gray text-xsmall">
-                    {getTimeAgo(comment.createdDate)}
+                    {getTimeAgo(new Date(comment.createdDate))}
                   </span>
                 </div>
                 <p className="text-middle">{comment.content}</p>
