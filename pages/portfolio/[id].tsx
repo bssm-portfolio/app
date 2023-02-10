@@ -12,6 +12,7 @@ import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import { getDateParsedData } from "@/utils/date";
 import { deepcopy } from "@/utils/data";
+import { useRouter } from "next/router";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
@@ -20,6 +21,8 @@ interface PortfolioIdPageProps {
 export default function Home({ portfolio }: PortfolioIdPageProps) {
   const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
   const type = dateParsedPortfolio.portfolioType;
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
     <div>
@@ -41,7 +44,7 @@ export default function Home({ portfolio }: PortfolioIdPageProps) {
         }
         sidebar={<AppSideMenu />}
         detail={<AppDetail portfolio={dateParsedPortfolio} />}
-        comment={<AppComment />}
+        comment={<AppComment portfolioId={parseInt(id as string, 10)} />}
       />
     </div>
   );
