@@ -1,4 +1,4 @@
-import { PortfolioWriter } from "@/types/oauth.interface";
+import { PortfolioWriter } from "@/types/member.interface";
 import classNames from "classnames";
 
 interface GroupProps {

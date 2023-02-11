@@ -15,13 +15,3 @@ export type PortfolioWriter = Omit<
   Member,
   "description" | "job" | "phone" | "memberRoleType"
 >;
-export type OAuthPlatform = "kakao" | "google" | "bsm";
-
-export interface Token {
-  token: string;
-  validity: string;
-}
-
-export interface Bsm {
-  authCode: string;
-}

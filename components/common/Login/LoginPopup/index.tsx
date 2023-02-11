@@ -4,7 +4,7 @@ import BssmIcon from "@/components/Icon/BssmIcon";
 import GoogleIcon from "@/components/Icon/GoogleIcon";
 import KakaoIcon from "@/components/Icon/KakaoIcon";
 import config from "@/config";
-import { OAuthPlatform } from "@/types/oauth.interface";
+import { OAuthPlatform } from "@/types/oauth..interface";
 import { useRouter } from "next/router";
 
 export default function LoginPopupView() {

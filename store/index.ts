@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import fixture from "@/fixtures";
-import { Member } from "@/types/oauth.interface";
+import { Member } from "@/types/member.interface";
 
 export { default as modalState } from "./modal";
 
