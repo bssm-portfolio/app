@@ -19,7 +19,7 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
         <div>
           <h2 className="font-bold text-large">{portfolio.title}</h2>
           <span>{portfolio.writer.name}</span>
-          <Chip.Group className="mt-small">
+          <Chip.Group className="mt-small" type="detail">
             {portfolio.skillList.map((skillData) => {
               return <Chip.Item key={skillData}>{skillData}</Chip.Item>;
             })}
