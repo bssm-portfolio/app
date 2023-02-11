@@ -9,11 +9,7 @@ interface CommentForm {
   content: string;
 }
 
-export default function CommentList({
-  portfolioId = 0,
-}: {
-  portfolioId: number;
-}) {
+export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const { user } = useUser();
   const { list: commentList } = useCommentList(portfolioId);
   const { register, handleSubmit } = useForm<CommentForm>();

@@ -31,11 +31,14 @@ interface CommentList {
   list: Comment[];
 }
 
-const useCommentList = (portfolioId: number) => {
-  const { data } = useQuery<CommentList>(["comment", portfolioId], () =>
-    httpClient.comment
-      .getById({ params: { id: portfolioId } })
-      .then((r) => r.data),
+const useCommentList = (portfolioId?: number) => {
+  const { data } = useQuery<CommentList>(
+    ["comment", portfolioId],
+    () =>
+      httpClient.comment
+        .getById({ params: { id: portfolioId } })
+        .then((r) => r.data),
+    { enabled: !!portfolioId },
   );
   return data || { list: [] };
 };
