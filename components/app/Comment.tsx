@@ -4,7 +4,6 @@ import { useCommentList } from "@/models/portfolio";
 import { SubmitHandler, useForm } from "react-hook-form";
 import httpClient from "@/apis";
 import { useUser } from "@/hooks/useUser";
-import { useEffect } from "react";
 
 interface CommentForm {
   content: string;
@@ -16,7 +15,7 @@ export default function CommentList({
   portfolioId: number;
 }) {
   const { user } = useUser();
-  const { list } = useCommentList(portfolioId);
+  const { list: commentList } = useCommentList(portfolioId);
   const { register, handleSubmit } = useForm<CommentForm>();
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
@@ -45,7 +44,7 @@ export default function CommentList({
         />
       </form>
       <div className="mt-2xlarge">
-        {list.map((comment) => {
+        {commentList.map((comment) => {
           return (
             <div
               className="flex items-center mb-xlarge"
