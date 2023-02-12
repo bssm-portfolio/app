@@ -14,7 +14,6 @@ export default function CommentView({ comment }: { comment: Comment }) {
   const handleDelete = async (commentId: number) => {
     try {
       await httpClient.comment.delete({ data: { commentId } });
-      alert("삭제에 성공하였습니다");
     } catch (error) {
       alert("삭제에 실패하였습니다.");
       throw error;
@@ -80,12 +79,12 @@ export default function CommentView({ comment }: { comment: Comment }) {
             <p className="text-middle">{comment.content}</p>
           )}
         </div>
-        {comment.editable ? (
+        {comment.editable && (
           <div>
             <span onClick={handleEdit}>수정</span>
             <span onClick={() => handleDelete(comment.commentId)}>삭제</span>
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );
