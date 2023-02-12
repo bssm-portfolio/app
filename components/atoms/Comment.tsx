@@ -23,6 +23,7 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
 
   const handleDelete = async (commentId: number) => {
     await httpClient.comment.delete({ data: { commentId } });
+    refetch();
   };
 
   const handleEdit = async () => {
