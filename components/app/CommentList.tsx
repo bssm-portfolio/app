@@ -11,7 +11,7 @@ interface CommentForm {
 
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const { user } = useUser();
-  const { list: commentList } = useCommentList(portfolioId);
+  const { list: commentList, refetch } = useCommentList(portfolioId);
   const { register, handleSubmit } = useForm<CommentForm>();
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
@@ -40,8 +40,8 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
         />
       </form>
       <div className="mt-2xlarge">
-        {commentList.map((comment) => {
-          return <Comment comment={comment} />;
+        {commentList?.map((comment) => {
+          return <Comment comment={comment} refetch={refetch} />;
         })}
       </div>
     </div>

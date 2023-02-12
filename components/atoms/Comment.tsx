@@ -1,23 +1,29 @@
 import httpClient from "@/apis";
 import { Comment } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Button from "./Button";
 
-export default function CommentView({ comment }: { comment: Comment }) {
+interface CommentViewProps {
+  comment: Comment;
+  refetch: <TPageData>(
+    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
+  ) => Promise<QueryObserverResult>;
+}
+
+export default function CommentView({ comment, refetch }: CommentViewProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editContent, setEditContent] = useState<string>(comment.content);
-  const router = useRouter();
 
   const handleDelete = async (commentId: number) => {
-    try {
-      await httpClient.comment.delete({ data: { commentId } });
-    } catch (error) {
-      alert("삭제에 실패하였습니다.");
-      throw error;
-    }
+    await httpClient.comment.delete({ data: { commentId } });
   };
 
   const handleEdit = async () => {
@@ -25,17 +31,11 @@ export default function CommentView({ comment }: { comment: Comment }) {
   };
 
   const handleEditCompleted = async (commentId: number) => {
-    try {
-      await httpClient.comment.put({
-        commentId,
-        content: editContent,
-      });
-      alert("수정 성공");
-      router.reload();
-    } catch (error) {
-      alert("수정 실패.");
-      throw error;
-    }
+    await httpClient.comment.put({
+      commentId,
+      content: editContent,
+    });
+    refetch();
   };
 
   return (
