@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { getTimeAgo } from "@/utils/date";
 import { useCommentList } from "@/models/portfolio";
 import { SubmitHandler, useForm } from "react-hook-form";
 import httpClient from "@/apis";
 import { useUser } from "@/hooks/useUser";
+import Comment from "../atoms/Comment";
 
 interface CommentForm {
   content: string;
@@ -41,32 +41,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
       </form>
       <div className="mt-2xlarge">
         {commentList.map((comment) => {
-          return (
-            <div
-              className="flex items-center mb-xlarge"
-              key={comment.commentId}
-            >
-              <Image
-                className="rounded-full mr-base"
-                src={comment.writer.profileImageUrl}
-                alt="프로필 사진"
-                width={40}
-                height={40}
-              />
-              <div>
-                <div className="flex items-center">
-                  <h2 className="font-bold text-small mr-xsmall">
-                    {comment.writer.name}
-                  </h2>
-                  ·{" "}
-                  <span className="text-primary-dark_gray text-xsmall">
-                    {getTimeAgo(comment.createdDate)}
-                  </span>
-                </div>
-                <p className="text-middle">{comment.content}</p>
-              </div>
-            </div>
-          );
+          return <Comment comment={comment} />;
         })}
       </div>
     </div>
