@@ -19,6 +19,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
       portfolioId,
       ...submitData,
     });
+    refetch();
   };
 
   return (
