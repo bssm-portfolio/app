@@ -7,8 +7,8 @@ import { useState } from "react";
 import Button from "./Button";
 
 export default function Comment({ comment }: { comment: CommentProps }) {
-  const [isEdit, setIsEdit] = useState(false);
-  const [editContent, setEditContent] = useState(comment.content);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [editContent, setEditContent] = useState<string>(comment.content);
   const router = useRouter();
 
   const handleDelete = async (commentId: number) => {
@@ -82,7 +82,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         </div>
         {comment.editable ? (
           <div>
-            <span onClick={handleEdit}>수정</span>/
+            <span onClick={handleEdit}>수정</span>
             <span onClick={() => handleDelete(comment.commentId)}>삭제</span>
           </div>
         ) : null}
