@@ -27,9 +27,8 @@ export class HttpClient {
     return this.api.get("/", { ...HttpClient.clientConfig, ...requestConfig });
   }
 
-  getById(requestConfig: AxiosRequestConfig) {
-    const { params } = requestConfig;
-    return this.api.get(`/${"id" in params ? params.id : "/:id"}`, {
+  getById(id: number, requestConfig?: AxiosRequestConfig) {
+    return this.api.get(`/${id}`, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
