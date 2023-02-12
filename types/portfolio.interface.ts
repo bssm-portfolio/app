@@ -3,7 +3,7 @@ import { PortfolioWriter } from "./member.interface";
 
 export type PortfolioType = "VIDEO" | "URL";
 type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
-export type PortfolioListType = "main" | "portfolio" | "upload";
+export type PortfolioListType = "main" | "portfolio" | "upload" | "detail";
 
 export type Portfolio = {
   portfolioId: number;

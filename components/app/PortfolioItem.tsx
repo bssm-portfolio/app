@@ -23,8 +23,8 @@ export default function PortfolioItem({
       onClick={onClick}
     >
       <div
-        className={classNames("relative w-[320px] h-[180px]", {
-          "xl:w-[240px] xl:h-[135px]": type === "portfolio",
+        className={classNames("relative w-[20rem] h-[11.25rem]", {
+          "xl:w-[15rem] xl:h-[8.4375rem]": type === "portfolio",
         })}
       >
         <Image

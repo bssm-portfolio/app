@@ -27,8 +27,9 @@ export class HttpClient {
     return this.api.get("/", { ...HttpClient.clientConfig, ...requestConfig });
   }
 
-  getById(requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/:id`, {
+  getById(requestConfig: AxiosRequestConfig) {
+    const { params } = requestConfig;
+    return this.api.get(`/${"id" in params ? params.id : "/:id"}`, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
@@ -101,4 +102,5 @@ export default {
   oauth: new HttpClient("/api/login/oauth2", axiosConfig),
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
+  comment: new HttpClient("/api/comment", axiosConfig),
 };
