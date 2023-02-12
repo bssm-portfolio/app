@@ -3,6 +3,10 @@ import fixture from "@/fixtures";
 import { Comment, PortfolioList } from "@/types/portfolio.interface";
 import { useQuery } from "@tanstack/react-query";
 
+interface CommentList {
+  list: Comment[];
+}
+
 const usePortfolioList = () => {
   const { data } = useQuery<PortfolioList>(["portfolioList"], () =>
     httpClient.portfolio.search({}).then((d) => d.data),
@@ -14,20 +18,13 @@ const usePortfolio = () => {
   return { data: fixture.portfolio };
 };
 
-interface CommentList {
-  list: Comment[];
-}
-
 const useCommentList = (portfolioId?: number) => {
-  const { data } = useQuery<CommentList>(
+  const { data, refetch } = useQuery<CommentList>(
     ["comment", portfolioId],
-    () =>
-      httpClient.comment
-        .getById({ params: { id: portfolioId } })
-        .then((r) => r.data),
-    { enabled: !!portfolioId },
+    () => httpClient.comment.getById(portfolioId as number).then((r) => r.data),
+    { enabled: portfolioId != null },
   );
-  return data || { list: [] };
+  return { ...data, refetch } || { list: [], refetch };
 };
 
 export { usePortfolioList, usePortfolio, useCommentList };
