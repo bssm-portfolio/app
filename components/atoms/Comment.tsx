@@ -1,12 +1,12 @@
 import httpClient from "@/apis";
-import { Comment as CommentProps } from "@/types/portfolio.interface";
+import { Comment } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Button from "./Button";
 
-export default function Comment({ comment }: { comment: CommentProps }) {
+export default function CommentView({ comment }: { comment: Comment }) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editContent, setEditContent] = useState<string>(comment.content);
   const router = useRouter();
