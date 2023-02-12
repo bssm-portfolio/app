@@ -6,12 +6,17 @@ const avatarUrl =
 const portfolioUrl = "/assets/images/testPortfolioThumbnail.png";
 
 const comment: Comment = {
+  writer: {
+    memberId: 0,
+    name: "string",
+    profileImageUrl:
+      "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg",
+    email: " string@gmail.com",
+  },
   commentId: 0,
-  userProfile:
-    "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg",
-  userName: "사람 이름1",
   content: "댓글 내용입니다.",
   createdDate: new Date("2022-12-01"),
+  editable: false,
 };
 
 const portfolio: Portfolio = {

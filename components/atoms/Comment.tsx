@@ -2,12 +2,14 @@ import httpClient from "@/apis";
 import { Comment as CommentProps } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Button from "./Button";
 
 export default function Comment({ comment }: { comment: CommentProps }) {
   const [isEdit, setIsEdit] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
+  const router = useRouter();
 
   const handleDelete = async (commentId: number) => {
     try {
@@ -20,14 +22,21 @@ export default function Comment({ comment }: { comment: CommentProps }) {
   };
 
   const handleEdit = async () => {
-    setIsEdit(true);
+    setIsEdit((prev) => !prev);
   };
 
   const handleEditCompleted = async (commentId: number) => {
-    await httpClient.comment.put({
-      commentId,
-      content: editContent,
-    });
+    try {
+      await httpClient.comment.put({
+        commentId,
+        content: editContent,
+      });
+      alert("수정 성공");
+      router.reload();
+    } catch (error) {
+      alert("수정 실패.");
+      throw error;
+    }
   };
 
   return (
@@ -45,8 +54,8 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             <h2 className="font-bold text-small mr-xsmall">
               {comment.writer.name}
             </h2>
-            ·{" "}
-            <span className="text-primary-dark_gray text-xsmall">
+            <span>·</span>
+            <span className="ml-1 text-primary-dark_gray text-xsmall">
               {getTimeAgo(comment.createdDate)}
             </span>
           </div>
@@ -60,13 +69,10 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                   setEditContent(event.target.value);
                 }}
               />
-              <Button
-                type="button"
-                onClick={() => handleEditCompleted(comment.commentId)}
-              >
+              <Button onClick={() => handleEditCompleted(comment.commentId)}>
                 완료
               </Button>
-              <Button varient="secondary" type="button">
+              <Button onClick={handleEdit} varient="secondary">
                 취소
               </Button>
             </>
