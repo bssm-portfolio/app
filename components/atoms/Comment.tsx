@@ -7,7 +7,6 @@ import {
   RefetchQueryFilters,
 } from "@tanstack/react-query";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import Button from "./Button";
 
@@ -35,6 +34,7 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
       commentId,
       content: editContent,
     });
+    setIsEdit(false);
     refetch();
   };
 
