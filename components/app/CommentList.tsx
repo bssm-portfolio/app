@@ -41,7 +41,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
         />
       </form>
       <div className="mt-2xlarge">
-        {commentList?.map((comment) => {
+        {commentList.map((comment) => {
           return <Comment comment={comment} refetch={refetch} />;
         })}
       </div>
