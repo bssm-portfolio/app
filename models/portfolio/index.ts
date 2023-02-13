@@ -24,7 +24,7 @@ const useCommentList = (portfolioId?: number) => {
     () => httpClient.comment.getById(portfolioId as number).then((r) => r.data),
     { enabled: portfolioId != null },
   );
-  return { ...data, refetch } || { list: [], refetch };
+  return { list: data?.list && [], refetch };
 };
 
 export { usePortfolioList, usePortfolio, useCommentList };
