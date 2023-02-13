@@ -50,13 +50,17 @@ export interface PortfolioList {
 }
 
 export interface Comment {
+  writer: {
+    memberId: number;
+    name: string;
+    profileImageUrl: string;
+    email: string;
+  };
   commentId: number;
-  userProfile: string;
-  userName: string;
   content: string;
   createdDate: Date;
+  editable: boolean;
 }
-
 export interface Description {
   description: string;
 }

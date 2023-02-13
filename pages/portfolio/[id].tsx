@@ -57,8 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       notFound: true,
     };
 
-  const portfolio = (await httpClient.portfolio.getById({ params: { id } }))
-    .data;
+  const portfolio = (await httpClient.portfolio.getById(Number(id))).data;
 
   return {
     props: {
