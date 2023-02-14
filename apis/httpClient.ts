@@ -93,7 +93,7 @@ export class HttpClient {
 
 const axiosConfig: HttpClientConfig = {
   baseURL: config.baseURL,
-  timeout: 2500,
+  timeout: 10000,
 };
 
 export default {
@@ -102,4 +102,5 @@ export default {
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
   comment: new HttpClient("/api/comment", axiosConfig),
+  file: new HttpClient("/api/file", axiosConfig),
 };
