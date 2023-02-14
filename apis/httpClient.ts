@@ -48,6 +48,13 @@ export class HttpClient {
     });
   }
 
+  upload(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/upload", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
     return this.api.put("/", data, {
       ...HttpClient.clientConfig,

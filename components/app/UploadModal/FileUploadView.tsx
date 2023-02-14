@@ -1,7 +1,9 @@
+import httpClient from "@/apis";
 import FileUploader from "@/components/atoms/FileUploader";
 import Input from "@/components/atoms/Input";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import classNames from "classnames";
+import { ChangeEvent, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 export default function FileUploadView({
@@ -12,13 +14,34 @@ export default function FileUploadView({
   register: UseFormRegister<PortfolioForm>;
   className?: string;
 }) {
+  const [fileUploadStatus, setFileUploadStatus] = useState<string>("");
+
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const formData = new FormData();
+      const flieName = e.target.files[0].name;
+      formData.append("file", e.target.files[0]);
+      setFileUploadStatus(`${flieName} 업로드 중..`);
+
+      httpClient.file.upload(formData).then(() => {
+        setFileUploadStatus(`${flieName} 업로드 완료`);
+      });
+    }
+  };
+
   return (
     <div className={classNames("flex flex-col gap-8", className)} {...props}>
       <div>
         <h2 className="mb-2">동영상</h2>
         <div className="w-full border h-60 mb-2.5 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
-          <FileUploader label="동영상 업로드" />
-          <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
+          {fileUploadStatus ? (
+            <p>{fileUploadStatus}</p>
+          ) : (
+            <>
+              <FileUploader label="동영상 업로드" onChange={handleFileUpload} />
+              <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
+            </>
+          )}
         </div>
       </div>
       <div>
