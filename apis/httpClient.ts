@@ -42,7 +42,7 @@ export class HttpClient {
   }
 
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/", data, {
+    return this.api.post("", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
