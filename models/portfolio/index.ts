@@ -14,6 +14,13 @@ const usePortfolioList = () => {
   return data || { pagination: null, list: [] };
 };
 
+const useMyPortfolioList = () => {
+  const { data } = useQuery<PortfolioList>(["my portfolioList"], () =>
+    httpClient.portfolio.self({}).then((d) => d.data),
+  );
+  return data || { pagination: null, list: [] };
+};
+
 const usePortfolio = () => {
   return { data: fixture.portfolio };
 };
@@ -27,4 +34,4 @@ const useCommentList = (portfolioId?: number) => {
   return { list: data?.list ?? [], refetch };
 };
 
-export { usePortfolioList, usePortfolio, useCommentList };
+export { usePortfolioList, usePortfolio, useCommentList, useMyPortfolioList };

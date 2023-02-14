@@ -1,8 +1,11 @@
 import Head from "next/head";
 import { MyPageProfile, MyPagePortfolioList } from "@/components";
 import { MyPageLayout } from "@/layouts";
+import { useMyPortfolioList } from "@/models/portfolio";
 
 export default function Home() {
+  const { list } = useMyPortfolioList();
+
   return (
     <div>
       <Head>
