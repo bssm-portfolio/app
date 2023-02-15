@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ChangeEventHandler, InputHTMLAttributes } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 type ButtonVarient = "primary" | "secondary";
 interface FileUploaderProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,6 +9,7 @@ interface FileUploaderProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   varient?: ButtonVarient;
   id?: string;
+  registerReturn?: UseFormRegisterReturn;
 }
 
 const getFileUploaderCss = (varient: ButtonVarient) => {
@@ -30,6 +32,7 @@ export default function FileUploader({
   label,
   className = "",
   id = "file-uploader",
+  registerReturn,
 }: FileUploaderProps) {
   return (
     <>
@@ -44,6 +47,7 @@ export default function FileUploader({
         id={id}
         className={classNames("hidden")}
         onChange={onChange}
+        {...registerReturn}
       />
     </>
   );

@@ -4,6 +4,7 @@ interface Config {
 }
 
 const createConfig: () => Config = () => {
+  console.log("PROCESS ENV : ", process.env);
   if (!process.env.NEXT_PUBLIC_SERVER_URL) throw new Error("no api server url");
   if (!process.env.NODE_ENV) throw new Error("no node env ");
 

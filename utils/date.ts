@@ -12,10 +12,16 @@ export const getKoreanDate = (
     day: "numeric",
   } as Intl.DateTimeFormatOptions,
 ) => {
-  return new Intl.DateTimeFormat("ko-KR", options).format(date);
+  console.log("date :", typeof date);
+  console.log("date :", date);
+  if (!date.getDay) return "invalid date";
+  return new Intl.DateTimeFormat("ko-KR", options).format(
+    date.getTimezoneOffset(),
+  );
 };
 
 export const getTimeAgo = (date: Date) => {
+  if (!date.getDay) return "invalid date";
   return timeAgo.format(date);
 };
 
