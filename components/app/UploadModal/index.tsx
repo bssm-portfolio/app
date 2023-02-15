@@ -34,7 +34,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       skillList: selectedSkills,
       contributorIdList: [0],
       videoFileUid,
-      thumbnailFileUid: "4e0a354b-42fc-4888-99bf-d8f0c7a5ad74.png",
+      thumbnailFileUid,
     });
     closeModal();
   };
