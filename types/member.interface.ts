@@ -1,4 +1,4 @@
-export type MemberRoleType = "ROLE_NORMAL";
+export type MemberRoleType = "ROLE_ADMIN" | "ROLE_MEMBER" | "ROLE_NORMAL";
 
 export interface Member {
   memberId: number;

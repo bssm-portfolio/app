@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useCommentList } from "@/models/portfolio";
 import { SubmitHandler, useForm } from "react-hook-form";
 import httpClient from "@/apis";
-import { useUser } from "@/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import Comment from "../atoms/Comment";
 
 interface CommentForm {
@@ -42,7 +42,13 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
       </form>
       <div className="mt-2xlarge">
         {commentList.map((comment) => {
-          return <Comment comment={comment} refetch={refetch} />;
+          return (
+            <Comment
+              comment={comment}
+              refetch={refetch}
+              key={comment.commentId}
+            />
+          );
         })}
       </div>
     </div>

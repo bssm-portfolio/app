@@ -1,8 +1,13 @@
 import Head from "next/head";
 import { MyPageProfile, MyPagePortfolioList } from "@/components";
 import { MyPageLayout } from "@/layouts";
+import { useMyPortfolioList } from "@/models/portfolio";
+import useUser from "@/hooks/useUser";
 
 export default function Home() {
+  const { list: myPortfolioList } = useMyPortfolioList();
+  const { user: userInfo } = useUser();
+
   return (
     <div>
       <Head>
@@ -11,8 +16,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MyPageLayout
-        profile={<MyPageProfile />}
-        portfiloList={<MyPagePortfolioList />}
+        profile={<MyPageProfile userInfo={userInfo} />}
+        portfiloList={<MyPagePortfolioList myPortfolioList={myPortfolioList} />}
       />
     </div>
   );

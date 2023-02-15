@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo, SearchBar, Avatar, HeaderButton } from "@/components";
+import { useRouter } from "next/router";
 
 interface HeaderProps {
   avatarUrl?: string;
@@ -14,6 +15,8 @@ export default function HeaderView({
   onLeftButtonClick,
   onRightButtonClick,
 }: HeaderProps) {
+  const router = useRouter();
+
   return (
     <div className="flex justify-center">
       <div className="flex justify-between items-center m-4 w-74">
@@ -29,8 +32,8 @@ export default function HeaderView({
             {isLogined ? "upload +" : "sign up"}
           </HeaderButton>
         </div>
-        <div className="relative">
-          <Avatar imageUrl={avatarUrl} />
+        <div className="relative cursor-pointer">
+          <Avatar imageUrl={avatarUrl} onClick={() => router.push("/mypage")} />
         </div>
       </div>
     </div>

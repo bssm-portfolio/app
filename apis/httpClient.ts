@@ -24,11 +24,11 @@ export class HttpClient {
   }
 
   get(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("/", { ...HttpClient.clientConfig, ...requestConfig });
+    return this.api.get("", { ...HttpClient.clientConfig, ...requestConfig });
   }
 
-  getById(id: number, requestConfig?: AxiosRequestConfig) {
-    return this.api.get(`/${id}`, {
+  getById(requestConfig?: AxiosRequestConfig) {
+    return this.api.get("/:id", {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
@@ -42,21 +42,28 @@ export class HttpClient {
   }
 
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/", data, {
+    return this.api.post("", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
+  upload(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/upload", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
   }
 
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.put("/", data, {
+    return this.api.put("", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
   }
 
   delete(requestConfig?: AxiosRequestConfig) {
-    return this.api.delete("/", {
+    return this.api.delete("", {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
@@ -93,7 +100,7 @@ export class HttpClient {
 
 const axiosConfig: HttpClientConfig = {
   baseURL: config.baseURL,
-  timeout: 2500,
+  timeout: 10000,
 };
 
 export default {
@@ -102,4 +109,5 @@ export default {
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
   comment: new HttpClient("/api/comment", axiosConfig),
+  file: new HttpClient("/api/file", axiosConfig),
 };

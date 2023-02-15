@@ -24,15 +24,21 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
     // watch,
     // formState: { errors },
   } = useForm<PortfolioForm>();
+  const [videoFileUid, setVideoFileUid] = useState<string>("");
+  const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
+
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     await httpClient.portfolio.post({
       ...data,
       portfolioType: "URL",
       skillList: selectedSkills,
-      contributorIdList: [],
+      contributorIdList: [0],
+      videoFileUid,
+      thumbnailFileUid,
     });
     closeModal();
   };
+
   const onInvalid: SubmitErrorHandler<PortfolioForm> = (data) => {
     console.error("invalid data : ", data);
   };
@@ -49,6 +55,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       <FileUploadView
         className={classNames({ hidden: pageIndex !== 0 })}
         register={register}
+        setVideoFileUid={setVideoFileUid}
+        setThumbnailFileUid={setThumbnailFileUid}
       />
       <FormView
         className={classNames({ hidden: pageIndex !== 1 })}

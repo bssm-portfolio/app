@@ -1,5 +1,5 @@
 import useModal from "@/hooks/useModal";
-import { useUser } from "@/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import UploadModal from "../../app/UploadModal";
 import LoginPopupView from "../Login/LoginPopup";
 import HeaderView from "./View";

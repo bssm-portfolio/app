@@ -9,7 +9,7 @@ const getOauth = (
   return () =>
     httpClient.oauth
       .post({ code: authCode, clientType: platform.toUpperCase() })
-      .then((d) => d.data);
+      .then((r) => r.data);
 };
 
 const useOauth = (platform: OAuthPlatform, authCode: string) => {
