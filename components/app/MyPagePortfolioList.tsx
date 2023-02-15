@@ -10,7 +10,7 @@ export default function MyPagePortfolioList({
   const router = useRouter();
 
   return (
-    <div className="bg-red-100 w-full h-full">
+    <div className="grid grid-cols-[320px_320px] gap-12 ml-[4.5rem]">
       {myPortfolioList.map((myPortfolio) => {
         return (
           <PortfolioView
