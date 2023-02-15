@@ -32,7 +32,7 @@ export default function HeaderView({
             {isLogined ? "upload +" : "sign up"}
           </HeaderButton>
         </div>
-        <div className="relative">
+        <div className="relative cursor-pointer">
           <Avatar imageUrl={avatarUrl} onClick={() => router.push("/mypage")} />
         </div>
       </div>
