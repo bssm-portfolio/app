@@ -4,7 +4,7 @@ import { MyPageLayout } from "@/layouts";
 import { useMyPortfolioList } from "@/models/portfolio";
 
 export default function Home() {
-  const { list } = useMyPortfolioList();
+  const { list: myPortfolioList } = useMyPortfolioList();
 
   return (
     <div>
@@ -15,7 +15,7 @@ export default function Home() {
       </Head>
       <MyPageLayout
         profile={<MyPageProfile />}
-        portfiloList={<MyPagePortfolioList />}
+        portfiloList={<MyPagePortfolioList myPortfolioList={myPortfolioList} />}
       />
     </div>
   );
