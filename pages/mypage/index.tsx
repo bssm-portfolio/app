@@ -2,9 +2,15 @@ import Head from "next/head";
 import { MyPageProfile, MyPagePortfolioList } from "@/components";
 import { MyPageLayout } from "@/layouts";
 import { useMyPortfolioList } from "@/models/portfolio";
+import useUser from "@/hooks/useUser";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   const { list: myPortfolioList } = useMyPortfolioList();
+  const { user: userInfo, isLogined } = useUser();
+
+  if (!isLogined) return router.push("/");
 
   return (
     <div>
@@ -14,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MyPageLayout
-        profile={<MyPageProfile />}
+        profile={<MyPageProfile userInfo={userInfo} />}
         portfiloList={<MyPagePortfolioList myPortfolioList={myPortfolioList} />}
       />
     </div>
