@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useCommentList } from "@/models/portfolio";
 import { SubmitHandler, useForm } from "react-hook-form";
 import httpClient from "@/apis";
-import { useUser } from "@/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import Comment from "../atoms/Comment";
 
 interface CommentForm {

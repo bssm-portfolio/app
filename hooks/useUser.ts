@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-export const useUser = () => {
+const useUser = () => {
   const [user, setUser] = useRecoilState(userState);
   const router = useRouter();
   const { data: userInfo, remove } = useQuery<Member>(
@@ -32,4 +32,4 @@ export const useUser = () => {
   return { user, isLogined: !!userInfo, logout };
 };
 
-export default {};
+export default useUser;
