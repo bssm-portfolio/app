@@ -24,7 +24,7 @@ export class HttpClient {
   }
 
   get(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("/", { ...HttpClient.clientConfig, ...requestConfig });
+    return this.api.get("", { ...HttpClient.clientConfig, ...requestConfig });
   }
 
   getById(requestConfig?: AxiosRequestConfig) {
@@ -56,14 +56,14 @@ export class HttpClient {
   }
 
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.put("/", data, {
+    return this.api.put("", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
   }
 
   delete(requestConfig?: AxiosRequestConfig) {
-    return this.api.delete("/", {
+    return this.api.delete("", {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
