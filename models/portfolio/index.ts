@@ -30,7 +30,7 @@ const useCommentList = (portfolioId?: number) => {
     ["comment", portfolioId],
     () =>
       httpClient.comment
-        .getById({ params: { portfolioId } })
+        .getById({ params: { id: portfolioId } })
         .then((r) => r.data),
     { enabled: portfolioId != null },
   );
