@@ -40,7 +40,7 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
   };
 
   return (
-    <div className="flex items-center mb-xlarge" key={comment.commentId}>
+    <div className="flex items-center mb-xlarge">
       <Image
         className="rounded-full mr-base"
         src={comment.writer.profileImageUrl}
