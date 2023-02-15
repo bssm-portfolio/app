@@ -1,8 +1,10 @@
 import { Member } from "@/types/member.interface";
+import { useRouter } from "next/router";
 import Button from "../atoms/Button";
 import Avatar from "../common/Avatar";
 
 export default function MyPageProfile({ userInfo }: { userInfo: Member }) {
+  const router = useRouter();
   return (
     <>
       <div className="flex flex-col w-[17.625rem] h-[33.75rem] rounded-lg bg-primary-light_gray px-[3.25rem] py-[1.875rem]">
@@ -36,8 +38,16 @@ export default function MyPageProfile({ userInfo }: { userInfo: Member }) {
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-8">
-        <Button className="!rounded-[0.625rem]">채널 콘텐츠 관리</Button>
-        <Button className="bg-primary-dark_gray !rounded-[0.625rem]">
+        <Button
+          className="!rounded-[0.625rem]"
+          onClick={() => router.push("/contents")}
+        >
+          채널 콘텐츠 관리
+        </Button>
+        <Button
+          className="bg-primary-dark_gray !rounded-[0.625rem]"
+          onClick={() => router.push("/mypage/edit")}
+        >
           내 정보 관리
         </Button>
       </div>
