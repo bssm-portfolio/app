@@ -28,7 +28,10 @@ const usePortfolio = () => {
 const useCommentList = (portfolioId?: number) => {
   const { data, refetch } = useQuery<CommentList>(
     ["comment", portfolioId],
-    () => httpClient.comment.getById(portfolioId as number).then((r) => r.data),
+    () =>
+      httpClient.comment
+        .getById({ params: { portfolioId } })
+        .then((r) => r.data),
     { enabled: portfolioId != null },
   );
   return { list: data?.list ?? [], refetch };
