@@ -3,14 +3,10 @@ import { MyPageProfile, MyPagePortfolioList } from "@/components";
 import { MyPageLayout } from "@/layouts";
 import { useMyPortfolioList } from "@/models/portfolio";
 import useUser from "@/hooks/useUser";
-import { useRouter } from "next/router";
 
 export default function Home() {
-  const router = useRouter();
   const { list: myPortfolioList } = useMyPortfolioList();
-  const { user: userInfo, isLogined } = useUser();
-
-  if (!isLogined) return router.push("/");
+  const { user: userInfo } = useUser();
 
   return (
     <div>
