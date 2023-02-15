@@ -36,8 +36,10 @@ export default function MyPageProfile({ userInfo }: { userInfo: Member }) {
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-8">
-        <Button>채널 콘텐츠 관리</Button>
-        <Button>내 정보 관리</Button>
+        <Button className="!rounded-[0.625rem]">채널 콘텐츠 관리</Button>
+        <Button className="bg-primary-dark_gray !rounded-[0.625rem]">
+          내 정보 관리
+        </Button>
       </div>
     </>
   );
