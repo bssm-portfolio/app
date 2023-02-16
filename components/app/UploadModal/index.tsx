@@ -18,19 +18,19 @@ const MAX_NAVIGATOR_LENGTH = 3;
 export default function UploadModal({ closeModal }: UploadModalProps) {
   const [pageIndex, setPageIndex] = useState(0);
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
+  const [videoFileUid, setVideoFileUid] = useState<string>("");
+  const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
   const {
     register,
     handleSubmit,
     // watch,
     // formState: { errors },
   } = useForm<PortfolioForm>();
-  const [videoFileUid, setVideoFileUid] = useState<string>("");
-  const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     await httpClient.portfolio.post({
       ...data,
-      portfolioType: "URL",
+      portfolioType: "VIDEO",
       skillList: selectedSkills,
       contributorIdList: [0],
       videoFileUid,
