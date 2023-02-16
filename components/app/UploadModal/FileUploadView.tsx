@@ -38,10 +38,12 @@ export default function FileUploadView({
         <h2 className="mb-2">동영상</h2>
         <div className="w-full border h-60 mb-2.5 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
           <FileUploader
+            id="thumbnail-uploader"
             label="썸네일 업로드"
             onChange={(e) => handleFileUpload(e, setThumbnailFileUid)}
           />
           <FileUploader
+            id="video-uploader"
             label="동영상 업로드"
             onChange={(e) => handleFileUpload(e, setVideoFileUid)}
           />
