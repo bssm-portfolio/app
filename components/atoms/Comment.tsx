@@ -1,20 +1,14 @@
 import httpClient from "@/apis";
+import { RefetchType } from "@/types/index.interface";
 import { Comment } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
 import Button from "./Button";
 
 interface CommentViewProps {
   comment: Comment;
-  refetch: <TPageData>(
-    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
-  ) => Promise<QueryObserverResult>;
+  refetch: RefetchType;
 }
 
 export default function CommentView({ comment, refetch }: CommentViewProps) {
