@@ -1,0 +1,13 @@
+version: 1.0
+runtime: nodejs16
+build:
+  commands:
+    build:
+      - yarn && yarn build
+run:
+  command: yarn start
+  network:
+  port: 3000
+  env:
+    - name: NEXT_PUBLIC_SERVER_URL
+      value: "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080"
