@@ -16,7 +16,7 @@ interface PortfolioDetailProps {
 export default function Detail({ portfolio }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const handleShare = () => {
-    openToast({ content: "안녕하세요" });
+    openToast("안녕하세요", {});
   };
 
   return (
