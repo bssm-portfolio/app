@@ -1,13 +1,11 @@
-// https://blog.logrocket.com/how-to-create-a-custom-toast-component-with-react/
 import { useRecoilState } from "recoil";
 import { Toast, ToastProperty } from "@/types/toast.interface";
 import { uuid as uuidv4 } from "uuidv4";
 import toastState from "@/store/toast";
 
 const getToastProperty = (property: Toast) => {
-  const id = uuidv4();
   const { type } = property;
-  const defaultProperty = { id, ...property };
+  const defaultProperty = { id: uuidv4(), ...property };
   switch (type) {
     case "success":
       return {
@@ -31,11 +29,10 @@ const useOverlay = () => {
   const [toastList, setToastList] = useRecoilState<ToastProperty[]>(toastState);
 
   const closeToast = (id: string) => {
-    const index = toastList.findIndex((e) => e.id === id);
-    setToastList((prev) => {
-      prev.splice(index, 1);
-      return prev;
-    });
+    const index = toastList.findIndex((toast) => toast.id === id);
+    console.log(id, toastList);
+    toastList.splice(index, 1);
+    setToastList([...toastList]);
   };
 
   const openToast = ({
