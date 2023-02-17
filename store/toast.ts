@@ -1,7 +1,7 @@
-import { Toast } from "@/types/toast.interface";
+import { ToastProperty } from "@/types/toast.interface";
 import { atom } from "recoil";
 
-const toastState = atom<Toast[]>({
+const toastState = atom<ToastProperty[]>({
   key: "toast",
   default: [],
 });

@@ -13,3 +13,7 @@ export interface Toast {
   type?: ToastType;
   time?: number;
 }
+
+export interface ToastProperty extends Toast {
+  id: string;
+}
