@@ -11,6 +11,12 @@ export default function ToastView({ toastList }: ToastViewProps) {
     danger: "bg-[#D9534F]",
     normal: "bg-[#3E73FB]",
   };
+  const toastAnimationList = {
+    TOP_LEFT: "animate-toast-animation-left",
+    TOP_RIGHT: "animate-toast-animation-left",
+    BOTTOM_LEFT: "animate-toast-animation-left",
+    BOTTOM_RIGHT: "animate-toast-animation-right",
+  };
 
   return (
     <div className="fixed bottom-6 right-6">
@@ -18,7 +24,10 @@ export default function ToastView({ toastList }: ToastViewProps) {
         return (
           <div
             key={toast.id}
-            className={classNames(backgroundColorList[toast.type])}
+            className={classNames(
+              backgroundColorList[toast.type],
+              toastAnimationList[toast.position],
+            )}
           >
             {toast.content}
           </div>
