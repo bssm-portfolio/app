@@ -26,7 +26,7 @@ const useOverlay = () => {
     type = "normal",
     time = 5000,
   }: Toast) => {
-    const toastProperty = getToastProperty({ content, position, type });
+    const toastProperty = getToastProperty({ content, position, type, time });
     setToastList((prev) => [...prev, toastProperty]);
 
     const timerId = setTimeout(() => {

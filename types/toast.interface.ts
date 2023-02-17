@@ -16,6 +16,7 @@ export interface Toast {
 
 export interface ToastProperty extends Toast {
   type: ToastType;
-  position: PositionType;
   id: string;
+  time: number;
+  position: PositionType;
 }
