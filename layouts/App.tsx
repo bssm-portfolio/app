@@ -26,10 +26,9 @@ function Frame({ app, sidebar, detail, comment }: FrameProps) {
       <div className="w-full">
         {app}
         {detail}
-        <div className="hidden xl:block">{comment}</div>
+        {comment}
       </div>
       <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
-      <div className="block xl:hidden">{comment}</div>
     </section>
   );
 }
