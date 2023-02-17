@@ -26,13 +26,10 @@ const getToastProperty = (property: Toast) => {
 };
 
 const useOverlay = () => {
-  const [toastList, setToastList] = useRecoilState<ToastProperty[]>(toastState);
+  const [, setToastList] = useRecoilState<ToastProperty[]>(toastState);
 
   const closeToast = (id: string, timerId: NodeJS.Timeout) => {
-    console.log(id, toastList);
-    const index = toastList.findIndex((toast) => toast.id === id);
-    toastList.splice(index, 1);
-    setToastList([...toastList]);
+    setToastList((toastList) => toastList.filter((toast) => toast.id !== id));
     clearTimeout(timerId);
   };
 
