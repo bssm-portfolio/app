@@ -10,7 +10,6 @@ export type ToastType = "success" | "danger" | "normal";
 export interface Toast {
   position?: PositionType;
   type?: ToastType;
-  time: number;
 }
 
 export interface ToastProperty extends Toast {

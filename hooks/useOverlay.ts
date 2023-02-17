@@ -8,7 +8,6 @@ const getToastProperty = (content: string, property?: Toast): ToastProperty => {
     id: uuidv4(),
     position: property?.position || "BOTTOM_RIGHT",
     type: property?.type || "normal",
-    time: property?.time || 5000,
     content,
   };
 };
@@ -23,7 +22,7 @@ const useOverlay = () => {
 
   const openToast = (content: string, toastConfig?: Toast) => {
     const time = 5000;
-    const toastProperty = getToastProperty(content, { ...toastConfig, time });
+    const toastProperty = getToastProperty(content, { ...toastConfig });
     setToastList((prev) => [...prev, toastProperty]);
 
     const timerId = setTimeout(() => {
