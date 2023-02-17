@@ -3,9 +3,13 @@ import { Toast, ToastProperty } from "@/types/toast.interface";
 import { uuid as uuidv4 } from "uuidv4";
 import toastState from "@/store/toast";
 
-const getToastProperty = (property: Toast): ToastProperty => {
-  const { type } = property;
-  return { type: type || "normal", id: uuidv4(), ...property };
+const getToastProperty = (
+  property: Omit<ToastProperty, "id">,
+): ToastProperty => {
+  return {
+    id: uuidv4(),
+    ...property,
+  };
 };
 
 const useOverlay = () => {

@@ -14,8 +14,10 @@ export default function ToastView({ toastList }: ToastViewProps) {
   const toastAnimationList = {
     TOP_LEFT: "animate-toast-animation-left",
     TOP_RIGHT: "animate-toast-animation-left",
+    TOP_CENTER: "animate-toast-animation-left",
     BOTTOM_LEFT: "animate-toast-animation-left",
     BOTTOM_RIGHT: "animate-toast-animation-right",
+    BOTTOM_CENTER: "animate-toast-animation-right",
   };
 
   return (
