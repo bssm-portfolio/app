@@ -24,7 +24,7 @@ const useOverlay = () => {
     position = "BOTTOM_RIGHT",
     content,
     type = "normal",
-    time = 2000,
+    time = 5000,
   }: Toast) => {
     const toastProperty = getToastProperty({ content, position, type });
     setToastList((prev) => [...prev, toastProperty]);
