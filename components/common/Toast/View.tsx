@@ -7,9 +7,9 @@ interface ToastViewProps {
 
 export default function ToastView({ toastList }: ToastViewProps) {
   const backgroundColorList = {
-    success: "#5CB85C",
-    danger: "#D9534F",
-    normal: "#3E73FB",
+    success: "bg-[#5CB85C]",
+    danger: "bg-[#D9534F]",
+    normal: "bg-[#3E73FB]",
   };
 
   return (
