@@ -4,29 +4,25 @@ import { Toast, ToastProperty } from "@/types/toast.interface";
 import { uuid as uuidv4 } from "uuidv4";
 import toastState from "@/store/toast";
 
-const getToastProperty = ({ content, position, type }: Omit<Toast, "time">) => {
+const getToastProperty = (property: Toast) => {
   const id = uuidv4();
+  const { type } = property;
+  const defaultProperty = { id, ...property };
   switch (type) {
     case "success":
       return {
-        id,
-        content,
+        ...defaultProperty,
         backgroundColor: "#5CB85C",
-        position,
       };
     case "danger":
       return {
-        id,
-        content,
+        ...defaultProperty,
         backgroundColor: "#D9534F",
-        position,
       };
     default:
       return {
-        id,
-        content,
+        ...defaultProperty,
         backgroundColor: "#3E73FB",
-        position,
       };
   }
 };
