@@ -10,25 +10,25 @@ module.exports = {
     extend: {
       keyframes: {
         "toast-in-right": {
-          "0%": {
+          "0%, 100%": {
             transform: "translateX(100%)",
           },
-          "100%": {
+          "50%": {
             transform: "translateX(0)",
           },
         },
         "toast-in-left": {
-          "0%": {
-            transform: "translateX(-100%)",
-          },
-          "100%": {
+          "0%, 100%": {
             transform: "translateX(0)",
+          },
+          "50%": {
+            transform: "translateX(-100%)",
           },
         },
       },
       animation: {
-        'toast-animation-right': "toast-in-right 0.6s ease-in",
-        'toast-animation-left': "toast-in-left 0.6s ease-in",
+        "toast-animation-right": "toast-in-right 2s ease-in",
+        "toast-animation-left": "toast-in-left 2s ease-in",
       },
       width: {
         70: "70rem",
