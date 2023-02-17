@@ -28,11 +28,12 @@ const getToastProperty = (property: Toast) => {
 const useOverlay = () => {
   const [toastList, setToastList] = useRecoilState<ToastProperty[]>(toastState);
 
-  const closeToast = (id: string) => {
-    const index = toastList.findIndex((toast) => toast.id === id);
+  const closeToast = (id: string, timerId: NodeJS.Timeout) => {
     console.log(id, toastList);
+    const index = toastList.findIndex((toast) => toast.id === id);
     toastList.splice(index, 1);
     setToastList([...toastList]);
+    clearTimeout(timerId);
   };
 
   const openToast = ({
@@ -44,8 +45,8 @@ const useOverlay = () => {
     const toastProperty = getToastProperty({ content, position, type });
     setToastList((prev) => [...prev, toastProperty]);
 
-    setTimeout(() => {
-      closeToast(toastProperty.id);
+    const timerId = setTimeout(() => {
+      closeToast(toastProperty.id, timerId);
     }, time);
   };
 
