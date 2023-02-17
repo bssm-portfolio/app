@@ -23,7 +23,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.41.5",
     "recoil": "^0.7.6",
-    "tailwind-scrollbar": "^2.1.0"
+    "tailwind-scrollbar": "^2.1.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@playwright/test": "^1.29.1",
