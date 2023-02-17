@@ -1,16 +1,19 @@
-import { ToastProperty } from "@/types/toast.interface";
 import classNames from "classnames";
+import { ToastProperty } from "@/types/toast.interface";
 
-export default function ToastView({
-  toastList,
-}: {
+interface ToastViewProps {
   toastList: ToastProperty[];
-}) {
+}
+
+export default function ToastView({ toastList }: ToastViewProps) {
   return (
-    <div>
+    <div className="fixed bottom-6 right-6">
       {toastList.map((toast) => {
         return (
-          <div className={classNames(`bg-${toast.backgroundColor}`)}>
+          <div
+            key={toast.id}
+            className={classNames(`bg-[${toast.backgroundColor}]`)}
+          >
             {toast.content}
           </div>
         );
