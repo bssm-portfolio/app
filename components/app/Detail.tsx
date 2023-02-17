@@ -1,5 +1,6 @@
 import { getKoreanDate } from "@/utils/date";
 import type { Portfolio } from "@/types/portfolio.interface";
+import useOverlay from "@/hooks/useOverlay";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
@@ -13,6 +14,11 @@ interface PortfolioDetailProps {
 }
 
 export default function Detail({ portfolio }: PortfolioDetailProps) {
+  const { openToast } = useOverlay();
+  const handleShare = () => {
+    openToast({ content: "안녕하세요" });
+  };
+
   return (
     <div className="mt-small">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
@@ -39,7 +45,7 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
               <PeopleIcon className="mr-2xsmall" />
               <span className="text-small">팔로잉</span>
             </Button>
-            <Button status="active">
+            <Button status="active" onClick={handleShare}>
               <ShareIcon className="mr-2xsmall" />
               <span className="text-small">공유</span>
             </Button>
