@@ -21,7 +21,7 @@ const useOverlay = () => {
   };
 
   const openToast = (content: string, toastConfig?: Toast) => {
-    const time = 5000;
+    const time = 3000;
     const toastProperty = getToastProperty(content, { ...toastConfig });
     setToastList((prev) => [...prev, toastProperty]);
 
