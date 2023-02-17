@@ -3,13 +3,12 @@ import { Toast, ToastProperty } from "@/types/toast.interface";
 import { uuid as uuidv4 } from "uuidv4";
 import toastState from "@/store/toast";
 
-const getToastProperty = (
-  content: string,
-  property: Omit<ToastProperty, "id" | "content">,
-): ToastProperty => {
+const getToastProperty = (content: string, property?: Toast): ToastProperty => {
   return {
-    ...property,
     id: uuidv4(),
+    position: property?.position || "BOTTOM_RIGHT",
+    type: property?.type || "normal",
+    time: property?.time || 5000,
     content,
   };
 };
@@ -22,11 +21,9 @@ const useOverlay = () => {
     clearTimeout(timerId);
   };
 
-  const openToast = (
-    content: string,
-    { position = "BOTTOM_RIGHT", type = "normal", time = 5000 }: Toast,
-  ) => {
-    const toastProperty = getToastProperty(content, { position, type, time });
+  const openToast = (content: string, toastConfig?: Toast) => {
+    const time = 5000;
+    const toastProperty = getToastProperty(content, { ...toastConfig, time });
     setToastList((prev) => [...prev, toastProperty]);
 
     const timerId = setTimeout(() => {
