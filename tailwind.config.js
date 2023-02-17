@@ -11,7 +11,7 @@ module.exports = {
       keyframes: {
         "toast-in-right": {
           "0%, 100%": {
-            transform: "translateX(100%)",
+            transform: "translateX(200%)",
           },
           "50%": {
             transform: "translateX(0)",
@@ -22,13 +22,9 @@ module.exports = {
             transform: "translateX(0)",
           },
           "50%": {
-            transform: "translateX(-100%)",
+            transform: "translateX(-200%)",
           },
         },
-      },
-      animation: {
-        "toast-animation-right": "toast-in-right 2s ease-in",
-        "toast-animation-left": "toast-in-left 2s ease-in",
       },
       width: {
         70: "70rem",
