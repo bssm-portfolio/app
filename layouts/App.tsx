@@ -9,24 +9,26 @@ interface FrameProps {
 
 const getLayoutCss = () => {
   return `
-  grid 
+  flex
+  flex-col
+  justify-between
   pt-[3.25rem] 
   px-4
   md:px-6
   xl:px-[6.25rem]
-  xl:grid-cols-[minmax(0,_1fr)_28.25rem] 
+  xl:flex-row
   `;
 };
 
 function Frame({ app, sidebar, detail, comment }: FrameProps) {
   return (
     <section className={getLayoutCss()}>
-      <div>
-        <div>{app}</div>
-        <div>{detail}</div>
+      <div className="w-full">
+        {app}
+        {detail}
+        {comment}
       </div>
       <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
-      <div>{comment}</div>
     </section>
   );
 }
