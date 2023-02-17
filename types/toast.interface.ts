@@ -16,4 +16,5 @@ export interface Toast {
 
 export interface ToastProperty extends Toast {
   id: string;
+  backgroundColor: string;
 }
