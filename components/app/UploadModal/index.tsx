@@ -1,5 +1,5 @@
 import httpClient from "@/apis";
-import { PortfolioForm } from "@/types/portfolio.interface";
+import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
 import classNames from "classnames";
 import React, { useState } from "react";
@@ -28,11 +28,21 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   } = useForm<PortfolioForm>();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
+    const getPortfolioType = (): PortfolioType => {
+      if (data.portfolioUrl.length > 0 && videoFileUid) {
+        return "ALL";
+      }
+      if (videoFileUid) {
+        return "VIDEO";
+      }
+      return "URL";
+    };
+
     await httpClient.portfolio.post({
       ...data,
-      portfolioType: "VIDEO",
+      portfolioType: getPortfolioType(),
       skillList: selectedSkills,
-      contributorIdList: [0],
+      contributorIdList: [],
       videoFileUid,
       thumbnailFileUid,
     });
