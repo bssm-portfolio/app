@@ -1,9 +1,16 @@
+import Button from "@/components/atoms/Button";
+import Avatar from "@/components/common/Avatar";
 import { Member } from "@/types/member.interface";
 import { useRouter } from "next/router";
-import Button from "../atoms/Button";
-import Avatar from "../common/Avatar";
 
-export default function MyPageProfile({ userInfo }: { userInfo: Member }) {
+interface MemberPageProfileProps {
+  userInfo: Member;
+  isMypage?: boolean;
+}
+export default function MemberPageProfile({
+  userInfo,
+  isMypage = false,
+}: MemberPageProfileProps) {
   const router = useRouter();
   return (
     <>
@@ -28,29 +35,35 @@ export default function MyPageProfile({ userInfo }: { userInfo: Member }) {
           </h4>
           <h4 className="text-2xsmall">{userInfo.email}</h4>
         </div>
-        <div className="flex justify-center mt-auto">
+        {isMypage && (
+          <div className="flex justify-center mt-auto">
+            <Button
+              varient="secondary"
+              className="border border-black !rounded-full bg-white py-2 px-8"
+            >
+              수정하기
+            </Button>
+          </div>
+        )}
+      </div>
+      {isMypage ? (
+        <div className="flex flex-col gap-4 mt-8">
           <Button
-            varient="secondary"
-            className="border border-black !rounded-full bg-white py-2 px-8"
+            className="!rounded-[0.625rem]"
+            onClick={() => router.push("/contents")}
           >
-            수정하기
+            채널 콘텐츠 관리
+          </Button>
+          <Button
+            className="bg-primary-dark_gray !rounded-[0.625rem]"
+            onClick={() => router.push("/mypage/edit")}
+          >
+            내 정보 관리
           </Button>
         </div>
-      </div>
-      <div className="flex flex-col gap-4 mt-8">
-        <Button
-          className="!rounded-[0.625rem]"
-          onClick={() => router.push("/contents")}
-        >
-          채널 콘텐츠 관리
-        </Button>
-        <Button
-          className="bg-primary-dark_gray !rounded-[0.625rem]"
-          onClick={() => router.push("/mypage/edit")}
-        >
-          내 정보 관리
-        </Button>
-      </div>
+      ) : (
+        <Button className="">팔로우</Button>
+      )}
     </>
   );
 }

@@ -10,8 +10,8 @@ export { default as AppDetail } from "./app/Detail";
 export { default as PortfolioPlayer } from "./app/PortfolioPlayer";
 export { default as AppSideMenu } from "./app/SideMenu";
 export { default as AppComment } from "./app/CommentList";
-export { default as MyPageProfile } from "./app/MyPageProfile";
-export { default as MyPagePortfolioList } from "./app/MyPagePortfolioList";
+export { default as ProfilePageProfile } from "./app/MemberProfile/ProfilePageProfile";
+export { default as ProfilePagePortfolioList } from "./app/MemberProfile/ProfilePagePortfolioList";
 export { default as MainPortfolioList } from "./main/MainPortfolioList";
 
 export { default as HeaderButton } from "./atoms/HeaderButton";
