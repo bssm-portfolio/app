@@ -35,18 +35,25 @@ export default function MemberPageProfile({
           </h4>
           <h4 className="text-2xsmall">{userInfo.email}</h4>
         </div>
-        {isMypage && (
-          <div className="flex justify-center mt-auto">
+        <div className="flex justify-center mt-auto">
+          {isMypage ? (
             <Button
               varient="secondary"
-              className="border border-black !rounded-full bg-white py-2 px-8"
+              className="border border-black !rounded-full !bg-white py-2 px-8"
             >
               수정하기
             </Button>
-          </div>
-        )}
+          ) : (
+            <Button
+              varient="secondary"
+              className="w-40 !rounded-full !bg-somago_yellow"
+            >
+              팔로우
+            </Button>
+          )}
+        </div>
       </div>
-      {isMypage ? (
+      {isMypage && (
         <div className="flex flex-col gap-4 mt-8">
           <Button
             className="!rounded-[0.625rem]"
@@ -61,8 +68,6 @@ export default function MemberPageProfile({
             내 정보 관리
           </Button>
         </div>
-      ) : (
-        <Button className="">팔로우</Button>
       )}
     </>
   );
