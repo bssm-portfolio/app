@@ -7,7 +7,9 @@ export const requestInterceptors = (requestConfig: AxiosRequestConfig) => {
 
   const paramParsedUrl = urlParams
     ?.map((paramKey) => {
-      return requestConfig.params[paramKey];
+      const { params } = requestConfig;
+      if (paramKey in params) return params[paramKey];
+      return paramKey;
     })
     .join("/");
 
