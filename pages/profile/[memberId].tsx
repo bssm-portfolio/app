@@ -24,10 +24,7 @@ export default function Home({ member }: MemberIdPageProps) {
       <ProfilePageLayout
         profile={<ProfilePageProfile userInfo={member} />}
         portfiloList={
-          <ProfilePagePortfolioList
-            portfolioList={portfolioList}
-            isMypage={false}
-          />
+          <ProfilePagePortfolioList portfolioList={portfolioList} />
         }
       />
     </div>
