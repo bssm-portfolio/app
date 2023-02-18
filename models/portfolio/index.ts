@@ -20,11 +20,14 @@ const useMyPortfolioList = () => {
   return data || { pagination: null, list: [] };
 };
 
-const usePortfolioListById = (id: number) => {
-  const { data } = useQuery<PortfolioList>(["get portfolioList by id"], () =>
-    httpClient.portfolio
-      .getMemberById({ params: { id: { id } } })
-      .then((r) => r.data),
+const usePortfolioListById = (portfolioId?: number) => {
+  const { data } = useQuery<PortfolioList>(
+    ["get portfolioList by id"],
+    () =>
+      httpClient.portfolio
+        .getMemberById({ params: { id: portfolioId } })
+        .then((r) => r.data),
+    { enabled: portfolioId != null },
   );
   return data || { pagination: null, list: [] };
 };
