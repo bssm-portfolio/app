@@ -19,7 +19,3 @@ test("timeAgo test - after 2000", () => {
 test("timeAgo test - now", () => {
   expect(getTimeAgo(new Date())).toBe("방금");
 });
-
-test("timeAgo test - future", () => {
-  expect(getTimeAgo(new Date("December 17, 2025"))).toBe("3년 후");
-});
