@@ -1,7 +1,7 @@
 import { getKoreanDate } from "@/utils/date";
 import type { Portfolio } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useRef } from "react";
+import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
@@ -20,7 +20,8 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
   const handleShare = () => {
     openToast("복사가 완료되었습니다.");
   };
-  const url = useRef(typeof window !== "undefined" ? window.location.href : "");
+  const router = useRouter();
+  const url = `http://localhost:3000${router.asPath}`;
 
   return (
     <div className="mt-small">
@@ -48,7 +49,7 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
               <PeopleIcon className="mr-2xsmall" />
               <span className="text-small">팔로잉</span>
             </Button>
-            <CopyToClipboard text={url.current}>
+            <CopyToClipboard text={url}>
               <Button status="active" onClick={handleShare}>
                 <ShareIcon className="mr-2xsmall" />
                 <span className="text-small">공유</span>
