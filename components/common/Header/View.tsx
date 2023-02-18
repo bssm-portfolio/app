@@ -28,13 +28,20 @@ export default function HeaderView({
           <HeaderButton onClick={onLeftButtonClick}>
             {isLogined ? "log out" : "log in"}
           </HeaderButton>
-          <HeaderButton onClick={onRightButtonClick} varient="secondary">
-            {isLogined ? "upload +" : "sign up"}
-          </HeaderButton>
+          {isLogined && (
+            <HeaderButton onClick={onRightButtonClick} varient="secondary">
+              upload +
+            </HeaderButton>
+          )}
         </div>
-        <div className="relative cursor-pointer">
-          <Avatar imageUrl={avatarUrl} onClick={() => router.push("/mypage")} />
-        </div>
+        {isLogined && (
+          <div className="relative cursor-pointer">
+            <Avatar
+              imageUrl={avatarUrl}
+              onClick={() => router.push("/mypage")}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

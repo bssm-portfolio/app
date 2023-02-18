@@ -12,13 +12,14 @@ interface CommentForm {
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const { user } = useUser();
   const { list: commentList, refetch } = useCommentList(portfolioId);
-  const { register, handleSubmit } = useForm<CommentForm>();
+  const { register, handleSubmit, reset } = useForm<CommentForm>();
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
     await httpClient.comment.post({
       portfolioId,
       ...submitData,
     });
+    reset();
     refetch();
   };
 
