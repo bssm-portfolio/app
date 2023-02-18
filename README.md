@@ -8,4 +8,5 @@ npx playwright codegen localhost:3000
 
 ## env
 
-NEXT_PUBLIC_SERVER_URL=http://ec2-3....ws.com:8080/api
+NEXT_PUBLIC_SERVER_URL=http://ec2-3....ws.com:8080
+NEXT_PUBLIC_CLIENT_URL=http://localhost:3000
