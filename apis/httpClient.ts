@@ -76,6 +76,13 @@ export class HttpClient {
     });
   }
 
+  getMemberById(requestConfig?: AxiosRequestConfig) {
+    return this.api.get("/member/:id", {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
   private setting() {
     HttpClient.setCommonInterceptors(this.api);
   }

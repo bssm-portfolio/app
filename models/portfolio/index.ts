@@ -1,5 +1,4 @@
 import httpClient from "@/apis";
-import fixture from "@/fixtures";
 import { Comment, PortfolioList } from "@/types/portfolio.interface";
 import { useQuery } from "@tanstack/react-query";
 
@@ -9,20 +8,25 @@ interface CommentList {
 
 const usePortfolioList = () => {
   const { data } = useQuery<PortfolioList>(["portfolioList"], () =>
-    httpClient.portfolio.search({}).then((d) => d.data),
+    httpClient.portfolio.search({}).then((r) => r.data),
   );
   return data || { pagination: null, list: [] };
 };
 
 const useMyPortfolioList = () => {
   const { data } = useQuery<PortfolioList>(["my portfolioList"], () =>
-    httpClient.portfolio.self({}).then((d) => d.data),
+    httpClient.portfolio.self({}).then((r) => r.data),
   );
   return data || { pagination: null, list: [] };
 };
 
-const usePortfolio = () => {
-  return { data: fixture.portfolio };
+const usePortfolioListById = (id: number) => {
+  const { data } = useQuery<PortfolioList>(["get portfolioList by id"], () =>
+    httpClient.portfolio
+      .getMemberById({ params: { id: { id } } })
+      .then((r) => r.data),
+  );
+  return data || { pagination: null, list: [] };
 };
 
 const useCommentList = (portfolioId?: number) => {
@@ -37,4 +41,9 @@ const useCommentList = (portfolioId?: number) => {
   return { list: data?.list ?? [], refetch };
 };
 
-export { usePortfolioList, usePortfolio, useCommentList, useMyPortfolioList };
+export {
+  usePortfolioList,
+  usePortfolioListById,
+  useCommentList,
+  useMyPortfolioList,
+};
