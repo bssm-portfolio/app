@@ -1,5 +1,9 @@
 import { getKoreanDate } from "@/utils/date";
 import type { Portfolio } from "@/types/portfolio.interface";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useRouter } from "next/router";
+import useOverlay from "@/hooks/useOverlay";
+import { useRef } from "react";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
@@ -13,6 +17,17 @@ interface PortfolioDetailProps {
 }
 
 export default function Detail({ portfolio }: PortfolioDetailProps) {
+  const { openToast } = useOverlay();
+  const handleShare = () => {
+    openToast("복사가 완료되었습니다.");
+  };
+  const router = useRouter();
+
+  const url =
+    typeof window !== "undefined"
+      ? `${window.location.origin + router.asPath}`
+      : router.asPath;
+
   return (
     <div className="mt-small">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
@@ -39,10 +54,12 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
               <PeopleIcon className="mr-2xsmall" />
               <span className="text-small">팔로잉</span>
             </Button>
-            <Button status="active">
-              <ShareIcon className="mr-2xsmall" />
-              <span className="text-small">공유</span>
-            </Button>
+            <CopyToClipboard text={url}>
+              <Button status="active" onClick={handleShare}>
+                <ShareIcon className="mr-2xsmall" />
+                <span className="text-small">공유</span>
+              </Button>
+            </CopyToClipboard>
           </div>
 
           <div className="mb-large">

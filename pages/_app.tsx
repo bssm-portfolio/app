@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import config from "@/config";
 import { Header } from "@/components";
+import Toast from "@/components/common/Toast";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Header />
         <Component {...pageProps} />
         <Modal />
+        <Toast />
       </QueryClientProvider>
     </RecoilRoot>
   );

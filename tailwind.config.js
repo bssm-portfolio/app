@@ -8,6 +8,40 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        "toast-in-right": {
+          "0%, 100%": {
+            transform: "translateX(calc(100% + 1.5rem))",
+          },
+          "50%": {
+            transform: "translateX(0)",
+          },
+        },
+        "toast-in-left": {
+          "0%, 100%": {
+            transform: "translateX(0)",
+          },
+          "50%": {
+            transform: "translateX(calc(-100% - 1.5rem))",
+          },
+        },
+        "toast-in-top": {
+          "0%, 100%": {
+            transform: "translateY(calc(100% + 1.5rem))",
+          },
+          "50%": {
+            transform: "translateY(0)",
+          },
+        },
+        "toast-in-bottom": {
+          "0%, 100%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(calc(-100% - 1.5rem))",
+          },
+        },
+      },
       width: {
         70: "70rem",
         37.5: "37.5rem", // 600px;
