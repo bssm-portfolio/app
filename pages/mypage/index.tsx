@@ -6,7 +6,7 @@ import useUser from "@/hooks/useUser";
 
 export default function Home() {
   const { list: myPortfolioList } = useMyPortfolioList();
-  const { user: userInfo } = useUser();
+  const { user: userInfo } = useUser({ authorizedPage: true });
 
   return (
     <div>

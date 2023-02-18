@@ -7,12 +7,19 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-const useUser = () => {
+interface UseUserOptions {
+  authorizedPage?: boolean;
+}
+const useUser = (options?: UseUserOptions) => {
   const [user, setUser] = useRecoilState(userState);
   const router = useRouter();
-  const { data: userInfo, remove } = useQuery<Member>(
+  const {
+    data: userInfo,
+    remove,
+    isFetched,
+  } = useQuery<Member>(
     ["get userData"],
-    () => {
+    async () => {
       HttpClient.setAccessToken();
       return httpClient.member.self().then((r) => r.data);
     },
@@ -28,6 +35,14 @@ const useUser = () => {
   useEffect(() => {
     if (userInfo) setUser(userInfo);
   }, [router.query, setUser, userInfo]);
+
+  useEffect(() => {
+    if (options?.authorizedPage && !isFetched && !userInfo) {
+      // TODO: alert 제거
+      alert("로그인이 필요한 페이지입니다.");
+      router.push("/");
+    }
+  }, [options, router, userInfo, isFetched]);
 
   return { user, isLogined: !!userInfo, logout };
 };
