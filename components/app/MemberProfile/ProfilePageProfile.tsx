@@ -27,13 +27,21 @@ export default function MemberPageProfile({
           </h4>
         </div>
         <div className="mt-5">
-          <h4 className="font-bold text-xs mb-2">프로젝트 수 {0}</h4>
-          <h4 className="font-bold text-xs mb-2">팔로워 수 {0}</h4>
-          <h4 className="font-bold text-xs">팔로잉 수 {0}</h4>
-          <h4 className="mt-5 text-xsmall">
-            {userInfo.description ?? "안녕하세요 반갑습니다"}
-          </h4>
-          <h4 className="text-2xsmall">{userInfo.email}</h4>
+          <div className="w-full flex font-bold">
+            <span className="mr-3">프로젝트 수</span>
+            <span>{0}</span>
+          </div>
+          <div className="w-full flex font-bold">
+            <span className="mr-3">팔로워 수</span>
+            <span>{0}</span>
+          </div>
+          <div className="w-full flex font-bold mb-5">
+            <span className="mr-3">팔로잉 수</span>
+            <span>{0}</span>
+          </div>
+          <pre className="overflow-y-scroll max-w-[17.625rem] whitespace-pre-wrap text-xs mb-5">
+            {userInfo.description}
+          </pre>
         </div>
         <div className="flex justify-center mt-auto">
           {isMypage ? (
