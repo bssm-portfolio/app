@@ -16,7 +16,7 @@ export const getKoreanDate = (
 };
 
 export const getTimeAgo = (date: Date) => {
-  return timeAgo.format(new Date(date));
+  return timeAgo.format(date);
 };
 
 export const isISODateString = (value: string) => {
