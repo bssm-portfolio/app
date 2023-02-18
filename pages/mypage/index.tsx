@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ProfilePageLayout
-        profile={<ProfilePageProfile userInfo={userInfo} />}
+        profile={<ProfilePageProfile userInfo={userInfo} isMypage />}
         portfiloList={
           <ProfilePagePortfolioList portfolioList={myPortfolioList} isMypage />
         }

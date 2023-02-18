@@ -1,6 +1,7 @@
 import { Portfolio } from "@/types/portfolio.interface";
 import { Portfolio as PortfolioView } from "@/components/";
 import { useRouter } from "next/router";
+import RoundPlusIcon from "@/components/Icon/RoundPlusIcon";
 
 interface ProfilePagePortfolioListProps {
   portfolioList: Portfolio[];
@@ -23,7 +24,14 @@ export default function ProfilePagePortfolioList({
           />
         );
       })}
-      {isMypage && <div>더보기</div>}
+      {isMypage && (
+        <div className="w-[320px] h-[180px] flex items-center justify-center rounded-md border border-blue cursor-pointer">
+          <div className="flex flex-col items-center">
+            <RoundPlusIcon />
+            <span className="text-blue">업로드</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
