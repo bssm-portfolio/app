@@ -13,7 +13,7 @@ export default function ProfilePagePortfolioList({
 }: ProfilePagePortfolioListProps) {
   const router = useRouter();
   return (
-    <div className="grid grid-cols-[20rem_20rem] gap-12 ml-[4.5rem]">
+    <div className="flex flex-wrap gap-12 ml-[4.5rem]">
       {portfolioList.map((portfolio) => {
         return (
           <PortfolioView
