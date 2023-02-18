@@ -13,11 +13,11 @@ export default function PortfolioList({
   type = "main",
 }: PortfolioListProps) {
   const router = useRouter();
-  const { list } = useSearch(keyword);
+  const { list: portfolioList } = useSearch(keyword);
 
   return (
     <div className="flex flex-col items-start">
-      {list.map((portfolio) => {
+      {portfolioList.map((portfolio) => {
         return (
           <PortfolioItem
             key={portfolio.portfolioId}
