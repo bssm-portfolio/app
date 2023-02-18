@@ -3,7 +3,7 @@ import type { Portfolio } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
-import config from "@/config";
+import { useRef } from "react";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
@@ -22,7 +22,11 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
     openToast("복사가 완료되었습니다.");
   };
   const router = useRouter();
-  const url = `${config.clientUrl}${router.asPath}`;
+
+  const url =
+    typeof window !== "undefined"
+      ? `${window.location.origin + router.asPath}`
+      : router.asPath;
 
   return (
     <div className="mt-small">
