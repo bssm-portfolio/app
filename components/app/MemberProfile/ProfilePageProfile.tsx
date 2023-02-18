@@ -46,7 +46,7 @@ export default function MemberPageProfile({
           ) : (
             <Button
               varient="secondary"
-              className="w-40 !rounded-full !bg-somago_yellow"
+              className="w-40 !rounded-full !bg-somago_yellow !py-2"
             >
               팔로우
             </Button>
