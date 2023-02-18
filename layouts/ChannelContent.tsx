@@ -8,7 +8,7 @@ interface FrameProps {
 
 function Frame({ title, filter, datagrid }: FrameProps) {
   return (
-    <div className="px-[8.25rem] pt-10">
+    <div className="px-[8.25rem] pt-10 pb-10">
       <div>{title}</div>
       <div>{filter}</div>
       <div>{datagrid}</div>
