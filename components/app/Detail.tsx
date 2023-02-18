@@ -3,7 +3,6 @@ import type { Portfolio } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
-import { useRef } from "react";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
