@@ -11,20 +11,18 @@ export default function Header() {
     openModal({
       content: <LoginPopupView />,
     });
+  const openUploadModal = () =>
+    openModal({
+      title: "업로드",
+      content: <UploadModal closeModal={closeModal} />,
+    });
+
   return (
     <HeaderView
       avatarUrl={user.profileImageUrl}
       isLogined={isLogined}
       onLeftButtonClick={isLogined ? logout : openLoginModal}
-      onRightButtonClick={
-        isLogined
-          ? () =>
-              openModal({
-                title: "업로드",
-                content: <UploadModal closeModal={closeModal} />,
-              })
-          : openLoginModal
-      }
+      onRightButtonClick={isLogined ? openUploadModal : openLoginModal}
     />
   );
 }
