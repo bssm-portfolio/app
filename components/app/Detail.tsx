@@ -3,7 +3,6 @@ import type { Portfolio } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
-import { useRef } from "react";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
@@ -33,7 +32,12 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
           <h2 className="font-bold text-large">{portfolio.title}</h2>
-          <span>{portfolio.writer.name}</span>
+          <span
+            onClick={() => router.push(`/profile/${portfolio.writer.memberId}`)}
+            className="cursor-pointer"
+          >
+            {portfolio.writer.name}
+          </span>
           <Chip.Group className="mt-small" type="detail">
             {portfolio.skillList.map((skillData) => {
               return <Chip.Item key={skillData}>{skillData}</Chip.Item>;

@@ -108,7 +108,7 @@ export default function DataGrid({
         </Droppable>
 
         <div className="flex justify-end mt-20">
-          <Button className="bg-primary-dark_gray">삭제</Button>
+          <Button className="!bg-primary-dark_gray">삭제</Button>
         </div>
       </DragDropContext>
     </>

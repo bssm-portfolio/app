@@ -22,7 +22,7 @@ export default function Home({ portfolio }: PortfolioIdPageProps) {
   const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
   const type = dateParsedPortfolio.portfolioType;
   const router = useRouter();
-  const { id } = router.query;
+  const { portfolioId } = router.query;
 
   return (
     <div>
@@ -44,21 +44,22 @@ export default function Home({ portfolio }: PortfolioIdPageProps) {
         }
         sidebar={<AppSideMenu />}
         detail={<AppDetail portfolio={dateParsedPortfolio} />}
-        comment={<AppComment portfolioId={Number(id)} />}
+        comment={<AppComment portfolioId={Number(portfolioId)} />}
       />
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
-  if (Number.isNaN(Number(id)))
+  const { portfolioId } = context.query;
+  if (Number.isNaN(Number(portfolioId)))
     return {
       notFound: true,
     };
 
-  const portfolio = (await httpClient.portfolio.getById({ params: { id } }))
-    .data;
+  const portfolio = (
+    await httpClient.portfolio.getById({ params: { id: portfolioId } })
+  ).data;
 
   return {
     props: {

@@ -38,7 +38,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           type="text"
           className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none"
           placeholder="댓글 추가.."
-          {...register("content")}
+          {...register("content", { required: true })}
         />
       </form>
       <div className="mt-2xlarge">

@@ -3,6 +3,7 @@ import { RefetchType } from "@/types/index.interface";
 import { Comment } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Button from "./Button";
 
@@ -12,9 +13,9 @@ interface CommentViewProps {
 }
 
 export default function CommentView({ comment, refetch }: CommentViewProps) {
+  const router = useRouter();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editContent, setEditContent] = useState<string>(comment.content);
-
   const handleDelete = async (commentId: number) => {
     await httpClient.comment.delete({ data: { commentId } });
     refetch();
@@ -23,6 +24,9 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
   const handleEdit = async () => {
     setIsEdit((prev) => !prev);
   };
+
+  const moveToProfile = () =>
+    router.push(`/profile/${comment.writer.memberId}`);
 
   const handleEditCompleted = async (commentId: number) => {
     await httpClient.comment.put({
@@ -35,19 +39,27 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
 
   return (
     <div className="flex items-center mb-xlarge">
-      <Image
-        className="rounded-full mr-base"
-        src={comment.writer.profileImageUrl}
-        alt="프로필 사진"
-        width={40}
-        height={40}
-      />
+      <div
+        className="relative w-10 h-10 mr-base cursor-pointer"
+        onClick={moveToProfile}
+      >
+        <Image
+          className="rounded-full"
+          src={comment.writer.profileImageUrl}
+          alt="프로필 사진"
+          fill
+        />
+      </div>
+
       <div className="w-full flex justify-between">
         <div className="w-full">
           <div className="flex items-center">
-            <h2 className="font-bold text-small mr-xsmall">
+            <span
+              className="font-bold text-small mr-xsmall cursor-pointer"
+              onClick={moveToProfile}
+            >
               {comment.writer.name}
-            </h2>
+            </span>
             <span>·</span>
             <span className="ml-1 text-primary-dark_gray text-xsmall">
               {getTimeAgo(comment.createdDate)}
