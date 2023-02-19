@@ -76,13 +76,6 @@ export class HttpClient {
     });
   }
 
-  getMemberById(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("/member/:id", {
-      ...HttpClient.clientConfig,
-      ...requestConfig,
-    });
-  }
-
   private setting() {
     HttpClient.setCommonInterceptors(this.api);
   }
@@ -112,6 +105,7 @@ const axiosConfig: HttpClientConfig = {
 
 export default {
   portfolio: new HttpClient("/api/portfolio", axiosConfig),
+  portfolioMember: new HttpClient("/api/portfolio/member", axiosConfig),
   oauth: new HttpClient("/api/login/oauth2", axiosConfig),
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
