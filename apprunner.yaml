@@ -4,10 +4,13 @@ build:
   commands:
     build:
       - yarn && yarn build
+  env:
+    - name: NEXT_PUBLIC_SERVER_URL
+      value: "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080"
 run:
   command: yarn start
   network:
-  port: 3000
+    port: 3000
   env:
     - name: NEXT_PUBLIC_SERVER_URL
       value: "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080"
