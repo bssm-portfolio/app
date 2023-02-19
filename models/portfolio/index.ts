@@ -22,12 +22,12 @@ const useMyPortfolioList = () => {
 
 const usePortfolioListById = (portfolioId?: number) => {
   const { data } = useQuery<PortfolioList>(
-    ["get portfolioList by id"],
+    ["get portfolioList by id", portfolioId],
     () =>
-      httpClient.portfolio
-        .getMemberById({ params: { id: portfolioId } })
+      httpClient.portfolioMember
+        .getById({ params: { id: portfolioId } })
         .then((r) => r.data),
-    { enabled: portfolioId != null },
+    { enabled: !!portfolioId },
   );
   return data || { pagination: null, list: [] };
 };
@@ -39,7 +39,7 @@ const useCommentList = (portfolioId?: number) => {
       httpClient.comment
         .getById({ params: { id: portfolioId } })
         .then((r) => r.data),
-    { enabled: portfolioId != null },
+    { enabled: !!portfolioId },
   );
   return { list: data?.list ?? [], refetch };
 };
