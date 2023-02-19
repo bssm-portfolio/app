@@ -20,7 +20,7 @@ function Group({ children, className, type = "main" }: ChipGroupProps) {
     <div
       className={`${classNames(className, "flex w-80 overflow-auto py-1", {
         "xl:max-w-[130px]": type === "portfolio",
-        "!w-[25rem]": type === "detail",
+        "!w-[23rem]": type === "detail",
         "!w-full !max-w-none": type === "upload",
       })}`}
     >
