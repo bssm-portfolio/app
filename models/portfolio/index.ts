@@ -1,16 +1,30 @@
+import fixture from "@/fixtures";
 import httpClient from "@/apis";
-import { Comment, PortfolioList } from "@/types/portfolio.interface";
+import {
+  Comment,
+  Pagination,
+  PortfolioList,
+} from "@/types/portfolio.interface";
 import { useQuery } from "@tanstack/react-query";
 
 interface CommentList {
   list: Comment[];
 }
 
-const usePortfolioList = () => {
-  const { data } = useQuery<PortfolioList>(["portfolioList"], () =>
-    httpClient.portfolio.search({}).then((r) => r.data),
+const usePortfolioList = (pagination?: Pagination) => {
+  const { data } = useQuery<PortfolioList>(
+    ["portfolioList", pagination],
+    () =>
+      httpClient.portfolio.search({ params: pagination }).then((r) => r.data),
+    { enabled: pagination !== fixture.defaultPagination },
   );
-  return data || { pagination: null, list: [] };
+
+  return (
+    data || {
+      pagination: fixture.defaultPagination,
+      list: [],
+    }
+  );
 };
 
 const useMyPortfolioList = () => {
