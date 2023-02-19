@@ -21,6 +21,7 @@ export default function Header() {
     <HeaderView
       avatarUrl={user.profileImageUrl}
       isLogined={isLogined}
+      memberId={user.memberId}
       onLeftButtonClick={isLogined ? logout : openLoginModal}
       onRightButtonClick={isLogined ? openUploadModal : openLoginModal}
     />
