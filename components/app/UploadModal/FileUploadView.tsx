@@ -41,13 +41,11 @@ export default function FileUploadView({
             id="thumbnail-uploader"
             label="썸네일 업로드"
             onChange={(event) => handleFileUpload(event, setThumbnailFileUid)}
-            registerReturn={register("thumbnailFileUid", { required: true })}
           />
           <FileUploader
             id="video-uploader"
             label="동영상 업로드"
             onChange={(event) => handleFileUpload(event, setVideoFileUid)}
-            registerReturn={register("videoFileUid")}
           />
           <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
         </div>
