@@ -9,7 +9,7 @@ export default function MainPortfolioList() {
   const router = useRouter();
   // todo: usePortfolioList useInfiniteQuery 안쓰는 빌트인 함수 정리하기
   const { pages, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    usePortfolioList({ page: 1, size: 12 }, {});
+    usePortfolioList({ size: 12 }, {});
   const [ref, inView] = useInView();
 
   useEffect(() => {

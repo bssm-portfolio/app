@@ -1,8 +1,12 @@
 import httpClient from "@/apis";
-import { Filter, Pagination, PortfolioList } from "@/types/portfolio.interface";
+import {
+  Filter,
+  PaginationRequest,
+  PortfolioList,
+} from "@/types/portfolio.interface";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-const useSearch = (pagination: Pagination, filter: Filter) => {
+const useSearch = (pagination: PaginationRequest, filter: Filter) => {
   const { data, isFetching, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery<PortfolioList>(
       ["search"],

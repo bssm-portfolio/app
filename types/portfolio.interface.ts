@@ -38,12 +38,14 @@ export type PortfolioForm = {
   contributorIdList: number[];
 };
 
-export interface Pagination {
-  page: number;
-  size: number;
+export interface PaginationRequest {
+  page?: number;
+  size?: number;
 }
 
-export interface PaginationResponse extends Pagination {
+export interface PaginationResponse {
+  page: number;
+  size: number;
   totalCount: number;
   totalPages: number;
 }
@@ -61,7 +63,7 @@ export interface Filter {
 
 export interface PortfolioList {
   list: Portfolio[];
-  pagination: Pagination;
+  pagination: PaginationResponse;
 }
 
 export interface Comment {

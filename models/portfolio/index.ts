@@ -2,7 +2,7 @@ import httpClient from "@/apis";
 import {
   Comment,
   Filter,
-  Pagination,
+  PaginationRequest,
   PortfolioList,
 } from "@/types/portfolio.interface";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
@@ -11,12 +11,14 @@ interface CommentList {
   list: Comment[];
 }
 
-const usePortfolioList = (pagination: Pagination, filter: Filter) => {
+const usePortfolioList = (pagination: PaginationRequest, filter: Filter) => {
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
       ["portfolioList"],
-      () =>
-        httpClient.portfolio.search({ pagination, filter }).then((r) => r.data),
+      ({ pageParam = 1 }) =>
+        httpClient.portfolio
+          .search({ pagination: { ...pagination, page: pageParam }, filter })
+          .then((r) => r.data),
       {
         getNextPageParam: (lastPage) => lastPage.pagination.page + 1,
       },
