@@ -12,6 +12,7 @@ export type Portfolio = {
   portfolioType: PortfolioType;
   title: string;
   description: string;
+  bookmarkYn: boolean;
   scope: PortfolioScope;
   gitUrl: string;
   video: S3File;
@@ -40,8 +41,22 @@ export type PortfolioForm = {
 export interface Pagination {
   page: number;
   size: number;
+}
+
+export interface PaginationResponse extends Pagination {
   totalCount: number;
   totalPages: number;
+}
+
+type SortType = "UPLOAD_DATE";
+type SortDirectionType = "ASC" | "DESC";
+
+export interface Filter {
+  search?: string;
+  uploadDateType?: string;
+  schoolGrade?: number;
+  sortType?: SortType;
+  sortDirectionType?: SortDirectionType;
 }
 
 export interface PortfolioList {

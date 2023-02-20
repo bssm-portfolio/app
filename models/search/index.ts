@@ -1,12 +1,25 @@
 import httpClient from "@/apis";
-import { PortfolioList } from "@/types/portfolio.interface";
-import { useQuery } from "@tanstack/react-query";
+import { Filter, Pagination, PortfolioList } from "@/types/portfolio.interface";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-const useSearch = (keyword: string) => {
-  const { data } = useQuery<PortfolioList>(["search", keyword], () =>
-    httpClient.portfolio.search({ params: { keyword } }).then((d) => d.data),
-  );
-  return data || { pagination: null, list: [] };
+const useSearch = (pagination: Pagination, filter: Filter) => {
+  const { data, isFetching, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery<PortfolioList>(
+      ["search"],
+      () =>
+        httpClient.portfolio.search({ pagination, filter }).then((r) => r.data),
+      {
+        getNextPageParam: (lastPage) => lastPage.pagination.page + 1,
+      },
+    );
+
+  return {
+    pages: data?.pages ?? [{ list: [] }],
+    pageParams: data?.pageParams ?? [],
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+  };
 };
 
 export default useSearch;
