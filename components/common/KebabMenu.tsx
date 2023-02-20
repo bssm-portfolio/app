@@ -37,15 +37,13 @@ function Menu({ children, className = "" }: KebabMenuProps) {
 }
 function Item({ children, className = "", onClick }: KebabItemProps) {
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <li
       className={classNames(
         "flex items-center whitespace-nowrap cursor-pointer px-2.5 py-[0.3125rem] hover:bg-slate-300",
         className,
       )}
-      onClick={onClick}
     >
-      {children}
+      <span onClick={onClick}>{children}</span>
     </li>
   );
 }
