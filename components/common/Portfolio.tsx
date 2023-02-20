@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
@@ -38,7 +38,11 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
             <div className="font-bold text-sm">{portfolio.title}</div>
             <div className="flex gap-3">
               <div className={countViewCss}>
-                <HeartIcon />
+                <HeartIcon
+                  className={
+                    portfolio.bookmarkYn && "[&_path]:!fill-somago_yellow"
+                  }
+                />
                 {portfolio.bookmarks}개
               </div>
               <div className={countViewCss}>
