@@ -101,17 +101,17 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
           )}
         </div>
         {comment.editable && !isEdit && (
-          <Kebab.Provider>
-            <Kebab.Menu>
+          <Kebab.Provider className="z-10">
+            <Kebab.Menu className="rounded">
               <Kebab.Item
-                className="pb-[0.3125rem]"
+                className="pb-[0.3125rem] rounded-t"
                 onClick={() => setIsEdit(true)}
               >
                 <EditIcon className="w-3 h-3 mr-3" />
                 <span>수정</span>
               </Kebab.Item>
               <Kebab.Item
-                className="pt-[0.3125rem]"
+                className="pt-[0.3125rem] rounded-b"
                 onClick={() => handleDelete(comment.commentId)}
               >
                 <TrashCanIcon className="w-3 h-3 mr-3" />

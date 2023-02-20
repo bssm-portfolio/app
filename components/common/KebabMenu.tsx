@@ -20,7 +20,7 @@ function Provider({ children, className = "" }: KebabProviderProps) {
       onClick={handleMenuClick}
       className={classNames("relative text-sm", className)}
     >
-      <KebabIcon className="hover:opacity-50" />
+      <KebabIcon className="hover:opacity-50 -z-10 relative" />
       {isOpen && children}
     </div>
   );
