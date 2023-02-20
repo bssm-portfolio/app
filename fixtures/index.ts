@@ -27,6 +27,7 @@ const portfolio: Portfolio = {
     profileImageUrl: avatarUrl,
     email: "iu@koko.com",
   },
+  bookmarkYn: false,
   portfolioType: "VIDEO",
   portfolioUrl: "https://naver.com",
   title: "포트폴리오 제목입니다.",
