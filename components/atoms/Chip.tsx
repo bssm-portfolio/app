@@ -18,15 +18,11 @@ interface ChipProps {
 function Group({ children, className, type = "main" }: ChipGroupProps) {
   return (
     <div
-      className={`${classNames(
-        className,
-        "flex w-80 xl:w-full overflow-auto py-1",
-        {
-          "xl:max-w-[130px]": type === "portfolio",
-          "!w-[25rem]": type === "detail",
-          "!w-full !max-w-none": type === "upload",
-        },
-      )}`}
+      className={`${classNames(className, "flex w-80 overflow-auto py-1", {
+        "xl:max-w-[130px]": type === "portfolio",
+        "!w-[23rem]": type === "detail",
+        "!w-full !max-w-none": type === "upload",
+      })}`}
     >
       {children}
     </div>

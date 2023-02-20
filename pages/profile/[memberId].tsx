@@ -6,6 +6,7 @@ import { Member } from "@/types/member.interface";
 import { usePortfolioListById } from "@/models/portfolio";
 import { ProfilePagePortfolioList, ProfilePageProfile } from "@/components";
 import { ProfilePageLayout } from "@/layouts";
+import useUser from "@/hooks/useUser";
 
 interface MemberIdPageProps {
   member: Member;
@@ -13,6 +14,7 @@ interface MemberIdPageProps {
 
 export default function Home({ member }: MemberIdPageProps) {
   const { list: portfolioList } = usePortfolioListById(member.memberId);
+  const { user: userInfo } = useUser({ authorizedPage: true });
 
   return (
     <div>
@@ -22,9 +24,17 @@ export default function Home({ member }: MemberIdPageProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ProfilePageLayout
-        profile={<ProfilePageProfile userInfo={member} />}
+        profile={
+          <ProfilePageProfile
+            userInfo={member}
+            isMypage={userInfo.memberId === member.memberId}
+          />
+        }
         portfiloList={
-          <ProfilePagePortfolioList portfolioList={portfolioList} />
+          <ProfilePagePortfolioList
+            portfolioList={portfolioList}
+            isMypage={userInfo.memberId === member.memberId}
+          />
         }
       />
     </div>

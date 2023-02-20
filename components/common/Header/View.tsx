@@ -7,6 +7,7 @@ interface HeaderProps {
   isLogined?: boolean;
   onLeftButtonClick?: () => void;
   onRightButtonClick?: () => void;
+  memberId: number;
 }
 
 export default function HeaderView({
@@ -14,6 +15,7 @@ export default function HeaderView({
   isLogined,
   onLeftButtonClick,
   onRightButtonClick,
+  memberId,
 }: HeaderProps) {
   const router = useRouter();
 
@@ -38,7 +40,7 @@ export default function HeaderView({
           <div className="relative cursor-pointer">
             <Avatar
               imageUrl={avatarUrl}
-              onClick={() => router.push("/mypage")}
+              onClick={() => router.push(`/profile/${memberId}`)}
             />
           </div>
         )}
