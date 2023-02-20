@@ -29,7 +29,10 @@ function Provider({ children, className = "" }: KebabProviderProps) {
 function Menu({ children, className = "" }: KebabMenuProps) {
   return (
     <ul
-      className={classNames("absolute top-6 right-0 border rounded", className)}
+      className={classNames(
+        "absolute top-6 right-0 shadow-sm shadow-[#00000040]",
+        className,
+      )}
     >
       {children}
     </ul>
@@ -39,11 +42,13 @@ function Item({ children, className = "", onClick }: KebabItemProps) {
   return (
     <li
       className={classNames(
-        "flex items-center whitespace-nowrap cursor-pointer px-2.5 py-[0.3125rem] hover:bg-slate-300",
+        "cursor-pointer px-2.5 py-[0.3125rem] hover:bg-slate-300",
         className,
       )}
     >
-      <span onClick={onClick}>{children}</span>
+      <span className="flex items-center whitespace-nowrap" onClick={onClick}>
+        {children}
+      </span>
     </li>
   );
 }
