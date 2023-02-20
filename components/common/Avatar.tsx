@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Image from "next/image";
+import { ChangeEvent } from "react";
 
 interface AvatarProps {
   imageUrl?: string;
@@ -16,6 +17,10 @@ export default function Avatar({
   onClick,
   className,
 }: AvatarProps) {
+  const handleImgError = (event: ChangeEvent<HTMLImageElement>) => {
+    event.target.src = "/assets/image/testPortfolioThumbnail.png";
+  };
+
   return (
     <Image
       onClick={onClick}
@@ -24,6 +29,7 @@ export default function Avatar({
       alt="사용자 아바타"
       width={width}
       height={height}
+      onError={handleImgError}
     />
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
@@ -16,21 +16,20 @@ const countViewCss = `
 `;
 
 export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
-  const [thumbnailUrl, setThumbnailUrl] = useState(
-    getFileDownloadUrl(portfolio.thumbnail),
-  );
+  const handleImgError = (event: ChangeEvent<HTMLImageElement>) => {
+    event.target.src = "/assets/image/testPortfolioThumbnail.png";
+  };
+
   return (
     <div className="flex flex-col cursor-pointer" onClick={onClick}>
       <div className="relative w-[20rem] h-[11.25rem]">
         <Image
           className="rounded object-cover"
-          src={thumbnailUrl}
+          src={getFileDownloadUrl(portfolio.thumbnail)}
           alt="포트폴리오이미지"
           fill
           priority
-          onError={() =>
-            setThumbnailUrl("/assets/image/testPortfolioThumbnail.png")
-          }
+          onError={handleImgError}
         />
       </div>
       <div className="flex w-full mt-3">
