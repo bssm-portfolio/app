@@ -12,8 +12,11 @@ function KebabMenuProvider({ children, className = "" }: KebabProps) {
   const handleMenuClick = () => setIsOpen((prev) => !prev);
 
   return (
-    <div className={classNames("relative text-sm", className)}>
-      <KebabIcon onClick={handleMenuClick} className="hover:opacity-50" />
+    <div
+      onClick={handleMenuClick}
+      className={classNames("relative text-sm", className)}
+    >
+      <KebabIcon className="hover:opacity-50" />
       {isOpen && children}
     </div>
   );
@@ -22,10 +25,7 @@ function KebabMenuProvider({ children, className = "" }: KebabProps) {
 function KebabMenu({ children, className = "" }: KebabProps) {
   return (
     <ul
-      className={classNames(
-        "absolute top-6 right-0 border rounded p-2.5",
-        className,
-      )}
+      className={classNames("absolute top-6 right-0 border rounded", className)}
     >
       {children}
     </ul>
@@ -33,7 +33,14 @@ function KebabMenu({ children, className = "" }: KebabProps) {
 }
 function KebabItem({ children, className = "" }: KebabProps) {
   return (
-    <li className={classNames("flex items-center", className)}>{children}</li>
+    <li
+      className={classNames(
+        "flex items-center whitespace-nowrap cursor-pointer px-2.5 py-[0.3125rem] hover:bg-slate-300",
+        className,
+      )}
+    >
+      {children}
+    </li>
   );
 }
 

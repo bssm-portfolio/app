@@ -93,16 +93,13 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
         {comment.editable && (
           <Kebab.KebabMenuProvider>
             <Kebab.KebabMenu>
-              <Kebab.KebabItem className="mb-2.5">
+              <Kebab.KebabItem className="pb-[0.3125rem]">
                 <EditIcon className="w-3 h-3 mr-3" />
                 <span onClick={handleEdit}>수정</span>
               </Kebab.KebabItem>
-              <Kebab.KebabItem>
+              <Kebab.KebabItem className="pt-[0.3125rem]">
                 <TrashCanIcon className="w-3 h-3 mr-3" />
-                <span
-                  className="whitespace-nowrap"
-                  onClick={() => handleDelete(comment.commentId)}
-                >
+                <span onClick={() => handleDelete(comment.commentId)}>
                   삭제
                 </span>
               </Kebab.KebabItem>
