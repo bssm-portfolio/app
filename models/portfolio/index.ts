@@ -1,30 +1,30 @@
-import fixture from "@/fixtures";
 import httpClient from "@/apis";
-import {
-  Comment,
-  Pagination,
-  PortfolioList,
-} from "@/types/portfolio.interface";
-import { useQuery } from "@tanstack/react-query";
+import { Comment, PortfolioList } from "@/types/portfolio.interface";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 interface CommentList {
   list: Comment[];
 }
+const usePortfolioList = () => {
+  const { data, isFetching, isFetchingNextPage, hasNextPage } =
+    useInfiniteQuery<PortfolioList>(
+      ["portfolioList"],
+      ({ pageParam }) =>
+        httpClient.portfolio
+          .search({ params: { page: pageParam, size: 12 } })
+          .then((r) => r.data),
+      {
+        getNextPageParam: (lastPage) => lastPage.pagination.page + 1,
+      },
+    );
 
-const usePortfolioList = (pagination?: Pagination) => {
-  const { data } = useQuery<PortfolioList>(
-    ["portfolioList", pagination],
-    () =>
-      httpClient.portfolio.search({ params: pagination }).then((r) => r.data),
-    { enabled: pagination !== fixture.defaultPagination },
-  );
-
-  return (
-    data || {
-      pagination: fixture.defaultPagination,
-      list: [],
-    }
-  );
+  return {
+    pages: data?.pages ?? [{ list: [] }],
+    pageParams: data?.pageParams ?? [],
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+  };
 };
 
 const useMyPortfolioList = () => {
