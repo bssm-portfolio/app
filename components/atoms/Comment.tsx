@@ -100,20 +100,20 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
           )}
         </div>
         {comment.editable && !isEdit && (
-          <Kebab.KebabMenuProvider>
-            <Kebab.KebabMenu>
-              <Kebab.KebabItem className="pb-[0.3125rem]">
+          <Kebab.MenuProvider>
+            <Kebab.Menu>
+              <Kebab.Item className="pb-[0.3125rem]">
                 <EditIcon className="w-3 h-3 mr-3" />
                 <span onClick={handleEdit}>수정</span>
-              </Kebab.KebabItem>
-              <Kebab.KebabItem className="pt-[0.3125rem]">
+              </Kebab.Item>
+              <Kebab.Item className="pt-[0.3125rem]">
                 <TrashCanIcon className="w-3 h-3 mr-3" />
                 <span onClick={() => handleDelete(comment.commentId)}>
                   삭제
                 </span>
-              </Kebab.KebabItem>
-            </Kebab.KebabMenu>
-          </Kebab.KebabMenuProvider>
+              </Kebab.Item>
+            </Kebab.Menu>
+          </Kebab.MenuProvider>
         )}
       </div>
     </div>

@@ -7,7 +7,7 @@ interface KebabProps {
   className?: string;
 }
 
-function KebabMenuProvider({ children, className = "" }: KebabProps) {
+function MenuProvider({ children, className = "" }: KebabProps) {
   const [isOpen, setIsOpen] = useState(false);
   const handleMenuClick = () => setIsOpen((prev) => !prev);
 
@@ -22,7 +22,7 @@ function KebabMenuProvider({ children, className = "" }: KebabProps) {
   );
 }
 
-function KebabMenu({ children, className = "" }: KebabProps) {
+function Menu({ children, className = "" }: KebabProps) {
   return (
     <ul
       className={classNames("absolute top-6 right-0 border rounded", className)}
@@ -31,7 +31,7 @@ function KebabMenu({ children, className = "" }: KebabProps) {
     </ul>
   );
 }
-function KebabItem({ children, className = "" }: KebabProps) {
+function Item({ children, className = "" }: KebabProps) {
   return (
     <li
       className={classNames(
@@ -44,4 +44,4 @@ function KebabItem({ children, className = "" }: KebabProps) {
   );
 }
 
-export default { KebabMenuProvider, KebabMenu, KebabItem };
+export default { MenuProvider, Menu, Item };
