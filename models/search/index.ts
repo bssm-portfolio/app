@@ -7,13 +7,16 @@ import {
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 const useSearch = (pagination: PaginationRequest, filter: Filter) => {
-  const { data, isFetching, isFetchingNextPage, fetchNextPage } =
+  const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
       ["search"],
-      () =>
-        httpClient.portfolio.search({ pagination, filter }).then((r) => r.data),
+      ({ pageParam = 1 }) =>
+        httpClient.portfolio
+          .search({ pagination: { ...pagination, page: pageParam }, filter })
+          .then((r) => r.data),
       {
         getNextPageParam: (lastPage) => lastPage.pagination.page + 1,
+        enabled: !!filter.search,
       },
     );
 
@@ -23,6 +26,7 @@ const useSearch = (pagination: PaginationRequest, filter: Filter) => {
     isFetching,
     isFetchingNextPage,
     fetchNextPage,
+    hasNextPage,
   };
 };
 
