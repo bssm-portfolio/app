@@ -12,7 +12,7 @@ interface CommentForm {
 }
 
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const { user } = useUser();
   const { list: commentList, refetch } = useCommentList(portfolioId);
   const { register, handleSubmit, reset } = useForm<CommentForm>();
@@ -32,6 +32,12 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
     return false;
   };
 
+  const { ref, ...rest } = register("content", { required: true });
+  const handleInput = (event: never) => {
+    inputRef.current = event;
+    ref(event);
+  };
+
   return (
     <div>
       <form className="flex mt-base relative" onSubmit={handleSubmit(onValid)}>
@@ -47,8 +53,8 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           type="text"
           className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none"
           placeholder="댓글 추가.."
-          {...register("content", { required: true })}
-          ref={inputRef}
+          {...rest}
+          ref={handleInput}
           onChange={() => setIsWriting(checkInputValueIsNull())}
         />
         {isWriting && (
