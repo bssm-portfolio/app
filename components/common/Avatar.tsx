@@ -1,5 +1,7 @@
+import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 import Image from "next/image";
+import { useState } from "react";
 
 interface AvatarProps {
   imageUrl?: string;
@@ -20,10 +22,14 @@ export default function Avatar({
     <Image
       onClick={onClick}
       className={classNames(className, "rounded-full")}
-      src={imageUrl}
+      src={imageUrl || ""}
       alt="사용자 아바타"
       width={width}
       height={height}
+      onError={(event) => {
+        event.currentTarget.src =
+          "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg";
+      }}
     />
   );
 }
