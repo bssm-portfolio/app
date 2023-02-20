@@ -8,7 +8,7 @@ import { useState } from "react";
 import Kebab from "../common/KebabMenu";
 import EditIcon from "../Icon/EditIcon";
 import TrashCanIcon from "../Icon/TrashCanIcon";
-import Button from "./Button";
+import InputButton from "./InputButton";
 
 interface CommentViewProps {
   comment: Comment;
@@ -70,27 +70,36 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
             </span>
           </div>
           {isEdit ? (
-            <>
+            <div className="relative">
               <input
                 type="text"
-                className="w-full border-b border-b-primary-border_gray"
+                className="w-full border-b border-b-primary-border_gray mb-1 pb-3 pr-8 focus:outline-none"
                 value={editContent}
                 onChange={(event) => {
                   setEditContent(event.target.value);
                 }}
               />
-              <Button onClick={() => handleEditCompleted(comment.commentId)}>
-                완료
-              </Button>
-              <Button onClick={handleEdit} varient="secondary">
-                취소
-              </Button>
-            </>
+              <div className="absolute top-0 right-0">
+                <InputButton
+                  onClick={handleEdit}
+                  varient="secondary"
+                  className="font-medium mr-2"
+                >
+                  취소
+                </InputButton>
+                <InputButton
+                  onClick={() => handleEditCompleted(comment.commentId)}
+                  className="font-medium"
+                >
+                  입력
+                </InputButton>
+              </div>
+            </div>
           ) : (
             <p className="text-middle">{comment.content}</p>
           )}
         </div>
-        {comment.editable && (
+        {comment.editable && !isEdit && (
           <Kebab.KebabMenuProvider>
             <Kebab.KebabMenu>
               <Kebab.KebabItem className="pb-[0.3125rem]">

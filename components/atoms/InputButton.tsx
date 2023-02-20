@@ -13,18 +13,18 @@ const getButtonCss = (varient: ButtonVarient) => {
   const bgColor =
     varient === "primary" ? "bg-somago_yellow" : "bg-primary-light_gray";
   return `
-    px-[5px]
-    py-[10px]
+    px-[10px]
+    py-[5px]
     ${bgColor}
     text-black
-    rounded 
+    rounded-full
     font-inter
     text-sm
     font-bold
   `;
 };
 
-export default function Button({
+export default function InputButton({
   type = "button",
   varient = "primary",
   onClick,
