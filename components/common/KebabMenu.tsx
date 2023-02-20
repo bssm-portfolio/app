@@ -7,7 +7,7 @@ interface KebabProps {
   className?: string;
 }
 
-function MenuProvider({ children, className = "" }: KebabProps) {
+function Provider({ children, className = "" }: KebabProps) {
   const [isOpen, setIsOpen] = useState(false);
   const handleMenuClick = () => setIsOpen((prev) => !prev);
 
@@ -44,4 +44,4 @@ function Item({ children, className = "" }: KebabProps) {
   );
 }
 
-export default { MenuProvider, Menu, Item };
+export default { Provider, Menu, Item };
