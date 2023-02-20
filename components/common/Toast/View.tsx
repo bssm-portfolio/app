@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ToastProperty } from "@/types/toast.interface";
+import CheckIcon from "@/components/Icon/CheckIcon";
 
 interface ToastViewProps {
   toastList: ToastProperty[];
@@ -9,7 +10,7 @@ export default function ToastView({ toastList }: ToastViewProps) {
   const backgroundColorList = {
     success: "bg-[#5CB85C]",
     danger: "bg-[#D9534F]",
-    normal: "bg-[#3E73FB]",
+    normal: "bg-[#000000B3]",
   };
   const toastAnimationList = {
     TOP_LEFT: "animate-[toast-in-left_3s_ease]",
@@ -26,13 +27,14 @@ export default function ToastView({ toastList }: ToastViewProps) {
         return (
           <div
             className={classNames(
-              "p-4 text-white rounded-xl mb-1",
+              "flex items-center px-[3.75rem] py-5 text-white rounded-xl mb-1",
               backgroundColorList[toast.type],
               toastAnimationList[toast.position],
             )}
             key={toast.id}
           >
-            {toast.content}
+            <CheckIcon className="mr-5" />
+            <span className="text-lg font-bold">{toast.content}</span>
           </div>
         );
       })}
