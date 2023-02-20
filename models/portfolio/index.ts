@@ -6,7 +6,7 @@ interface CommentList {
   list: Comment[];
 }
 const usePortfolioList = () => {
-  const { data, isFetching, isFetchingNextPage, hasNextPage } =
+  const { data, isFetching, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery<PortfolioList>(
       ["portfolioList"],
       ({ pageParam }) =>
@@ -23,7 +23,7 @@ const usePortfolioList = () => {
     pageParams: data?.pageParams ?? [],
     isFetching,
     isFetchingNextPage,
-    hasNextPage,
+    fetchNextPage,
   };
 };
 
