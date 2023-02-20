@@ -2,7 +2,6 @@ import httpClient from "@/apis";
 import { RefetchType } from "@/types/index.interface";
 import { Comment } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Avatar from "../common/Avatar";
@@ -24,23 +23,25 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
 
   const handleDelete = async (commentId: number) => {
     await httpClient.comment.delete({ data: { commentId } });
+    setIsEdit(false);
     refetch();
-  };
-
-  const handleEdit = (status: boolean) => {
-    setIsEdit(status);
   };
 
   const moveToProfile = () =>
     router.push(`/profile/${comment.writer.memberId}`);
 
-  const handleEditCompleted = async (commentId: number) => {
+  const handleEditComplete = async (commentId: number) => {
     await httpClient.comment.put({
       commentId,
       content: editContent,
     });
     setIsEdit(false);
     refetch();
+  };
+
+  const handleEditCancel = () => {
+    setEditContent(originalContent);
+    setIsEdit(false);
   };
 
   return (
@@ -81,17 +82,14 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
               />
               <div className="absolute top-0 right-0">
                 <InputButton
-                  onClick={() => {
-                    setEditContent(originalContent);
-                    handleEdit(false);
-                  }}
+                  onClick={handleEditCancel}
                   varient="secondary"
                   className="font-medium mr-2"
                 >
                   취소
                 </InputButton>
                 <InputButton
-                  onClick={() => handleEditCompleted(comment.commentId)}
+                  onClick={() => handleEditComplete(comment.commentId)}
                   className="font-medium"
                 >
                   입력
@@ -103,11 +101,11 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
           )}
         </div>
         {comment.editable && !isEdit && (
-          <Kebab.MenuProvider>
+          <Kebab.Provider>
             <Kebab.Menu>
               <Kebab.Item className="pb-[0.3125rem]">
                 <EditIcon className="w-3 h-3 mr-3" />
-                <span onClick={() => handleEdit(true)}>수정</span>
+                <span onClick={() => setIsEdit(true)}>수정</span>
               </Kebab.Item>
               <Kebab.Item className="pt-[0.3125rem]">
                 <TrashCanIcon className="w-3 h-3 mr-3" />
@@ -116,7 +114,7 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
                 </span>
               </Kebab.Item>
             </Kebab.Menu>
-          </Kebab.MenuProvider>
+          </Kebab.Provider>
         )}
       </div>
     </div>
