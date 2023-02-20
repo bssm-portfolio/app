@@ -5,6 +5,9 @@ import { getTimeAgo } from "@/utils/date";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Kebab from "../common/KebabMenu";
+import EditIcon from "../Icon/EditIcon";
+import TrashCanIcon from "../Icon/TrashCanIcon";
 import Button from "./Button";
 
 interface CommentViewProps {
@@ -16,12 +19,13 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editContent, setEditContent] = useState<string>(comment.content);
+
   const handleDelete = async (commentId: number) => {
     await httpClient.comment.delete({ data: { commentId } });
     refetch();
   };
 
-  const handleEdit = async () => {
+  const handleEdit = () => {
     setIsEdit((prev) => !prev);
   };
 
@@ -87,10 +91,23 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
           )}
         </div>
         {comment.editable && (
-          <div>
-            <span onClick={handleEdit}>수정</span>
-            <span onClick={() => handleDelete(comment.commentId)}>삭제</span>
-          </div>
+          <Kebab.KebabMenuProvider>
+            <Kebab.KebabMenu>
+              <Kebab.KebabItem className="mb-2.5">
+                <EditIcon className="w-3 h-3 mr-3" />
+                <span onClick={handleEdit}>수정</span>
+              </Kebab.KebabItem>
+              <Kebab.KebabItem>
+                <TrashCanIcon className="w-3 h-3 mr-3" />
+                <span
+                  className="whitespace-nowrap"
+                  onClick={() => handleDelete(comment.commentId)}
+                >
+                  삭제
+                </span>
+              </Kebab.KebabItem>
+            </Kebab.KebabMenu>
+          </Kebab.KebabMenuProvider>
         )}
       </div>
     </div>

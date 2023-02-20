@@ -1,4 +1,4 @@
-export default function ShareIcon({ ...props }) {
+export default function TrashCanIcon({ ...props }) {
   return (
     <svg
       width="32"
