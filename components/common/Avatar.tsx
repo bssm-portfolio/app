@@ -1,7 +1,5 @@
-import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 import Image from "next/image";
-import { useState } from "react";
 
 interface AvatarProps {
   imageUrl?: string;
