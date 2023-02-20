@@ -21,6 +21,7 @@ const getButtonCss = (varient: ButtonVarient) => {
     font-inter
     text-sm
     font-bold
+    whitespace-nowrap
   `;
 };
 
