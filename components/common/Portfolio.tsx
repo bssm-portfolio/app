@@ -16,10 +16,6 @@ const countViewCss = `
 `;
 
 export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
-  const handleImgError = (event: ChangeEvent<HTMLImageElement>) => {
-    event.target.src = "/assets/image/testPortfolioThumbnail.png";
-  };
-
   return (
     <div className="flex flex-col cursor-pointer" onClick={onClick}>
       <div className="relative w-[20rem] h-[11.25rem]">
@@ -29,7 +25,10 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
           alt="포트폴리오이미지"
           fill
           priority
-          onError={handleImgError}
+          onError={(event) => {
+            // event.currentTarget.src =
+            // "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg";
+          }}
         />
       </div>
       <div className="flex w-full mt-3">
