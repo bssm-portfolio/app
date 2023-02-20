@@ -7,18 +7,20 @@ import UploadModal from "../app/UploadModal";
 
 export default function ProfilePortfolioList() {
   const router = useRouter();
-  const { pages } = usePortfolioList();
+  const { pages } = usePortfolioList({ size: 12, page: 1 }, {});
   const { openModal, closeModal } = useModal();
 
   return (
     <div className="flex gap-12 flex-wrap">
-      {pages[0].list.map((portfolio) => (
-        <Portfolio
-          portfolio={portfolio}
-          onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
-          key={portfolio.portfolioId}
-        />
-      ))}
+      {pages.map((page) =>
+        page.list.map((portfolio) => (
+          <Portfolio
+            portfolio={portfolio}
+            onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
+            key={portfolio.portfolioId}
+          />
+        )),
+      )}
       <div
         onClick={() =>
           openModal({

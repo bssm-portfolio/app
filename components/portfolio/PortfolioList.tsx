@@ -17,16 +17,16 @@ export default function PortfolioList({
 
   return (
     <div className="flex flex-col items-start">
-      {pages[0].list.map((portfolio) => {
-        return (
+      {pages.map((page) =>
+        page.list.map((portfolio) => (
           <PortfolioItem
             key={portfolio.portfolioId}
             portfolio={portfolio}
             onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
             type={type}
           />
-        );
-      })}
+        )),
+      )}
     </div>
   );
 }
