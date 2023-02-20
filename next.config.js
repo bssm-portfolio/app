@@ -18,6 +18,7 @@ const nextConfig = {
       { protocol: "http", hostname: "k.kakaocdn.net" },
       { protocol: "https", hostname: "bssm.kro.kr" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "velog.velcdn.com" },
     ],
   },
 };
