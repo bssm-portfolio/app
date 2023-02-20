@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ChangeEventHandler, InputHTMLAttributes } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 type ButtonVarient = "primary" | "secondary";
 interface FileUploaderProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,6 +8,7 @@ interface FileUploaderProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   label?: string;
   varient?: ButtonVarient;
+  registerReturn: UseFormRegisterReturn;
   id?: string;
 }
 
@@ -29,6 +31,7 @@ export default function FileUploader({
   onChange,
   label,
   className = "",
+  registerReturn,
   id = "file-uploader",
 }: FileUploaderProps) {
   return (
@@ -43,6 +46,7 @@ export default function FileUploader({
         type="file"
         id={id}
         className={classNames("hidden")}
+        {...registerReturn}
         onChange={onChange}
       />
     </>
