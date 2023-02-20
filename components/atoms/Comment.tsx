@@ -5,6 +5,7 @@ import { getTimeAgo } from "@/utils/date";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Avatar from "../common/Avatar";
 import Kebab from "../common/KebabMenu";
 import EditIcon from "../Icon/EditIcon";
 import TrashCanIcon from "../Icon/TrashCanIcon";
@@ -19,14 +20,15 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editContent, setEditContent] = useState<string>(comment.content);
+  const [originalContent] = useState<string>(comment.content);
 
   const handleDelete = async (commentId: number) => {
     await httpClient.comment.delete({ data: { commentId } });
     refetch();
   };
 
-  const handleEdit = () => {
-    setIsEdit((prev) => !prev);
+  const handleEdit = (status: boolean) => {
+    setIsEdit(status);
   };
 
   const moveToProfile = () =>
@@ -47,11 +49,9 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
         className="relative w-10 h-10 mr-base cursor-pointer"
         onClick={moveToProfile}
       >
-        <Image
+        <Avatar
           className="rounded-full"
-          src={comment.writer.profileImageUrl}
-          alt="프로필 사진"
-          fill
+          imageUrl={comment.writer.profileImageUrl}
         />
       </div>
 
@@ -81,7 +81,10 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
               />
               <div className="absolute top-0 right-0">
                 <InputButton
-                  onClick={handleEdit}
+                  onClick={() => {
+                    setEditContent(originalContent);
+                    handleEdit(false);
+                  }}
                   varient="secondary"
                   className="font-medium mr-2"
                 >
@@ -104,7 +107,7 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
             <Kebab.Menu>
               <Kebab.Item className="pb-[0.3125rem]">
                 <EditIcon className="w-3 h-3 mr-3" />
-                <span onClick={handleEdit}>수정</span>
+                <span onClick={() => handleEdit(true)}>수정</span>
               </Kebab.Item>
               <Kebab.Item className="pt-[0.3125rem]">
                 <TrashCanIcon className="w-3 h-3 mr-3" />
