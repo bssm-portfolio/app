@@ -27,7 +27,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
     refetch();
   };
 
-  const inputValueIsNull = () => {
+  const checkInputValueIsNull = () => {
     if (inputRef.current) return inputRef.current.value !== "";
     return false;
   };
@@ -49,10 +49,16 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           placeholder="댓글 추가.."
           {...register("content", { required: true })}
           ref={inputRef}
-          onChange={() => setIsWriting(inputValueIsNull())}
+          onChange={() => setIsWriting(checkInputValueIsNull())}
         />
         {isWriting && (
-          <InputButton className="absolute top-0 right-1">입력</InputButton>
+          <InputButton
+            type="submit"
+            className="absolute top-0 right-1"
+            onClick={handleSubmit(onValid)}
+          >
+            입력
+          </InputButton>
         )}
       </form>
       <div className="mt-2xlarge">
