@@ -2,8 +2,6 @@ export { default as CommentIcon } from "./CommentIcon";
 export { default as HeartIcon } from "./HeartIcon";
 export { default as ScopeIcon } from "./ScopeIcon";
 export { default as XIcon } from "./XIcon";
-export { default as BsmIcon } from "./BsmIcon";
-export { default as BssmIcon } from "./BssmIcon";
 export { default as DownIcon } from "./DownIcon";
 export { default as EmptyHeartIcon } from "./EmptyHeartIcon";
 export { default as GoogleIcon } from "./GoogleIcon";
