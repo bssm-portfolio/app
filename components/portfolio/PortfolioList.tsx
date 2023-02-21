@@ -1,7 +1,8 @@
+import { usePortfolioList } from "@/models/portfolio";
 import useSearch from "@/models/search";
 import { PortfolioListType } from "@/types/portfolio.interface";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import PortfolioItem from "../app/PortfolioItem";
 import Loading from "../common/Loading";
@@ -16,10 +17,8 @@ export default function PortfolioList({
   type = "main",
 }: PortfolioListProps) {
   const router = useRouter();
-  const { pages, fetchNextPage, hasNextPage, isFetchingNextPage } = useSearch(
-    { page: 1, size: 12 },
-    { search: keyword },
-  );
+  const { pages, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    usePortfolioList({ size: 12 }, { search: keyword });
 
   const { ref, inView } = useInView();
 
