@@ -2,7 +2,7 @@ import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import Image from "next/image";
 import { NextRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
@@ -47,6 +47,10 @@ export default function DataGridItem({
     return checkedList.includes(portfolioId);
   };
 
+  const [imageUrl, setImageUrl] = useState(
+    getFileDownloadUrl(portfolio.thumbnail),
+  );
+
   return (
     <Draggable
       key={portfolio.portfolioId.toString()}
@@ -76,9 +80,14 @@ export default function DataGridItem({
               <div className="relative w-[7.5rem] h-[4.2rem] mx-3">
                 <Image
                   className="object-cover rounded"
-                  src={getFileDownloadUrl(portfolio.thumbnail)}
+                  src={imageUrl}
                   alt={portfolio.title}
                   fill
+                  onError={() =>
+                    setImageUrl(
+                      "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
+                    )
+                  }
                 />
               </div>
               <h2 className="font-bold">{portfolio.title}</h2>
