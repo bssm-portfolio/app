@@ -17,7 +17,10 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
       ["portfolioList"],
       ({ pageParam = 1 }) =>
         httpClient.portfolio
-          .search({ pagination: { ...pagination, page: pageParam }, filter })
+          .search({
+            pagination: { ...pagination, page: pageParam },
+            filter: filter || {},
+          })
           .then((r) => r.data),
       {
         getNextPageParam: (lastPage) => lastPage.pagination.page + 1,
