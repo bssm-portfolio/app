@@ -18,7 +18,7 @@ export default function MainPortfolioList() {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center mt-8 gap-12">
+      <div className="flex flex-wrap justify-center gap-12">
         {pages.map((page) =>
           page.list.map((portfolio) => (
             <Portfolio
