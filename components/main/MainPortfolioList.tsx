@@ -8,7 +8,7 @@ import Loading from "../common/Loading";
 export default function MainPortfolioList() {
   const router = useRouter();
   const { pages, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    usePortfolioList({ size: 12 }, {});
+    usePortfolioList({ size: 12 });
   const [ref, inView] = useInView();
 
   useEffect(() => {

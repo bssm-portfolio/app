@@ -11,7 +11,7 @@ interface CommentList {
   list: Comment[];
 }
 
-const usePortfolioList = (pagination: PaginationRequest, filter: Filter) => {
+const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
       ["portfolioList"],

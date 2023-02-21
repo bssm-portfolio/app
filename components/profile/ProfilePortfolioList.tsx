@@ -7,7 +7,7 @@ import UploadModal from "../app/UploadModal";
 
 export default function ProfilePortfolioList() {
   const router = useRouter();
-  const { pages } = usePortfolioList({ size: 12, page: 1 }, {});
+  const { pages } = usePortfolioList({ size: 12, page: 1 });
   const { openModal, closeModal } = useModal();
 
   return (
