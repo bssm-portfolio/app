@@ -2,16 +2,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
-import { useSkill } from "@/models/skill";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import httpClient from "@/apis";
 import { handleFileUpload } from "@/utils/file";
-import { SearchIcon } from "../Icon";
 import Input from "../atoms/Input";
-import Skills from "../app/UploadModal/Skills";
 import Radio from "../atoms/Radio";
 import FileUploader from "../atoms/FileUploader";
 import Button from "../atoms/Button";
+import SkillForm from "../common/SkillForm";
 
 interface PortfolioEditProps {
   portfolioId: number;
@@ -19,12 +17,10 @@ interface PortfolioEditProps {
 
 export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
-  const [skillSearchText, setSkillSearchText] = useState("");
   const [videoFileUid, setVideoFileUid] = useState("");
   const [thumbnailFileUid, setThumbnailFileUid] = useState("");
 
   const { register, handleSubmit } = useForm<PortfolioForm>();
-  const { data: skills } = useSkill(skillSearchText);
   const { data: portfolio } = usePortfolio(portfolioId);
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
@@ -82,36 +78,10 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         defaultValue={portfolio.gitUrl}
         placeholder="https://github.com/"
       />
-      <Skills
-        skills={selectedSkills}
+
+      <SkillForm
         selectedSkills={selectedSkills}
-        setSelectedSkills={(skill) =>
-          setSelectedSkills((s) =>
-            s.filter(
-              (selectedSkill) => selectedSkill.skillId !== skill.skillId,
-            ),
-          )
-        }
-      />
-      <div className="relative">
-        <SearchIcon className="absolute top-2 left-3 w-[0.8125rem]" />
-        <Input
-          className="w-full pl-8 mb-2"
-          placeholder="기술스택을 입력하세요"
-          onChange={(e) => setSkillSearchText(e.target.value)}
-        />
-      </div>
-      <Skills
-        skills={skills}
-        selectedSkills={selectedSkills}
-        setSelectedSkills={(v) =>
-          setSelectedSkills((s) => {
-            if (s.includes(v)) {
-              return s.filter((sv) => sv !== v);
-            }
-            return [...s, v];
-          })
-        }
+        setSelectedSkills={setSelectedSkills}
       />
 
       <h2 className="text-base mb-large">공개범위</h2>

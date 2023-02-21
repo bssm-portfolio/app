@@ -1,10 +1,9 @@
-import httpClient from "@/apis";
 import FileUploader from "@/components/atoms/FileUploader";
 import Input from "@/components/atoms/Input";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import { handleFileUpload } from "@/utils/file";
 import classNames from "classnames";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 export default function FileUploadView({

@@ -9,16 +9,12 @@ export const getFileDownloadUrl = (file: S3File) => {
 
 export const handleFileUpload = (
   event: ChangeEvent<HTMLInputElement>,
-  setState: Dispatch<SetStateAction<string>>,
+  setFileUid: Dispatch<SetStateAction<string>>,
 ) => {
   if (event.target.files) {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
 
-    httpClient.file.upload(formData).then((r) => {
-      setState(r.data.fileUid);
-    });
+    httpClient.file.upload(formData).then((r) => setFileUid(r.data.fileUid));
   }
 };
-
-export default {};

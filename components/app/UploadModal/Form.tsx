@@ -4,11 +4,10 @@ import Textarea from "@/components/atoms/Textarea";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import { UseFormRegister } from "react-hook-form";
-import SearchIcon from "@/components/Icon/SearchIcon";
 import { useSkill } from "@/models/skill";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Skill } from "@/types/skill.interface";
-import Skills from "./Skills";
+import SkillForm from "@/components/common/SkillForm";
 
 interface FormProps {
   register: UseFormRegister<PortfolioForm>;
@@ -17,19 +16,12 @@ interface FormProps {
   setSelectedSkills: Dispatch<SetStateAction<Skill[]>>;
 }
 
-interface FormViewProps extends FormProps {
-  setSkillSearchText: Dispatch<SetStateAction<string>>;
-  skills: Skill[];
-}
-
 function FormView({
   register,
   className,
-  setSkillSearchText,
-  skills,
   selectedSkills,
   setSelectedSkills,
-}: FormViewProps) {
+}: FormProps) {
   const getFormViewCss = () => {
     return `w-full 
     h-[32.5rem] 
@@ -62,37 +54,9 @@ function FormView({
         />
       </LabelForm>
       <LabelForm label="기술스택(중복선택 가능)" className="mb-6">
-        <Skills
-          className="mb-1"
-          skills={selectedSkills}
+        <SkillForm
           selectedSkills={selectedSkills}
-          setSelectedSkills={(skill) =>
-            setSelectedSkills((s) =>
-              s.filter(
-                (selectedSkill) => selectedSkill.skillId !== skill.skillId,
-              ),
-            )
-          }
-        />
-        <div className="relative">
-          <SearchIcon className="absolute top-2 left-3 w-[0.8125rem]" />
-          <Input
-            className="w-full pl-8 mb-2"
-            placeholder="기술스택을 입력하세요"
-            onChange={(e) => setSkillSearchText(e.target.value)}
-          />
-        </div>
-        <Skills
-          skills={skills}
-          selectedSkills={selectedSkills}
-          setSelectedSkills={(v) =>
-            setSelectedSkills((s) => {
-              if (s.includes(v)) {
-                return s.filter((sv) => sv !== v);
-              }
-              return [...s, v];
-            })
-          }
+          setSelectedSkills={setSelectedSkills}
         />
       </LabelForm>
 
