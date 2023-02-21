@@ -11,12 +11,13 @@ import Input from "../atoms/Input";
 import Skills from "../app/UploadModal/Skills";
 import Radio from "../atoms/Radio";
 import FileUploader from "../atoms/FileUploader";
+import Button from "../atoms/Button";
 
-export default function PortfolioEdit({
-  portfolioId,
-}: {
+interface PortfolioEditProps {
   portfolioId: number;
-}) {
+}
+
+export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
   const [skillSearchText, setSkillSearchText] = useState("");
   const [videoFileUid, setVideoFileUid] = useState("");
@@ -39,28 +40,30 @@ export default function PortfolioEdit({
 
     await httpClient.portfolio.put({
       ...data,
+      portfolioId,
       portfolioType: getPortfolioType(),
       skillList: selectedSkills,
-      contributorIdList: [],
+      contributorIdList: [0],
       videoFileUid,
       thumbnailFileUid,
     });
   };
 
   return (
-    <form onSubmit={handleSubmit(onValid)}>
+    <form>
       <Input
         registerReturn={register("title", { required: true })}
-        value={portfolio.title}
+        defaultValue={portfolio.title}
       />
       <Input
         registerReturn={register("description", { required: true })}
-        value={portfolio.description}
+        defaultValue={portfolio.description}
       />
       <Input
-        registerReturn={register("videoFileUid", { required: true })}
-        value={portfolio.video.fileName}
+        registerReturn={register("portfolioUrl")}
+        defaultValue={portfolio.description}
       />
+
       <div className="w-full border h-60 mb-2.5 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
         <FileUploader
           id="thumbnail-uploader"
@@ -75,8 +78,8 @@ export default function PortfolioEdit({
         <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
       </div>
       <Input
-        registerReturn={register("gitUrl", { required: true })}
-        value={portfolio.gitUrl}
+        registerReturn={register("gitUrl")}
+        defaultValue={portfolio.gitUrl}
         placeholder="https://github.com/"
       />
       <Skills
@@ -133,6 +136,9 @@ export default function PortfolioEdit({
         value="PRIVATE"
         description="나와 내가 선택한 사람만 볼 수 있습니다."
       />
+      <Button type="submit" onClick={handleSubmit(onValid)}>
+        수정하기
+      </Button>
     </form>
   );
 }
