@@ -37,7 +37,7 @@ export type PortfolioForm = {
   contributorIdList: number[];
 };
 
-interface Pagination {
+export interface Pagination {
   page: number;
   size: number;
   totalCount: number;

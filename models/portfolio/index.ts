@@ -1,16 +1,30 @@
 import httpClient from "@/apis";
 import { Comment, PortfolioList } from "@/types/portfolio.interface";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 interface CommentList {
   list: Comment[];
 }
-
 const usePortfolioList = () => {
-  const { data } = useQuery<PortfolioList>(["portfolioList"], () =>
-    httpClient.portfolio.search({}).then((r) => r.data),
-  );
-  return data || { pagination: null, list: [] };
+  const { data, isFetching, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery<PortfolioList>(
+      ["portfolioList"],
+      ({ pageParam }) =>
+        httpClient.portfolio
+          .search({ params: { page: pageParam, size: 12 } })
+          .then((r) => r.data),
+      {
+        getNextPageParam: (lastPage) => lastPage.pagination.page + 1,
+      },
+    );
+
+  return {
+    pages: data?.pages ?? [{ list: [] }],
+    pageParams: data?.pageParams ?? [],
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+  };
 };
 
 const useMyPortfolioList = () => {

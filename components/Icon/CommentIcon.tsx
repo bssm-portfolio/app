@@ -1,4 +1,4 @@
-function CommentIcon() {
+export default function CommentIcon() {
   return (
     <svg
       width="12"
@@ -14,5 +14,3 @@ function CommentIcon() {
     </svg>
   );
 }
-
-export default CommentIcon;

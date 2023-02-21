@@ -19,12 +19,12 @@ export default function FileUploadView({
   setThumbnailFileUid: Dispatch<SetStateAction<string>>;
 }) {
   const handleFileUpload = (
-    e: ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
     setState: Dispatch<SetStateAction<string>>,
   ) => {
-    if (e.target.files) {
+    if (event.target.files) {
       const formData = new FormData();
-      formData.append("file", e.target.files[0]);
+      formData.append("file", event.target.files[0]);
 
       httpClient.file.upload(formData).then((r) => {
         setState(r.data.fileUid);
@@ -40,12 +40,12 @@ export default function FileUploadView({
           <FileUploader
             id="thumbnail-uploader"
             label="썸네일 업로드"
-            onChange={(e) => handleFileUpload(e, setThumbnailFileUid)}
+            onChange={(event) => handleFileUpload(event, setThumbnailFileUid)}
           />
           <FileUploader
             id="video-uploader"
             label="동영상 업로드"
-            onChange={(e) => handleFileUpload(e, setVideoFileUid)}
+            onChange={(event) => handleFileUpload(event, setVideoFileUid)}
           />
           <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
         </div>

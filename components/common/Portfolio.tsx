@@ -29,7 +29,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
           fill
           priority
           onError={() =>
-            setThumbnailUrl("/assets/images/testPortfolioThumbnail.png")
+            setThumbnailUrl("/assets/image/testPortfolioThumbnail.png")
           }
         />
       </div>

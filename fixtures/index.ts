@@ -116,6 +116,13 @@ const user = {
   memberRoleType: "ROLE_NORMAL",
 };
 
+const defaultPagination = {
+  page: 1,
+  size: 0,
+  totalCount: 0,
+  totalPages: 1,
+};
+
 const fixture = {
   avatarUrl,
   portfolioUrl,
@@ -124,6 +131,7 @@ const fixture = {
   commentList,
   profileDescription,
   user,
+  defaultPagination,
 };
 
 export default fixture;

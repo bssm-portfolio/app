@@ -13,4 +13,9 @@ const clearInput = (inputRef: RefObject<HTMLInputElement>) => {
   }
 };
 
-export { focusInput, clearInput };
+const checkInputValueIsNull = (inputRef: RefObject<HTMLInputElement>) => {
+  if (inputRef.current) return inputRef.current.value !== "";
+  return false;
+};
+
+export { focusInput, clearInput, checkInputValueIsNull };
