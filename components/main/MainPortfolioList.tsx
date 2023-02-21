@@ -17,8 +17,8 @@ export default function MainPortfolioList() {
   }, [inView, fetchNextPage, hasNextPage]);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex gap-12 flex-wrap">
+    <>
+      <div className="flex flex-wrap justify-center mt-8 gap-12">
         {pages.map((page) =>
           page.list.map((portfolio) => (
             <Portfolio
@@ -31,9 +31,14 @@ export default function MainPortfolioList() {
       </div>
       <div ref={ref} className="h-36">
         {isFetchingNextPage && (
-          <Loading className="mt-8" width={60} height={60} type="spin" />
+          <Loading
+            className="mt-8 mx-auto"
+            width={60}
+            height={60}
+            type="spin"
+          />
         )}
       </div>
-    </div>
+    </>
   );
 }
