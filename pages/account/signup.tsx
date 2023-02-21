@@ -27,5 +27,5 @@ function Home() {
   );
 }
 export default function Page() {
-  return <MainLayout app={<Home />} />;
+  return <div />;
 }

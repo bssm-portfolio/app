@@ -12,7 +12,7 @@ interface CommentList {
 }
 
 const usePortfolioList = (pagination: PaginationRequest, filter: Filter) => {
-  const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
+  const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
       ["portfolioList"],
       ({ pageParam = 1 }) =>
@@ -26,11 +26,9 @@ const usePortfolioList = (pagination: PaginationRequest, filter: Filter) => {
 
   return {
     pages: data?.pages ?? [{ list: [] }],
-    pageParams: data?.pageParams ?? [],
-    isFetching,
     isFetchingNextPage,
-    fetchNextPage,
     hasNextPage,
+    fetchNextPage,
   };
 };
 
