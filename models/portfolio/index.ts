@@ -39,7 +39,7 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
 
 const useMyPortfolioList = () => {
   const { data } = useQuery<PortfolioList>(["my portfolioList"], () =>
-    httpClient.portfolio.self({}).then((r) => r.data),
+    httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
   );
   return data || { pagination: null, list: [] };
 };
@@ -49,7 +49,7 @@ const usePortfolioListById = (portfolioId?: number) => {
     ["get portfolioList by id", portfolioId],
     () =>
       httpClient.portfolioMember
-        .getById({ params: { id: portfolioId } })
+        .getById({ params: { id: portfolioId, size: 100 } })
         .then((r) => r.data),
     { enabled: !!portfolioId },
   );
