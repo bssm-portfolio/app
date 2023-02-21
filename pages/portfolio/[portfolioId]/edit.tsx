@@ -1,4 +1,4 @@
-import PortfolioEdit from "@/components/portfolio/PortfolioEdit";
+import PortfolioEdit from "@/components/portfolio/edit";
 import EditLayout from "@/layouts/PortfolioEdit";
 import Head from "next/head";
 import { useRouter } from "next/router";
