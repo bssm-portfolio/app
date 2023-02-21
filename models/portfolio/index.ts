@@ -1,8 +1,10 @@
 import httpClient from "@/apis";
+import fixture from "@/fixtures";
 import {
   Comment,
   Filter,
   PaginationRequest,
+  Portfolio,
   PortfolioList,
 } from "@/types/portfolio.interface";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
@@ -66,7 +68,20 @@ const useCommentList = (portfolioId?: number) => {
   return { list: data?.list ?? [], refetch };
 };
 
+const usePortfolio = (portfolioId?: number) => {
+  const { data } = useQuery<Portfolio>(
+    ["comment", portfolioId],
+    () =>
+      httpClient.portfolio
+        .getById({ params: { id: portfolioId } })
+        .then((r) => r.data),
+    { enabled: !!portfolioId },
+  );
+  return { data: data || fixture.portfolio };
+};
+
 export {
+  usePortfolio,
   usePortfolioList,
   usePortfolioListById,
   useCommentList,
