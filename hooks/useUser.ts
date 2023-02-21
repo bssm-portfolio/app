@@ -16,7 +16,7 @@ const useUser = (options?: UseUserOptions) => {
   const {
     data: userInfo,
     remove,
-    isFetched,
+    isFetching,
   } = useQuery<Member>(
     ["get userData"],
     async () => {
@@ -37,12 +37,12 @@ const useUser = (options?: UseUserOptions) => {
   }, [router.query, setUser, userInfo]);
 
   useEffect(() => {
-    if (options?.authorizedPage && !isFetched && !userInfo) {
+    if (options?.authorizedPage && !isFetching && !userInfo) {
       // TODO: alert 제거
       alert("로그인이 필요한 페이지입니다.");
       router.push("/");
     }
-  }, [options, router, userInfo, isFetched]);
+  }, [options, router, userInfo, isFetching]);
 
   return { user, isLogined: !!userInfo, logout };
 };

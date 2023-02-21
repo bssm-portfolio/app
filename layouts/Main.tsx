@@ -1,9 +1,17 @@
 import { ReactNode } from "react";
 
-export default function MainLayout({ app }: { app: ReactNode }) {
+interface MainLayoutProps {
+  app: ReactNode;
+  title: ReactNode;
+  filter: ReactNode;
+}
+
+export default function MainLayout({ app, title, filter }: MainLayoutProps) {
   return (
-    <div className="w-full flex justify-center">
-      <div className="m-6 w-70">{app}</div>
+    <div className="w-full flex flex-col justify-center px-[8.375rem]">
+      <div>{title}</div>
+      <div>{filter}</div>
+      <div>{app}</div>
     </div>
   );
 }

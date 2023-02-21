@@ -3,6 +3,7 @@ import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 import Image from "next/image";
+import { useState } from "react";
 import Chip from "../atoms/Chip";
 
 interface SideMenuPortfolioProps {
@@ -16,6 +17,9 @@ export default function PortfolioItem({
   onClick,
   type,
 }: SideMenuPortfolioProps) {
+  const [imageSrc, setImageSrc] = useState(
+    getFileDownloadUrl(portfolio.thumbnail),
+  );
   return (
     <div
       className="w-full h-full flex m-2 cursor-pointer"
@@ -29,9 +33,14 @@ export default function PortfolioItem({
       >
         <Image
           className="rounded-[0.625rem]"
-          src={getFileDownloadUrl(portfolio.thumbnail)}
+          src={imageSrc}
           alt={portfolio.title}
           fill
+          onError={() => {
+            setImageSrc(
+              "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
+            );
+          }}
         />
       </div>
 

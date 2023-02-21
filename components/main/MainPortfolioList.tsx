@@ -7,30 +7,37 @@ import Loading from "../common/Loading";
 
 export default function MainPortfolioList() {
   const router = useRouter();
-  // todo: usePortfolioList useInfiniteQuery 안쓰는 빌트인 함수 정리하기
-  const { pages, isFetchingNextPage, fetchNextPage } = usePortfolioList();
+  const { pages, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    usePortfolioList({ size: 12 });
   const [ref, inView] = useInView();
 
   useEffect(() => {
-    if (inView) fetchNextPage();
-  }, [inView, fetchNextPage]);
+    if (inView && hasNextPage) fetchNextPage();
+  }, [inView, fetchNextPage, hasNextPage]);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex gap-12 flex-wrap">
-        {pages[0].list.map((portfolio) => (
-          <Portfolio
-            portfolio={portfolio}
-            onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
-            key={portfolio.portfolioId}
-          />
-        ))}
-      </div>
-      <div ref={ref}>
-        {isFetchingNextPage && (
-          <Loading className="mt-8" width={60} height={60} type="spin" />
+    <>
+      <div className="flex flex-wrap justify-center gap-12">
+        {pages.map((page) =>
+          page.list.map((portfolio) => (
+            <Portfolio
+              portfolio={portfolio}
+              onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
+              key={portfolio.portfolioId}
+            />
+          )),
         )}
       </div>
-    </div>
+      <div ref={ref} className="h-36">
+        {isFetchingNextPage && (
+          <Loading
+            className="mt-8 mx-auto"
+            width={60}
+            height={60}
+            type="spin"
+          />
+        )}
+      </div>
+    </>
   );
 }

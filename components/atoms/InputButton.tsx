@@ -13,8 +13,8 @@ const getButtonCss = (varient: ButtonVarient) => {
   const bgColor =
     varient === "primary" ? "bg-somago_yellow" : "bg-primary-light_gray";
   return `
-    px-[10px]
-    py-[5px]
+    px-[0.625rem]
+    py-[0.3125rem]
     ${bgColor}
     text-black
     rounded-full

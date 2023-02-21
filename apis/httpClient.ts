@@ -34,8 +34,8 @@ export class HttpClient {
     });
   }
 
-  search(requestConfig?: AxiosRequestConfig) {
-    return this.api.get("/search", {
+  search(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/search", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });

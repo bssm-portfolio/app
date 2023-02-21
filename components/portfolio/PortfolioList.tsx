@@ -1,7 +1,10 @@
-import useSearch from "@/models/search";
+import { usePortfolioList } from "@/models/portfolio";
 import { PortfolioListType } from "@/types/portfolio.interface";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import PortfolioItem from "../app/PortfolioItem";
+import Loading from "../common/Loading";
 
 interface PortfolioListProps {
   keyword?: string;
@@ -13,20 +16,32 @@ export default function PortfolioList({
   type = "main",
 }: PortfolioListProps) {
   const router = useRouter();
-  const { list: portfolioList } = useSearch(keyword);
+  const { pages, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    usePortfolioList({ size: 12 }, { search: keyword });
+
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView && hasNextPage) fetchNextPage();
+  }, [inView, hasNextPage, fetchNextPage]);
 
   return (
     <div className="flex flex-col items-start">
-      {portfolioList.map((portfolio) => {
-        return (
+      {pages.map((page) =>
+        page.list.map((portfolio) => (
           <PortfolioItem
             key={portfolio.portfolioId}
             portfolio={portfolio}
             onClick={() => router.push(`/portfolio/${portfolio.portfolioId}`)}
             type={type}
           />
-        );
-      })}
+        )),
+      )}
+      <div ref={ref} className="h-36 mx-auto">
+        {isFetchingNextPage && hasNextPage && (
+          <Loading className="mt-8" width={60} height={60} type="spin" />
+        )}
+      </div>
     </div>
   );
 }
