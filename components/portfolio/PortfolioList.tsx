@@ -1,5 +1,4 @@
 import { usePortfolioList } from "@/models/portfolio";
-import useSearch from "@/models/search";
 import { PortfolioListType } from "@/types/portfolio.interface";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -38,8 +37,8 @@ export default function PortfolioList({
           />
         )),
       )}
-      <div ref={ref} className="h-36">
-        {isFetchingNextPage && (
+      <div ref={ref} className="h-36 mx-auto">
+        {isFetchingNextPage && hasNextPage && (
           <Loading className="mt-8" width={60} height={60} type="spin" />
         )}
       </div>
