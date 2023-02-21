@@ -4,7 +4,6 @@ import Image from "next/image";
 import { NextRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
 import HamburgerIcon from "../Icon/HamburgerIcon";
 

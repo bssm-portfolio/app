@@ -1,3 +1,5 @@
+import httpClient from "@/apis";
+import { RefetchType } from "@/types/index.interface";
 import { Portfolio } from "@/types/portfolio.interface";
 import { deepcopy, reorder } from "@/utils/data";
 import { useRouter } from "next/router";
@@ -10,11 +12,13 @@ import DataGridItem from "./DataGridItem";
 interface DataGridProps {
   portfolioList: Portfolio[];
   setPortfolioList: Dispatch<SetStateAction<Portfolio[]>>;
+  refetch: RefetchType;
 }
 
 export default function DataGrid({
   portfolioList,
   setPortfolioList,
+  refetch,
 }: DataGridProps) {
   const router = useRouter();
   const [checkedPortfolioIdList, setCheckedPortfolioIdList] = useState<
@@ -52,6 +56,16 @@ export default function DataGrid({
     border-y 
     border-y-primary-border_gray 
     text-center`;
+  };
+
+  const handleDeleteButton = () => {
+    Promise.all(
+      checkedPortfolioIdList.map((checkedPortfolioId) =>
+        httpClient.portfolio.delete({
+          data: { portfolioId: checkedPortfolioId },
+        }),
+      ),
+    ).then(() => refetch());
   };
 
   useEffect(() => {
@@ -108,7 +122,12 @@ export default function DataGrid({
         </Droppable>
 
         <div className="flex justify-end mt-20">
-          <Button className="!bg-primary-dark_gray">삭제</Button>
+          <Button
+            className="!bg-primary-dark_gray"
+            onClick={handleDeleteButton}
+          >
+            삭제
+          </Button>
         </div>
       </DragDropContext>
     </>

@@ -38,10 +38,14 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
 };
 
 const useMyPortfolioList = () => {
-  const { data } = useQuery<PortfolioList>(["my portfolioList"], () =>
+  const { data, refetch } = useQuery<PortfolioList>(["my portfolioList"], () =>
     httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
   );
-  return data || { pagination: null, list: [] };
+  return {
+    pagination: data?.pagination || null,
+    list: data?.list || [],
+    refetch,
+  };
 };
 
 const usePortfolioListById = (portfolioId?: number) => {
