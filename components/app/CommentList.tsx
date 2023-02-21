@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useCommentList } from "@/models/portfolio";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRef, useState } from "react";
+import { checkInputValueIsNull } from "@/utils/input";
 import httpClient from "@/apis";
 import useUser from "@/hooks/useUser";
 import Comment from "../atoms/Comment";
@@ -27,11 +28,6 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
     refetch();
   };
 
-  const checkInputValueIsNull = () => {
-    if (inputRef.current) return inputRef.current.value !== "";
-    return false;
-  };
-
   const { ref, ...rest } = register("content", { required: true });
   const handleInput = (event: never) => {
     inputRef.current = event;
@@ -55,7 +51,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           placeholder="댓글 추가.."
           {...rest}
           ref={handleInput}
-          onChange={() => setIsWriting(checkInputValueIsNull())}
+          onChange={() => setIsWriting(checkInputValueIsNull(inputRef))}
         />
         {isWriting && (
           <InputButton
