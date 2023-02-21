@@ -50,13 +50,20 @@ export interface PaginationResponse {
   totalPages: number;
 }
 
-type SortType = "UPLOAD_DATE";
+type UploadDateType =
+  | "AN_HOUR_AGO"
+  | "TODAY"
+  | "THIS_WEEK"
+  | "THIS_MONTH"
+  | "THIS_YEAR";
+type SortType = "UPLOAD_DATE" | "BOOKMARKS" | "COMMENTS" | "RANK";
 type SortDirectionType = "ASC" | "DESC";
+type SchoolGradeType = 1 | 2 | 3;
 
 export interface Filter {
   search?: string;
-  uploadDateType?: string;
-  schoolGrade?: number;
+  uploadDateType?: UploadDateType;
+  schoolGrade?: SchoolGradeType;
   sortType?: SortType;
   sortDirectionType?: SortDirectionType;
 }
