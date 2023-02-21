@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
@@ -17,8 +17,8 @@ interface PortfolioEditProps {
 
 export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
-  const [videoFileUid, setVideoFileUid] = useState("");
   const [thumbnailFileUid, setThumbnailFileUid] = useState("");
+  const [videoFileUid, setVideoFileUid] = useState("");
 
   const { register, handleSubmit } = useForm<PortfolioForm>();
   const { data: portfolio } = usePortfolio(portfolioId);
@@ -45,6 +45,11 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
     });
   };
 
+  useEffect(() => {
+    setThumbnailFileUid(portfolio.thumbnail.fileUid);
+    setVideoFileUid(portfolio.video.fileUid);
+  }, [portfolio]);
+
   return (
     <form>
       <Input
@@ -62,17 +67,28 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
       <div className="w-full border h-60 mb-2.5 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
         <FileUploader
-          id="thumbnail-uploader"
+          id="edit-thumbnail-uploader"
           label="썸네일 업로드"
           onChange={(event) => handleFileUpload(event, setThumbnailFileUid)}
         />
         <FileUploader
-          id="video-uploader"
+          id="edit-video-uploader"
           label="동영상 업로드"
           onChange={(event) => handleFileUpload(event, setVideoFileUid)}
         />
+        <Input
+          registerReturn={register("thumbnailFileUid")}
+          value={thumbnailFileUid}
+          type="hidden"
+        />
+        <Input
+          registerReturn={register("videoFileUid")}
+          value={videoFileUid}
+          type="hidden"
+        />
         <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
       </div>
+
       <Input
         registerReturn={register("gitUrl")}
         defaultValue={portfolio.gitUrl}
