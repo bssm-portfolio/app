@@ -50,10 +50,7 @@ export default function CommentView({ comment, refetch }: CommentViewProps) {
         className="relative w-10 h-10 mr-base cursor-pointer"
         onClick={moveToProfile}
       >
-        <Avatar
-          className="rounded-full"
-          imageUrl={comment.writer.profileImageUrl}
-        />
+        <Avatar imageUrl={comment.writer.profileImageUrl} />
       </div>
 
       <div className="w-full flex justify-between">
