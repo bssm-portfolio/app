@@ -2,7 +2,7 @@ import { S3File } from "./file.interface";
 import { PortfolioWriter } from "./member.interface";
 
 export type PortfolioType = "VIDEO" | "URL" | "ALL";
-type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
+export type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
 export type PortfolioListType = "main" | "portfolio" | "upload" | "detail";
 
 export type Portfolio = {

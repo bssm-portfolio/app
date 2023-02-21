@@ -2,7 +2,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
-import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
+import {
+  Portfolio,
+  PortfolioForm,
+  PortfolioType,
+} from "@/types/portfolio.interface";
 import httpClient from "@/apis";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
@@ -19,8 +23,11 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [thumbnailFileUid, setThumbnailFileUid] = useState("");
   const [videoFileUid, setVideoFileUid] = useState("");
 
-  const { register, handleSubmit } = useForm<PortfolioForm>();
   const { data: portfolio } = usePortfolio(portfolioId);
+
+  const { register, handleSubmit, reset } = useForm<PortfolioForm>({
+    defaultValues: portfolio,
+  });
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     const getPortfolioType = (): PortfolioType => {
@@ -47,23 +54,18 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   useEffect(() => {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
     setVideoFileUid(portfolio.video.fileUid);
-  }, [portfolio]);
+    reset(portfolio);
+  }, [portfolio, reset]);
 
   return (
     <form className="p-12">
+      <Input registerReturn={register("title")} placeholder="title" />
       <Input
-        registerReturn={register("title", { required: true })}
-        defaultValue={portfolio.title}
-        placeholder="title"
-      />
-      <Input
-        registerReturn={register("description", { required: true })}
-        defaultValue={portfolio.description}
+        registerReturn={register("description")}
         placeholder="description"
       />
       <Input
         registerReturn={register("portfolioUrl")}
-        defaultValue={portfolio.portfolioUrl}
         placeholder="portfolioUrl"
       />
 
@@ -77,7 +79,6 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
       <Input
         registerReturn={register("gitUrl")}
-        defaultValue={portfolio.gitUrl}
         placeholder="https://github.com/"
       />
 
@@ -86,7 +87,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         setSelectedSkills={setSelectedSkills}
       />
 
-      <ScopeView register={register} />
+      <ScopeView register={register} scope={portfolio.scope} />
 
       <Button type="submit" onClick={handleSubmit(onValid)}>
         수정하기

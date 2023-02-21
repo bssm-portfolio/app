@@ -33,7 +33,7 @@ export default function FileUploadView({
         onChange={(event) => handleFileUpload(event, setVideoFileUid)}
       />
       <Input
-        registerReturn={register("thumbnailFileUid", { required: true })}
+        registerReturn={register("thumbnailFileUid")}
         value={thumbnailFileUid}
         type="hidden"
       />
