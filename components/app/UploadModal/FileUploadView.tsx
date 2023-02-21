@@ -2,6 +2,7 @@ import httpClient from "@/apis";
 import FileUploader from "@/components/atoms/FileUploader";
 import Input from "@/components/atoms/Input";
 import { PortfolioForm } from "@/types/portfolio.interface";
+import { handleFileUpload } from "@/utils/file";
 import classNames from "classnames";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { UseFormRegister } from "react-hook-form";
@@ -18,20 +19,6 @@ export default function FileUploadView({
   setVideoFileUid: Dispatch<SetStateAction<string>>;
   setThumbnailFileUid: Dispatch<SetStateAction<string>>;
 }) {
-  const handleFileUpload = (
-    event: ChangeEvent<HTMLInputElement>,
-    setState: Dispatch<SetStateAction<string>>,
-  ) => {
-    if (event.target.files) {
-      const formData = new FormData();
-      formData.append("file", event.target.files[0]);
-
-      httpClient.file.upload(formData).then((r) => {
-        setState(r.data.fileUid);
-      });
-    }
-  };
-
   return (
     <div className={classNames("flex flex-col gap-8", className)} {...props}>
       <div>
