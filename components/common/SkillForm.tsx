@@ -5,13 +5,15 @@ import Skills from "../app/UploadModal/Skills";
 import Input from "../atoms/Input";
 import { SearchIcon } from "../Icon";
 
+interface SkillFormProps {
+  selectedSkills: Skill[];
+  setSelectedSkills: Dispatch<SetStateAction<Skill[]>>;
+}
+
 export default function SkillForm({
   selectedSkills,
   setSelectedSkills,
-}: {
-  selectedSkills: Skill[];
-  setSelectedSkills: Dispatch<SetStateAction<Skill[]>>;
-}) {
+}: SkillFormProps) {
   const [skillSearchText, setSkillSearchText] = useState("");
   const { data: skills } = useSkill(skillSearchText);
 
