@@ -1,6 +1,7 @@
 import httpClient from "@/apis";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
+import { getFormData } from "@/utils/file";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
@@ -18,8 +19,9 @@ const MAX_NAVIGATOR_LENGTH = 3;
 export default function UploadModal({ closeModal }: UploadModalProps) {
   const [pageIndex, setPageIndex] = useState(0);
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
-  const [videoFileUid, setVideoFileUid] = useState<string>("");
-  const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
+  const [thumbnailFile, setThumbnailFile] = useState<File>();
+  const [videoFile, setVideoFile] = useState<File>();
+
   const {
     register,
     handleSubmit,
@@ -28,24 +30,33 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   } = useForm<PortfolioForm>();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
-    const getPortfolioType = (): PortfolioType => {
-      if (data.portfolioUrl.length > 0 && videoFileUid) {
-        return "ALL";
-      }
-      if (videoFileUid) {
-        return "VIDEO";
-      }
-      return "URL";
-    };
+    if (thumbnailFile && videoFile) {
+      const videoFileUid = (
+        await httpClient.file.upload(getFormData(videoFile))
+      ).data.fileUid;
+      const thumbnailFileUid = (
+        await httpClient.file.upload(getFormData(thumbnailFile))
+      ).data.fileUid;
 
-    await httpClient.portfolio.post({
-      ...data,
-      portfolioType: getPortfolioType(),
-      skillList: selectedSkills,
-      contributorIdList: [],
-      videoFileUid,
-      thumbnailFileUid,
-    });
+      const getPortfolioType = (): PortfolioType => {
+        if (data.portfolioUrl.length > 0 && videoFileUid) {
+          return "ALL";
+        }
+        if (videoFileUid) {
+          return "VIDEO";
+        }
+        return "URL";
+      };
+
+      await httpClient.portfolio.post({
+        ...data,
+        portfolioType: getPortfolioType(),
+        skillList: selectedSkills,
+        contributorIdList: [],
+        videoFileUid,
+        thumbnailFileUid,
+      });
+    }
     closeModal();
   };
 
@@ -65,8 +76,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       <FileUploadView
         className={classNames({ hidden: pageIndex !== 0 })}
         register={register}
-        setVideoFileUid={setVideoFileUid}
-        setThumbnailFileUid={setThumbnailFileUid}
+        setThumbnailFile={setThumbnailFile}
+        setVideoFile={setVideoFile}
       />
       <FormView
         className={classNames({ hidden: pageIndex !== 1 })}
