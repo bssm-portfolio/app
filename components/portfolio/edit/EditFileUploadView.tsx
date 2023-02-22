@@ -2,25 +2,25 @@ import FileUploader from "@/components/atoms/FileUploader";
 import Input from "@/components/atoms/Input";
 import { S3File } from "@/types/file.interface";
 import { PortfolioForm } from "@/types/portfolio.interface";
-import { handleFileUpload, getFileDownloadUrl } from "@/utils/file";
+import { getFileDownloadUrl } from "@/utils/file";
 import { Dispatch, SetStateAction } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 interface FileUploadViewProps {
   register: UseFormRegister<PortfolioForm>;
   thumbnailFileUid: string;
-  setThumbnailFileUid: Dispatch<SetStateAction<string>>;
+  setThumbnailFile: Dispatch<SetStateAction<File | undefined>>;
   videoFileUid: string;
-  setVideoFileUid: Dispatch<SetStateAction<string>>;
+  setVideoFile: Dispatch<SetStateAction<File | undefined>>;
   thumbnail: S3File;
 }
 
 export default function FileUploadView({
   register,
   thumbnailFileUid,
-  setThumbnailFileUid,
+  setThumbnailFile,
   videoFileUid,
-  setVideoFileUid,
+  setVideoFile,
   thumbnail,
 }: FileUploadViewProps) {
   type FileUploaderType = "thumbnail" | "video";
@@ -59,14 +59,18 @@ export default function FileUploadView({
         <FileUploader
           id="edit-thumbnail-uploader"
           label="썸네일 업로드"
-          onChange={(event) => handleFileUpload(event, setThumbnailFileUid)}
+          onChange={(event) => {
+            if (event.target.files) setThumbnailFile(event.target.files[0]);
+          }}
         />
       </div>
       <div className={getBackgroundImageCss("video")}>
         <FileUploader
           id="edit-video-uploader"
           label="동영상 업로드"
-          onChange={(event) => handleFileUpload(event, setVideoFileUid)}
+          onChange={(event) => {
+            if (event.target.files) setVideoFile(event.target.files[0]);
+          }}
         />
       </div>
       <Input

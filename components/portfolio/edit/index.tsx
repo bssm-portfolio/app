@@ -2,12 +2,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
-import {
-  Portfolio,
-  PortfolioForm,
-  PortfolioType,
-} from "@/types/portfolio.interface";
+import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import httpClient from "@/apis";
+import { getFormData } from "@/utils/file";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import SkillForm from "../../common/SkillForm";
@@ -20,8 +17,10 @@ interface PortfolioEditProps {
 
 export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
-  const [thumbnailFileUid, setThumbnailFileUid] = useState("");
-  const [videoFileUid, setVideoFileUid] = useState("");
+  const [thumbnailFile, setThumbnailFile] = useState<File>();
+  const [videoFile, setVideoFile] = useState<File>();
+  const [videoFileUid, setVideoFileUid] = useState<string>("");
+  const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
 
   const { data: portfolio } = usePortfolio(portfolioId);
 
@@ -30,6 +29,16 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   });
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
+    if (videoFile)
+      setVideoFileUid(
+        (await httpClient.file.upload(getFormData(videoFile))).data.fileUid,
+      );
+
+    if (thumbnailFile)
+      setThumbnailFileUid(
+        (await httpClient.file.upload(getFormData(thumbnailFile))).data.fileUid,
+      );
+
     const getPortfolioType = (): PortfolioType => {
       if (data.portfolioUrl.length > 0 && videoFileUid) {
         return "ALL";
@@ -86,9 +95,9 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       <EditFileUploadView
         register={register}
         thumbnailFileUid={thumbnailFileUid}
-        setThumbnailFileUid={setThumbnailFileUid}
+        setThumbnailFile={setThumbnailFile}
+        setVideoFile={setVideoFile}
         videoFileUid={videoFileUid}
-        setVideoFileUid={setVideoFileUid}
         thumbnail={portfolio.thumbnail}
       />
 
