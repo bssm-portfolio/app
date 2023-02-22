@@ -29,16 +29,6 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   });
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
-    if (videoFile)
-      setVideoFileUid(
-        (await httpClient.file.upload(getFormData(videoFile))).data.fileUid,
-      );
-
-    if (thumbnailFile)
-      setThumbnailFileUid(
-        (await httpClient.file.upload(getFormData(thumbnailFile))).data.fileUid,
-      );
-
     const getPortfolioType = (): PortfolioType => {
       if (data.portfolioUrl.length > 0 && videoFileUid) {
         return "ALL";
@@ -55,8 +45,16 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       portfolioType: getPortfolioType(),
       skillList: selectedSkills,
       contributorIdList: [0],
-      videoFileUid,
-      thumbnailFileUid,
+      videoFileUid: videoFile
+        ? (
+            await httpClient.file.upload(getFormData(videoFile))
+          ).data.fileUid
+        : videoFileUid,
+      thumbnailFileUid: thumbnailFile
+        ? (
+            await httpClient.file.upload(getFormData(thumbnailFile))
+          ).data.fileUid
+        : thumbnailFileUid,
     });
   };
 
