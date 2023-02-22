@@ -5,6 +5,7 @@ import { Skill } from "@/types/skill.interface";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import httpClient from "@/apis";
 import { getFormData } from "@/utils/file";
+import Textarea from "@/components/atoms/Textarea";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import SkillForm from "../../common/SkillForm";
@@ -81,7 +82,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   return (
     <form className="p-12">
       <Input registerReturn={register("title")} placeholder="title" />
-      <Input
+      <Textarea
         registerReturn={register("description")}
         placeholder="description"
       />
@@ -97,6 +98,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         setVideoFile={setVideoFile}
         videoFileUid={videoFileUid}
         thumbnail={portfolio.thumbnail}
+        editThumbnail={thumbnailFile}
       />
 
       <Input

@@ -3,6 +3,7 @@ import Input from "@/components/atoms/Input";
 import { S3File } from "@/types/file.interface";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
+import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { UseFormRegister } from "react-hook-form";
 
@@ -13,6 +14,7 @@ interface FileUploadViewProps {
   videoFileUid: string;
   setVideoFile: Dispatch<SetStateAction<File | undefined>>;
   thumbnail: S3File;
+  editThumbnail: File | undefined;
 }
 
 export default function FileUploadView({
@@ -22,14 +24,13 @@ export default function FileUploadView({
   videoFileUid,
   setVideoFile,
   thumbnail,
+  editThumbnail,
 }: FileUploadViewProps) {
   type FileUploaderType = "thumbnail" | "video";
 
   const getBackgroundImageCss = (varient: FileUploaderType) => {
     const width = varient === "thumbnail" ? "20rem" : "full";
-    const backgroundImageUrl = `before:bg-[url(${getFileDownloadUrl(
-      thumbnail,
-    )})]`;
+
     return `
     relative 
     flex 
@@ -42,14 +43,7 @@ export default function FileUploadView({
     border 
     border-primary-border_gray
     rounded-lg
-    before:rounded-lg
-    before:-z-10
-    before:absolute 
-    before:inset-0 
-    ${backgroundImageUrl}
-    before:bg-cover
-    before:opacity-30 
-    before:bg-no-repeat
+    object-cover
     `;
   };
 
@@ -63,7 +57,18 @@ export default function FileUploadView({
             if (event.target.files) setThumbnailFile(event.target.files[0]);
           }}
         />
+        <Image
+          src={
+            editThumbnail
+              ? URL.createObjectURL(editThumbnail)
+              : getFileDownloadUrl(thumbnail)
+          }
+          alt={thumbnail.fileName}
+          className="rounded-lg -z-10 opacity-30"
+          fill
+        />
       </div>
+
       <div className={getBackgroundImageCss("video")}>
         <FileUploader
           id="edit-video-uploader"
