@@ -1,5 +1,6 @@
 import { S3File } from "./file.interface";
 import { PortfolioWriter } from "./member.interface";
+import { Skill } from "./skill.interface";
 
 export type PortfolioType = "VIDEO" | "URL" | "ALL";
 export type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
@@ -17,7 +18,7 @@ export type Portfolio = {
   gitUrl: string;
   video: S3File;
   thumbnail: S3File;
-  skillList: string[];
+  skillList: Skill[];
   contributorList: PortfolioWriter[];
   bookmarks: number;
   views: number;
@@ -34,7 +35,7 @@ export type PortfolioForm = {
   portfolioScope: PortfolioScope;
   portfolioType: PortfolioType;
   gitUrl: string;
-  skillList: string[];
+  skillList: Skill[];
   contributorIdList: number[];
 };
 

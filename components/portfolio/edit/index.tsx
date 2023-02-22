@@ -55,20 +55,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   useEffect(() => {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
     setVideoFileUid(portfolio.video.fileUid);
-    setSelectedSkills([
-      {
-        skillId: 2501,
-        skillName: "SAP",
-      },
-      {
-        skillId: 2779,
-        skillName: "ARM",
-      },
-      {
-        skillId: 2818,
-        skillName: "AVA",
-      },
-    ]);
+    setSelectedSkills(portfolio.skillList);
     reset(portfolio);
   }, [portfolio, reset]);
 

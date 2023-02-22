@@ -65,7 +65,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
       </div>
       <Chip.Group className="mt-2">
         {portfolio.skillList.map((skill) => (
-          <Chip.Item key={skill}>{skill}</Chip.Item>
+          <Chip.Item key={skill.skillId}>{skill.skillName}</Chip.Item>
         ))}
       </Chip.Group>
       <div className="text-sxx mt-1">

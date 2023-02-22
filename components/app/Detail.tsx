@@ -40,7 +40,11 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
           </span>
           <Chip.Group className="mt-small" type="detail">
             {portfolio.skillList.map((skillData) => {
-              return <Chip.Item key={skillData}>{skillData}</Chip.Item>;
+              return (
+                <Chip.Item key={skillData.skillId}>
+                  {skillData.skillName}
+                </Chip.Item>
+              );
             })}
           </Chip.Group>
           <span className="block my-small">
