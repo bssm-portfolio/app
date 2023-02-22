@@ -4,7 +4,7 @@ import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import httpClient from "@/apis";
-import { getFileUidByFile } from "@/utils/file";
+import { getFileUidByFileUpload } from "@/utils/file";
 import Textarea from "@/components/atoms/Textarea";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
@@ -45,9 +45,11 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       portfolioType: getPortfolioType(),
       skillList: selectedSkills,
       contributorIdList: [0],
-      videoFileUid: videoFile ? getFileUidByFile(videoFile) : videoFileUid,
+      videoFileUid: videoFile
+        ? getFileUidByFileUpload(videoFile)
+        : videoFileUid,
       thumbnailFileUid: thumbnailFile
-        ? getFileUidByFile(thumbnailFile)
+        ? getFileUidByFileUpload(thumbnailFile)
         : thumbnailFileUid,
     });
   };
