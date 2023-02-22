@@ -1,8 +1,10 @@
 import httpClient from "@/apis";
+import fixture from "@/fixtures";
 import {
   Comment,
   Filter,
   PaginationRequest,
+  Portfolio,
   PortfolioList,
 } from "@/types/portfolio.interface";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
@@ -36,10 +38,14 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
 };
 
 const useMyPortfolioList = () => {
-  const { data } = useQuery<PortfolioList>(["my portfolioList"], () =>
-    httpClient.portfolio.self({}).then((r) => r.data),
+  const { data, refetch } = useQuery<PortfolioList>(["my portfolioList"], () =>
+    httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
   );
-  return data || { pagination: null, list: [] };
+  return {
+    pagination: data?.pagination || null,
+    list: data?.list || [],
+    refetch,
+  };
 };
 
 const usePortfolioListById = (portfolioId?: number) => {
@@ -47,7 +53,7 @@ const usePortfolioListById = (portfolioId?: number) => {
     ["get portfolioList by id", portfolioId],
     () =>
       httpClient.portfolioMember
-        .getById({ params: { id: portfolioId } })
+        .getById({ params: { id: portfolioId, size: 100 } })
         .then((r) => r.data),
     { enabled: !!portfolioId },
   );
@@ -66,7 +72,20 @@ const useCommentList = (portfolioId?: number) => {
   return { list: data?.list ?? [], refetch };
 };
 
+const usePortfolio = (portfolioId?: number) => {
+  const { data } = useQuery<Portfolio>(
+    ["comment", portfolioId],
+    () =>
+      httpClient.portfolio
+        .getById({ params: { id: portfolioId } })
+        .then((r) => r.data),
+    { enabled: !!portfolioId },
+  );
+  return { data: data || fixture.portfolio };
+};
+
 export {
+  usePortfolio,
   usePortfolioList,
   usePortfolioListById,
   useCommentList,

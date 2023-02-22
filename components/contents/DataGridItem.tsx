@@ -4,7 +4,6 @@ import Image from "next/image";
 import { NextRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
 import HamburgerIcon from "../Icon/HamburgerIcon";
 
@@ -25,7 +24,7 @@ export default function DataGridItem({
 }: DataGridItemProps) {
   const getBodyCss = () => {
     return `grid 
-    grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem_4.2rem] 
+    grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
     items-center 
     py-4 
     border-b 
@@ -96,12 +95,6 @@ export default function DataGridItem({
           <span>{portfolio.views}</span>
           <span>{portfolio.comments}</span>
           <span>{portfolio.bookmarks}</span>
-          <Button
-            varient="secondary"
-            className="border border-black !bg-white text-primary-dark_gray"
-          >
-            수정
-          </Button>
         </div>
       )}
     </Draggable>

@@ -8,7 +8,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { list } = useMyPortfolioList();
+  const { list, refetch } = useMyPortfolioList();
   const [portfolioList, setPortfolioList] = useState<Portfolio[]>([]);
 
   useEffect(() => {
@@ -29,6 +29,7 @@ export default function Home() {
           <DataGrid
             portfolioList={portfolioList}
             setPortfolioList={setPortfolioList}
+            refetch={refetch}
           />
         }
       />

@@ -52,8 +52,8 @@ export default function PortfolioItem({
         <Chip.Group className="mb-xsmall" type={type}>
           {portfolio.skillList.map((skillData) => {
             return (
-              <Chip.Item type={type} key={skillData}>
-                {skillData}
+              <Chip.Item type={type} key={skillData.skillId}>
+                {skillData.skillName}
               </Chip.Item>
             );
           })}

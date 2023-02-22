@@ -1,37 +1,22 @@
-import httpClient from "@/apis";
 import FileUploader from "@/components/atoms/FileUploader";
 import Input from "@/components/atoms/Input";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import classNames from "classnames";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 export default function FileUploadView({
   register,
   className,
-  setVideoFileUid,
-  setThumbnailFileUid,
+  setVideoFile,
+  setThumbnailFile,
   ...props
 }: {
   register: UseFormRegister<PortfolioForm>;
   className?: string;
-  setVideoFileUid: Dispatch<SetStateAction<string>>;
-  setThumbnailFileUid: Dispatch<SetStateAction<string>>;
+  setVideoFile: Dispatch<SetStateAction<File | undefined>>;
+  setThumbnailFile: Dispatch<SetStateAction<File | undefined>>;
 }) {
-  const handleFileUpload = (
-    event: ChangeEvent<HTMLInputElement>,
-    setState: Dispatch<SetStateAction<string>>,
-  ) => {
-    if (event.target.files) {
-      const formData = new FormData();
-      formData.append("file", event.target.files[0]);
-
-      httpClient.file.upload(formData).then((r) => {
-        setState(r.data.fileUid);
-      });
-    }
-  };
-
   return (
     <div className={classNames("flex flex-col gap-8", className)} {...props}>
       <div>
@@ -40,12 +25,16 @@ export default function FileUploadView({
           <FileUploader
             id="thumbnail-uploader"
             label="썸네일 업로드"
-            onChange={(event) => handleFileUpload(event, setThumbnailFileUid)}
+            onChange={(event) => {
+              if (event.target.files) setThumbnailFile(event.target.files[0]);
+            }}
           />
           <FileUploader
             id="video-uploader"
             label="동영상 업로드"
-            onChange={(event) => handleFileUpload(event, setVideoFileUid)}
+            onChange={(event) => {
+              if (event.target.files) setVideoFile(event.target.files[0]);
+            }}
           />
           <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
         </div>
