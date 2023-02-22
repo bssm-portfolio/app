@@ -4,7 +4,7 @@ import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import httpClient from "@/apis";
-import { getFileUidByFile, getFormData } from "@/utils/file";
+import { getFileUidByFile } from "@/utils/file";
 import Textarea from "@/components/atoms/Textarea";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
@@ -24,7 +24,6 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
 
   const { data: portfolio } = usePortfolio(portfolioId);
-
   const { register, handleSubmit, reset } = useForm<PortfolioForm>({
     defaultValues: portfolio,
   });

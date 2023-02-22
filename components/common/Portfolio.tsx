@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
