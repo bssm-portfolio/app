@@ -1,3 +1,4 @@
+import httpClient from "@/apis";
 import config from "@/config";
 import { S3File } from "@/types/file.interface";
 
@@ -10,3 +11,6 @@ export const getFormData = (file: File) => {
   formData.append("file", file);
   return formData;
 };
+
+export const getFileUidByFile = async (file: File) =>
+  (await httpClient.file.upload(getFormData(file))).data.fileUid;
