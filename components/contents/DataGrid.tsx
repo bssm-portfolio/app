@@ -31,11 +31,14 @@ export default function DataGrid({
   const [isEnabled, setIsEnabled] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
+  const getPortfolioIdList = useCallback(
+    () => portfolioList.map((portfolio) => portfolio.portfolioId),
+    [portfolioList],
+  );
+
   const handleAllCheck = (isChecked: boolean) => {
     if (isChecked) {
-      setCheckedPortfolioIdList(
-        portfolioList.map((portfolio) => portfolio.portfolioId),
-      );
+      setCheckedPortfolioIdList(getPortfolioIdList());
       return;
     }
     setCheckedPortfolioIdList([]);
@@ -74,11 +77,6 @@ export default function DataGrid({
       ),
     ).then(() => refetch());
   };
-
-  const getPortfolioIdList = useCallback(
-    () => portfolioList.map((portfolio) => portfolio.portfolioId),
-    [portfolioList],
-  );
 
   useEffect(() => {
     if (portfolioList.length !== 0 && isChanged) {
