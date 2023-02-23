@@ -5,11 +5,12 @@ import {
   PortfolioList,
 } from "@/types/portfolio.interface";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { SEARCH_KEY } from "../key";
 
 const useSearch = (pagination: PaginationRequest, filter: Filter) => {
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
-      ["search"],
+      [SEARCH_KEY],
       ({ pageParam = 1 }) =>
         httpClient.portfolio
           .search({ pagination: { ...pagination, page: pageParam }, filter })

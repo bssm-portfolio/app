@@ -8,6 +8,13 @@ import {
   PortfolioList,
 } from "@/types/portfolio.interface";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import {
+  COMMENT_KEY,
+  MY_PORTFOLIO_LIST_KEY,
+  PORTFOLIO_KEY,
+  PORTFOLIO_LIST_BY_ID_KEY,
+  PORTFOLIO_LIST_KEY,
+} from "../key";
 
 interface CommentList {
   list: Comment[];
@@ -16,7 +23,7 @@ interface CommentList {
 const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
-      ["portfolioList"],
+      [PORTFOLIO_LIST_KEY],
       ({ pageParam = 1 }) =>
         httpClient.portfolio
           .search({
@@ -38,8 +45,10 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
 };
 
 const useMyPortfolioList = () => {
-  const { data, refetch } = useQuery<PortfolioList>(["my portfolioList"], () =>
-    httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
+  const { data, refetch } = useQuery<PortfolioList>(
+    [MY_PORTFOLIO_LIST_KEY],
+    () =>
+      httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
   );
   return {
     pagination: data?.pagination || null,
@@ -50,7 +59,7 @@ const useMyPortfolioList = () => {
 
 const usePortfolioListById = (portfolioId?: number) => {
   const { data } = useQuery<PortfolioList>(
-    ["get portfolioList by id", portfolioId],
+    [PORTFOLIO_LIST_BY_ID_KEY, portfolioId],
     () =>
       httpClient.portfolioMember
         .getById({ params: { id: portfolioId, size: 100 } })
@@ -62,7 +71,7 @@ const usePortfolioListById = (portfolioId?: number) => {
 
 const useCommentList = (portfolioId?: number) => {
   const { data, refetch } = useQuery<CommentList>(
-    ["comment", portfolioId],
+    [COMMENT_KEY, portfolioId],
     () =>
       httpClient.comment
         .getById({ params: { id: portfolioId } })
@@ -74,7 +83,7 @@ const useCommentList = (portfolioId?: number) => {
 
 const usePortfolio = (portfolioId?: number) => {
   const { data } = useQuery<Portfolio>(
-    ["comment", portfolioId],
+    [PORTFOLIO_KEY, portfolioId],
     () =>
       httpClient.portfolio
         .getById({ params: { id: portfolioId } })
