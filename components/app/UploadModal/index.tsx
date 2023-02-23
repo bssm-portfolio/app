@@ -5,7 +5,7 @@ import { Skill } from "@/types/skill.interface";
 import { getFormData } from "@/utils/file";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import FileUploadView from "./FileUploadView";
 import FormView from "./Form";
