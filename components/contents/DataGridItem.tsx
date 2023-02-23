@@ -1,7 +1,7 @@
 import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import Image from "next/image";
-import { NextRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import CheckBox from "../atoms/CheckBox";
@@ -11,7 +11,6 @@ interface DataGridItemProps {
   portfolio: Portfolio;
   checkedList: number[];
   setCheckedPortfolioIdList: Dispatch<SetStateAction<number[]>>;
-  router: NextRouter;
   idx: number;
 }
 
@@ -19,9 +18,10 @@ export default function DataGridItem({
   portfolio,
   checkedList,
   setCheckedPortfolioIdList,
-  router,
   idx,
 }: DataGridItemProps) {
+  const router = useRouter();
+
   const getBodyCss = () => {
     return `grid 
     grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 

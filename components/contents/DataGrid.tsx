@@ -2,8 +2,13 @@ import httpClient from "@/apis";
 import { RefetchType } from "@/types/index.interface";
 import { Portfolio } from "@/types/portfolio.interface";
 import { deepcopy, reorder } from "@/utils/data";
-import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
@@ -20,17 +25,20 @@ export default function DataGrid({
   setPortfolioList,
   refetch,
 }: DataGridProps) {
-  const router = useRouter();
   const [checkedPortfolioIdList, setCheckedPortfolioIdList] = useState<
     number[]
   >([]);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
+
+  const getPortfolioIdList = useCallback(
+    () => portfolioList.map((portfolio) => portfolio.portfolioId),
+    [portfolioList],
+  );
 
   const handleAllCheck = (isChecked: boolean) => {
     if (isChecked) {
-      setCheckedPortfolioIdList(
-        portfolioList.map((portfolio) => portfolio.portfolioId),
-      );
+      setCheckedPortfolioIdList(getPortfolioIdList());
       return;
     }
     setCheckedPortfolioIdList([]);
@@ -47,10 +55,12 @@ export default function DataGrid({
     setPortfolioList(
       reorder<Portfolio>(dataGridList, source.index, destination.index),
     );
+    setIsChanged(true);
   };
 
   const getHeadCss = () => {
-    return `grid 
+    return `
+    grid 
     grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
     py-6 
     border-y 
@@ -65,8 +75,16 @@ export default function DataGrid({
           data: { portfolioId: checkedPortfolioId },
         }),
       ),
-    ).then(() => refetch());
+    ).then(() => {
+      refetch();
+      setCheckedPortfolioIdList([]);
+    });
   };
+
+  useEffect(() => {
+    if (isChanged)
+      httpClient.portfolio.sequence({ portfolioIdList: getPortfolioIdList() });
+  }, [portfolioList, getPortfolioIdList, isChanged]);
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setIsEnabled(true));
@@ -111,7 +129,6 @@ export default function DataGrid({
                   portfolio={portfolio}
                   checkedList={checkedPortfolioIdList}
                   setCheckedPortfolioIdList={setCheckedPortfolioIdList}
-                  router={router}
                   key={portfolio.portfolioId}
                   idx={idx}
                 />

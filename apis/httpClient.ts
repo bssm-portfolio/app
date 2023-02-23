@@ -76,6 +76,13 @@ export class HttpClient {
     });
   }
 
+  sequence(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.put("/sequence", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
   private setting() {
     HttpClient.setCommonInterceptors(this.api);
   }
