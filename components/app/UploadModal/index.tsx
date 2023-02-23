@@ -1,5 +1,5 @@
 import httpClient from "@/apis";
-import { PORTFOLIO_LIST_BY_ID_KEY, PORTFOLIO_LIST_KEY } from "@/models/key";
+import { PORTFOLIO_LIST_KEY } from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
 import { getFormData } from "@/utils/file";
