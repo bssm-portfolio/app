@@ -46,7 +46,6 @@ export default function DataGrid({
 
   const isCheckedAll = () => {
     if (checkedPortfolioIdList.length === 0) return false;
-    console.log(checkedPortfolioIdList, portfolioList);
     return checkedPortfolioIdList.length === portfolioList.length;
   };
 
