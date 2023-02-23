@@ -1,7 +1,8 @@
 import TimeAgo from "javascript-time-ago";
 import ko from "javascript-time-ago/locale/ko";
 
-TimeAgo.addDefaultLocale(ko);
+TimeAgo.setDefaultLocale(ko.locale);
+TimeAgo.addLocale(ko);
 const timeAgo = new TimeAgo("ko-KR");
 
 export const getKoreanDate = (
