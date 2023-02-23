@@ -82,9 +82,8 @@ export default function DataGrid({
   };
 
   useEffect(() => {
-    if (portfolioList.length !== 0 && isChanged) {
+    if (isChanged)
       httpClient.portfolio.sequence({ portfolioIdList: getPortfolioIdList() });
-    }
   }, [portfolioList, getPortfolioIdList, isChanged]);
 
   useEffect(() => {
