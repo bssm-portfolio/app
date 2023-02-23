@@ -49,7 +49,7 @@ export default function DataGrid({
     return checkedPortfolioIdList.length === portfolioList.length;
   };
 
-  const onDragEnd = async ({ source, destination }: DropResult) => {
+  const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
     const dataGridList = deepcopy<Portfolio[]>(portfolioList);
     setPortfolioList(
