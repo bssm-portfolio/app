@@ -2,7 +2,13 @@ import httpClient from "@/apis";
 import { RefetchType } from "@/types/index.interface";
 import { Portfolio } from "@/types/portfolio.interface";
 import { deepcopy, reorder } from "@/utils/data";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import Button from "../atoms/Button";
 import CheckBox from "../atoms/CheckBox";
@@ -23,6 +29,7 @@ export default function DataGrid({
     number[]
   >([]);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
   const handleAllCheck = (isChecked: boolean) => {
     if (isChecked) {
@@ -39,16 +46,18 @@ export default function DataGrid({
     return checkedPortfolioIdList.length === portfolioList.length;
   };
 
-  const onDragEnd = ({ source, destination }: DropResult) => {
+  const onDragEnd = async ({ source, destination }: DropResult) => {
     if (!destination) return;
     const dataGridList = deepcopy<Portfolio[]>(portfolioList);
     setPortfolioList(
       reorder<Portfolio>(dataGridList, source.index, destination.index),
     );
+    setIsChanged(true);
   };
 
   const getHeadCss = () => {
-    return `grid 
+    return `
+    grid 
     grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
     py-6 
     border-y 
@@ -65,6 +74,17 @@ export default function DataGrid({
       ),
     ).then(() => refetch());
   };
+
+  const getPortfolioIdList = useCallback(
+    () => portfolioList.map((portfolio) => portfolio.portfolioId),
+    [portfolioList],
+  );
+
+  useEffect(() => {
+    if (portfolioList.length !== 0 && isChanged) {
+      httpClient.portfolio.sequence({ portfolioIdList: getPortfolioIdList() });
+    }
+  }, [portfolioList, getPortfolioIdList, isChanged]);
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setIsEnabled(true));
