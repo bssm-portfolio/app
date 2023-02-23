@@ -2,7 +2,6 @@ import httpClient from "@/apis";
 import { RefetchType } from "@/types/index.interface";
 import { Portfolio } from "@/types/portfolio.interface";
 import { deepcopy, reorder } from "@/utils/data";
-import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import Button from "../atoms/Button";
@@ -20,7 +19,6 @@ export default function DataGrid({
   setPortfolioList,
   refetch,
 }: DataGridProps) {
-  const router = useRouter();
   const [checkedPortfolioIdList, setCheckedPortfolioIdList] = useState<
     number[]
   >([]);
@@ -111,7 +109,6 @@ export default function DataGrid({
                   portfolio={portfolio}
                   checkedList={checkedPortfolioIdList}
                   setCheckedPortfolioIdList={setCheckedPortfolioIdList}
-                  router={router}
                   key={portfolio.portfolioId}
                   idx={idx}
                 />
