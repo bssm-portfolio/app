@@ -84,12 +84,12 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
             </Button>
             <Button
               status="active"
-              onClick={portfolio.followYN ? handleUnFollow : handleFollow}
-              className={portfolio.followYN ? "!bg-somago_yellow" : ""}
+              onClick={portfolio.followYn ? handleUnFollow : handleFollow}
+              className={portfolio.followYn ? "!bg-somago_yellow" : ""}
             >
               <PeopleIcon className="mr-2xsmall" />
               <span className="text-small">
-                {portfolio.followYN ? "팔로잉" : "팔로우"}
+                {portfolio.followYn ? "팔로잉" : "팔로우"}
               </span>
             </Button>
             <CopyToClipboard text={url}>
