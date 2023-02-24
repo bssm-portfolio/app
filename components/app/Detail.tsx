@@ -26,13 +26,13 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
   const handleLike = () => {
     httpClient.portfolio
       .bookmark({ portfolioId: portfolio.portfolioId })
-      .then(() => router.reload());
+      .then(() => router.replace(router.asPath));
   };
 
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: portfolio.writer.memberId })
-      .then(() => router.reload());
+      .then(() => router.replace(router.asPath));
   };
 
   const handleUnFollow = () => {
@@ -40,7 +40,7 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
       .unfollow({
         data: { memberId: portfolio.writer.memberId },
       })
-      .then(() => router.reload());
+      .then(() => router.replace(router.asPath));
   };
 
   const handleShare = () => {

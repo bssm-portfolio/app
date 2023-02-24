@@ -17,7 +17,7 @@ export default function MemberPageProfile({
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: userInfo.memberId })
-      .then(() => router.reload());
+      .then(() => router.replace(router.asPath));
   };
 
   const handleUnFollow = () => {
@@ -25,7 +25,7 @@ export default function MemberPageProfile({
       .unfollow({
         data: { memberId: userInfo.memberId },
       })
-      .then(() => router.reload());
+      .then(() => router.replace(router.asPath));
   };
 
   return (
