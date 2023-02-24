@@ -13,6 +13,7 @@ import { getDateParsedData } from "@/utils/date";
 import { deepcopy } from "@/utils/data";
 import { NextSeo, NextSeoProps } from "next-seo";
 import { usePortfolio } from "@/models/portfolio";
+import useUser from "@/hooks/useUser";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
@@ -21,9 +22,10 @@ interface PortfolioIdPageProps {
 export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
   const type = dateParsedPortfolio.portfolioType;
-  const { bookmarkYn, followYn } = usePortfolio(
+  const { bookmarkYn, followYn, bookmarks } = usePortfolio(
     dateParsedPortfolio.portfolioId,
   ).data;
+  const { memberId } = useUser().user;
 
   const seoConfig: NextSeoProps = {
     title: dateParsedPortfolio.title,
@@ -60,6 +62,8 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
             portfolio={dateParsedPortfolio}
             bookmarkYn={bookmarkYn}
             followYn={followYn}
+            bookmarks={bookmarks}
+            isMyPortfolio={memberId === dateParsedPortfolio.writer.memberId}
           />
         }
         comment={
