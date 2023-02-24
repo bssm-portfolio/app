@@ -83,6 +83,13 @@ export class HttpClient {
     });
   }
 
+  bookmark(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.put("/bookmark", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
   private setting() {
     HttpClient.setCommonInterceptors(this.api);
   }

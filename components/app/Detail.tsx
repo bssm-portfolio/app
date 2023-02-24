@@ -4,13 +4,17 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
+import httpClient from "@/apis";
+import KEY from "@/models/key";
+import { useQueryClient } from "@tanstack/react-query";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
 import Description from "../portfolio/Description";
-import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
 import ShareIcon from "../Icon/ShareIcon";
 import PeopleIcon from "../Icon/PeopleIcon";
+import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
+import FilledHeartIcon from "../Icon/FilledHeartIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -20,6 +24,15 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const router = useRouter();
   const url = `${config.clientUrl + router.asPath}`;
+  const queryClient = useQueryClient();
+
+  const handleLike = () => {
+    httpClient.portfolio.bookmark({ portfolioId: portfolio.portfolioId });
+  };
+
+  const handleFollow = () => {
+    httpClient.portfolio.bookmark({ portfolioId: portfolio.portfolioId });
+  };
 
   const handleShare = () => {
     openToast("복사가 완료되었습니다.");
@@ -52,8 +65,12 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
 
         <div>
           <div className="flex gap-small mb-large">
-            <Button status="active">
-              <EmptyHeartIcon className="mr-2xsmall" />
+            <Button status="active" onClick={handleLike}>
+              {portfolio.bookmarkYn ? (
+                <FilledHeartIcon className="mr-2xsmall" />
+              ) : (
+                <EmptyHeartIcon className="mr-2xsmall" />
+              )}
               <span className="text-small">{portfolio.bookmarks}</span>
             </Button>
             <Button status="active">
