@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { AppLayout } from "@/layouts";
 import {
   AppComment,
