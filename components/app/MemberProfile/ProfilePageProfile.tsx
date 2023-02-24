@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 
 interface MemberPageProfileProps {
   userInfo: Member;
-  isMypage?: boolean;
+  isMypage: boolean;
 }
 export default function MemberPageProfile({
   userInfo,
-  isMypage = false,
+  isMypage,
 }: MemberPageProfileProps) {
   const router = useRouter();
 
@@ -69,7 +69,7 @@ export default function MemberPageProfile({
             </Button>
           )}
 
-          {!isMypage && !userInfo.followYn && (
+          {!isMypage && (
             <Button
               varient="secondary"
               className="w-40 !rounded-full !bg-somago_yellow !py-2"
@@ -79,7 +79,7 @@ export default function MemberPageProfile({
             </Button>
           )}
 
-          {!isMypage && userInfo.followYn && (
+          {!isMypage && (
             <Button
               varient="secondary"
               className="w-40 !rounded-full !bg-somago_yellow !py-2"
