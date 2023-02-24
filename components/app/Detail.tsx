@@ -83,9 +83,7 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
             <Button
               status="active"
               onClick={portfolio.followYN ? handleUnFollow : handleFollow}
-              className={
-                portfolio.followYN ? "!bg-somago_yellow" : "!bg-somago_yellow"
-              }
+              className={portfolio.followYN ? "!bg-somago_yellow" : ""}
             >
               <PeopleIcon className="mr-2xsmall" />
               <span className="text-small">
