@@ -20,6 +20,9 @@ export default function Home({ member }: MemberIdPageProps) {
   const seoConfig: NextSeoProps = {
     title: `${userInfo.name}님의 정보`,
     description: `${userInfo.name}님의 정보 페이지입니다.`,
+    openGraph: {
+      images: [{ url: userInfo.profileImageUrl }],
+    },
   };
 
   return (
