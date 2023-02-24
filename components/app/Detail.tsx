@@ -19,11 +19,11 @@ interface PortfolioDetailProps {
 export default function Detail({ portfolio }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const router = useRouter();
+  const url = `${config.clientUrl + router.asPath}`;
+
   const handleShare = () => {
     openToast("복사가 완료되었습니다.");
   };
-
-  const url = `${config.clientUrl + router.asPath}`;
 
   return (
     <div className="mt-small">
