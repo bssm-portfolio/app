@@ -14,6 +14,7 @@ const DEFAULT_SEO: DefaultSeoProps = {
   title: "BSSM Portfolio",
   description: "부산소프트웨어마이스터고 포트폴리오",
   canonical: config.clientUrl,
+  themeColor: "#3E73FB",
   openGraph: {
     type: "website",
     locale: "ko_KR",
