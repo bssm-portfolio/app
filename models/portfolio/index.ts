@@ -8,6 +8,7 @@ import {
   PortfolioList,
 } from "@/types/portfolio.interface";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import KEY from "../key";
 
 interface CommentList {
   list: Comment[];
@@ -16,7 +17,7 @@ interface CommentList {
 const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
-      ["portfolioList"],
+      [KEY.PORTFOLIO_LIST],
       ({ pageParam = 1 }) =>
         httpClient.portfolio
           .search({
@@ -38,8 +39,10 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
 };
 
 const useMyPortfolioList = () => {
-  const { data, refetch } = useQuery<PortfolioList>(["my portfolioList"], () =>
-    httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
+  const { data, refetch } = useQuery<PortfolioList>(
+    [KEY.MY_PORTFOLIO_LIST],
+    () =>
+      httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
   );
   return {
     pagination: data?.pagination || null,
@@ -50,7 +53,7 @@ const useMyPortfolioList = () => {
 
 const usePortfolioListById = (portfolioId?: number) => {
   const { data } = useQuery<PortfolioList>(
-    ["get portfolioList by id", portfolioId],
+    [KEY.PORTFOLIO_LIST_BY_ID, portfolioId],
     () =>
       httpClient.portfolioMember
         .getById({ params: { id: portfolioId, size: 100 } })
@@ -62,7 +65,7 @@ const usePortfolioListById = (portfolioId?: number) => {
 
 const useCommentList = (portfolioId?: number) => {
   const { data, refetch } = useQuery<CommentList>(
-    ["comment", portfolioId],
+    [KEY.COMMENT, portfolioId],
     () =>
       httpClient.comment
         .getById({ params: { id: portfolioId } })
@@ -74,7 +77,7 @@ const useCommentList = (portfolioId?: number) => {
 
 const usePortfolio = (portfolioId?: number) => {
   const { data } = useQuery<Portfolio>(
-    ["comment", portfolioId],
+    [KEY.PORTFOLIO, portfolioId],
     () =>
       httpClient.portfolio
         .getById({ params: { id: portfolioId } })

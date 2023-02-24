@@ -1,9 +1,11 @@
 import httpClient from "@/apis";
+import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
 import { getFormData } from "@/utils/file";
+import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import FileUploadView from "./FileUploadView";
 import FormView from "./Form";
@@ -28,6 +30,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
     // watch,
     // formState: { errors },
   } = useForm<PortfolioForm>();
+  const queryClient = useQueryClient();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     if (thumbnailFile && videoFile) {
@@ -48,16 +51,22 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         return "URL";
       };
 
-      await httpClient.portfolio.post({
-        ...data,
-        portfolioType: getPortfolioType(),
-        skillList: selectedSkills,
-        contributorIdList: [],
-        videoFileUid,
-        thumbnailFileUid,
-      });
+      await httpClient.portfolio
+        .post({
+          ...data,
+          portfolioType: getPortfolioType(),
+          skillList: selectedSkills,
+          contributorIdList: [],
+          videoFileUid,
+          thumbnailFileUid,
+        })
+        .then(() => {
+          closeModal();
+          queryClient.invalidateQueries({
+            queryKey: [KEY.PORTFOLIO_LIST],
+          });
+        });
     }
-    closeModal();
   };
 
   const onInvalid: SubmitErrorHandler<PortfolioForm> = (data) => {

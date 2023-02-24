@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { HTMLProps, ReactNode, useState } from "react";
+import { HTMLProps, ReactNode, useState } from "react";
 import KebabIcon from "../Icon/KebabIcon";
 
 interface KebabProps {

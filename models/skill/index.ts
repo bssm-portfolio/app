@@ -1,9 +1,10 @@
 import httpClient from "@/apis";
 import { Skill } from "@/types/skill.interface";
 import { useQuery } from "@tanstack/react-query";
+import KEY from "../key";
 
 export const useSkill = (keyword: string) => {
-  const { data } = useQuery<Skill[]>(["skill"], () =>
+  const { data } = useQuery<Skill[]>([KEY.SKILL], () =>
     httpClient.skill.get().then((d) => d.data.list),
   );
   return {
