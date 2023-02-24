@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
 import httpClient from "@/apis";
+import { useQueryClient } from "@tanstack/react-query";
+import KEY from "@/models/key";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
@@ -18,27 +20,33 @@ interface PortfolioDetailProps {
   portfolio: Portfolio;
   bookmarkYn: boolean;
   followYn: boolean;
+  isMyPortfolio: boolean;
+  bookmarks: number;
 }
 
 export default function Detail({
   portfolio,
   bookmarkYn,
   followYn,
+  isMyPortfolio,
+  bookmarks,
 }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const router = useRouter();
   const url = `${config.clientUrl + router.asPath}`;
+  const queryClient = useQueryClient();
 
   const handleLike = () => {
     httpClient.portfolio
       .bookmark({ portfolioId: portfolio.portfolioId })
-      .then(() => router.replace(router.asPath));
+      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]));
   };
 
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: portfolio.writer.memberId })
-      .then(() => router.replace(router.asPath));
+      .then(() => router.replace(router.asPath))
+      .catch((error) => alert(error.response.data.message));
   };
 
   const handleUnFollow = () => {
@@ -46,7 +54,8 @@ export default function Detail({
       .unfollow({
         data: { memberId: portfolio.writer.memberId },
       })
-      .then(() => router.replace(router.asPath));
+      .then(() => router.replace(router.asPath))
+      .catch((error) => alert(error.response.data.message));
   };
 
   const handleShare = () => {
@@ -86,18 +95,22 @@ export default function Detail({
               ) : (
                 <EmptyHeartIcon className="mr-2xsmall" />
               )}
-              <span className="text-small">{portfolio.bookmarks}</span>
+              <span className="text-small">{bookmarks}</span>
             </Button>
-            <Button
-              status="active"
-              onClick={followYn ? handleUnFollow : handleFollow}
-              className={followYn ? "!bg-somago_yellow" : ""}
-            >
-              <PeopleIcon className="mr-2xsmall" />
-              <span className="text-small">
-                {followYn ? "팔로잉" : "팔로우"}
-              </span>
-            </Button>
+
+            {!isMyPortfolio && (
+              <Button
+                status="active"
+                onClick={followYn ? handleUnFollow : handleFollow}
+                className={followYn ? "!bg-somago_yellow" : ""}
+              >
+                <PeopleIcon className="mr-2xsmall" />
+                <span className="text-small">
+                  {followYn ? "팔로잉" : "팔로우"}
+                </span>
+              </Button>
+            )}
+
             <CopyToClipboard text={url}>
               <Button status="active" onClick={handleShare}>
                 <ShareIcon className="mr-2xsmall" />
