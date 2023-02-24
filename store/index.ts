@@ -13,6 +13,11 @@ export const emptyUser: Member = {
   memberRoleType: "ROLE_NORMAL",
   job: null,
   phone: null,
+  followerCount: 0,
+  followingCount: 0,
+  portfolioCount: 0,
+  bookmarkYn: false,
+  followYn: false,
 };
 
 export const userState = atom<Member>({
