@@ -1,17 +1,50 @@
+import httpClient from "@/apis";
 import Button from "@/components/atoms/Button";
 import Avatar from "@/components/common/Avatar";
+import useOverlay from "@/hooks/useOverlay";
+import KEY from "@/models/key";
 import { Member } from "@/types/member.interface";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 interface MemberPageProfileProps {
   userInfo: Member;
-  isMypage?: boolean;
+  isMypage: boolean;
+  followYn: boolean;
+  followerCount: number;
+  followingCount: number;
 }
 export default function MemberPageProfile({
   userInfo,
-  isMypage = false,
+  isMypage,
+  followYn,
+  followerCount,
+  followingCount,
 }: MemberPageProfileProps) {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const { openToast } = useOverlay();
+
+  const handleFollow = () => {
+    httpClient.follow
+      .post({ memberId: userInfo.memberId })
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
+  };
+
+  const handleUnFollow = () => {
+    httpClient.follow
+      .unfollow({
+        data: { memberId: userInfo.memberId },
+      })
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
+  };
+
   return (
     <>
       <div className="flex flex-col w-[17.625rem] h-[33.75rem] rounded-lg bg-primary-light_gray px-[3.25rem] py-[1.875rem]">
@@ -29,32 +62,44 @@ export default function MemberPageProfile({
         <div className="mt-5">
           <div className="w-full flex font-bold">
             <span className="mr-3">프로젝트 수</span>
-            <span>{0}</span>
+            <span>{userInfo.portfolioCount}</span>
           </div>
           <div className="w-full flex font-bold">
             <span className="mr-3">팔로워 수</span>
-            <span>{0}</span>
+            <span>{followerCount}</span>
           </div>
           <div className="w-full flex font-bold mb-5">
             <span className="mr-3">팔로잉 수</span>
-            <span>{0}</span>
+            <span>{followingCount}</span>
           </div>
           <pre className="overflow-y-scroll max-w-[17.625rem] whitespace-pre-wrap text-xs mb-5">
             {userInfo.description}
           </pre>
         </div>
         <div className="flex justify-center mt-auto">
-          {isMypage ? (
+          {isMypage && (
             <Button
               varient="secondary"
               className="border border-black !rounded-full !bg-white py-2 px-8"
             >
               수정하기
             </Button>
-          ) : (
+          )}
+
+          {!isMypage && followYn && (
+            <Button
+              className="w-40 !rounded-full !bg-primary-dark_gray !py-2"
+              onClick={handleUnFollow}
+            >
+              팔로우 취소
+            </Button>
+          )}
+
+          {!isMypage && !followYn && (
             <Button
               varient="secondary"
               className="w-40 !rounded-full !bg-somago_yellow !py-2"
+              onClick={handleFollow}
             >
               팔로우
             </Button>

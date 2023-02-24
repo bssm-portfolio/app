@@ -1,5 +1,4 @@
 import { HeaderButton } from "@/components";
-import { MainLayout } from "@/layouts";
 import Head from "next/head";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -8,7 +7,7 @@ interface SigninForm {
   password: string;
 }
 
-function Home() {
+export default function Home() {
   const { register, handleSubmit } = useForm<SigninForm>();
   const onSubmit: SubmitHandler<SigninForm> = (data) => data;
 
@@ -38,8 +37,4 @@ function Home() {
       </div>
     </div>
   );
-}
-
-export default function Page() {
-  return <div />;
 }

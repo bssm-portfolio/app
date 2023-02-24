@@ -4,22 +4,66 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
+import httpClient from "@/apis";
+import { useQueryClient } from "@tanstack/react-query";
+import KEY from "@/models/key";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
 import Description from "../portfolio/Description";
-import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
 import ShareIcon from "../Icon/ShareIcon";
 import PeopleIcon from "../Icon/PeopleIcon";
+import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
+import FilledHeartIcon from "../Icon/FilledHeartIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
+  bookmarkYn: boolean;
+  followYn: boolean;
+  isMyPortfolio: boolean;
+  bookmarks: number;
 }
 
-export default function Detail({ portfolio }: PortfolioDetailProps) {
+export default function Detail({
+  portfolio,
+  bookmarkYn,
+  followYn,
+  isMyPortfolio,
+  bookmarks,
+}: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const router = useRouter();
   const url = `${config.clientUrl + router.asPath}`;
+  const queryClient = useQueryClient();
+
+  const handleLike = () => {
+    httpClient.portfolio
+      .bookmark({ portfolioId: portfolio.portfolioId })
+      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]))
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
+  };
+
+  const handleFollow = () => {
+    httpClient.follow
+      .post({ memberId: portfolio.writer.memberId })
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
+  };
+
+  const handleUnFollow = () => {
+    httpClient.follow
+      .unfollow({
+        data: { memberId: portfolio.writer.memberId },
+      })
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
+  };
 
   const handleShare = () => {
     openToast("복사가 완료되었습니다.");
@@ -52,14 +96,28 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
 
         <div>
           <div className="flex gap-small mb-large">
-            <Button status="active">
-              <EmptyHeartIcon className="mr-2xsmall" />
-              <span className="text-small">{portfolio.bookmarks}</span>
+            <Button status="active" onClick={handleLike}>
+              {bookmarkYn ? (
+                <FilledHeartIcon className="mr-2xsmall" />
+              ) : (
+                <EmptyHeartIcon className="mr-2xsmall" />
+              )}
+              <span className="text-small">{bookmarks}</span>
             </Button>
-            <Button status="active">
-              <PeopleIcon className="mr-2xsmall" />
-              <span className="text-small">팔로잉</span>
-            </Button>
+
+            {!isMyPortfolio && (
+              <Button
+                status="active"
+                onClick={followYn ? handleUnFollow : handleFollow}
+                className={followYn ? "!bg-somago_yellow" : ""}
+              >
+                <PeopleIcon className="mr-2xsmall" />
+                <span className="text-small">
+                  {followYn ? "팔로잉" : "팔로우"}
+                </span>
+              </Button>
+            )}
+
             <CopyToClipboard text={url}>
               <Button status="active" onClick={handleShare}>
                 <ShareIcon className="mr-2xsmall" />

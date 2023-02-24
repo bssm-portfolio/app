@@ -1,3 +1,4 @@
+import { Member } from "@/types/member.interface";
 import { Comment, Portfolio } from "@/types/portfolio.interface";
 
 const avatarUrl =
@@ -28,6 +29,7 @@ const portfolio: Portfolio = {
     email: "",
   },
   bookmarkYn: false,
+  followYn: false,
   portfolioType: "VIDEO",
   portfolioUrl: "",
   title: "",
@@ -94,8 +96,8 @@ const commentList = Array(10)
     return { ...comment, portfolioId: idx };
   });
 
-const user = {
-  memberId: "",
+const user: Member = {
+  memberId: 0,
   name: "",
   profileImageUrl: "",
   email: "",
@@ -103,6 +105,10 @@ const user = {
   phone: "",
   job: "",
   memberRoleType: "ROLE_NORMAL",
+  portfolioCount: 0,
+  followerCount: 0,
+  followingCount: 0,
+  followYn: false,
 };
 
 const defaultPagination = {

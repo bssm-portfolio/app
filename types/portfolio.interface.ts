@@ -14,6 +14,7 @@ export type Portfolio = {
   title: string;
   description: string;
   bookmarkYn: boolean;
+  followYn: boolean;
   scope: PortfolioScope;
   gitUrl: string;
   video: S3File;
