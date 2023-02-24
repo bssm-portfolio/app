@@ -1,5 +1,5 @@
 import httpClient from "@/apis";
-import { PORTFOLIO_LIST_KEY } from "@/models/key";
+import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
 import { getFormData } from "@/utils/file";
@@ -63,7 +63,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         .then(() => {
           closeModal();
           queryClient.invalidateQueries({
-            queryKey: [PORTFOLIO_LIST_KEY],
+            queryKey: [KEY.PORTFOLIO_LIST],
           });
         });
     }

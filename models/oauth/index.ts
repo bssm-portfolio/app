@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import httpClient from "@/apis";
 import { OAuthPlatform, Token } from "@/types/oauth.interface";
-import { OAUTH_KEY } from "../key";
+import KEY from "../key";
 
 const getOauth = (
   platform: OAuthPlatform,
@@ -15,7 +15,7 @@ const getOauth = (
 
 const useOauth = (platform: OAuthPlatform, authCode: string) => {
   const { data } = useQuery<Token>(
-    [OAUTH_KEY, authCode],
+    [KEY.OAUTH, authCode],
     getOauth(platform, authCode),
     {
       enabled: !!authCode,
