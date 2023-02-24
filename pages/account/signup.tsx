@@ -1,4 +1,3 @@
-import { MainLayout } from "@/layouts";
 import Head from "next/head";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -7,7 +6,7 @@ interface SignupForm {
   password: string;
 }
 
-function Home() {
+export default function Home() {
   const { register, handleSubmit } = useForm<SignupForm>();
   const onSubmit: SubmitHandler<SignupForm> = (data) => data;
 
@@ -25,7 +24,4 @@ function Home() {
       </form>
     </div>
   );
-}
-export default function Page() {
-  return <div />;
 }
