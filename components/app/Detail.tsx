@@ -16,9 +16,15 @@ import FilledHeartIcon from "../Icon/FilledHeartIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
+  bookmarkYn: boolean;
+  followYn: boolean;
 }
 
-export default function Detail({ portfolio }: PortfolioDetailProps) {
+export default function Detail({
+  portfolio,
+  bookmarkYn,
+  followYn,
+}: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const router = useRouter();
   const url = `${config.clientUrl + router.asPath}`;
@@ -75,7 +81,7 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
         <div>
           <div className="flex gap-small mb-large">
             <Button status="active" onClick={handleLike}>
-              {portfolio.bookmarkYn ? (
+              {bookmarkYn ? (
                 <FilledHeartIcon className="mr-2xsmall" />
               ) : (
                 <EmptyHeartIcon className="mr-2xsmall" />
@@ -84,12 +90,12 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
             </Button>
             <Button
               status="active"
-              onClick={portfolio.followYn ? handleUnFollow : handleFollow}
-              className={portfolio.followYn ? "!bg-somago_yellow" : ""}
+              onClick={followYn ? handleUnFollow : handleFollow}
+              className={followYn ? "!bg-somago_yellow" : ""}
             >
               <PeopleIcon className="mr-2xsmall" />
               <span className="text-small">
-                {portfolio.followYn ? "팔로잉" : "팔로우"}
+                {followYn ? "팔로잉" : "팔로우"}
               </span>
             </Button>
             <CopyToClipboard text={url}>

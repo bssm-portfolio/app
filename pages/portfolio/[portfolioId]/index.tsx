@@ -11,29 +11,30 @@ import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import { getDateParsedData } from "@/utils/date";
 import { deepcopy } from "@/utils/data";
-import { useRouter } from "next/router";
 import { NextSeo, NextSeoProps } from "next-seo";
+import { usePortfolio } from "@/models/portfolio";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
 }
 
-export default function Home({ portfolio }: PortfolioIdPageProps) {
+export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
   const type = dateParsedPortfolio.portfolioType;
-  const router = useRouter();
-  const { portfolioId } = router.query;
+  const { bookmarkYn, followYn } = usePortfolio(
+    dateParsedPortfolio.portfolioId,
+  ).data;
 
   const seoConfig: NextSeoProps = {
-    title: portfolio.title,
-    description: portfolio.description,
+    title: dateParsedPortfolio.title,
+    description: dateParsedPortfolio.description,
     openGraph: {
       images: [
         {
-          url: getFileDownloadUrl(portfolio.thumbnail),
+          url: getFileDownloadUrl(dateParsedPortfolio.thumbnail),
           width: 320,
           height: 160,
-          alt: portfolio.thumbnail.fileName,
+          alt: dateParsedPortfolio.thumbnail.fileName,
         },
       ],
     },
@@ -54,8 +55,16 @@ export default function Home({ portfolio }: PortfolioIdPageProps) {
           />
         }
         sidebar={<AppSideMenu />}
-        detail={<AppDetail portfolio={dateParsedPortfolio} />}
-        comment={<AppComment portfolioId={Number(portfolioId)} />}
+        detail={
+          <AppDetail
+            portfolio={dateParsedPortfolio}
+            bookmarkYn={bookmarkYn}
+            followYn={followYn}
+          />
+        }
+        comment={
+          <AppComment portfolioId={Number(dateParsedPortfolio.portfolioId)} />
+        }
       />
     </div>
   );
