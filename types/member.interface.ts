@@ -13,9 +13,16 @@ export interface Member {
   followerCount: number;
   followingCount: number;
   followYn?: boolean;
+  bookmarkYn?: boolean;
 }
 
 export type PortfolioWriter = Omit<
   Member,
-  "description" | "job" | "phone" | "memberRoleType"
+  | "description"
+  | "job"
+  | "phone"
+  | "memberRoleType"
+  | "portfolioCount"
+  | "followerCount"
+  | "followingCount"
 >;
