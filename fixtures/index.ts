@@ -28,6 +28,7 @@ const portfolio: Portfolio = {
     email: "",
   },
   bookmarkYn: false,
+  followYn: false,
   portfolioType: "VIDEO",
   portfolioUrl: "",
   title: "",
