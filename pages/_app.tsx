@@ -11,21 +11,21 @@ import Toast from "@/components/common/Toast";
 import { DefaultSeo, DefaultSeoProps } from "next-seo";
 
 const DEFAULT_SEO: DefaultSeoProps = {
-  title: "meta head title에 들어가는 값",
-  description: "meta head description에 들어가는 값",
-  canonical: "https://www.carrotins.com",
+  title: "BSSM Portfolio",
+  description: "부산소프트웨어마이스터고 포트폴리오",
+  canonical: config.clientUrl,
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "카카오톡, 페이스북에 링크 넣으면 연결되는 url",
-    title: "카카오톡, 페이스북에 링크 넣으면 올라올 타이틀",
-    site_name: "사이트이름",
+    url: config.clientUrl,
+    title: "BSSM Portfolio",
+    site_name: "BSSM Portfolio",
     images: [
       {
-        url: "카카오톡, 페이스북에에 링크 넣으면 올라올 이미지",
-        width: 285,
-        height: 167,
-        alt: "이미지",
+        url: "https://velog.velcdn.com/images/j1min/post/1235a9a1-debb-4dd4-a92c-029515abbabd/image.png",
+        width: 320,
+        height: 160,
+        alt: "BSSM Portfolio",
       },
     ],
   },
