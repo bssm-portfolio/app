@@ -4,7 +4,3 @@ export interface Token {
   token: string;
   validity: string;
 }
-
-export interface Bsm {
-  authCode: string;
-}
