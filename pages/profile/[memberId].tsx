@@ -1,4 +1,3 @@
-import Head from "next/head";
 import type { GetServerSideProps } from "next";
 import httpClient from "@/apis";
 import { deepcopy } from "@/utils/data";
@@ -10,12 +9,12 @@ import useUser from "@/hooks/useUser";
 import { NextSeo, NextSeoProps } from "next-seo";
 
 interface MemberIdPageProps {
-  member: Member;
+  userInfo: Member;
 }
 
-export default function Home({ member }: MemberIdPageProps) {
-  const { list: portfolioList } = usePortfolioListById(member.memberId);
-  const { user: userInfo } = useUser({ authorizedPage: true });
+export default function Home({ userInfo }: MemberIdPageProps) {
+  const { list: portfolioList } = usePortfolioListById(userInfo.memberId);
+  const { user: myUserInfo } = useUser({ authorizedPage: true });
 
   const seoConfig: NextSeoProps = {
     title: `${userInfo.name}님의 정보`,
@@ -31,14 +30,14 @@ export default function Home({ member }: MemberIdPageProps) {
       <ProfilePageLayout
         profile={
           <ProfilePageProfile
-            userInfo={member}
-            isMypage={userInfo.memberId === member.memberId}
+            userInfo={userInfo}
+            isMypage={myUserInfo.memberId === userInfo.memberId}
           />
         }
         portfiloList={
           <ProfilePagePortfolioList
             portfolioList={portfolioList}
-            isMypage={userInfo.memberId === member.memberId}
+            isMypage={myUserInfo.memberId === userInfo.memberId}
           />
         }
       />
@@ -53,12 +52,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       notFound: true,
     };
 
-  const member = (await httpClient.member.getById({ params: { id: memberId } }))
-    .data;
+  const userInfo = (
+    await httpClient.member.getById({ params: { id: memberId } })
+  ).data;
 
   return {
     props: {
-      member: deepcopy(member),
+      userInfo: deepcopy(userInfo),
     },
   };
 };
