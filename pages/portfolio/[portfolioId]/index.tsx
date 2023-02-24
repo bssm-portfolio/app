@@ -25,7 +25,7 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   const { bookmarkYn, followYn, bookmarks } = usePortfolio(
     dateParsedPortfolio.portfolioId,
   ).data;
-  const { memberId } = useUser().user;
+  const { user: userInfo } = useUser();
 
   const seoConfig: NextSeoProps = {
     title: dateParsedPortfolio.title,
@@ -63,7 +63,9 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
             bookmarkYn={bookmarkYn}
             followYn={followYn}
             bookmarks={bookmarks}
-            isMyPortfolio={memberId === dateParsedPortfolio.writer.memberId}
+            isMyPortfolio={
+              userInfo.memberId === dateParsedPortfolio.writer.memberId
+            }
           />
         }
         comment={
