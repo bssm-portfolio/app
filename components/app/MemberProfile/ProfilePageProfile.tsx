@@ -10,11 +10,15 @@ interface MemberPageProfileProps {
   userInfo: Member;
   isMypage: boolean;
   followYn: boolean;
+  followerCount: number;
+  followingCount: number;
 }
 export default function MemberPageProfile({
   userInfo,
   isMypage,
   followYn,
+  followerCount,
+  followingCount,
 }: MemberPageProfileProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -22,10 +26,7 @@ export default function MemberPageProfile({
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: userInfo.memberId })
-      .then(() => {
-        router.replace(router.asPath);
-        queryClient.invalidateQueries([KEY.MEMBER]);
-      })
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
       .catch((error) => alert(error.response.data.message));
   };
 
@@ -34,10 +35,7 @@ export default function MemberPageProfile({
       .unfollow({
         data: { memberId: userInfo.memberId },
       })
-      .then(() => {
-        router.replace(router.asPath);
-        queryClient.invalidateQueries([KEY.MEMBER]);
-      })
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
       .catch((error) => alert(error.response.data.message));
   };
 
@@ -62,11 +60,11 @@ export default function MemberPageProfile({
           </div>
           <div className="w-full flex font-bold">
             <span className="mr-3">팔로워 수</span>
-            <span>{userInfo.followerCount}</span>
+            <span>{followerCount}</span>
           </div>
           <div className="w-full flex font-bold mb-5">
             <span className="mr-3">팔로잉 수</span>
-            <span>{userInfo.followingCount}</span>
+            <span>{followingCount}</span>
           </div>
           <pre className="overflow-y-scroll max-w-[17.625rem] whitespace-pre-wrap text-xs mb-5">
             {userInfo.description}

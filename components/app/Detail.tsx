@@ -45,7 +45,7 @@ export default function Detail({
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: portfolio.writer.memberId })
-      .then(() => router.replace(router.asPath))
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
       .catch((error) => alert(error.response.data.message));
   };
 
@@ -54,7 +54,7 @@ export default function Detail({
       .unfollow({
         data: { memberId: portfolio.writer.memberId },
       })
-      .then(() => router.replace(router.asPath))
+      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
       .catch((error) => alert(error.response.data.message));
   };
 

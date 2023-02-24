@@ -16,7 +16,9 @@ interface MemberIdPageProps {
 export default function Home({ userInfo }: MemberIdPageProps) {
   const { list: portfolioList } = usePortfolioListById(userInfo.memberId);
   const { user: myUserInfo } = useUser({ authorizedPage: true });
-  const { followYn } = useMember(userInfo.memberId).data;
+  const { followYn, followingCount, followerCount } = useMember(
+    userInfo.memberId,
+  ).data;
 
   const seoConfig: NextSeoProps = {
     title: `${userInfo.name}님의 정보`,
@@ -35,6 +37,8 @@ export default function Home({ userInfo }: MemberIdPageProps) {
             userInfo={userInfo}
             isMypage={myUserInfo.memberId === userInfo.memberId}
             followYn={followYn}
+            followingCount={followingCount}
+            followerCount={followerCount}
           />
         }
         portfiloList={
