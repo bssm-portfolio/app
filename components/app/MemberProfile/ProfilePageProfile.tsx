@@ -1,6 +1,7 @@
 import httpClient from "@/apis";
 import Button from "@/components/atoms/Button";
 import Avatar from "@/components/common/Avatar";
+import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
 import { Member } from "@/types/member.interface";
 import { useQueryClient } from "@tanstack/react-query";
@@ -22,12 +23,15 @@ export default function MemberPageProfile({
 }: MemberPageProfileProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { openToast } = useOverlay();
 
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: userInfo.memberId })
       .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
   };
 
   const handleUnFollow = () => {
@@ -36,7 +40,9 @@ export default function MemberPageProfile({
         data: { memberId: userInfo.memberId },
       })
       .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
   };
 
   return (
