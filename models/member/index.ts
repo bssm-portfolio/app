@@ -15,7 +15,7 @@ const useMember = (memberId: number) => {
       enabled: !!memberId,
     },
   );
-  return data || fixture.user;
+  return { data: data || fixture.user };
 };
 
 export default useMember;

@@ -16,7 +16,6 @@ export const emptyUser: Member = {
   followerCount: 0,
   followingCount: 0,
   portfolioCount: 0,
-  bookmarkYn: false,
   followYn: false,
 };
 

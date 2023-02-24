@@ -7,6 +7,7 @@ import { ProfilePagePortfolioList, ProfilePageProfile } from "@/components";
 import { ProfilePageLayout } from "@/layouts";
 import useUser from "@/hooks/useUser";
 import { NextSeo, NextSeoProps } from "next-seo";
+import useMember from "@/models/member";
 
 interface MemberIdPageProps {
   userInfo: Member;
@@ -15,6 +16,7 @@ interface MemberIdPageProps {
 export default function Home({ userInfo }: MemberIdPageProps) {
   const { list: portfolioList } = usePortfolioListById(userInfo.memberId);
   const { user: myUserInfo } = useUser({ authorizedPage: true });
+  const { followYn } = useMember(userInfo.memberId).data;
 
   const seoConfig: NextSeoProps = {
     title: `${userInfo.name}님의 정보`,
@@ -32,6 +34,7 @@ export default function Home({ userInfo }: MemberIdPageProps) {
           <ProfilePageProfile
             userInfo={userInfo}
             isMypage={myUserInfo.memberId === userInfo.memberId}
+            followYn={followYn}
           />
         }
         portfiloList={

@@ -1,23 +1,32 @@
 import httpClient from "@/apis";
 import Button from "@/components/atoms/Button";
 import Avatar from "@/components/common/Avatar";
+import KEY from "@/models/key";
 import { Member } from "@/types/member.interface";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 interface MemberPageProfileProps {
   userInfo: Member;
   isMypage: boolean;
+  followYn: boolean;
 }
 export default function MemberPageProfile({
   userInfo,
   isMypage,
+  followYn,
 }: MemberPageProfileProps) {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: userInfo.memberId })
-      .then(() => router.replace(router.asPath));
+      .then(() => {
+        router.replace(router.asPath);
+        queryClient.invalidateQueries([KEY.MEMBER]);
+      })
+      .catch((error) => alert(error.response.data.message));
   };
 
   const handleUnFollow = () => {
@@ -25,7 +34,11 @@ export default function MemberPageProfile({
       .unfollow({
         data: { memberId: userInfo.memberId },
       })
-      .then(() => router.replace(router.asPath));
+      .then(() => {
+        router.replace(router.asPath);
+        queryClient.invalidateQueries([KEY.MEMBER]);
+      })
+      .catch((error) => alert(error.response.data.message));
   };
 
   return (
@@ -69,17 +82,16 @@ export default function MemberPageProfile({
             </Button>
           )}
 
-          {!isMypage && (
+          {!isMypage && followYn && (
             <Button
-              varient="secondary"
-              className="w-40 !rounded-full !bg-somago_yellow !py-2"
+              className="w-40 !rounded-full !bg-primary-dark_gray !py-2"
               onClick={handleUnFollow}
             >
-              팔로잉
+              팔로우 취소
             </Button>
           )}
 
-          {!isMypage && (
+          {!isMypage && !followYn && (
             <Button
               varient="secondary"
               className="w-40 !rounded-full !bg-somago_yellow !py-2"
