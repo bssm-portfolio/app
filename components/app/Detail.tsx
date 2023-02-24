@@ -30,7 +30,9 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
   };
 
   const handleFollow = () => {
-    httpClient.follow.post({ memberId: portfolio.writer.memberId });
+    httpClient.follow
+      .post({ memberId: portfolio.writer.memberId })
+      .then(() => router.reload());
   };
 
   const handleUnFollow = () => {

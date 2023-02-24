@@ -1,3 +1,4 @@
+import httpClient from "@/apis";
 import Button from "@/components/atoms/Button";
 import Avatar from "@/components/common/Avatar";
 import { Member } from "@/types/member.interface";
@@ -12,6 +13,21 @@ export default function MemberPageProfile({
   isMypage = false,
 }: MemberPageProfileProps) {
   const router = useRouter();
+
+  const handleFollow = () => {
+    httpClient.follow
+      .post({ memberId: userInfo.memberId })
+      .then(() => router.reload());
+  };
+
+  const handleUnFollow = () => {
+    httpClient.follow
+      .unfollow({
+        data: { memberId: userInfo.memberId },
+      })
+      .then(() => router.reload());
+  };
+
   return (
     <>
       <div className="flex flex-col w-[17.625rem] h-[33.75rem] rounded-lg bg-primary-light_gray px-[3.25rem] py-[1.875rem]">
@@ -44,17 +60,30 @@ export default function MemberPageProfile({
           </pre>
         </div>
         <div className="flex justify-center mt-auto">
-          {isMypage ? (
+          {isMypage && (
             <Button
               varient="secondary"
               className="border border-black !rounded-full !bg-white py-2 px-8"
             >
               수정하기
             </Button>
-          ) : (
+          )}
+
+          {!isMypage && !userInfo.followYn && (
             <Button
               varient="secondary"
               className="w-40 !rounded-full !bg-somago_yellow !py-2"
+              onClick={handleUnFollow}
+            >
+              팔로잉
+            </Button>
+          )}
+
+          {!isMypage && userInfo.followYn && (
+            <Button
+              varient="secondary"
+              className="w-40 !rounded-full !bg-somago_yellow !py-2"
+              onClick={handleFollow}
             >
               팔로우
             </Button>
