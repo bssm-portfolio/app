@@ -9,6 +9,9 @@ export interface Member {
   memberRoleType: MemberRoleType;
   job: string | null;
   phone: string | null;
+  portfolioCount: number;
+  followerCount: number;
+  followingCount: number;
 }
 
 export type PortfolioWriter = Omit<

@@ -29,15 +29,15 @@ export default function MemberPageProfile({
         <div className="mt-5">
           <div className="w-full flex font-bold">
             <span className="mr-3">프로젝트 수</span>
-            <span>{0}</span>
+            <span>{userInfo.portfolioCount}</span>
           </div>
           <div className="w-full flex font-bold">
             <span className="mr-3">팔로워 수</span>
-            <span>{0}</span>
+            <span>{userInfo.followerCount}</span>
           </div>
           <div className="w-full flex font-bold mb-5">
             <span className="mr-3">팔로잉 수</span>
-            <span>{0}</span>
+            <span>{userInfo.followingCount}</span>
           </div>
           <pre className="overflow-y-scroll max-w-[17.625rem] whitespace-pre-wrap text-xs mb-5">
             {userInfo.description}
