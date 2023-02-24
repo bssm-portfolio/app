@@ -39,7 +39,10 @@ export default function Detail({
   const handleLike = () => {
     httpClient.portfolio
       .bookmark({ portfolioId: portfolio.portfolioId })
-      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]));
+      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]))
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
   };
 
   const handleFollow = () => {

@@ -22,9 +22,9 @@ interface PortfolioIdPageProps {
 export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
   const type = dateParsedPortfolio.portfolioType;
-  const { bookmarkYn, followYn, bookmarks } = usePortfolio(
-    dateParsedPortfolio.portfolioId,
-  ).data;
+  const {
+    data: { bookmarkYn, followYn, bookmarks },
+  } = usePortfolio(dateParsedPortfolio.portfolioId);
   const { user: userInfo } = useUser();
 
   const seoConfig: NextSeoProps = {
