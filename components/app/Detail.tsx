@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
 import httpClient from "@/apis";
-import KEY from "@/models/key";
-import { useQueryClient } from "@tanstack/react-query";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
 import Group from "../atoms/Group";
@@ -24,14 +22,23 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const router = useRouter();
   const url = `${config.clientUrl + router.asPath}`;
-  const queryClient = useQueryClient();
 
   const handleLike = () => {
-    httpClient.portfolio.bookmark({ portfolioId: portfolio.portfolioId });
+    httpClient.portfolio
+      .bookmark({ portfolioId: portfolio.portfolioId })
+      .then(() => router.reload());
   };
 
   const handleFollow = () => {
-    httpClient.portfolio.bookmark({ portfolioId: portfolio.portfolioId });
+    httpClient.follow.post({ memberId: portfolio.writer.memberId });
+  };
+
+  const handleUnFollow = () => {
+    httpClient.follow
+      .unfollow({
+        data: { memberId: portfolio.writer.memberId },
+      })
+      .then(() => router.reload());
   };
 
   const handleShare = () => {
@@ -73,9 +80,17 @@ export default function Detail({ portfolio }: PortfolioDetailProps) {
               )}
               <span className="text-small">{portfolio.bookmarks}</span>
             </Button>
-            <Button status="active">
+            <Button
+              status="active"
+              onClick={portfolio.followYN ? handleUnFollow : handleFollow}
+              className={
+                portfolio.followYN ? "!bg-somago_yellow" : "!bg-somago_yellow"
+              }
+            >
               <PeopleIcon className="mr-2xsmall" />
-              <span className="text-small">팔로잉</span>
+              <span className="text-small">
+                {portfolio.followYN ? "팔로잉" : "팔로우"}
+              </span>
             </Button>
             <CopyToClipboard text={url}>
               <Button status="active" onClick={handleShare}>

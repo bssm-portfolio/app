@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonStatus = "active" | "disabled";
@@ -5,6 +6,7 @@ type ButtonStatus = "active" | "disabled";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   status: ButtonStatus;
   children: ReactNode;
+  className?: string;
 }
 
 const getButtonCss = (status: ButtonStatus): string => {
@@ -25,12 +27,13 @@ export default function DetailButton({
   status = "disabled",
   children,
   onClick,
+  className,
 }: ButtonProps) {
   return (
     <button
       type={type === "submit" ? "submit" : "button"}
       onClick={onClick}
-      className={getButtonCss(status)}
+      className={classNames(getButtonCss(status), className)}
     >
       {children}
     </button>
