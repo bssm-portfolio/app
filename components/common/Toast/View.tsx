@@ -8,8 +8,8 @@ interface ToastViewProps {
 
 export default function ToastView({ toastList }: ToastViewProps) {
   const backgroundColorList = {
-    success: "bg-[#5CB85C]",
-    danger: "bg-[#D9534F]",
+    success: "bg-[#5CB85CB3]",
+    danger: "bg-[#D9534FB3]",
     normal: "bg-[#000000B3]",
   };
   const toastAnimationList = {
