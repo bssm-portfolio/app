@@ -1,6 +1,7 @@
 interface Config {
   baseURL: string;
   nodeEnv: "development" | "production" | "test";
+  clientUrl: string;
 }
 
 const createConfig: () => Config = () => {
@@ -10,6 +11,7 @@ const createConfig: () => Config = () => {
   return {
     baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
     nodeEnv: process.env.NODE_ENV,
+    clientUrl: typeof window !== "undefined" ? window.location.origin : "",
   };
 };
 
