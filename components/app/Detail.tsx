@@ -46,7 +46,9 @@ export default function Detail({
     httpClient.follow
       .post({ memberId: portfolio.writer.memberId })
       .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
   };
 
   const handleUnFollow = () => {
@@ -55,7 +57,9 @@ export default function Detail({
         data: { memberId: portfolio.writer.memberId },
       })
       .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
   };
 
   const handleShare = () => {
