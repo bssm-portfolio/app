@@ -90,6 +90,13 @@ export class HttpClient {
     });
   }
 
+  unfollow(requestConfig?: AxiosRequestConfig) {
+    return this.api.delete("/unfollow", {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
   private setting() {
     HttpClient.setCommonInterceptors(this.api);
   }
@@ -125,4 +132,5 @@ export default {
   member: new HttpClient("/api/member", axiosConfig),
   comment: new HttpClient("/api/comment", axiosConfig),
   file: new HttpClient("/api/file", axiosConfig),
+  follow: new HttpClient("/api/follow", axiosConfig),
 };
