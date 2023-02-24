@@ -12,6 +12,7 @@ export interface Member {
   portfolioCount: number;
   followerCount: number;
   followingCount: number;
+  followYn?: boolean;
 }
 
 export type PortfolioWriter = Omit<
