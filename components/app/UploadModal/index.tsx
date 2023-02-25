@@ -1,4 +1,5 @@
 import httpClient from "@/apis";
+import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
@@ -31,46 +32,47 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
     // formState: { errors },
   } = useForm<PortfolioForm>();
   const queryClient = useQueryClient();
+  const { openToast } = useOverlay();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
-    if (thumbnailFile && videoFile) {
-      const videoFileUid = (
-        await httpClient.file.upload(getFormData(videoFile))
-      ).data.fileUid;
-      const thumbnailFileUid = (
-        await httpClient.file.upload(getFormData(thumbnailFile))
-      ).data.fileUid;
+    const videoFileUid =
+      videoFile &&
+      (await httpClient.file.upload(getFormData(videoFile))).data.fileUid;
+    const thumbnailFileUid =
+      thumbnailFile &&
+      (await httpClient.file.upload(getFormData(thumbnailFile))).data.fileUid;
 
-      const getPortfolioType = (): PortfolioType => {
-        if (data.portfolioUrl.length > 0 && videoFileUid) {
-          return "ALL";
-        }
-        if (videoFileUid) {
-          return "VIDEO";
-        }
-        return "URL";
-      };
+    const getPortfolioType = (): PortfolioType => {
+      if (data.portfolioUrl.length > 0 && videoFileUid) {
+        return "ALL";
+      }
+      if (videoFileUid) {
+        return "VIDEO";
+      }
+      return "URL";
+    };
 
-      await httpClient.portfolio
-        .post({
-          ...data,
-          portfolioType: getPortfolioType(),
-          skillList: selectedSkills,
-          contributorIdList: [],
-          videoFileUid,
-          thumbnailFileUid,
-        })
-        .then(() => {
-          closeModal();
-          queryClient.invalidateQueries({
-            queryKey: [KEY.PORTFOLIO_LIST],
-          });
+    await httpClient.portfolio
+      .post({
+        ...data,
+        portfolioType: getPortfolioType(),
+        skillList: selectedSkills,
+        contributorIdList: [],
+        videoFileUid,
+        thumbnailFileUid,
+      })
+      .then(() => {
+        closeModal();
+        queryClient.invalidateQueries({
+          queryKey: [KEY.PORTFOLIO_LIST],
         });
-    }
+      });
   };
 
-  const onInvalid: SubmitErrorHandler<PortfolioForm> = (data) => {
-    console.error("invalid data : ", data);
+  const onInvalid: SubmitErrorHandler<PortfolioForm> = (invalidData) => {
+    openToast(`${Object.keys(invalidData).join(", ")}를 확인해주세요.`, {
+      type: "danger",
+    });
   };
 
   const goNext = () =>

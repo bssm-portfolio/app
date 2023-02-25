@@ -20,6 +20,7 @@ const getRadioCss = () => {
     rounded-full 
     cursor-pointer
     outline 
+    outline-2
     outline-primary-dark_gray 
     checked:bg-blue 
     checked:border-[0.1875rem] 

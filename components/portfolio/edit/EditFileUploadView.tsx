@@ -65,7 +65,6 @@ export default function FileUploadView({
           }
           alt={thumbnail.fileName}
           className="rounded-lg -z-10 opacity-30"
-          fill
         />
       </div>
 

@@ -24,6 +24,8 @@ export default function Avatar({
       alt="사용자 아바타"
       width={width}
       height={height}
+      sizes="3.125rem"
+      priority
       onError={(event) => {
         event.currentTarget.src =
           "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg";

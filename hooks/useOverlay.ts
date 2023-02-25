@@ -1,11 +1,11 @@
 import { useRecoilState } from "recoil";
 import { Toast, ToastProperty } from "@/types/toast.interface";
-import { uuid as uuidv4 } from "uuidv4";
+import { v4 as uuid } from "uuid";
 import toastState from "@/store/toast";
 
 const getToastProperty = (content: string, property?: Toast): ToastProperty => {
   return {
-    id: uuidv4(),
+    id: uuid(),
     position: property?.position || "BOTTOM_RIGHT",
     type: property?.type || "normal",
     content,

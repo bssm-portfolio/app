@@ -12,6 +12,7 @@ const getCheckBoxCss = () => {
   w-5
   h-5
   outline
+  outline-2
   outline-primary-dark_gray
   rounded-sm
   box-border

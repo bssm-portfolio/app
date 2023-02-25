@@ -27,8 +27,9 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
           className="rounded object-cover"
           src={imageSrc}
           alt="포트폴리오이미지"
-          fill
           priority
+          fill
+          sizes="20rem"
           onError={() => {
             setImageSrc(
               "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
@@ -44,7 +45,9 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
               <div className={countViewCss}>
                 <HeartIcon
                   className={
-                    portfolio.bookmarkYn && "[&_path]:!fill-somago_yellow"
+                    portfolio.bookmarkYn
+                      ? "[&_path]:!fill-somago_yellow"
+                      : undefined
                   }
                 />
                 {portfolio.bookmarks}개
