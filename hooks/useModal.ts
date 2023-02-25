@@ -3,13 +3,18 @@ import { ModalState } from "@/types/modal.interface";
 import { useRecoilState } from "recoil";
 
 const useModal = () => {
-  const [, setModal] = useRecoilState(modalState);
+  const [modal, setModal] = useRecoilState(modalState);
 
-  const openModal = ({ title, content }: Omit<ModalState, "visible">) => {
+  const openModal = ({
+    title,
+    content,
+    onClose,
+  }: Omit<ModalState, "visible">) => {
     setModal({
       visible: true,
       title,
       content,
+      onClose,
     });
   };
 
@@ -21,7 +26,7 @@ const useModal = () => {
     });
   };
 
-  return { openModal, closeModal };
+  return { openModal, closeModal, visible: !!modal.visible };
 };
 
 export default useModal;

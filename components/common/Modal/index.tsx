@@ -7,5 +7,13 @@ export default function Modal() {
   const [modal] = useRecoilState(modalState);
   const { closeModal } = useModal();
 
-  return <ModalView {...modal} onClose={closeModal} />;
+  return (
+    <ModalView
+      {...modal}
+      onClose={() => {
+        modal.onClose?.();
+        closeModal();
+      }}
+    />
+  );
 }

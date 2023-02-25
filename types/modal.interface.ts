@@ -4,4 +4,5 @@ export interface ModalState {
   title?: string;
   content: ReactNode;
   visible?: boolean;
+  onClose?: () => void;
 }
