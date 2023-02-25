@@ -44,7 +44,9 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
               <div className={countViewCss}>
                 <HeartIcon
                   className={
-                    portfolio.bookmarkYn && "[&_path]:!fill-somago_yellow"
+                    portfolio.bookmarkYn
+                      ? "[&_path]:!fill-somago_yellow"
+                      : undefined
                   }
                 />
                 {portfolio.bookmarks}개
