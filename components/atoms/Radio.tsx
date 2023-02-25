@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface RadioProps {
@@ -48,7 +49,12 @@ export default function Radio({
         {...props}
         {...registerReturn}
       />
-      <div className="flex flex-col mb-[1.93rem]">
+      <div
+        className={classNames("flex flex-col", {
+          "mb-[1.93rem]": !!description,
+          "justify-center h-full": !description,
+        })}
+      >
         <label htmlFor={id} className="leading-3">
           {label}
         </label>
