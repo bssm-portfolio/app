@@ -8,14 +8,21 @@ interface PortfolioProps {
 export default function PortfolioPlayer({ url, type }: PortfolioProps) {
   return (
     <div className="w-full">
-      {type === "URL" ? (
-        <iframe className="w-full h-full" src={url} title="portfolio">
-          portfolio 가 들어가야 할 곳
-        </iframe>
-      ) : (
+      {type === "URL" && (
+        <iframe className="w-full h-full" src={url} title="portfolio" />
+      )}
+      {type === "VIDEO" && (
         <video src={url} controls className="w-full">
           <track default kind="captions" srcLang="ko" src={url} />
         </video>
+      )}
+      {type === "ALL" && (
+        <div className="flex">
+          <iframe className="w-full h-full" src={url} title="portfolio" />
+          <video src={url} controls className="w-full">
+            <track default kind="captions" srcLang="ko" src={url} />
+          </video>
+        </div>
       )}
     </div>
   );
