@@ -39,12 +39,7 @@ const useUser = (options?: UseUserOptions) => {
   }, [router.query, setUser, userInfo]);
 
   useEffect(() => {
-    if (
-      ["/contents"].includes(router.asPath) &&
-      !isFetching &&
-      !userInfo &&
-      !visible
-    ) {
+    if (options?.authorizedPage && !isFetching && !userInfo && !visible) {
       openModal({
         title: "로그인",
         content: (
@@ -64,6 +59,7 @@ const useUser = (options?: UseUserOptions) => {
       userInfo?.phone === null &&
       !["/account/signup", "/docs/privacy"].includes(router.asPath)
     ) {
+      console.log("push");
       router.push("/account/signup");
     }
   }, [userInfo?.phone, router]);
