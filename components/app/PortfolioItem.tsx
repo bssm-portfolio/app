@@ -35,7 +35,7 @@ export default function PortfolioItem({
           className="rounded-[0.625rem]"
           src={imageSrc}
           alt={portfolio.title}
-          fill
+          sizes="10px"
           onError={() => {
             setImageSrc(
               "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",

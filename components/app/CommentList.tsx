@@ -42,7 +42,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           alt="프로필"
           width={40}
           height={40}
-          sizes="100px"
+          sizes="40px"
           className="rounded-full"
         />
         <input
