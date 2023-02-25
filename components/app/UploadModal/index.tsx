@@ -1,4 +1,5 @@
 import httpClient from "@/apis";
+import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
@@ -67,8 +68,12 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       });
   };
 
-  const onInvalid: SubmitErrorHandler<PortfolioForm> = (data) => {
-    console.error("invalid data : ", data);
+  const { openToast } = useOverlay();
+
+  const onInvalid: SubmitErrorHandler<PortfolioForm> = (invalidData) => {
+    openToast(`${Object.keys(invalidData).join(", ")}를 확인해주세요.`, {
+      type: "danger",
+    });
   };
 
   const goNext = () =>
