@@ -1,8 +1,7 @@
 import { SelectHTMLAttributes } from "react";
-import { UseFormRegisterReturn, Control } from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 import ReactSelect from "react-select";
 import DownIcon from "../Icon/DownIcon";
-import { SignupForm } from "./Auth/SignupPopup";
 
 export interface Option {
   value: string | number | readonly string[] | undefined;
@@ -11,7 +10,6 @@ export interface Option {
 interface SelectProps<T> extends SelectHTMLAttributes<HTMLSelectElement> {
   className?: string;
   options?: Option[];
-  control: Control<SignupForm, any>;
   nativeSelect?: boolean;
   registerReturn?: UseFormRegisterReturn;
   setValue?: (v: T) => void;
@@ -23,7 +21,6 @@ export default function Select<T>({
   name,
   className = "",
   options = [],
-  control,
   registerReturn,
   nativeSelect = false,
   ...props

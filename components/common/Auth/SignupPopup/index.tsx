@@ -23,10 +23,9 @@ export interface SignupForm {
 }
 
 export default function SignupPopupView() {
-  const { watch, register, handleSubmit, setValue, control } =
-    useForm<SignupForm>({
-      defaultValues: { memberType: MemberType.STUDENT },
-    });
+  const { watch, register, handleSubmit, setValue } = useForm<SignupForm>({
+    defaultValues: { memberType: MemberType.STUDENT },
+  });
   const [isPrivacyAgree, setIsPrivacyAgree] = useState(false);
   const { openToast } = useOverlay();
 
@@ -75,7 +74,6 @@ export default function SignupPopupView() {
                 <Select
                   className="w-full"
                   placeholder="학년"
-                  control={control}
                   setValue={(v: Option) =>
                     typeof v.value === "number" &&
                     setValue("schoolGrade", v.value)
@@ -87,7 +85,6 @@ export default function SignupPopupView() {
                 <Select
                   className="w-full"
                   placeholder="반"
-                  control={control}
                   setValue={(v: Option) =>
                     typeof v.value === "number" &&
                     setValue("schoolClass", v.value)
@@ -99,7 +96,6 @@ export default function SignupPopupView() {
                 <Select
                   className="w-full"
                   placeholder="번호"
-                  control={control}
                   setValue={(v: Option) =>
                     typeof v.value === "number" &&
                     setValue("schoolNumber", v.value)
