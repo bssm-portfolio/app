@@ -36,5 +36,6 @@ module.exports = {
         labelAttributes: ["htmlFor"],
       },
     ],
+    "react/no-array-index-key": 0,
   },
 };
