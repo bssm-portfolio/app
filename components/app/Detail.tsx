@@ -48,7 +48,7 @@ export default function Detail({
   const handleFollow = () => {
     httpClient.follow
       .post({ memberId: portfolio.writer.memberId })
-      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
+      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]))
       .catch((error) =>
         openToast(error.response.data.message, { type: "danger" }),
       );
@@ -59,7 +59,7 @@ export default function Detail({
       .unfollow({
         data: { memberId: portfolio.writer.memberId },
       })
-      .then(() => queryClient.invalidateQueries([KEY.MEMBER]))
+      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]))
       .catch((error) =>
         openToast(error.response.data.message, { type: "danger" }),
       );
