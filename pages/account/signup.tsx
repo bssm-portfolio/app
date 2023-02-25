@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { useEffect } from "react";
+import SignupPopupView from "@/components/common/Auth/SignupPopup";
+import useModal from "@/hooks/useModal";
 
 function Home() {
   const { openModal } = useModal();
@@ -8,6 +10,7 @@ function Home() {
     openModal({
       title: "회원가입을 위해 아래의 정보를 입력해주세요.",
       content: <SignupPopupView />,
+      menualClose: true,
     });
   }, [openModal]);
 

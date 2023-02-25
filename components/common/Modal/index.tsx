@@ -12,7 +12,9 @@ export default function Modal() {
       {...modal}
       onClose={() => {
         modal.onClose?.();
-        closeModal();
+        if (!modal.menualClose) {
+          closeModal();
+        }
       }}
     />
   );
