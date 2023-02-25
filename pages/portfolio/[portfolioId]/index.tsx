@@ -48,8 +48,16 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
       <AppLayout
         app={
           <PortfolioPlayer
-            videoUrl={getFileDownloadUrl(dateParsedPortfolio.video)}
-            portfolioUrl={dateParsedPortfolio.portfolioUrl}
+            videoUrl={
+              dateParsedPortfolio.portfolioType !== "URL"
+                ? getFileDownloadUrl(dateParsedPortfolio.video)
+                : undefined
+            }
+            portfolioUrl={
+              dateParsedPortfolio.portfolioType !== "VIDEO"
+                ? dateParsedPortfolio.portfolioUrl
+                : undefined
+            }
             type={type}
           />
         }
