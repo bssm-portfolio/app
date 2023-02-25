@@ -59,7 +59,6 @@ const useUser = (options?: UseUserOptions) => {
       userInfo?.phone === null &&
       !["/account/signup", "/docs/privacy"].includes(router.asPath)
     ) {
-      console.log("push");
       router.push("/account/signup");
     }
   }, [userInfo?.phone, router]);

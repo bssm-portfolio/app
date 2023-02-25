@@ -6,7 +6,6 @@ import Radio from "@/components/atoms/Radio";
 import useOverlay from "@/hooks/useOverlay";
 import { MemberType } from "@/types/member.interface";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Select, { Option } from "../../Select";
@@ -30,7 +29,6 @@ export default function SignupPopupView() {
     });
   const [isPrivacyAgree, setIsPrivacyAgree] = useState(false);
   const { openToast } = useOverlay();
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<SignupForm> = (data) => {
     if (!isPrivacyAgree) return openToast("개인정보 이용 동의가 필요합니다.");
@@ -44,7 +42,9 @@ export default function SignupPopupView() {
     };
     httpClient.memberSignup
       .post(payload)
-      .then(() => router.push("/"))
+      .then(() => {
+        if (typeof window !== "undefined") window.location.href = "/";
+      })
       .catch(() => openToast("잘못된 정보가 있습니다."));
   };
 
