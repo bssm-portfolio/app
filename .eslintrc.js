@@ -37,5 +37,6 @@ module.exports = {
       },
     ],
     "react/no-array-index-key": 0,
+    "consistent-return": 0,
   },
 };
