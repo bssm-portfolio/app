@@ -24,7 +24,7 @@ export default function Avatar({
       alt="사용자 아바타"
       width={width}
       height={height}
-      sizes="50px"
+      sizes="3.125rem"
       priority
       onError={(event) => {
         event.currentTarget.src =
