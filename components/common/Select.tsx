@@ -1,24 +1,33 @@
 import { SelectHTMLAttributes } from "react";
+import { UseFormRegisterReturn, Control } from "react-hook-form";
 import ReactSelect from "react-select";
 import DownIcon from "../Icon/DownIcon";
+import { SignupForm } from "./Auth/SignupPopup";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface Option {
+  value: string | number | readonly string[] | undefined;
+  label: string;
+}
+interface SelectProps<T> extends SelectHTMLAttributes<HTMLSelectElement> {
   className?: string;
-  options?: {
-    value: string | number | readonly string[] | undefined;
-    label: string;
-  }[];
+  options?: Option[];
+  control: Control<SignupForm, any>;
   nativeSelect?: boolean;
+  registerReturn?: UseFormRegisterReturn;
+  setValue?: (v: T) => void;
 }
 
-export default function Select({
+export default function Select<T>({
   onChange,
+  setValue,
   name,
   className = "",
   options = [],
+  control,
+  registerReturn,
   nativeSelect = false,
   ...props
-}: SelectProps) {
+}: SelectProps<T>) {
   if (nativeSelect) {
     return (
       <div className={className}>
@@ -27,6 +36,7 @@ export default function Select({
             name={name}
             onChange={onChange}
             className="appearance-none pr-8 text-center bg-inherit focus:outline-none"
+            {...registerReturn}
           >
             {options.map(({ label, value }) => (
               <option key={label + value} value={value}>
@@ -39,5 +49,12 @@ export default function Select({
       </div>
     );
   }
-  return <ReactSelect placeholder={props.placeholder} options={options} />;
+  return (
+    <ReactSelect
+      id={name}
+      onChange={(v) => setValue?.(v as any)}
+      placeholder={props.placeholder}
+      options={options}
+    />
+  );
 }
