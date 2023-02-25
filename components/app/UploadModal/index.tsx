@@ -33,40 +33,38 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   const queryClient = useQueryClient();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
-    if (thumbnailFile && videoFile) {
-      const videoFileUid = (
-        await httpClient.file.upload(getFormData(videoFile))
-      ).data.fileUid;
-      const thumbnailFileUid = (
-        await httpClient.file.upload(getFormData(thumbnailFile))
-      ).data.fileUid;
+    const videoFileUid =
+      videoFile &&
+      (await httpClient.file.upload(getFormData(videoFile))).data.fileUid;
+    const thumbnailFileUid =
+      thumbnailFile &&
+      (await httpClient.file.upload(getFormData(thumbnailFile))).data.fileUid;
 
-      const getPortfolioType = (): PortfolioType => {
-        if (data.portfolioUrl.length > 0 && videoFileUid) {
-          return "ALL";
-        }
-        if (videoFileUid) {
-          return "VIDEO";
-        }
-        return "URL";
-      };
+    const getPortfolioType = (): PortfolioType => {
+      if (data.portfolioUrl.length > 0 && videoFileUid) {
+        return "ALL";
+      }
+      if (videoFileUid) {
+        return "VIDEO";
+      }
+      return "URL";
+    };
 
-      await httpClient.portfolio
-        .post({
-          ...data,
-          portfolioType: getPortfolioType(),
-          skillList: selectedSkills,
-          contributorIdList: [],
-          videoFileUid,
-          thumbnailFileUid,
-        })
-        .then(() => {
-          closeModal();
-          queryClient.invalidateQueries({
-            queryKey: [KEY.PORTFOLIO_LIST],
-          });
+    await httpClient.portfolio
+      .post({
+        ...data,
+        portfolioType: getPortfolioType(),
+        skillList: selectedSkills,
+        contributorIdList: [],
+        videoFileUid,
+        thumbnailFileUid,
+      })
+      .then(() => {
+        closeModal();
+        queryClient.invalidateQueries({
+          queryKey: [KEY.PORTFOLIO_LIST],
         });
-    }
+      });
   };
 
   const onInvalid: SubmitErrorHandler<PortfolioForm> = (data) => {
