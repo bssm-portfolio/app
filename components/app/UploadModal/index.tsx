@@ -32,6 +32,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
     // formState: { errors },
   } = useForm<PortfolioForm>();
   const queryClient = useQueryClient();
+  const { openToast } = useOverlay();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     const videoFileUid =
@@ -67,8 +68,6 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         });
       });
   };
-
-  const { openToast } = useOverlay();
 
   const onInvalid: SubmitErrorHandler<PortfolioForm> = (invalidData) => {
     openToast(`${Object.keys(invalidData).join(", ")}를 확인해주세요.`, {
