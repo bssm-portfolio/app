@@ -36,6 +36,8 @@ export default function PortfolioItem({
           src={imageSrc}
           alt={portfolio.title}
           sizes="10px"
+          placeholder="blur"
+          blurDataURL="https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg"
           onError={() => {
             setImageSrc(
               "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
