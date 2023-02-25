@@ -81,6 +81,7 @@ export default function DataGridItem({
                   className="object-cover rounded"
                   src={imageUrl}
                   alt={portfolio.title}
+                  fill
                   sizes="120px"
                   onError={() =>
                     setImageUrl(
