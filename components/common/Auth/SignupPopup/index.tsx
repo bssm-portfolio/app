@@ -1,3 +1,4 @@
+import httpClient from "@/apis";
 import Button from "@/components/atoms/Button";
 import CheckBox from "@/components/atoms/CheckBox";
 import Input from "@/components/atoms/Input";
@@ -5,26 +6,46 @@ import Radio from "@/components/atoms/Radio";
 import useOverlay from "@/hooks/useOverlay";
 import { MemberType } from "@/types/member.interface";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Select from "../../Select";
+import Select, { Option } from "../../Select";
 
-interface SignupForm {
+export interface SignupForm {
   username: string;
   password: string;
   memberType: MemberType;
+  schoolGrade: number;
+  schoolClass: number;
+  schoolNumber: number;
+  phone: string;
+  belong: string;
+  admissionDate: string;
 }
 
 export default function SignupPopupView() {
-  const { watch, register, handleSubmit } = useForm<SignupForm>({
-    defaultValues: { memberType: MemberType.STUDENT },
-  });
+  const { watch, register, handleSubmit, setValue, control } =
+    useForm<SignupForm>({
+      defaultValues: { memberType: MemberType.STUDENT },
+    });
   const [isPrivacyAgree, setIsPrivacyAgree] = useState(false);
   const { openToast } = useOverlay();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<SignupForm> = (data) => {
     if (!isPrivacyAgree) return openToast("개인정보 이용 동의가 필요합니다.");
-    return data;
+    const isTeacher = data.memberType === MemberType.TEACHER;
+    const payload = {
+      ...data,
+      schoolGrade: isTeacher ? undefined : data.schoolGrade,
+      schoolClass: isTeacher ? undefined : data.schoolClass,
+      schoolNumber: isTeacher ? undefined : data.schoolNumber,
+      admissionDate: isTeacher ? undefined : data.admissionDate,
+    };
+    httpClient.memberSignup
+      .post(payload)
+      .then(() => router.push("/"))
+      .catch(() => openToast("잘못된 정보가 있습니다."));
   };
 
   const memberType = watch("memberType");
@@ -46,50 +67,73 @@ export default function SignupPopupView() {
           />
         </div>
         <div className="flex flex-col gap-1 mb-6">
-          <Input placeholder="전화번호" />
-          <Input placeholder="소속" />
+          <Input placeholder="전화번호" registerReturn={register("phone")} />
+          <Input placeholder="소속" registerReturn={register("belong")} />
           {memberType === MemberType.STUDENT && (
             <>
-              <div className="flex">
+              <div className="flex justify-between gap-1">
                 <Select
+                  className="w-full"
                   placeholder="학년"
+                  control={control}
+                  setValue={(v: Option) =>
+                    typeof v.value === "number" &&
+                    setValue("schoolGrade", v.value)
+                  }
                   options={Array(3)
                     .fill(null)
                     .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
                 />
-
                 <Select
+                  className="w-full"
                   placeholder="반"
+                  control={control}
+                  setValue={(v: Option) =>
+                    typeof v.value === "number" &&
+                    setValue("schoolClass", v.value)
+                  }
                   options={Array(4)
                     .fill(null)
                     .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
                 />
                 <Select
+                  className="w-full"
                   placeholder="번호"
+                  control={control}
+                  setValue={(v: Option) =>
+                    typeof v.value === "number" &&
+                    setValue("schoolNumber", v.value)
+                  }
                   options={Array(20)
                     .fill(null)
                     .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
                 />
               </div>
-              <Input placeholder="입학년도" />
+              <Input
+                placeholder="입학년도"
+                registerReturn={register("admissionDate")}
+              />
             </>
           )}
         </div>
         <div>
-          <p>
-            <Link
-              href="/docs/privacy"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              개인정보 수집
-            </Link>
-            에 동의합니다.{" "}
+          <div className="flex justify-center gap-1">
+            <p>
+              <Link
+                href="/docs/privacy"
+                rel="noopener noreferrer"
+                target="_blank"
+                className="font-bold"
+              >
+                개인정보 수집
+              </Link>
+              에 동의합니다.{" "}
+            </p>
             <CheckBox
               checked={isPrivacyAgree}
               onChange={(e) => setIsPrivacyAgree(e.target.checked)}
             />
-          </p>
+          </div>
         </div>
         <div className="flex justify-end">
           <Button type="submit">완료</Button>
