@@ -1,26 +1,39 @@
 import { PortfolioType } from "@/types/portfolio.interface";
 
 interface PortfolioProps {
-  url: string;
   type: PortfolioType;
+  portfolioUrl?: string;
+  videoUrl?: string;
 }
 
-export default function PortfolioPlayer({ url, type }: PortfolioProps) {
+export default function PortfolioPlayer({
+  portfolioUrl,
+  videoUrl,
+  type,
+}: PortfolioProps) {
   return (
     <div className="w-full">
       {type === "URL" && (
-        <iframe className="w-full h-full" src={url} title="portfolio" />
+        <iframe
+          className="w-full h-full"
+          src={portfolioUrl}
+          title="portfolio"
+        />
       )}
       {type === "VIDEO" && (
-        <video src={url} controls className="w-full">
-          <track default kind="captions" srcLang="ko" src={url} />
+        <video src={videoUrl} controls className="w-full">
+          <track default kind="captions" srcLang="ko" src={videoUrl} />
         </video>
       )}
       {type === "ALL" && (
-        <div className="flex">
-          <iframe className="w-full h-full" src={url} title="portfolio" />
-          <video src={url} controls className="w-full">
-            <track default kind="captions" srcLang="ko" src={url} />
+        <div className="flex flex-wrap">
+          <iframe
+            className="w-full h-full"
+            src={portfolioUrl}
+            title="portfolio"
+          />
+          <video src={videoUrl} controls className="w-full">
+            <track default kind="captions" srcLang="ko" src={videoUrl} />
           </video>
         </div>
       )}
