@@ -35,7 +35,6 @@ export default function PortfolioItem({
           className="rounded-[0.625rem]"
           src={imageSrc}
           alt={portfolio.title}
-          priority
           sizes="15rem"
           fill
           onError={() => {
