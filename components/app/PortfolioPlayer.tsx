@@ -32,7 +32,7 @@ export default function PortfolioPlayer({
             src={portfolioUrl}
             title="portfolio"
           />
-          <video src={videoUrl} controls className="w-full">
+          <video src={videoUrl} controls className="w-full" crossOrigin="true">
             <track default kind="captions" srcLang="ko" src={videoUrl} />
           </video>
         </div>
