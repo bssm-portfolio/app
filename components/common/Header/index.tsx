@@ -1,16 +1,18 @@
 import useModal from "@/hooks/useModal";
 import useUser from "@/hooks/useUser";
 import UploadModal from "../../app/UploadModal";
-import LoginPopupView from "../Login/LoginPopup";
+import LoginPopupView from "../Auth/LoginPopup";
 import HeaderView from "./View";
 
 export default function Header() {
   const { user, isLogined, logout } = useUser();
   const { openModal, closeModal } = useModal();
+
   const openLoginModal = () =>
     openModal({
       content: <LoginPopupView />,
     });
+
   const openUploadModal = () =>
     openModal({
       title: "업로드",

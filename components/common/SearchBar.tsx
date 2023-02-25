@@ -5,6 +5,25 @@ import { XIcon } from "../Icon";
 import SearchIcon from "../Icon/SearchIcon";
 import Select from "./Select";
 
+const searchOptions = [
+  {
+    label: "전체",
+    value: "전체",
+  },
+  {
+    label: "테마별",
+    value: "테마별",
+  },
+  {
+    label: "제작자별",
+    value: "제작자별",
+  },
+  {
+    label: "학생별",
+    value: "학생별",
+  },
+];
+
 export default function SearchBar() {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("");
@@ -41,12 +60,9 @@ export default function SearchBar() {
         name="category"
         value={category}
         onChange={(event) => handleSelect(event)}
-      >
-        <option>전체</option>
-        <option>테마별</option>
-        <option>제작자별</option>
-        <option>학생별</option>
-      </Select>
+        options={searchOptions}
+        nativeSelect
+      />
       <span className="block border-r border-primary-dark_gray h-base" />
       <SearchIcon className="mx-small" onClick={() => focusInput(inputRef)} />
       <input

@@ -8,7 +8,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     value: string | number | readonly string[] | undefined;
     label: string;
   }[];
-  isNativeSelect?: boolean;
+  nativeSelect?: boolean;
 }
 
 export default function Select({
@@ -16,10 +16,10 @@ export default function Select({
   name,
   className = "",
   options = [],
-  isNativeSelect = false,
+  nativeSelect = false,
   ...props
 }: SelectProps) {
-  if (isNativeSelect) {
+  if (nativeSelect) {
     return (
       <div className={className}>
         <div className="relative">
