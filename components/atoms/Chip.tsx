@@ -18,11 +18,15 @@ interface ChipProps {
 function Group({ children, className, type = "main" }: ChipGroupProps) {
   return (
     <div
-      className={`${classNames(className, "flex w-80 overflow-auto py-1", {
-        "xl:max-w-[8.125rem]": type === "portfolio",
-        "!w-[23rem]": type === "detail",
-        "!w-full !max-w-none": type === "upload",
-      })}`}
+      className={`${classNames(
+        className,
+        "flex w-80 overflow-auto scrollbar-hide py-1",
+        {
+          "xl:max-w-[8.125rem]": type === "portfolio",
+          "!w-[23rem]": type === "detail",
+          "!w-full": type === "upload",
+        },
+      )}`}
     >
       {children}
     </div>
@@ -37,7 +41,7 @@ function Item({ children, type = "main", selected, onClick }: ChipProps) {
         "px-3 py-1 border border-blue rounded-full text-sxx whitespace-nowrap mr-1",
         {
           "text-blue": type === "main" || (type === "upload" && !selected),
-          "cursor-pointer h-[2.31rem] whitespace-nowrap text-ellipsis overflow-hidden text-[0.875rem] flex items-center":
+          "cursor-pointer h-[2.31rem] whitespace-nowrap text-ellipsis text-[0.875rem] flex items-center":
             type === "upload",
           "bg-blue text-white": type === "upload" && selected,
         },

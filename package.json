@@ -29,6 +29,7 @@
     "react-loading": "^2.0.3",
     "recoil": "^0.7.6",
     "tailwind-scrollbar": "^2.1.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {

@@ -124,5 +124,6 @@ module.exports = {
   plugins: [
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     require("tailwind-scrollbar")({ nocompatible: true }),
+    require("tailwind-scrollbar-hide"),
   ],
 };
