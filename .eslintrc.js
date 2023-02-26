@@ -3,23 +3,20 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint", "prettier"],
   parserOptions: {
-    project: "./tsconfig.json",
+    project: "./tsconfig.json"
   },
   env: {
-    node: true,
+    node: true
   },
-  extends: [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended",
-    "airbnb",
-    "airbnb-typescript",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "airbnb", "airbnb-typescript", "plugin:prettier/recommended", "plugin:storybook/recommended"],
   rules: {
     // 'React' must be in scope when using JSX 에러 지우기(Next.js)
     "react/react-in-jsx-scope": "off",
     // ts파일에서 tsx구문 허용(Next.js)
-    "react/jsx-filename-extension": [1, { extensions: [".ts", ".tsx"] }], // should add ".ts" if typescript project
+    "react/jsx-filename-extension": [1, {
+      extensions: [".ts", ".tsx"]
+    }],
+    // should add ".ts" if typescript project
     "no-unused-vars": "off",
     "no-param-reassign": "off",
     "@typescript-eslint/no-unused-vars": "warn",
@@ -30,13 +27,10 @@ module.exports = {
     "react/jsx-props-no-spreading": 0,
     "no-empty-interface": 0,
     // id, htmlFor 이름 규칙 에러 지우기
-    "jsx-a11y/label-has-associated-control": [
-      2,
-      {
-        labelAttributes: ["htmlFor"],
-      },
-    ],
+    "jsx-a11y/label-has-associated-control": [2, {
+      labelAttributes: ["htmlFor"]
+    }],
     "react/no-array-index-key": 0,
-    "consistent-return": 0,
-  },
+    "consistent-return": 0
+  }
 };
