@@ -22,11 +22,25 @@ export default function FileUploadView({
   thumbnailFile: File | undefined;
   setThumbnailFile: Dispatch<SetStateAction<File | undefined>>;
 }) {
+  const getFileUploaderBorderCss = () => {
+    return `
+    relative
+    border
+    mb-2.5
+    flex
+    flex-col
+    justify-center
+    items-center
+    border-primary-border_gray
+    gap-2.5
+    rounded-lg`;
+  };
+
   return (
     <div className={classNames("flex flex-col gap-8", className)} {...props}>
       <div>
         <h2 className="mb-2">동영상</h2>
-        <div className="relative w-full border h-60 mb-2.5 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
+        <div className={classNames("w-full h-60", getFileUploaderBorderCss())}>
           <FileUploader
             id="video-uploader"
             label="동영상 업로드"
@@ -56,7 +70,12 @@ export default function FileUploadView({
         </div>
 
         <h2 className="mt-5 mb-2">썸네일</h2>
-        <div className="relative w-[20rem] h-[11.25rem] border mb-2.5 flex flex-col justify-center items-center border-primary-border_gray gap-2.5 rounded-lg">
+        <div
+          className={classNames(
+            "w-[20rem] h-[11.25rem]",
+            getFileUploaderBorderCss(),
+          )}
+        >
           <FileUploader
             id="thumbnail-uploader"
             label="썸네일 업로드"
