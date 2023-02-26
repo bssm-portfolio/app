@@ -114,7 +114,7 @@ export class HttpClient {
   }
 
   private static setCommonInterceptors(instance: AxiosInstance) {
-    instance.interceptors.request.use(requestInterceptors);
+    instance.interceptors.request.use(requestInterceptors as any);
     instance.interceptors.response.use(responseInterceptors);
   }
 }
@@ -130,6 +130,7 @@ export default {
   oauth: new HttpClient("/api/login/oauth2", axiosConfig),
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
+  memberSignup: new HttpClient("/api/member/signup", axiosConfig),
   comment: new HttpClient("/api/comment", axiosConfig),
   file: new HttpClient("/api/file", axiosConfig),
   follow: new HttpClient("/api/follow", axiosConfig),
