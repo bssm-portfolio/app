@@ -8,13 +8,7 @@ import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useState } from "react";
-import {
-  useForm,
-  SubmitHandler,
-  SubmitErrorHandler,
-  FieldErrors,
-  FieldErrorsImpl,
-} from "react-hook-form";
+import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import FileUploadView from "./FileUploadView";
 import FormView from "./Form";
 import Navigator from "./Navigator";
@@ -102,8 +96,10 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       <FileUploadView
         className={classNames({ hidden: pageIndex !== 0 })}
         register={register}
-        setThumbnailFile={setThumbnailFile}
+        videoFile={videoFile}
         setVideoFile={setVideoFile}
+        thumbnailFile={thumbnailFile}
+        setThumbnailFile={setThumbnailFile}
       />
       <FormView
         className={classNames({ hidden: pageIndex !== 1 })}
