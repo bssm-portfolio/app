@@ -14,7 +14,9 @@ const clearInput = (inputRef: RefObject<HTMLInputElement>) => {
 };
 
 const checkInputValueIsNull = (inputRef: RefObject<HTMLInputElement>) => {
-  if (inputRef.current) return inputRef.current.value !== "";
+  if (inputRef.current) {
+    return !!inputRef.current.value.trimEnd();
+  }
   return false;
 };
 
