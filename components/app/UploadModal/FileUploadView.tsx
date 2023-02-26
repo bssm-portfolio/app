@@ -36,7 +36,6 @@ export default function FileUploadView({
               if (event.target.files) setVideoFile(event.target.files[0]);
             }}
           />
-          <p>동영상 파일을 드래그 앤 드롭하여 업로드</p>
         </div>
       </div>
       <div>
