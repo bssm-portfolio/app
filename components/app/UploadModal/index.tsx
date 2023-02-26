@@ -112,7 +112,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         register={register}
       />
       <Navigator
-        className="mt-auto mb-6"
+        className="mt-auto pb-6"
         goNext={goNext}
         goPrev={pageIndex > 0 ? goPrev : null}
         isLast={pageIndex === MAX_NAVIGATOR_LENGTH - 1}
