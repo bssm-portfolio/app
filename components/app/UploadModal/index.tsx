@@ -73,16 +73,21 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         queryClient.invalidateQueries({
           queryKey: [KEY.PORTFOLIO_LIST],
         });
-      });
+      })
+      .catch((error) =>
+        openToast(error.response.data.reason, {
+          type: "danger",
+        }),
+      );
   };
 
   const onInValid: SubmitErrorHandler<PortfolioForm> = (inValidData) => {
-    console.log(inValidData);
-    console.log(getErrorProperty<PortfolioForm>(inValidData));
-
-    openToast(`를 확인해주세요.`, {
-      type: "danger",
-    });
+    openToast(
+      `${getErrorProperty<PortfolioForm>(inValidData)}를 확인해주세요.`,
+      {
+        type: "danger",
+      },
+    );
   };
 
   const goNext = () =>
