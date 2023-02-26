@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import fixture from "@/fixtures";
-import { Member } from "@/types/member.interface";
+import { Member, MemberType } from "@/types/member.interface";
 
 export { default as modalState } from "./modal";
 
@@ -13,6 +13,7 @@ export const emptyUser: Member = {
   memberRoleType: "ROLE_NORMAL",
   job: null,
   phone: null,
+  memberType: MemberType.EMPTY,
   followerCount: 0,
   followingCount: 0,
   portfolioCount: 0,

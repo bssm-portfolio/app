@@ -1,4 +1,4 @@
-import { Member } from "@/types/member.interface";
+import { Member, MemberType } from "@/types/member.interface";
 import { Comment, Portfolio } from "@/types/portfolio.interface";
 
 const avatarUrl =
@@ -27,6 +27,7 @@ const portfolio: Portfolio = {
     name: "",
     profileImageUrl: avatarUrl,
     email: "",
+    memberType: MemberType.STUDENT,
   },
   bookmarkYn: false,
   followYn: false,
@@ -54,6 +55,7 @@ const portfolio: Portfolio = {
       memberId: 0,
       name: "",
       profileImageUrl: "",
+      memberType: MemberType.STUDENT,
       email: "",
     },
   ],
@@ -104,6 +106,7 @@ const user: Member = {
   description: "",
   phone: "",
   job: "",
+  memberType: MemberType.STUDENT,
   memberRoleType: "ROLE_NORMAL",
   portfolioCount: 0,
   followerCount: 0,
