@@ -16,10 +16,12 @@ interface CommentForm {
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { user } = useUser();
-  const { openToast } = useOverlay();
   const { list: commentList, refetch } = useCommentList(portfolioId);
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [isWriting, setIsWriting] = useState(false);
+  const { ref, ...rest } = register("content", {
+    required: "댓글 내용은 필수 항목입니다.",
+  });
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
     await httpClient.comment.post({
@@ -30,14 +32,6 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
     refetch();
   };
 
-  const onInValid: SubmitErrorHandler<CommentForm> = (inValidData) => {
-    // openToast(errorData)
-    console.log(inValidData);
-  };
-
-  const { ref, ...rest } = register("content", {
-    required: "댓글 내용은 필수 항목입니다.",
-  });
   const handleInput = (event: never) => {
     inputRef.current = event;
     ref(event);
@@ -45,10 +39,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
 
   return (
     <div>
-      <form
-        className="flex mt-base relative"
-        onSubmit={handleSubmit(onValid, onInValid)}
-      >
+      <form className="flex mt-base relative" onSubmit={handleSubmit(onValid)}>
         <Image
           src={user.profileImageUrl}
           alt="프로필"
@@ -63,7 +54,8 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           placeholder="댓글 추가.."
           {...rest}
           ref={handleInput}
-          onChange={() => setIsWriting(checkInputValueIsNull(inputRef))}
+          onChange={() => setIsWriting(true)}
+          // checkInputValueIsNull(inputRef)
         />
         {isWriting && (
           <InputButton

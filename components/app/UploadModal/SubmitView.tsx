@@ -13,21 +13,21 @@ export default function SubmitView({
     <div className={className}>
       <h2 className="text-base mb-large">공개범위</h2>
       <Radio
-        registerReturn={register("portfolioScope", { required: true })}
+        registerReturn={register("portfolioScope", { required: "공개범위" })}
         id="entire"
         label="전체"
         value="PUBLIC"
         description="누구나 볼 수 있습니다."
       />
       <Radio
-        registerReturn={register("portfolioScope", { required: true })}
+        registerReturn={register("portfolioScope", { required: "공개범위" })}
         id="part"
         label="일부"
         value="PROTECTED"
         description="링크가 있으면 누구든 볼 수 있습니다."
       />
       <Radio
-        registerReturn={register("portfolioScope", { required: true })}
+        registerReturn={register("portfolioScope", { required: "공개범위" })}
         id="private"
         label="비공개"
         value="PRIVATE"
