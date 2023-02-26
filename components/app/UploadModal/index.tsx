@@ -71,9 +71,12 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   };
 
   const onInValid: SubmitErrorHandler<PortfolioForm> = (inValidData) => {
-    openToast(`${getErrorProperty(inValidData)}을(를) 확인해주세요.`, {
-      type: "danger",
-    });
+    openToast(
+      `${getErrorProperty<PortfolioForm>(inValidData)}을(를) 확인해주세요.`,
+      {
+        type: "danger",
+      },
+    );
   };
 
   const goNext = () =>
