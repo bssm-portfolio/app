@@ -43,7 +43,7 @@ function Item({ children, className = "", onClick }: KebabItemProps) {
   return (
     <li
       className={classNames(
-        "cursor-pointer px-2.5 py-[0.3125rem] hover:bg-slate-300",
+        "cursor-pointer px-2.5 py-[0.3125rem] hover:bg-primary-light_gray",
         className,
       )}
     >
