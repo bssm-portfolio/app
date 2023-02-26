@@ -7,13 +7,10 @@ const useModal = () => {
   const [modal, setModal] = useRecoilState(modalState);
 
   const openModal = useCallback(
-    ({ title, content, menualClose, onClose }: Omit<ModalState, "visible">) => {
+    (modalData: ModalState) => {
       setModal({
+        ...modalData,
         visible: true,
-        title,
-        content,
-        menualClose,
-        onClose,
       });
     },
     [setModal],
