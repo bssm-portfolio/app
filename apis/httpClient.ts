@@ -114,7 +114,7 @@ export class HttpClient {
   }
 
   private static setCommonInterceptors(instance: AxiosInstance) {
-    instance.interceptors.request.use(requestInterceptors);
+    instance.interceptors.request.use(requestInterceptors as any);
     instance.interceptors.response.use(responseInterceptors);
   }
 }
