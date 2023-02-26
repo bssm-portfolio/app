@@ -7,8 +7,8 @@ import Select from "./Select";
 
 const searchOptions = [
   {
-    label: "전체",
-    value: "전체",
+    label: "제목",
+    value: "제목",
   },
   {
     label: "테마별",
