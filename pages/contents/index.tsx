@@ -1,6 +1,7 @@
 import DataGrid from "@/components/contents/DataGrid";
 import DataGridTitle from "@/components/contents/DataGridTitle";
 import Filter from "@/components/contents/Filter";
+import useUser from "@/hooks/useUser";
 import ChannelContentLayout from "@/layouts/ChannelContent";
 import { useMyPortfolioList } from "@/models/portfolio";
 import { Portfolio } from "@/types/portfolio.interface";
@@ -8,12 +9,15 @@ import { NextSeo, NextSeoProps } from "next-seo";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { list, refetch } = useMyPortfolioList();
+  const { list, refetch, isError } = useMyPortfolioList();
   const [portfolioList, setPortfolioList] = useState<Portfolio[]>([]);
+  useUser({ authorizedPage: true });
 
   useEffect(() => {
-    setPortfolioList(list);
-  }, [list]);
+    if (list.length > 0 && !isError) {
+      setPortfolioList(list);
+    }
+  }, [list, isError]);
 
   const seoConfig: NextSeoProps = {
     title: "콘텐츠 관리",

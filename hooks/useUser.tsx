@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import useModal from "./useModal";
 
 interface UseUserOptions {
   authorizedPage?: boolean;
@@ -13,6 +14,7 @@ interface UseUserOptions {
 const useUser = (options?: UseUserOptions) => {
   const [user, setUser] = useRecoilState(userState);
   const router = useRouter();
+  const { openModal, visible } = useModal();
   const {
     data: userInfo,
     remove,
@@ -37,12 +39,29 @@ const useUser = (options?: UseUserOptions) => {
   }, [router.query, setUser, userInfo]);
 
   useEffect(() => {
-    if (options?.authorizedPage && !isFetching && !userInfo) {
-      // TODO: alert 제거
-      alert("로그인이 필요한 페이지입니다.");
-      router.push("/");
+    if (options?.authorizedPage && !isFetching && !userInfo && !visible) {
+      openModal({
+        title: "로그인",
+        content: (
+          <p className="mb-5">
+            로그인이 필요한 페이지입니다. 메인 페이지로 돌아갑니다.
+          </p>
+        ),
+        onClose: () => {
+          if (typeof window !== "undefined") window.location.href = "/";
+        },
+      });
     }
-  }, [options, router, userInfo, isFetching]);
+  }, [options, userInfo, isFetching, router, visible, openModal]);
+
+  useEffect(() => {
+    if (
+      userInfo?.phone === null &&
+      !["/account/signup", "/docs/privacy"].includes(router.asPath)
+    ) {
+      router.push("/account/signup");
+    }
+  }, [userInfo?.phone, router]);
 
   return { user, isLogined: !!userInfo, logout };
 };
