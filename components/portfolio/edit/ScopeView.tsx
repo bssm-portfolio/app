@@ -13,7 +13,7 @@ export default function ScopeView({
     <>
       <h2 className="text-base mb-large">공개범위</h2>
       <Radio
-        registerReturn={register("portfolioScope", { required: true })}
+        registerReturn={register("portfolioScope", { required: "공개범위" })}
         id="entire"
         label="전체"
         value="PUBLIC"
@@ -21,7 +21,7 @@ export default function ScopeView({
         checked={scope === "PUBLIC"}
       />
       <Radio
-        registerReturn={register("portfolioScope", { required: true })}
+        registerReturn={register("portfolioScope", { required: "공개범위" })}
         id="part"
         label="일부"
         value="PROTECTED"
@@ -29,7 +29,7 @@ export default function ScopeView({
         checked={scope === "PROTECTED"}
       />
       <Radio
-        registerReturn={register("portfolioScope", { required: true })}
+        registerReturn={register("portfolioScope", { required: "공개범위" })}
         id="private"
         label="비공개"
         value="PRIVATE"

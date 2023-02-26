@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { useCommentList } from "@/models/portfolio";
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useRef, useState } from "react";
 import { checkInputValueIsNull } from "@/utils/input";
 import httpClient from "@/apis";
 import useUser from "@/hooks/useUser";
-import useOverlay from "@/hooks/useOverlay";
 import Comment from "../atoms/Comment";
 import InputButton from "../atoms/InputButton";
 
@@ -54,8 +53,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           placeholder="댓글 추가.."
           {...rest}
           ref={handleInput}
-          onChange={() => setIsWriting(true)}
-          // checkInputValueIsNull(inputRef)
+          onChange={() => setIsWriting(checkInputValueIsNull(inputRef))}
         />
         {isWriting && (
           <InputButton

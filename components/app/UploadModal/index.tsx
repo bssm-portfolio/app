@@ -4,10 +4,17 @@ import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
 import { getFormData } from "@/utils/file";
+import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useState } from "react";
-import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
+import {
+  useForm,
+  SubmitHandler,
+  SubmitErrorHandler,
+  FieldErrors,
+  FieldErrorsImpl,
+} from "react-hook-form";
 import FileUploadView from "./FileUploadView";
 import FormView from "./Form";
 import Navigator from "./Navigator";
@@ -70,7 +77,10 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   };
 
   const onInValid: SubmitErrorHandler<PortfolioForm> = (inValidData) => {
-    openToast(`${Object.keys(inValidData).join(", ")}를 확인해주세요.`, {
+    console.log(inValidData);
+    console.log(getErrorProperty<PortfolioForm>(inValidData));
+
+    openToast(`를 확인해주세요.`, {
       type: "danger",
     });
   };
