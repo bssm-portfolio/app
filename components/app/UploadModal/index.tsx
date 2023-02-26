@@ -69,8 +69,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       });
   };
 
-  const onInvalid: SubmitErrorHandler<PortfolioForm> = (invalidData) => {
-    openToast(`${Object.keys(invalidData).join(", ")}를 확인해주세요.`, {
+  const onInValid: SubmitErrorHandler<PortfolioForm> = (inValidData) => {
+    openToast(`${Object.keys(inValidData).join(", ")}를 확인해주세요.`, {
       type: "danger",
     });
   };
@@ -82,7 +82,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   return (
     <form
       className="h-39 flex flex-col"
-      onSubmit={handleSubmit(onValid, onInvalid)}
+      onSubmit={handleSubmit(onValid, onInValid)}
     >
       <FileUploadView
         className={classNames({ hidden: pageIndex !== 0 })}
