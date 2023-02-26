@@ -1,6 +1,7 @@
-export default function CommentIcon() {
+export default function CommentIcon({ className }: { className?: string }) {
   return (
     <svg
+      className={className}
       width="12"
       height="13"
       viewBox="0 0 12 13"
