@@ -44,7 +44,7 @@ export default function SignupPopupView() {
       .then(() => {
         if (typeof window !== "undefined") window.location.href = "/";
       })
-      .catch(() => openToast("잘못된 정보가 있습니다."));
+      .catch(() => openToast("잘못된 정보가 있습니다.", { type: "danger" }));
   };
 
   const memberType = watch("memberType");
@@ -123,7 +123,7 @@ export default function SignupPopupView() {
               >
                 개인정보 수집
               </Link>
-              에 동의합니다.{" "}
+              에 동의합니다.
             </p>
             <CheckBox
               checked={isPrivacyAgree}
