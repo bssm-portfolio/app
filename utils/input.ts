@@ -1,4 +1,5 @@
 import { RefObject } from "react";
+import { FieldErrorsImpl, FieldValues } from "react-hook-form";
 
 const focusInput = (inputRef: RefObject<HTMLInputElement>) => {
   if (inputRef.current) {
@@ -14,8 +15,18 @@ const clearInput = (inputRef: RefObject<HTMLInputElement>) => {
 };
 
 const checkInputValueIsNull = (inputRef: RefObject<HTMLInputElement>) => {
-  if (inputRef.current) return inputRef.current.value !== "";
+  if (inputRef.current) {
+    return !!inputRef.current.value.trimEnd();
+  }
   return false;
 };
 
-export { focusInput, clearInput, checkInputValueIsNull };
+const getErrorProperty = <T extends FieldValues>(
+  inValidData: Partial<FieldErrorsImpl<T>>,
+): string => {
+  return Object.values(inValidData)
+    .map((inValidProperty) => inValidProperty.message)
+    .join(", ");
+};
+
+export { focusInput, clearInput, checkInputValueIsNull, getErrorProperty };

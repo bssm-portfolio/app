@@ -18,6 +18,9 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const { list: commentList, refetch } = useCommentList(portfolioId);
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [isWriting, setIsWriting] = useState(false);
+  const { ref, ...rest } = register("content", {
+    required: "댓글 내용은 필수 항목입니다.",
+  });
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
     await httpClient.comment.post({
@@ -28,7 +31,6 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
     refetch();
   };
 
-  const { ref, ...rest } = register("content", { required: true });
   const handleInput = (event: never) => {
     inputRef.current = event;
     ref(event);

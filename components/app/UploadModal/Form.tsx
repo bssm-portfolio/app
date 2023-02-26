@@ -43,14 +43,18 @@ function FormView({
         <Input
           className="w-full"
           placeholder="제목"
-          registerReturn={register("title", { required: true })}
+          registerReturn={register("title", {
+            required: "제목",
+          })}
         />
       </LabelForm>
       <LabelForm label="설명" className="mb-6">
         <Textarea
           className="w-full"
           placeholder="설명"
-          registerReturn={register("description", { required: true })}
+          registerReturn={register("description", {
+            required: "설명",
+          })}
         />
       </LabelForm>
       <LabelForm label="기술스택(중복선택 가능)" className="mb-6">

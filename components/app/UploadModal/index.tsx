@@ -4,6 +4,7 @@ import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
 import { getFormData } from "@/utils/file";
+import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useState } from "react";
@@ -66,13 +67,21 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         queryClient.invalidateQueries({
           queryKey: [KEY.PORTFOLIO_LIST],
         });
-      });
+      })
+      .catch((error) =>
+        openToast(error.response.data.reason, {
+          type: "danger",
+        }),
+      );
   };
 
-  const onInvalid: SubmitErrorHandler<PortfolioForm> = (invalidData) => {
-    openToast(`${Object.keys(invalidData).join(", ")}를 확인해주세요.`, {
-      type: "danger",
-    });
+  const onInValid: SubmitErrorHandler<PortfolioForm> = (inValidData) => {
+    openToast(
+      `${getErrorProperty<PortfolioForm>(inValidData)}를 확인해주세요.`,
+      {
+        type: "danger",
+      },
+    );
   };
 
   const goNext = () =>
@@ -82,13 +91,15 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   return (
     <form
       className="h-39 flex flex-col"
-      onSubmit={handleSubmit(onValid, onInvalid)}
+      onSubmit={handleSubmit(onValid, onInValid)}
     >
       <FileUploadView
         className={classNames({ hidden: pageIndex !== 0 })}
         register={register}
-        setThumbnailFile={setThumbnailFile}
+        videoFile={videoFile}
         setVideoFile={setVideoFile}
+        thumbnailFile={thumbnailFile}
+        setThumbnailFile={setThumbnailFile}
       />
       <FormView
         className={classNames({ hidden: pageIndex !== 1 })}
@@ -101,7 +112,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         register={register}
       />
       <Navigator
-        className="mt-auto mb-6"
+        className="mt-auto pb-6"
         goNext={goNext}
         goPrev={pageIndex > 0 ? goPrev : null}
         isLast={pageIndex === MAX_NAVIGATOR_LENGTH - 1}
