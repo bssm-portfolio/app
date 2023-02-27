@@ -8,8 +8,8 @@ interface MainLayoutProps {
 
 export default function MainLayout({ app, title, filter }: MainLayoutProps) {
   return (
-    <div className="relative z-10 bg-background_blue">
-      <div className="w-full flex flex-col justify-center px-[8.375rem] overflow-hidden z-20">
+    <div className="relative z-10 bg-background_blue overflow-hidden">
+      <div className="w-full flex flex-col justify-center px-[8.375rem] z-20">
         <div>{title}</div>
         <div>{filter}</div>
         <div>{app}</div>
