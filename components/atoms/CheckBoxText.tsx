@@ -13,7 +13,7 @@ interface RadioProps {
   setFilter: Dispatch<SetStateAction<Filter>>;
 }
 
-export default function RadioText({
+export default function CheckBoxText({
   id,
   label,
   name,
@@ -24,10 +24,10 @@ export default function RadioText({
   ...props
 }: RadioProps) {
   return (
-    <div className="flex items-start">
+    <div className="flex items-start select-none cursor-pointer">
       <input
-        type="radio"
-        className="appearance-none cursor-pointer"
+        type="checkbox"
+        className="appearance-none"
         name={name}
         id={id}
         value={value}

@@ -1,7 +1,7 @@
 import { Filter } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import { Dispatch, SetStateAction, useState } from "react";
-import RadioText from "../atoms/RadioText";
+import CheckBoxText from "../atoms/CheckBoxText";
 import { DownIcon } from "../Icon";
 import OrangeFilterIcon from "../Icon/OrangeFilterIcon";
 import WhiteFilterIcon from "../Icon/WhiteFilterIcon";
@@ -60,7 +60,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <h2 className="font-semibold">업로드 날짜</h2>
             <hr className="my-2.5 text-white w-40" />
             {dateRadioPropertyList.map((dateRadioProperty) => (
-              <RadioText
+              <CheckBoxText
                 name="uploadDateType"
                 id={dateRadioProperty.id}
                 label={dateRadioProperty.label}
@@ -75,7 +75,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <h2 className="font-semibold">학년</h2>
             <hr className="my-2.5 text-white w-40" />
             {gradeRadioPropertyList.map(({ id, label, value }) => (
-              <RadioText
+              <CheckBoxText
                 name="schoolGrade"
                 id={id}
                 label={label}
@@ -90,7 +90,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <h2 className="font-semibold">정렬기준</h2>
             <hr className="my-2.5 text-white w-40" />
             {sortTypeRadioPropertyList.map(({ id, label, value }) => (
-              <RadioText
+              <CheckBoxText
                 name="sortType"
                 id={id}
                 label={label}
