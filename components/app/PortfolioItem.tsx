@@ -5,6 +5,7 @@ import classNames from "classnames";
 import Image from "next/image";
 import { useState } from "react";
 import Chip from "../atoms/Chip";
+import { CommentIcon, HeartIcon } from "../Icon";
 
 interface SideMenuPortfolioProps {
   portfolio: Portfolio;
@@ -20,9 +21,15 @@ export default function PortfolioItem({
   const [imageSrc, setImageSrc] = useState(
     getFileDownloadUrl(portfolio.thumbnail),
   );
+  const countViewCss = `
+    flex items-center gap-0.5 text-[12px]
+  `;
+
   return (
     <div
-      className="w-full h-full flex m-2 cursor-pointer"
+      className={classNames("w-full h-full flex m-2 cursor-pointer", {
+        "bg-white p-2.5 rounded-[10px] shadow-md": type === "search",
+      })}
       key={portfolio.portfolioId}
       onClick={onClick}
     >
@@ -46,9 +53,9 @@ export default function PortfolioItem({
         />
       </div>
 
-      <div className="ml-3">
-        <h2 className="font-bold text-middle mb-[.5rem]">{portfolio.title}</h2>
-        <span className="font-bold text-small block mb-xsmall">
+      <div className="ml-4">
+        <h2 className="font-bold mb-[0.5rem] text-lg">{portfolio.title}</h2>
+        <span className="font-bold block mb-xsmall text-base">
           {portfolio.writer.name}
         </span>
         <Chip.Group className="mb-xsmall" type={type}>
@@ -60,8 +67,25 @@ export default function PortfolioItem({
             );
           })}
         </Chip.Group>
-        <div className="text-xsmall">
+        <div className="text-[14px] my-3">
           조회수 {portfolio.views}회 · {getTimeAgo(portfolio.createdDate)}
+        </div>
+        <div className="flex gap-3 text-small mt-4">
+          <div className={countViewCss}>
+            <HeartIcon
+              className={classNames(
+                portfolio.bookmarkYn
+                  ? "[&_path]:!fill-somago_yellow"
+                  : undefined,
+                "mr-[0.1rem]",
+              )}
+            />
+            {portfolio.bookmarks}
+          </div>
+          <div className={countViewCss}>
+            <CommentIcon className={classNames("mr-[0.1rem]")} />
+            {portfolio.comments}
+          </div>
         </div>
       </div>
     </div>
