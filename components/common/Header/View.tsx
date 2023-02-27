@@ -31,7 +31,10 @@ export default function HeaderView({
             {isLogined ? "log out" : "log in"}
           </HeaderButton>
           {isLogined && (
-            <HeaderButton onClick={onRightButtonClick} varient="secondary">
+            <HeaderButton
+              onClick={onRightButtonClick}
+              className="!bg-somago_yellow"
+            >
               upload +
             </HeaderButton>
           )}
