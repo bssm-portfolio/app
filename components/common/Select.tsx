@@ -1,4 +1,4 @@
-import { RefObject, SelectHTMLAttributes, useRef } from "react";
+import { SelectHTMLAttributes } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import ReactSelect from "react-select";
 import DownIcon from "../Icon/DownIcon";

@@ -1,3 +1,4 @@
+import { SortType } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import { Dispatch, SetStateAction } from "react";
 
@@ -7,8 +8,8 @@ interface RadioProps {
   name?: string;
   checked?: boolean;
   value?: string;
-  keyword: string;
-  setKeyword: Dispatch<SetStateAction<string>>;
+  keyword: SortType;
+  setKeyword: Dispatch<SetStateAction<SortType>>;
 }
 
 export default function RadioButton({
@@ -28,7 +29,7 @@ export default function RadioButton({
         name={name}
         id={id}
         value={value}
-        onChange={(event) => setKeyword(event.target.value)}
+        onChange={(event) => setKeyword(event.target.value as SortType)}
         {...props}
       />
       <label
