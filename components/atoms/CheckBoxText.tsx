@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { Filter, SearchFilterPropertyType } from "@/types/portfolio.interface";
 import { deepcopy } from "@/utils/data";
 import { XIcon } from "../Icon";
@@ -27,6 +27,19 @@ export default function CheckBoxText({
   ...props
 }: RadioProps) {
   const isChecked = checkedId === id;
+  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (checkedId === id) {
+      setCheckedId("");
+      setFilter((prev) => {
+        const newPrev = deepcopy(prev);
+        delete newPrev[name];
+        return newPrev;
+      });
+      return;
+    }
+    setCheckedId(id);
+    setFilter((prev) => ({ ...prev, [name]: event.target.value }));
+  };
 
   return (
     <div className="flex items-start select-none cursor-pointer">
@@ -37,19 +50,7 @@ export default function CheckBoxText({
         id={id}
         value={value}
         checked={isChecked}
-        onChange={(event) => {
-          if (checkedId === id) {
-            setCheckedId("");
-            setFilter((prev) => {
-              const newPrev = deepcopy(prev);
-              delete newPrev[name];
-              return newPrev;
-            });
-          } else {
-            setCheckedId(id);
-            setFilter((prev) => ({ ...prev, [name]: event.target.value }));
-          }
-        }}
+        onChange={handleFilterChange}
         {...props}
       />
       <label
