@@ -21,6 +21,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const { ref, ...rest } = register("content", {
     required: "댓글 내용은 필수 항목입니다.",
   });
+  const emptyUser = user.memberId === 0;
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
     await httpClient.comment.post({
@@ -50,16 +51,18 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
         <input
           type="text"
           className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none"
-          placeholder="댓글 추가.."
+          placeholder={!emptyUser ? "댓글 추가.." : "로그인이 필요합니다."}
           {...rest}
           ref={handleInput}
           onChange={() => setIsWriting(checkInputValueIsNull(inputRef))}
+          disabled={emptyUser}
         />
         {isWriting && (
           <InputButton
             type="submit"
             className="absolute top-0 right-1"
             onClick={handleSubmit(onValid)}
+            disabled={emptyUser}
           >
             입력
           </InputButton>
