@@ -20,8 +20,7 @@ export default function PortfolioList({
   const router = useRouter();
 
   const filterSortType = () => {
-    if (filter?.sortType && "sortType" in filter && filter.sortType === "ALL")
-      delete filter.sortType;
+    if (filter?.sortType && filter.sortType === "ALL") delete filter.sortType;
     return filter;
   };
 

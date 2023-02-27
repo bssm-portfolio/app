@@ -1,6 +1,6 @@
 import { Filter } from "@/types/portfolio.interface";
 import classNames from "classnames";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useReducer, useState } from "react";
 import CheckBoxText from "../atoms/CheckBoxText";
 import { DownIcon } from "../Icon";
 import OrangeFilterIcon from "../Icon/OrangeFilterIcon";
@@ -12,8 +12,7 @@ interface SearchFilterProps {
 }
 
 export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleFilterClick = () => setIsOpen((prev) => !prev);
+  const [isOpen, toggleOpen] = useReducer((state) => !state, false);
 
   const datePropertyList = [
     {
@@ -48,10 +47,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
 
   return (
     <div className="flex flex-col mb-small cursor-pointer text-white">
-      <div
-        className="flex items-center select-none"
-        onClick={handleFilterClick}
-      >
+      <div className="flex items-center select-none" onClick={toggleOpen}>
         {isOpen ? <OrangeFilterIcon /> : <WhiteFilterIcon />}
 
         <span
@@ -112,15 +108,17 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {sortTypePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                name="sortType"
-                id={id}
-                label={label}
-                value={value}
-                key={id}
-                checkedId={selectedSortTypePropertyId}
-                setCheckedId={setSelectedSortTypePropertyId}
-                filter={filter}
-                setFilter={setFilter}
+                {...{
+                  name: "sortType",
+                  key: id,
+                  id,
+                  label,
+                  value,
+                  filter,
+                  setFilter,
+                  checkedId: selectedSortTypePropertyId,
+                  setCheckedId: setSelectedSortTypePropertyId,
+                }}
               />
             ))}
           </div>
