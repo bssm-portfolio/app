@@ -1,4 +1,4 @@
-import Filter from "@/components/contents/Filter";
+import SearchFilter from "@/components/common/SearchFilter";
 import PortfolioList from "@/components/portfolio/PortfolioList";
 import SearchPageLayout from "@/layouts/Search";
 import { NextSeo, NextSeoProps } from "next-seo";
@@ -22,7 +22,7 @@ export default function SearchPage() {
     <div>
       <NextSeo {...seoConfig} />
       <SearchPageLayout
-        filter={<Filter />}
+        filter={<SearchFilter />}
         portfolioList={<PortfolioList keyword={keyword} type="search" />}
       />
     </div>

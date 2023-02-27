@@ -1,6 +1,6 @@
 import DataGrid from "@/components/contents/DataGrid";
 import DataGridTitle from "@/components/contents/DataGridTitle";
-import Filter from "@/components/contents/Filter";
+import Filter from "@/components/contents/ContentFilter";
 import useUser from "@/hooks/useUser";
 import ChannelContentLayout from "@/layouts/ChannelContent";
 import { useMyPortfolioList } from "@/models/portfolio";
