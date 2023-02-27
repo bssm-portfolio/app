@@ -3,7 +3,7 @@ import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
-import { getFileUidByFileUpload, getFormData } from "@/utils/file";
+import { getFileUidByFileUpload } from "@/utils/file";
 import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
