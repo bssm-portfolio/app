@@ -17,7 +17,7 @@ interface CommentList {
 const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery<PortfolioList>(
-      [KEY.PORTFOLIO_LIST],
+      [KEY.PORTFOLIO_LIST, filter],
       ({ pageParam = 1 }) =>
         httpClient.portfolio
           .search({
