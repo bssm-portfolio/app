@@ -131,6 +131,7 @@ export default {
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),
   memberSignup: new HttpClient("/api/member/signup", axiosConfig),
+  memberName: new HttpClient("/api/member/name", axiosConfig),
   comment: new HttpClient("/api/comment", axiosConfig),
   file: new HttpClient("/api/file", axiosConfig),
   follow: new HttpClient("/api/follow", axiosConfig),
