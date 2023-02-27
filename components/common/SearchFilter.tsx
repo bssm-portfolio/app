@@ -112,15 +112,17 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {datePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                name="uploadDateType"
-                id={id}
-                label={label}
-                value={value}
-                key={id}
-                checkedId={selectedDatePropertyId}
-                setCheckedId={setSelectedDatePropertyId}
-                filter={filter}
-                setFilter={setFilter}
+                {...{
+                  name: "uploadDateType",
+                  key: id,
+                  id,
+                  label,
+                  value,
+                  filter,
+                  setFilter,
+                  checkedId: selectedDatePropertyId,
+                  setCheckedId: setSelectedDatePropertyId,
+                }}
               />
             ))}
           </div>
@@ -129,15 +131,17 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {gradePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                name="schoolGrade"
-                id={id}
-                label={label}
-                value={value}
-                key={id}
-                checkedId={selectedGradePropertyId}
-                setCheckedId={setSelectedGradePropertyId}
-                filter={filter}
-                setFilter={setFilter}
+                {...{
+                  name: "schoolGrade",
+                  key: id,
+                  id,
+                  label,
+                  value,
+                  filter,
+                  setFilter,
+                  checkedId: selectedGradePropertyId,
+                  setCheckedId: setSelectedGradePropertyId,
+                }}
               />
             ))}
           </div>
