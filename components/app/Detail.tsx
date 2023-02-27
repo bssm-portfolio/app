@@ -125,10 +125,11 @@ export default function Detail({
               </Button>
             </CopyToClipboard>
           </div>
-
-          <div className="mb-large">
-            <Group names={portfolio.contributorList} />
-          </div>
+          {portfolio.contributorList.length > 0 && (
+            <div className="mb-large">
+              <Group names={portfolio.contributorList} />
+            </div>
+          )}
         </div>
       </div>
       <Description description={portfolio.description} />
