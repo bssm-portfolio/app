@@ -62,6 +62,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         videoFileUid: await getVideoFileUid(),
         thumbnailFileUid: await getThumbnailFileUid(),
       })
+      .then(() => openToast("수정이 완료되었습니다."))
       .catch((error) =>
         openToast(error.response.data.message, { type: "danger" }),
       );
