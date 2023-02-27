@@ -63,6 +63,7 @@ export type SortType =
   | "BOOKMARKS"
   | "COMMENTS"
   | "RANK"
+  | "VIEWS"
   | "ALL";
 export type SortDirectionType = "ASC" | "DESC";
 export type SchoolGradeType = 1 | 2 | 3;

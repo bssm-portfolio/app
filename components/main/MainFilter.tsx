@@ -22,11 +22,6 @@ export default function MainFilter({
       value: "ALL",
     },
     {
-      id: "BOOKMARKS",
-      label: "추천순",
-      value: "BOOKMARKS",
-    },
-    {
       id: "UPLOAD_DATE",
       label: "업로드일순",
       value: "UPLOAD_DATE",
@@ -36,6 +31,16 @@ export default function MainFilter({
       label: "댓글순",
       value: "COMMENTS",
     },
+    // {
+    //   id: "BOOKMARKS",
+    //   label: "추천순",
+    //   value: "BOOKMARKS",
+    // },
+    // {
+    //   id: "VIEWS",
+    //   label: "조회수순",
+    //   value: "VIEWS",
+    // },
   ];
   return (
     <div className="flex items-center justify-center gap-3 my-11">
