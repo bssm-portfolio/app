@@ -28,7 +28,7 @@ export default function PortfolioItem({
   return (
     <div
       className={classNames("w-full h-full flex m-2 cursor-pointer", {
-        "bg-white p-2.5 rounded-[10px] shadow-md": type === "search",
+        "bg-white p-2.5 rounded-[0.625rem]": type === "search",
       })}
       key={portfolio.portfolioId}
       onClick={onClick}
@@ -53,40 +53,55 @@ export default function PortfolioItem({
         />
       </div>
 
-      <div className="ml-4">
-        <h2 className="font-bold mb-[0.5rem] text-lg">{portfolio.title}</h2>
-        <span className="font-bold block mb-xsmall text-base">
+      <div className="ml-3">
+        <h2
+          className={classNames("font-bold text-middle mb-[.5rem]", {
+            "!text-lg": type === "search",
+          })}
+        >
+          {portfolio.title}
+        </h2>
+        <span
+          className={classNames("font-bold text-small block", {
+            "!text-base": type === "search",
+          })}
+        >
           {portfolio.writer.name}
         </span>
-        <Chip.Group className="mb-xsmall" type={type}>
-          {portfolio.skillList.map((skillData) => {
-            return (
-              <Chip.Item type={type} key={skillData.skillId}>
-                {skillData.skillName}
-              </Chip.Item>
-            );
-          })}
-        </Chip.Group>
-        <div className="text-[14px] my-3">
+        {portfolio.skillList.length > 0 && (
+          <Chip.Group className="my-2" type={type}>
+            {portfolio.skillList.map((skillData) => {
+              return (
+                <Chip.Item type={type} key={skillData.skillId}>
+                  {skillData.skillName}
+                </Chip.Item>
+              );
+            })}
+          </Chip.Group>
+        )}
+        <div className="text-[12px] mt-3">
           조회수 {portfolio.views}회 · {getTimeAgo(portfolio.createdDate)}
         </div>
-        <div className="flex gap-3 text-small mt-4">
-          <div className={countViewCss}>
-            <HeartIcon
-              className={classNames(
-                portfolio.bookmarkYn
-                  ? "[&_path]:!fill-somago_yellow"
-                  : undefined,
-                "mr-[0.1rem]",
-              )}
-            />
-            {portfolio.bookmarks}
+
+        {type === "search" && (
+          <div className="flex gap-3 mt-4">
+            <div className={countViewCss}>
+              <HeartIcon
+                className={classNames(
+                  portfolio.bookmarkYn
+                    ? "[&_path]:!fill-somago_yellow"
+                    : undefined,
+                  "mr-[0.1rem]",
+                )}
+              />
+              {portfolio.bookmarks}
+            </div>
+            <div className={countViewCss}>
+              <CommentIcon className={classNames("mr-[0.1rem]")} />
+              {portfolio.comments}
+            </div>
           </div>
-          <div className={countViewCss}>
-            <CommentIcon className={classNames("mr-[0.1rem]")} />
-            {portfolio.comments}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
