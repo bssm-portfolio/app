@@ -20,7 +20,7 @@ export default function HeaderView({
   const router = useRouter();
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center bg-background_blue">
       <div className="flex justify-between items-center m-4 w-74">
         <Link href="/">
           <Logo />
