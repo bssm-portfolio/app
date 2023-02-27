@@ -13,7 +13,7 @@ interface SearchFilterProps {
 
 export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const handleClick = () => setIsOpen((prev) => !prev);
+  const handleFilterClick = () => setIsOpen((prev) => !prev);
 
   const datePropertyList = [
     {
@@ -45,9 +45,13 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
   const [selectedGradePropertyId, setSelectedGradePropertyId] = useState("");
   const [selectedSortTypePropertyId, setSelectedSortTypePropertyId] =
     useState("");
+
   return (
     <div className="flex flex-col mb-small cursor-pointer text-white">
-      <div className="flex items-center select-none" onClick={handleClick}>
+      <div
+        className="flex items-center select-none"
+        onClick={handleFilterClick}
+      >
         {isOpen ? <OrangeFilterIcon /> : <WhiteFilterIcon />}
 
         <span
