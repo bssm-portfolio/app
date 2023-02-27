@@ -21,7 +21,7 @@ export default function HeaderView({
 
   return (
     <div className="flex justify-center bg-background_blue z-50">
-      <div className="flex justify-between items-center m-4 w-74">
+      <div className="flex justify-between items-center m-4 w-74 select-none">
         <Link href="/">
           <Logo />
         </Link>
