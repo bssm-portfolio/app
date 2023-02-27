@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { Dispatch, SetStateAction } from "react";
 import { Filter, SearchFilterPropertyType } from "@/types/portfolio.interface";
+import { deepcopy } from "@/utils/data";
 import { XIcon } from "../Icon";
 
 interface RadioProps {
@@ -8,7 +9,8 @@ interface RadioProps {
   label: string;
   name: SearchFilterPropertyType;
   value: string;
-  isSelect?: boolean;
+  checkedId: string;
+  setCheckedId: Dispatch<SetStateAction<string>>;
   filter: Filter;
   setFilter: Dispatch<SetStateAction<Filter>>;
 }
@@ -18,11 +20,14 @@ export default function CheckBoxText({
   label,
   name,
   value,
+  checkedId,
+  setCheckedId,
   filter,
   setFilter,
-  isSelect = value === filter[name],
   ...props
 }: RadioProps) {
+  const isChecked = checkedId === id;
+
   return (
     <div className="flex items-start select-none cursor-pointer">
       <input
@@ -31,9 +36,20 @@ export default function CheckBoxText({
         name={name}
         id={id}
         value={value}
-        onChange={(event) =>
-          setFilter((prev) => ({ ...prev, [name]: event.target.value }))
-        }
+        checked={isChecked}
+        onChange={(event) => {
+          if (checkedId === id) {
+            setCheckedId("");
+            setFilter((prev) => {
+              const newPrev = deepcopy(prev);
+              delete newPrev[name];
+              return newPrev;
+            });
+          } else {
+            setCheckedId(id);
+            setFilter((prev) => ({ ...prev, [name]: event.target.value }));
+          }
+        }}
         {...props}
       />
       <label
@@ -41,12 +57,12 @@ export default function CheckBoxText({
         className={classNames(
           "flex items-center text-white cursor-pointer mt-2.5",
           {
-            "!text-somago_yellow": isSelect,
+            "!text-somago_yellow": isChecked,
           },
         )}
       >
         {label}
-        {isSelect && (
+        {isChecked && (
           <XIcon className="[&>path]:fill-somago_yellow w-3 h-3 ml-2" />
         )}
       </label>

@@ -9,7 +9,7 @@ import Loading from "../common/Loading";
 interface PortfolioListProps {
   keyword?: string;
   type?: PortfolioListType;
-  filter: Filter;
+  filter?: Filter;
 }
 
 export default function PortfolioList({
