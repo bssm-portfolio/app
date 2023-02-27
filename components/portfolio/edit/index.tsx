@@ -4,8 +4,9 @@ import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import httpClient from "@/apis";
-import { getFileUidByFileUpload } from "@/utils/file";
+import { getFileDownloadUrl, getFileUidByFileUpload } from "@/utils/file";
 import Textarea from "@/components/atoms/Textarea";
+import useOverlay from "@/hooks/useOverlay";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import SkillForm from "../../common/SkillForm";
@@ -18,11 +19,12 @@ interface PortfolioEditProps {
 
 export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
-  const [thumbnailFile, setThumbnailFile] = useState<File>();
-  const [videoFile, setVideoFile] = useState<File>();
-  const [videoFileUid, setVideoFileUid] = useState<string>("");
+  const [editThumbnailFile, setEditThumbnailFile] = useState<File>();
+  const [editVideoFile, setEditVideoFile] = useState<File>();
   const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
+  const [videoFileUid, setVideoFileUid] = useState<string>("");
 
+  const { openToast } = useOverlay();
   const { data: portfolio } = usePortfolio(portfolioId);
   const { register, handleSubmit, reset } = useForm<PortfolioForm>({
     defaultValues: portfolio,
@@ -39,24 +41,35 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       return "URL";
     };
 
-    await httpClient.portfolio.put({
-      ...data,
-      portfolioId,
-      portfolioType: getPortfolioType(),
-      skillList: selectedSkills,
-      contributorIdList: [0],
-      videoFileUid: videoFile
-        ? getFileUidByFileUpload(videoFile)
-        : videoFileUid,
-      thumbnailFileUid: thumbnailFile
-        ? getFileUidByFileUpload(thumbnailFile)
-        : thumbnailFileUid,
-    });
+    const getVideoFileUid = () => {
+      if (editVideoFile) return getFileUidByFileUpload(editVideoFile);
+      if (videoFileUid && !editVideoFile) return videoFileUid;
+      return undefined;
+    };
+
+    const getThumbnailFileUid = () => {
+      if (editThumbnailFile) return getFileUidByFileUpload(editThumbnailFile);
+      return thumbnailFileUid;
+    };
+
+    await httpClient.portfolio
+      .put({
+        ...data,
+        portfolioId,
+        portfolioType: getPortfolioType(),
+        skillList: selectedSkills,
+        contributorIdList: [],
+        videoFileUid: await getVideoFileUid(),
+        thumbnailFileUid: await getThumbnailFileUid(),
+      })
+      .catch((error) =>
+        openToast(error.response.data.message, { type: "danger" }),
+      );
   };
 
   useEffect(() => {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
-    setVideoFileUid(portfolio.video.fileUid);
+    setVideoFileUid(portfolio.video?.fileUid);
     setSelectedSkills(portfolio.skillList);
     reset(portfolio);
   }, [portfolio, reset]);
@@ -76,11 +89,15 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       <EditFileUploadView
         register={register}
         thumbnailFileUid={thumbnailFileUid}
-        setThumbnailFile={setThumbnailFile}
-        setVideoFile={setVideoFile}
         videoFileUid={videoFileUid}
-        thumbnail={portfolio.thumbnail}
-        editThumbnail={thumbnailFile}
+        setThumbnailFile={setEditThumbnailFile}
+        setVideoFile={setEditVideoFile}
+        thumbnailUrl={getFileDownloadUrl(portfolio.thumbnail)}
+        videoUrl={
+          portfolio.video ? getFileDownloadUrl(portfolio.video) : undefined
+        }
+        editVideoFile={editVideoFile}
+        editThumbnailFile={editThumbnailFile}
       />
 
       <Input
