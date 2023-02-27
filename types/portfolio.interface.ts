@@ -4,7 +4,12 @@ import { Skill } from "./skill.interface";
 
 export type PortfolioType = "VIDEO" | "URL" | "ALL";
 export type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
-export type PortfolioListType = "main" | "portfolio" | "upload" | "detail";
+export type PortfolioListType =
+  | "main"
+  | "portfolio"
+  | "upload"
+  | "detail"
+  | "search";
 
 export type Portfolio = {
   portfolioId: number;
@@ -52,15 +57,21 @@ export interface PaginationResponse {
   totalPages: number;
 }
 
-type UploadDateType =
+export type UploadDateType =
   | "AN_HOUR_AGO"
   | "TODAY"
   | "THIS_WEEK"
   | "THIS_MONTH"
   | "THIS_YEAR";
-type SortType = "UPLOAD_DATE" | "BOOKMARKS" | "COMMENTS" | "RANK";
-type SortDirectionType = "ASC" | "DESC";
-type SchoolGradeType = 1 | 2 | 3;
+export type SortType =
+  | "UPLOAD_DATE"
+  | "BOOKMARKS"
+  | "COMMENTS"
+  | "RANK"
+  | "VIEWS"
+  | "ALL";
+export type SortDirectionType = "ASC" | "DESC";
+export type SchoolGradeType = 1 | 2 | 3;
 
 export interface Filter {
   search?: string;

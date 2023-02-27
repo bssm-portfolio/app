@@ -1,14 +1,23 @@
 import { Portfolio } from "@/components";
+import { FetchNextPageType } from "@/types/index.interface";
+import { PortfolioList } from "@/types/portfolio.interface";
 import { useRouter } from "next/router";
-import { usePortfolioList } from "@/models/portfolio";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Loading from "../common/Loading";
 
-export default function MainPortfolioList() {
+export default function MainPortfolioList({
+  pages,
+  hasNextPage,
+  fetchNextPage,
+  isFetchingNextPage,
+}: {
+  pages: PortfolioList[] | { list: never[] }[];
+  hasNextPage: boolean;
+  fetchNextPage: FetchNextPageType;
+  isFetchingNextPage: boolean;
+}) {
   const router = useRouter();
-  const { pages, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    usePortfolioList({ size: 12 });
   const [ref, inView] = useInView();
 
   useEffect(() => {

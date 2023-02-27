@@ -102,7 +102,8 @@ module.exports = {
         blue: "#3E73FB",
         somago_yellow: "#FAAF3D",
         black: "#000000",
-        white: "#ffffff",
+        white: "#FFFFFF",
+        background_blue: "#0D3FBF",
         primary: {
           dark_gray: "#3A3A3A",
           light_gray: "#F9F9F9",

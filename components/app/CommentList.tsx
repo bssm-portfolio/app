@@ -37,7 +37,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   };
 
   return (
-    <div>
+    <div className="bg-white mt-2 p-3 box-border rounded">
       <form className="flex mt-base relative" onSubmit={handleSubmit(onValid)}>
         <Image
           src={user.profileImageUrl}

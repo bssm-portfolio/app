@@ -1,9 +1,15 @@
 export default function MainTitle() {
+  const h1Style = `
+  text-5xl 
+  leading-[3.75rem] 
+  font-semibold
+  text-white`;
+
   return (
-    <div className="mx-10 text-[52px] font-bold">
-      <h1>BUSAN</h1>
-      <h1>SOFTWARE MEISTER</h1>
-      <h1>HIGH SCHOOL</h1>
+    <div className="mx-10">
+      <h1 className={h1Style}>BUSAN</h1>
+      <h1 className={h1Style}>SOFTWARE MEISTER</h1>
+      <h1 className={h1Style}>HIGH SCHOOL</h1>
       <hr className="text-white mt-10" />
     </div>
   );

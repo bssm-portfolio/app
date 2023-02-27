@@ -14,6 +14,7 @@ const getLayoutCss = () => {
   justify-between
   pt-[3.25rem] 
   px-4
+  z-20
   md:px-6
   xl:px-[6.25rem]
   xl:flex-row
@@ -22,13 +23,16 @@ const getLayoutCss = () => {
 
 function Frame({ app, sidebar, detail, comment }: FrameProps) {
   return (
-    <section className={getLayoutCss()}>
-      <div className="w-full">
-        {app}
-        {detail}
-        {comment}
+    <section className="relative z-10 overflow-hidden">
+      <div className={getLayoutCss()}>
+        <div className="w-full">
+          {app}
+          {detail}
+          {comment}
+        </div>
+        <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
       </div>
-      <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
+      <div className="absolute -top-[15rem] -left-24 rotate-[-7deg] w-[150vw] h-[55rem] bg-background_blue -z-10" />
     </section>
   );
 }

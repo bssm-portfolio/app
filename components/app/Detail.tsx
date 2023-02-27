@@ -70,7 +70,7 @@ export default function Detail({
   };
 
   return (
-    <div className="mt-small">
+    <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
           <h2 className="font-bold text-large">{portfolio.title}</h2>

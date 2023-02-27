@@ -37,6 +37,7 @@ export default function PortfolioList({
           />
         )),
       )}
+      {pages[0].list.length === 0 && "검색결과가 없습니다."}
       <div ref={ref} className="h-36 mx-auto">
         {isFetchingNextPage && hasNextPage && (
           <Loading className="mt-8" width={60} height={60} type="spin" />

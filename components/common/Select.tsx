@@ -41,7 +41,7 @@ export default function Select<T>({
               </option>
             ))}
           </select>
-          <DownIcon className="absolute top-2 right-3 -z-10" />
+          <DownIcon className="absolute top-2 right-3" />
         </div>
       </div>
     );

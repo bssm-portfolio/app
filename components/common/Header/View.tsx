@@ -20,7 +20,7 @@ export default function HeaderView({
   const router = useRouter();
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center bg-background_blue z-50">
       <div className="flex justify-between items-center m-4 w-74">
         <Link href="/">
           <Logo />
@@ -31,7 +31,10 @@ export default function HeaderView({
             {isLogined ? "log out" : "log in"}
           </HeaderButton>
           {isLogined && (
-            <HeaderButton onClick={onRightButtonClick} varient="secondary">
+            <HeaderButton
+              onClick={onRightButtonClick}
+              className="!bg-somago_yellow"
+            >
               upload +
             </HeaderButton>
           )}

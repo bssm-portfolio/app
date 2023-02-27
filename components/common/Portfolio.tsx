@@ -3,7 +3,7 @@ import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
 import { Avatar, Chip } from "@/components";
-import { getKoreanDate, getTimeAgo } from "@/utils/date";
+import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 
@@ -23,7 +23,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
 
   return (
     <div
-      className="flex flex-col cursor-pointer w-[22.5rem] shadow p-[1.25rem]"
+      className="flex flex-col cursor-pointer w-[22.5rem] shadow p-[1.25rem] rounded-lg bg-white"
       onClick={onClick}
     >
       <div className="relative h-[11.25rem]">

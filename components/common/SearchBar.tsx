@@ -34,6 +34,7 @@ export default function SearchBar() {
     return `
     flex 
     items-center 
+    bg-white
     text-primary-dark_gray
     border
     border-primary-dark_gray

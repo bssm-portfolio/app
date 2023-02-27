@@ -10,15 +10,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const getButtonCss = (varient: ButtonVarient) => {
-  const borderColor = varient === "primary" ? "border-black" : "border-blue";
   const bgColor = varient === "primary" ? "bg-white" : "bg-blue";
   const color = varient === "primary" ? "text-black" : "text-white";
 
   return `
   px-1.875 
   py-0.468 
-  border-0.5
-  ${borderColor}
   ${bgColor}
   ${color}
   rounded-full 
