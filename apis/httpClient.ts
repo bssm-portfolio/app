@@ -134,4 +134,5 @@ export default {
   comment: new HttpClient("/api/comment", axiosConfig),
   file: new HttpClient("/api/file", axiosConfig),
   follow: new HttpClient("/api/follow", axiosConfig),
+  refreshToken: new HttpClient("/api/refresh-token", axiosConfig),
 };
