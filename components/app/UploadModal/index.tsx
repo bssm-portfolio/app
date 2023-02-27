@@ -3,7 +3,7 @@ import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
-import { getFormData } from "@/utils/file";
+import { getFileUidByFileUpload, getFormData } from "@/utils/file";
 import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
@@ -36,12 +36,9 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   const { openToast } = useOverlay();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
-    const videoFileUid =
-      videoFile &&
-      (await httpClient.file.upload(getFormData(videoFile))).data.fileUid;
+    const videoFileUid = videoFile && (await getFileUidByFileUpload(videoFile));
     const thumbnailFileUid =
-      thumbnailFile &&
-      (await httpClient.file.upload(getFormData(thumbnailFile))).data.fileUid;
+      thumbnailFile && (await getFileUidByFileUpload(thumbnailFile));
 
     const getPortfolioType = (): PortfolioType => {
       if (data.portfolioUrl.length > 0 && videoFileUid) {
