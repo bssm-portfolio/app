@@ -61,7 +61,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
           className={classNames(
             "ml-3 mt-1 [&>path]:stroke-somago_yellow rotate-180",
             {
-              " [&>path]:!stroke-white rotate-0": !isOpen,
+              " [&>path]:!stroke-white !rotate-0": !isOpen,
             },
           )}
         />
