@@ -4,7 +4,8 @@ import { Comment, Portfolio } from "@/types/portfolio.interface";
 const avatarUrl =
   "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg";
 
-const portfolioUrl = "/assets/images/testPortfolioThumbnail.png";
+const portfolioUrl =
+  "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg";
 
 const comment: Comment = {
   writer: {

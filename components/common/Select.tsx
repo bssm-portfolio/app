@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes } from "react";
+import { RefObject, SelectHTMLAttributes, useRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import ReactSelect from "react-select";
 import DownIcon from "../Icon/DownIcon";
@@ -41,7 +41,7 @@ export default function Select<T>({
               </option>
             ))}
           </select>
-          <DownIcon className="absolute top-2 right-3 -z-10" />
+          <DownIcon className="absolute top-2 right-3" />
         </div>
       </div>
     );
