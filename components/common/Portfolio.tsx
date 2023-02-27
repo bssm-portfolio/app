@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
-import { Chip } from "@/components";
+import { Avatar, Chip } from "@/components";
 import { getKoreanDate, getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
+import classNames from "classnames";
 
 interface PortfolioProps {
   portfolio: Portfolio;
@@ -21,8 +22,11 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
   );
 
   return (
-    <div className="flex flex-col cursor-pointer" onClick={onClick}>
-      <div className="relative w-[20rem] h-[11.25rem]">
+    <div
+      className="flex flex-col cursor-pointer w-[22.5rem] shadow p-[1.25rem]"
+      onClick={onClick}
+    >
+      <div className="relative h-[11.25rem]">
         <Image
           className="rounded object-cover"
           src={imageSrc}
@@ -37,44 +41,53 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
           }}
         />
       </div>
-      <div className="flex w-full mt-3">
-        <div className="flex flex-col w-full">
-          <div className="flex justify-between w-full">
-            <div className="font-bold text-sm">{portfolio.title}</div>
-            <div className="flex gap-3">
+      <div className="flex mt-3 mb-[3.125rem] ">
+        <div className="flex flex-col">
+          <div className="flex">
+            <div className="flex gap-4">
+              <Avatar
+                width={40}
+                height={40}
+                imageUrl={portfolio.writer.profileImageUrl}
+              />
+              <div className="flex-1">
+                <div className="font-bold text-sm">{portfolio.title}</div>
+                <div className="text-xs">
+                  {portfolio.writer.name}
+                  {portfolio.contributorList.length > 0
+                    ? `외 ${portfolio.contributorList.length} 명`
+                    : ""}
+                </div>
+                <Chip.Group className="mt-2 w-[14rem] h-[1.875rem]">
+                  {portfolio.skillList.map((skill) => (
+                    <Chip.Item key={skill.skillId}>{skill.skillName}</Chip.Item>
+                  ))}
+                </Chip.Group>
+              </div>
+            </div>
+            <div className="flex gap-3 items-start">
               <div className={countViewCss}>
                 <HeartIcon
-                  className={
+                  className={classNames(
                     portfolio.bookmarkYn
                       ? "[&_path]:!fill-somago_yellow"
-                      : undefined
-                  }
+                      : undefined,
+                    "mr-[0.1rem]",
+                  )}
                 />
-                {portfolio.bookmarks}개
+                {portfolio.bookmarks}
               </div>
               <div className={countViewCss}>
-                <CommentIcon />
-                {portfolio.comments}개
+                <CommentIcon className={classNames("mr-[0.1rem]")} />
+                {portfolio.comments}
               </div>
             </div>
           </div>
-          <div className="text-xs">
-            {portfolio.writer.name}
-            {portfolio.contributorList.length > 0
-              ? `외 ${portfolio.contributorList.length} 명`
-              : ""}
-          </div>
         </div>
       </div>
-      <Chip.Group className="mt-2">
-        {portfolio.skillList.map((skill) => (
-          <Chip.Item key={skill.skillId}>{skill.skillName}</Chip.Item>
-        ))}
-      </Chip.Group>
+
       <div className="text-sxx mt-1">
-        {`${getKoreanDate(portfolio.createdDate)} · ${getTimeAgo(
-          portfolio.createdDate,
-        )}`}
+        {`조회수 ${portfolio.views}회 · ${getTimeAgo(portfolio.createdDate)}`}
       </div>
     </div>
   );
