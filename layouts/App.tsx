@@ -32,7 +32,7 @@ function Frame({ app, sidebar, detail, comment }: FrameProps) {
         </div>
         <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
       </div>
-      <div className="absolute -top-[9.375rem] -left-24 rotate-[-8deg] w-[150vw] h-[37.5rem] bg-background_blue -z-10" />
+      <div className="absolute -top-[10rem] -left-24 rotate-[-8deg] w-[150vw] h-[37.5rem] bg-background_blue -z-10" />
     </section>
   );
 }
