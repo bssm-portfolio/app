@@ -1,6 +1,7 @@
-import Filter from "@/components/contents/Filter";
+import SearchFilter from "@/components/common/SearchFilter";
 import PortfolioList from "@/components/portfolio/PortfolioList";
 import SearchPageLayout from "@/layouts/Search";
+import { Filter } from "@/types/portfolio.interface";
 import { NextSeo, NextSeoProps } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -8,6 +9,7 @@ import { useEffect, useState } from "react";
 export default function SearchPage() {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("");
+  const [filter, setFilter] = useState<Filter>({});
 
   useEffect(() => {
     setKeyword((router.query.keyword as string) || "");
@@ -22,8 +24,10 @@ export default function SearchPage() {
     <div>
       <NextSeo {...seoConfig} />
       <SearchPageLayout
-        filter={<Filter />}
-        portfolioList={<PortfolioList keyword={keyword} type="search" />}
+        filter={<SearchFilter filter={filter} setFilter={setFilter} />}
+        portfolioList={
+          <PortfolioList keyword={keyword} type="search" filter={filter} />
+        }
       />
     </div>
   );

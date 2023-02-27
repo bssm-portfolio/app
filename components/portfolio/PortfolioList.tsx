@@ -1,5 +1,5 @@
 import { usePortfolioList } from "@/models/portfolio";
-import { PortfolioListType } from "@/types/portfolio.interface";
+import { Filter, PortfolioListType } from "@/types/portfolio.interface";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
@@ -9,15 +9,23 @@ import Loading from "../common/Loading";
 interface PortfolioListProps {
   keyword?: string;
   type?: PortfolioListType;
+  filter?: Filter;
 }
 
 export default function PortfolioList({
   keyword = "",
   type = "main",
+  filter,
 }: PortfolioListProps) {
   const router = useRouter();
+
+  const filterSortType = () => {
+    if (filter?.sortType && filter.sortType === "ALL") delete filter.sortType;
+    return filter;
+  };
+
   const { pages, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    usePortfolioList({ size: 12 }, { search: keyword });
+    usePortfolioList({ size: 12 }, { search: keyword, ...filterSortType() });
 
   const { ref, inView } = useInView();
 
