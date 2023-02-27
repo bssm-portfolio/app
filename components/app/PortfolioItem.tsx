@@ -27,8 +27,9 @@ export default function PortfolioItem({
 
   return (
     <div
-      className={classNames("w-full h-full flex m-2 cursor-pointer", {
-        "bg-white p-2.5 rounded-[0.625rem] shadow-lg": type === "search",
+      className={classNames("w-full h-full flex mt-3 cursor-pointer", {
+        "bg-white p-2.5 rounded-[0.625rem] shadow-lg":
+          type === "search" || "portfolio",
       })}
       key={portfolio.portfolioId}
       onClick={onClick}
