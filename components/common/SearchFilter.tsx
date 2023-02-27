@@ -11,33 +11,71 @@ interface SearchFilterProps {
   setFilter: Dispatch<SetStateAction<Filter>>;
 }
 
+const enum PropertyEnum {
+  DATE_AN_HOUR_AGO = "AN_HOUR_AGO",
+  DATE_TODAY = "TODAY",
+  DATE_THIS_WEEK = "THIS_WEEK",
+  DATE_THIS_MONTH = "THIS_MONTH",
+  DATE_THIS_YEAR = "THIS_YEAR",
+  GRADE_3 = "3",
+  GRADE_2 = "2",
+  GRADE_1 = "1",
+  SORT_ALL = "ALL",
+  SORT_UPLOAD_DATE = "UPLOAD_DATE",
+  SORT_COMMENTS = "COMMENTS",
+}
+
 export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
   const [isOpen, toggleOpen] = useReducer((state) => !state, false);
 
   const datePropertyList = [
     {
-      id: "AN_HOUR_AGO",
+      id: PropertyEnum.DATE_AN_HOUR_AGO,
       label: "지난 1시간",
-      value: "AN_HOUR_AGO",
+      value: PropertyEnum.DATE_AN_HOUR_AGO,
     },
-    { id: "TODAY", label: "오늘", value: "TODAY" },
-    { id: "THIS_WEEK", label: "이번 주", value: "THIS_WEEK" },
-    { id: "THIS_MONTH", label: "이번 달", value: "THIS_MONTH" },
-    { id: "THIS_YEAR", label: "올해", value: "THIS_YEAR" },
+    {
+      id: PropertyEnum.DATE_TODAY,
+      label: "오늘",
+      value: PropertyEnum.DATE_TODAY,
+    },
+    {
+      id: PropertyEnum.DATE_THIS_WEEK,
+      label: "이번 주",
+      value: PropertyEnum.DATE_THIS_WEEK,
+    },
+    {
+      id: PropertyEnum.DATE_THIS_MONTH,
+      label: "이번 달",
+      value: PropertyEnum.DATE_THIS_MONTH,
+    },
+    {
+      id: PropertyEnum.DATE_THIS_YEAR,
+      label: "올해",
+      value: PropertyEnum.DATE_THIS_YEAR,
+    },
   ];
   const gradePropertyList = [
-    { id: "3", label: "3학년", value: "3" },
-    { id: "2", label: "2학년", value: "2" },
-    { id: "1", label: "1학년", value: "1" },
+    { id: PropertyEnum.GRADE_3, label: "3학년", value: PropertyEnum.GRADE_3 },
+    { id: PropertyEnum.GRADE_2, label: "2학년", value: PropertyEnum.GRADE_2 },
+    { id: PropertyEnum.GRADE_1, label: "1학년", value: PropertyEnum.GRADE_1 },
   ];
   const sortTypePropertyList = [
-    { id: "ALL", label: "전체", value: "ALL" },
     {
-      id: "UPLOAD_DATE",
-      label: "업로드순",
-      value: "UPLOAD_DATE",
+      id: PropertyEnum.SORT_ALL,
+      label: "전체",
+      value: PropertyEnum.SORT_ALL,
     },
-    { id: "COMMENTS", label: "댓글순", value: "COMMENTS" },
+    {
+      id: PropertyEnum.SORT_UPLOAD_DATE,
+      label: "업로드순",
+      value: PropertyEnum.SORT_UPLOAD_DATE,
+    },
+    {
+      id: PropertyEnum.SORT_COMMENTS,
+      label: "댓글순",
+      value: PropertyEnum.SORT_COMMENTS,
+    },
   ];
 
   const [selectedDatePropertyId, setSelectedDatePropertyId] = useState("");

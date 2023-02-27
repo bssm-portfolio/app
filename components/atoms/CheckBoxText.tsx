@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { Filter, SearchFilterPropertyType } from "@/types/portfolio.interface";
-import { deepcopy } from "@/utils/data";
 import { XIcon } from "../Icon";
 
 interface RadioProps {
@@ -30,11 +29,7 @@ export default function CheckBoxText({
   const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (checkedId === id) {
       setCheckedId("");
-      setFilter((prev) => {
-        const newPrev = deepcopy(prev);
-        delete newPrev[name];
-        return newPrev;
-      });
+      setFilter((prev) => ({ ...prev, [name]: undefined }));
       return;
     }
     setCheckedId(id);
