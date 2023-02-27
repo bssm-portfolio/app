@@ -23,7 +23,7 @@ export default function SearchPage() {
       <NextSeo {...seoConfig} />
       <SearchPageLayout
         filter={<Filter />}
-        portfolioList={<PortfolioList keyword={keyword} />}
+        portfolioList={<PortfolioList keyword={keyword} type="search" />}
       />
     </div>
   );

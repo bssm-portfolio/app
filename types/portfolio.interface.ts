@@ -4,7 +4,12 @@ import { Skill } from "./skill.interface";
 
 export type PortfolioType = "VIDEO" | "URL" | "ALL";
 export type PortfolioScope = "PUBLIC" | "PRIVATE" | "PROTECTED";
-export type PortfolioListType = "main" | "portfolio" | "upload" | "detail";
+export type PortfolioListType =
+  | "main"
+  | "portfolio"
+  | "upload"
+  | "detail"
+  | "search";
 
 export type Portfolio = {
   portfolioId: number;
