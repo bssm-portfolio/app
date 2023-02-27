@@ -48,6 +48,7 @@ export default function MainFilter({
         <RadioButton
           name="main-radio"
           id={radioProperty.id}
+          key={radioProperty.id}
           label={radioProperty.label}
           value={radioProperty.value}
           keyword={keyword}

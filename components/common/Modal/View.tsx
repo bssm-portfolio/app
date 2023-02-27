@@ -16,7 +16,7 @@ export default function ModalView({
     <>
       <div
         className={classNames(
-          "fixed top-0 left-0 w-full h-full bg-black opacity-20",
+          "fixed top-0 left-0 w-full h-full bg-black opacity-20 z-40",
           { hidden: !visible },
         )}
         onClick={onClose}
@@ -26,7 +26,7 @@ export default function ModalView({
           { hidden: !visible },
           { "rounded-lg": title },
           { "rounded-3xl": !title },
-          "fixed top-1/2 left-1/2 flex flex-col bg-white max-h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 overflow-auto overflow-x-hidden",
+          "fixed top-1/2 left-1/2 flex flex-col bg-white max-h-45 w-3/4 max-w-37.5 -translate-x-1/2 -translate-y-1/2 overflow-auto overflow-x-hidden z-50",
         )}
       >
         {title ? (
