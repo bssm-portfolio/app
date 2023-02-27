@@ -14,7 +14,7 @@ export default function MainLayout({ app, title, filter }: MainLayoutProps) {
         <div>{filter}</div>
         <div>{app}</div>
       </div>
-      <div className="absolute top-[37.5rem] -left-16 -rotate-[8deg] bg-somago_yellow w-[110vw] h-60 -z-10" />
+      <div className="absolute top-[37.5rem] -left-16 -rotate-[8deg] bg-somago_yellow w-[150vw] h-60 -z-10" />
     </div>
   );
 }
