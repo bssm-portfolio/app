@@ -72,7 +72,6 @@ export type SortType =
   | "ALL";
 export type SortDirectionType = "ASC" | "DESC";
 export type SchoolGradeType = 1 | 2 | 3;
-
 export interface Filter {
   search?: string;
   uploadDateType?: UploadDateType;
@@ -80,6 +79,11 @@ export interface Filter {
   sortType?: SortType;
   sortDirectionType?: SortDirectionType;
 }
+export type SearchFilterPropertyType =
+  | "uploadDateType"
+  | "schoolGrade"
+  | "sortType"
+  | "sortDirectionType";
 
 export interface PortfolioList {
   list: Portfolio[];

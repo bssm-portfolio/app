@@ -1,15 +1,19 @@
 import { Filter } from "@/types/portfolio.interface";
 import classNames from "classnames";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import RadioText from "../atoms/RadioText";
 import { DownIcon } from "../Icon";
 import OrangeFilterIcon from "../Icon/OrangeFilterIcon";
 import WhiteFilterIcon from "../Icon/WhiteFilterIcon";
 
-export default function SearchFilter() {
+interface SearchFilterProps {
+  filter: Filter;
+  setFilter: Dispatch<SetStateAction<Filter>>;
+}
+
+export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
-  const [filter, setFilter] = useState<Filter>({});
 
   const dateRadioPropertyList = [
     { id: "AN_HOUR_AGO", label: "지난 1시간", value: "AN_HOUR_AGO" },
@@ -57,7 +61,7 @@ export default function SearchFilter() {
             <hr className="my-2.5 text-white w-40" />
             {dateRadioPropertyList.map((dateRadioProperty) => (
               <RadioText
-                name="업로드 날짜"
+                name="uploadDateType"
                 id={dateRadioProperty.id}
                 label={dateRadioProperty.label}
                 value={dateRadioProperty.value}
@@ -72,7 +76,7 @@ export default function SearchFilter() {
             <hr className="my-2.5 text-white w-40" />
             {gradeRadioPropertyList.map((gradeRadioProperty) => (
               <RadioText
-                name="학년"
+                name="schoolGrade"
                 id={gradeRadioProperty.id}
                 label={gradeRadioProperty.label}
                 value={gradeRadioProperty.value}
@@ -87,7 +91,7 @@ export default function SearchFilter() {
             <hr className="my-2.5 text-white w-40" />
             {sortTypeRadioPropertyList.map((sortTypeRadioProperty) => (
               <RadioText
-                name="정렬기준"
+                name="sortType"
                 id={sortTypeRadioProperty.id}
                 label={sortTypeRadioProperty.label}
                 value={sortTypeRadioProperty.value}
