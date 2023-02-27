@@ -51,7 +51,7 @@ export default function FileUploadView({
           {videoFile && (
             <video
               src={URL.createObjectURL(videoFile)}
-              className="w-full h-60 -z-10 absolute object-cover rounded-lg"
+              className="w-full h-60 -z-10 absolute object-cover rounded-lg opacity-30"
             >
               <track kind="captions" src={URL.createObjectURL(videoFile)} />
             </video>

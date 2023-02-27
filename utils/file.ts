@@ -12,5 +12,6 @@ export const getFormData = (file: File) => {
   return formData;
 };
 
-export const getFileUidByFileUpload = async (file: File) =>
-  (await httpClient.file.upload(getFormData(file))).data.fileUid;
+export const getFileUidByFileUpload = async (file: File) => {
+  return (await httpClient.file.upload(getFormData(file))).data.fileUid;
+};
