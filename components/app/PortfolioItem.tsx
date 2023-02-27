@@ -22,7 +22,7 @@ export default function PortfolioItem({
     getFileDownloadUrl(portfolio.thumbnail),
   );
   const countViewCss = `
-    flex items-center gap-0.5 text-[12px]
+    flex items-center gap-0.5 text-xs
   `;
 
   return (
@@ -53,7 +53,7 @@ export default function PortfolioItem({
         />
       </div>
 
-      <div className="ml-3">
+      <div className="ml-4">
         <h2
           className={classNames("font-bold text-middle mb-[.5rem]", {
             "!text-lg": type === "search",
@@ -79,7 +79,7 @@ export default function PortfolioItem({
             })}
           </Chip.Group>
         )}
-        <div className="text-[12px] mt-3">
+        <div className="text-xs mt-3">
           조회수 {portfolio.views}회 · {getTimeAgo(portfolio.createdDate)}
         </div>
 

@@ -12,7 +12,7 @@ function Frame({ filter, portfolioList }: SearchPageLayoutProps) {
         <div>{filter}</div>
         <div>{portfolioList}</div>
       </div>
-      <div className="absolute -top-[150px] -left-24 rotate-[-8deg] w-[150vw] h-[600px] bg-background_blue -z-10" />
+      <div className="absolute -top-[9.375rem] -left-24 rotate-[-8deg] w-[150vw] h-[37.5rem] bg-background_blue -z-10" />
     </div>
   );
 }
