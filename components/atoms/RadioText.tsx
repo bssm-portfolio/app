@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { Dispatch, SetStateAction } from "react";
 import { Filter, SearchFilterPropertyType } from "@/types/portfolio.interface";
+import { XIcon } from "../Icon";
 
 interface RadioProps {
   id: string;
@@ -21,6 +22,11 @@ export default function RadioText({
   setFilter,
   ...props
 }: RadioProps) {
+  const isSelect =
+    value === filter[name] ||
+    (value === "ALL" &&
+      !["UPLOAD_DATE", "COMMENTS"].includes(filter.sortType || "ALL"));
+
   return (
     <div className="flex items-start">
       <input
@@ -36,11 +42,17 @@ export default function RadioText({
       />
       <label
         htmlFor={id}
-        className={classNames("text-white cursor-pointer mt-2.5", {
-          "!text-somago_yellow": value === filter[name],
-        })}
+        className={classNames(
+          "flex items-center text-white cursor-pointer mt-2.5",
+          {
+            "!text-somago_yellow": isSelect,
+          },
+        )}
       >
         {label}
+        {isSelect && (
+          <XIcon className="[&>path]:fill-somago_yellow w-3 h-3 ml-2" />
+        )}
       </label>
     </div>
   );
