@@ -7,8 +7,8 @@ interface RadioProps {
   id: string;
   label: string;
   name: SearchFilterPropertyType;
-  checked?: boolean;
-  value?: string;
+  value: string;
+  isSelect?: boolean;
   filter: Filter;
   setFilter: Dispatch<SetStateAction<Filter>>;
 }
@@ -20,13 +20,9 @@ export default function RadioText({
   value,
   filter,
   setFilter,
+  isSelect = value === filter[name],
   ...props
 }: RadioProps) {
-  const isSelect =
-    value === filter[name] ||
-    (value === "ALL" &&
-      !["UPLOAD_DATE", "COMMENTS"].includes(filter.sortType || "ALL"));
-
   return (
     <div className="flex items-start">
       <input

@@ -74,13 +74,13 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
           <div>
             <h2 className="font-semibold">학년</h2>
             <hr className="my-2.5 text-white w-40" />
-            {gradeRadioPropertyList.map((gradeRadioProperty) => (
+            {gradeRadioPropertyList.map(({ id, label, value }) => (
               <RadioText
                 name="schoolGrade"
-                id={gradeRadioProperty.id}
-                label={gradeRadioProperty.label}
-                value={gradeRadioProperty.value}
-                key={gradeRadioProperty.id}
+                id={id}
+                label={label}
+                value={value}
+                key={id}
                 filter={filter}
                 setFilter={setFilter}
               />
@@ -89,15 +89,22 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
           <div>
             <h2 className="font-semibold">정렬기준</h2>
             <hr className="my-2.5 text-white w-40" />
-            {sortTypeRadioPropertyList.map((sortTypeRadioProperty) => (
+            {sortTypeRadioPropertyList.map(({ id, label, value }) => (
               <RadioText
                 name="sortType"
-                id={sortTypeRadioProperty.id}
-                label={sortTypeRadioProperty.label}
-                value={sortTypeRadioProperty.value}
-                key={sortTypeRadioProperty.id}
+                id={id}
+                label={label}
+                value={value}
+                key={id}
                 filter={filter}
                 setFilter={setFilter}
+                isSelect={
+                  value === filter.sortType ||
+                  (value === "ALL" &&
+                    !["UPLOAD_DATE", "COMMENTS"].includes(
+                      filter.sortType || "ALL",
+                    ))
+                }
               />
             ))}
           </div>
