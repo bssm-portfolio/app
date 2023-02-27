@@ -1,3 +1,4 @@
+import { Filter } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import { useState } from "react";
 import RadioText from "../atoms/RadioText";
@@ -8,6 +9,7 @@ import WhiteFilterIcon from "../Icon/WhiteFilterIcon";
 export default function SearchFilter() {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
+  const [filter, setFilter] = useState<Filter>({});
 
   const dateRadioPropertyList = [
     { id: "AN_HOUR_AGO", label: "지난 1시간", value: "AN_HOUR_AGO" },
@@ -16,13 +18,11 @@ export default function SearchFilter() {
     { id: "THIS_MONTH", label: "이번 달", value: "THIS_MONTH" },
     { id: "THIS_YEAR", label: "올해", value: "THIS_YEAR" },
   ];
-
   const gradeRadioPropertyList = [
     { id: "3", label: "3학년", value: "3" },
     { id: "2", label: "2학년", value: "2" },
     { id: "1", label: "1학년", value: "1" },
   ];
-
   const sortTypeRadioPropertyList = [
     { id: "ALL", label: "전체", value: "ALL" },
     { id: "UPLOAD_DATE", label: "업로드순", value: "UPLOAD_DATE" },
@@ -57,10 +57,13 @@ export default function SearchFilter() {
             <hr className="my-2.5 text-white w-40" />
             {dateRadioPropertyList.map((dateRadioProperty) => (
               <RadioText
+                name="업로드 날짜"
                 id={dateRadioProperty.id}
                 label={dateRadioProperty.label}
                 value={dateRadioProperty.value}
                 key={dateRadioProperty.id}
+                filter={filter}
+                setFilter={setFilter}
               />
             ))}
           </div>
@@ -69,10 +72,13 @@ export default function SearchFilter() {
             <hr className="my-2.5 text-white w-40" />
             {gradeRadioPropertyList.map((gradeRadioProperty) => (
               <RadioText
+                name="학년"
                 id={gradeRadioProperty.id}
                 label={gradeRadioProperty.label}
                 value={gradeRadioProperty.value}
                 key={gradeRadioProperty.id}
+                filter={filter}
+                setFilter={setFilter}
               />
             ))}
           </div>
@@ -81,10 +87,13 @@ export default function SearchFilter() {
             <hr className="my-2.5 text-white w-40" />
             {sortTypeRadioPropertyList.map((sortTypeRadioProperty) => (
               <RadioText
+                name="정렬기준"
                 id={sortTypeRadioProperty.id}
                 label={sortTypeRadioProperty.label}
                 value={sortTypeRadioProperty.value}
                 key={sortTypeRadioProperty.id}
+                filter={filter}
+                setFilter={setFilter}
               />
             ))}
           </div>

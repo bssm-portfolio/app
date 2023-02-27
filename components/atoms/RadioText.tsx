@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { Dispatch, SetStateAction } from "react";
+import { Filter } from "@/types/portfolio.interface";
 
 interface RadioProps {
   id: string;
@@ -7,6 +8,8 @@ interface RadioProps {
   name?: string;
   checked?: boolean;
   value?: string;
+  filter: Filter;
+  setFilter: Dispatch<SetStateAction<Filter>>;
 }
 
 export default function RadioText({
