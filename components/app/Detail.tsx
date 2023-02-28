@@ -7,9 +7,10 @@ import config from "@/config";
 import httpClient from "@/apis";
 import { useQueryClient } from "@tanstack/react-query";
 import KEY from "@/models/key";
+import useUser from "@/hooks/useUser";
 import Button from "../atoms/DetailButton";
 import Chip from "../atoms/Chip";
-import Group from "../atoms/Group";
+import MemberGroup from "../atoms/MemberGroup";
 import Description from "../portfolio/Description";
 import ShareIcon from "../Icon/ShareIcon";
 import PeopleIcon from "../Icon/PeopleIcon";
@@ -32,6 +33,7 @@ export default function Detail({
   bookmarks,
 }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
+  const { user: userInfo } = useUser();
   const router = useRouter();
   const url = `${config.clientUrl + router.asPath}`;
   const queryClient = useQueryClient();
@@ -73,7 +75,10 @@ export default function Detail({
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="font-bold text-large">{portfolio.title}</h2>
+          <h2 className="font-bold text-large">
+            <span className="text-blue">({portfolio.portfolioTheme}) </span>
+            {portfolio.title}
+          </h2>
           <span
             onClick={() => router.push(`/profile/${portfolio.writer.memberId}`)}
             className="cursor-pointer"
@@ -95,7 +100,7 @@ export default function Detail({
         </div>
 
         <div>
-          <div className="flex gap-small mb-large">
+          <div className="flex justify-end gap-small mb-large">
             <Button status="active" onClick={handleLike}>
               {bookmarkYn ? (
                 <FilledHeartIcon className="mr-2xsmall" />
@@ -127,7 +132,7 @@ export default function Detail({
           </div>
           {portfolio.contributorList.length > 0 && (
             <div className="mb-large">
-              <Group names={portfolio.contributorList} />
+              <MemberGroup writers={[userInfo, ...portfolio.contributorList]} />
             </div>
           )}
         </div>

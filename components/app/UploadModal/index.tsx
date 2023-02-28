@@ -28,12 +28,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   const [thumbnailFile, setThumbnailFile] = useState<File>();
   const [videoFile, setVideoFile] = useState<File>();
 
-  const {
-    register,
-    handleSubmit,
-    // watch,
-    // formState: { errors },
-  } = useForm<PortfolioForm>();
+  const { register, handleSubmit, setValue } = useForm<PortfolioForm>();
   const queryClient = useQueryClient();
   const { openToast } = useOverlay();
 
@@ -109,6 +104,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         setSelectedMembers={setSelectedMembers}
         selectedSkills={selectedSkills}
         setSelectedSkills={setSelectedSkills}
+        setValue={setValue}
       />
       <SubmitView
         className={classNames({ hidden: pageIndex !== 2 })}
