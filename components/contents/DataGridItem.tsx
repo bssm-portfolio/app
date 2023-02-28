@@ -1,3 +1,4 @@
+import config from "@/config";
 import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import Image from "next/image";
@@ -83,9 +84,7 @@ export default function DataGridItem({
                   alt={portfolio.title}
                   fill
                   sizes="7.5rem"
-                  onError={() =>
-                    setImageUrl("/assets/images/defaultThumbnail.png")
-                  }
+                  onError={() => setImageUrl(config.defaultThumbnail)}
                 />
               </div>
               <h2 className="font-bold">{portfolio.title}</h2>

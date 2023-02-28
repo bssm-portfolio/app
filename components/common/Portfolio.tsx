@@ -6,6 +6,7 @@ import { Avatar, Chip } from "@/components";
 import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
+import config from "@/config";
 
 interface PortfolioProps {
   portfolio: Portfolio;
@@ -34,9 +35,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
           priority
           fill
           sizes="20rem"
-          onError={() => {
-            setImageSrc("/assets/images/defaultThumbnail.png");
-          }}
+          onError={() => setImageSrc(config.defaultThumbnail)}
         />
       </div>
       <div className="flex mt-3 mb-[3.125rem] ">

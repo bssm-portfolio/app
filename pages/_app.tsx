@@ -11,7 +11,7 @@ import Toast from "@/components/common/Toast";
 import { DefaultSeo, DefaultSeoProps } from "next-seo";
 
 const DEFAULT_SEO: DefaultSeoProps = {
-  title: "BSSM Portfolio",
+  title: config.serviceName,
   description: "부산소프트웨어마이스터고 포트폴리오",
   canonical: config.clientUrl,
   themeColor: "#3E73FB",
@@ -19,14 +19,14 @@ const DEFAULT_SEO: DefaultSeoProps = {
     type: "website",
     locale: "ko_KR",
     url: config.clientUrl,
-    title: "BSSM Portfolio",
-    site_name: "BSSM Portfolio",
+    title: config.serviceName,
+    site_name: config.serviceName,
     images: [
       {
-        url: "/assets/images/defaultThumbnail.png",
+        url: config.defaultThumbnail,
         width: 320,
         height: 160,
-        alt: "BSSM Portfolio",
+        alt: config.serviceName,
       },
     ],
   },

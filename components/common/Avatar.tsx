@@ -1,3 +1,4 @@
+import config from "@/config";
 import classNames from "classnames";
 import Image from "next/image";
 
@@ -29,7 +30,7 @@ export default function Avatar({
       sizes="3.125rem"
       priority
       onError={(event) => {
-        event.currentTarget.src = "/assets/images/defaultThumbnail.png";
+        event.currentTarget.src = config.defaultProfile;
       }}
     />
   );
