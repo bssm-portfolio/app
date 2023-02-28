@@ -38,13 +38,13 @@ export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
       });
   };
 
-  const onInVaild: SubmitErrorHandler<Member> = () =>
+  const onInValid: SubmitErrorHandler<Member> = () =>
     openToast("잘못된 정보입니다.", { type: "danger" });
 
   return (
     <form
       className="flex flex-col gap-4"
-      onSubmit={handleSubmit(onValid, onInVaild)}
+      onSubmit={handleSubmit(onValid, onInValid)}
     >
       <Input registerReturn={register("name")} placeholder="이름" />
       <Input registerReturn={register("description")} placeholder="소개" />

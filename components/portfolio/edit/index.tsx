@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
@@ -10,6 +10,7 @@ import useOverlay from "@/hooks/useOverlay";
 import { Member } from "@/types/member.interface";
 import UserSearchForm from "@/components/common/UserSearchForm";
 import LabelForm from "@/components/atoms/LabelForm";
+import { getErrorProperty } from "@/utils/input";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import SkillForm from "../../common/SkillForm";
@@ -74,6 +75,14 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       );
   };
 
+  const onInValid: SubmitErrorHandler<PortfolioForm> = (inValidData) => {
+    openToast(
+      `${getErrorProperty<PortfolioForm>(inValidData)}을(를) 확인해주세요.`,
+      {
+        type: "danger",
+      },
+    );
+  };
   useEffect(() => {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
     setVideoFileUid(portfolio.video?.fileUid);
@@ -84,8 +93,14 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
   return (
     <form className="flex flex-col gap-3 p-12">
-      <Input registerReturn={register("title")} placeholder="제목" />
-      <Textarea registerReturn={register("description")} placeholder="소개" />
+      <Input
+        registerReturn={register("title", { required: "제목" })}
+        placeholder="제목"
+      />
+      <Textarea
+        registerReturn={register("description", { required: "소개" })}
+        placeholder="소개"
+      />
       <Input registerReturn={register("portfolioUrl")} placeholder="웹 주소" />
 
       <EditFileUploadView
@@ -117,7 +132,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
       <ScopeView register={register} scope={portfolio.scope} />
 
-      <Button type="submit" onClick={handleSubmit(onValid)}>
+      <Button type="submit" onClick={handleSubmit(onValid, onInValid)}>
         수정하기
       </Button>
     </form>
