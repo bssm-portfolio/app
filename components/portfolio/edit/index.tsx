@@ -7,6 +7,9 @@ import httpClient from "@/apis";
 import { getFileDownloadUrl, getFileUidByFileUpload } from "@/utils/file";
 import Textarea from "@/components/atoms/Textarea";
 import useOverlay from "@/hooks/useOverlay";
+import { Member } from "@/types/member.interface";
+import UserSearchForm from "@/components/common/UserSearchForm";
+import LabelForm from "@/components/atoms/LabelForm";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import SkillForm from "../../common/SkillForm";
@@ -23,6 +26,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [editVideoFile, setEditVideoFile] = useState<File>();
   const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
   const [videoFileUid, setVideoFileUid] = useState<string>("");
+  const [selectedMembers, setSelectedMembers] = useState<Member[]>([]);
 
   const { openToast } = useOverlay();
   const { data: portfolio } = usePortfolio(portfolioId);
@@ -60,7 +64,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         portfolioId,
         portfolioType: getPortfolioType(),
         skillList: selectedSkills,
-        contributorIdList: [],
+        contributorIdList: selectedMembers.map((member) => member.memberId),
         videoFileUid: await getVideoFileUid(),
         thumbnailFileUid: await getThumbnailFileUid(),
       })
@@ -74,6 +78,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
     setVideoFileUid(portfolio.video?.fileUid);
     setSelectedSkills(portfolio.skillList);
+    setSelectedMembers(portfolio.contributorList);
     reset(portfolio);
   }, [portfolio, reset]);
 
@@ -102,6 +107,12 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         editVideoFile={editVideoFile}
         editThumbnailFile={editThumbnailFile}
       />
+      <LabelForm label="참여자 아이디" className="mb-6">
+        <UserSearchForm
+          selectedMembers={selectedMembers}
+          setSelectedMembers={setSelectedMembers}
+        />
+      </LabelForm>
 
       <Input
         registerReturn={register("gitUrl")}

@@ -1,5 +1,5 @@
 import { S3File } from "./file.interface";
-import { PortfolioWriter } from "./member.interface";
+import { Member, PortfolioWriter } from "./member.interface";
 import { Skill } from "./skill.interface";
 
 export type PortfolioType = "VIDEO" | "URL" | "ALL";
@@ -25,7 +25,7 @@ export type Portfolio = {
   video: S3File;
   thumbnail: S3File;
   skillList: Skill[];
-  contributorList: PortfolioWriter[];
+  contributorList: Member[];
   bookmarks: number;
   views: number;
   comments: number;
