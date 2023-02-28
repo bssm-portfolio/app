@@ -1,18 +1,15 @@
 import { Member, MemberType } from "@/types/member.interface";
 import { Comment, Portfolio } from "@/types/portfolio.interface";
 
-const avatarUrl =
-  "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg";
+const avatarUrl = "/assets/images/defaultProfile.png";
 
-const portfolioUrl =
-  "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg";
+const portfolioUrl = "/assets/images/defaultProfile.png";
 
 const comment: Comment = {
   writer: {
     memberId: 0,
     name: "string",
-    profileImageUrl:
-      "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg",
+    profileImageUrl: "/assets/images/defaultProfile.png",
     email: " string@gmail.com",
   },
   commentId: 0,
