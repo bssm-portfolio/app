@@ -9,7 +9,6 @@ import Button from "../atoms/Button";
 import Input from "../atoms/Input";
 
 export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
-  console.log(userInfo);
   const { register, handleSubmit, reset } = useForm<Member>();
   const { openToast } = useOverlay();
   const queryClient = useQueryClient();
@@ -43,7 +42,7 @@ export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
       <Input registerReturn={register("email")} />
       <Input registerReturn={register("job")} />
       <Input registerReturn={register("phone")} />
-      <Button>제출</Button>
+      <Button type="submit">제출</Button>
     </form>
   );
 }

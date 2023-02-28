@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 interface FrameProps {
+  title: ReactNode;
   app: ReactNode;
   sidebar: ReactNode;
   detail: ReactNode;
@@ -12,7 +13,7 @@ const getLayoutCss = () => {
   flex
   flex-col
   justify-between
-  pt-[3.25rem] 
+  pt-10 
   px-4
   z-20
   md:px-6
@@ -21,9 +22,10 @@ const getLayoutCss = () => {
   `;
 };
 
-function Frame({ app, sidebar, detail, comment }: FrameProps) {
+function Frame({ title, app, sidebar, detail, comment }: FrameProps) {
   return (
     <section className="relative z-10 overflow-hidden min-h-[calc(100vh-5.125rem)]">
+      {title}
       <div className={getLayoutCss()}>
         <div className="w-full">
           {app}
@@ -37,10 +39,8 @@ function Frame({ app, sidebar, detail, comment }: FrameProps) {
   );
 }
 
-export function AppLayout({ app, sidebar, detail, comment }: FrameProps) {
-  return (
-    <Frame app={app} sidebar={sidebar} detail={detail} comment={comment} />
-  );
+export function AppLayout(props: FrameProps) {
+  return <Frame {...props} />;
 }
 
 export default AppLayout;

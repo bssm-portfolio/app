@@ -14,6 +14,7 @@ import { deepcopy } from "@/utils/data";
 import { NextSeo, NextSeoProps } from "next-seo";
 import { usePortfolio } from "@/models/portfolio";
 import useUser from "@/hooks/useUser";
+import PortfolioTitle from "@/components/app/PortfolioTitle";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
@@ -46,6 +47,7 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
     <>
       <NextSeo {...seoConfig} />
       <AppLayout
+        title={<PortfolioTitle />}
         app={
           <PortfolioPlayer
             videoUrl={
