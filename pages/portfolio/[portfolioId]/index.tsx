@@ -43,7 +43,7 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   };
 
   return (
-    <div>
+    <>
       <NextSeo {...seoConfig} />
       <AppLayout
         app={
@@ -77,7 +77,7 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
           <AppComment portfolioId={Number(dateParsedPortfolio.portfolioId)} />
         }
       />
-    </div>
+    </>
   );
 }
 

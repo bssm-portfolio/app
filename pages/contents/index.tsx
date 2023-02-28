@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <NextSeo {...seoConfig} />
       <ChannelContentLayout
         title={<DataGridTitle />}
@@ -35,6 +35,6 @@ export default function Home() {
           />
         }
       />
-    </div>
+    </>
   );
 }

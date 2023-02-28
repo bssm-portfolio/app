@@ -29,7 +29,7 @@ export default function Home({ userInfo }: MemberIdPageProps) {
   };
 
   return (
-    <div>
+    <>
       <NextSeo {...seoConfig} />
       <ProfilePageLayout
         profile={
@@ -48,7 +48,7 @@ export default function Home({ userInfo }: MemberIdPageProps) {
           />
         }
       />
-    </div>
+    </>
   );
 }
 
