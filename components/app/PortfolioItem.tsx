@@ -1,3 +1,4 @@
+import config from "@/config";
 import { Portfolio, PortfolioListType } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
@@ -46,9 +47,7 @@ export default function PortfolioItem({
           sizes="15rem"
           fill
           priority
-          onError={() => {
-            setImageSrc("/assets/images/defaultThumbnail.png");
-          }}
+          onError={() => setImageSrc(config.defaultThumbnail)}
         />
       </div>
 

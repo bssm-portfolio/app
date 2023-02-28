@@ -51,8 +51,8 @@ ${config.serviceName}는 서비스 이용을 위해 필요한 최소한의 개�
 `;
 export default function Home() {
   const seoConfig: NextSeoProps = {
-    title: "BSSM Portfolio 개인정보 동의",
-    description: "BSSM Portfolio 회원가입",
+    title: `${config.serviceName} 개인정보 동의`,
+    description: `${config.serviceName} 회원가입`,
   };
   return (
     <>

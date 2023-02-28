@@ -1,15 +1,16 @@
+import config from "@/config";
 import { Member, MemberType } from "@/types/member.interface";
 import { Comment, Portfolio } from "@/types/portfolio.interface";
 
-const avatarUrl = "/assets/images/defaultProfile.png";
+const avatarUrl = config.defaultProfile;
 
-const portfolioUrl = "/assets/images/defaultProfile.png";
+const portfolioUrl = config.defaultProfile;
 
 const comment: Comment = {
   writer: {
     memberId: 0,
     name: "string",
-    profileImageUrl: "/assets/images/defaultProfile.png",
+    profileImageUrl: config.defaultProfile,
     email: " string@gmail.com",
   },
   commentId: 0,
