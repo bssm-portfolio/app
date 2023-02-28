@@ -14,7 +14,7 @@ export default function LoginPopupView() {
     const oauthCallbackUrlList = {
       google: `${config.baseURL}/oauth2/authorization/google`,
       kakao: `${config.baseURL}/oauth2/authorization/kakao`,
-      bsm: "https://auth.bssm.kro.kr/oauth?clientId=17283d0f&redirectURI=http://localhost:3000/oauth/callback/bsm",
+      bsm: "https://auth.bssm.kro.kr/oauth?clientId=17283d0f&redirectURI=https://portfolio.bssm.io/oauth/callback/bsm",
     };
     return router.push(oauthCallbackUrlList[platform]);
   };
