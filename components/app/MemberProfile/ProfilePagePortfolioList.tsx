@@ -33,6 +33,9 @@ export default function ProfilePagePortfolioList({
           />
         );
       })}
+      {portfolioList.length === 0 && !isMypage && (
+        <p className="text-2xl">포트폴리오가 없습니다.</p>
+      )}
       {isMypage && (
         <div
           className="w-[22.5rem] h-[23.75rem] flex items-center justify-center rounded-md border border-blue cursor-pointer"

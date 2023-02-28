@@ -142,6 +142,11 @@ export default function DataGrid({
             </div>
           )}
         </Droppable>
+        {portfolioList.length === 0 && (
+          <p className="flex justify-center mt-10 text-2xl">
+            내 포트폴리오가 없습니다.
+          </p>
+        )}
 
         <div className="flex justify-end mt-20">
           <Button
