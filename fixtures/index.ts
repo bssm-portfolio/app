@@ -1,4 +1,5 @@
 import config from "@/config";
+import { emptyUser } from "@/store";
 import { Member, MemberType } from "@/types/member.interface";
 import { Comment, Portfolio } from "@/types/portfolio.interface";
 
@@ -49,15 +50,7 @@ const portfolio: Portfolio = {
   scope: "PUBLIC",
   gitUrl: "",
   skillList: [],
-  contributorList: [
-    {
-      memberId: 0,
-      name: "",
-      profileImageUrl: "",
-      memberType: MemberType.STUDENT,
-      email: "",
-    },
-  ],
+  contributorList: [emptyUser],
   bookmarks: 0,
   views: 0,
   comments: 0,
