@@ -62,7 +62,7 @@ export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
             options={Array(3)
               .fill(null)
               .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
-            defaultValue={userInfo.schoolGrade.toString()}
+            defaultValue={userInfo.schoolGrade?.toString()}
           />
           <Select
             className="w-full"
@@ -73,7 +73,7 @@ export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
             options={Array(4)
               .fill(null)
               .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
-            defaultValue={userInfo.schoolClass.toString()}
+            defaultValue={userInfo.schoolClass?.toString()}
           />
           <Select
             className="w-full"
@@ -84,7 +84,7 @@ export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
             options={Array(20)
               .fill(null)
               .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
-            defaultValue={userInfo.schoolNumber.toString()}
+            defaultValue={userInfo.schoolNumber?.toString()}
           />
         </div>
       )}
