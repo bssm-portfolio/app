@@ -51,13 +51,22 @@ const useMyPortfolioList = () => {
   };
 };
 
-const usePortfolioListById = (portfolioId?: number) => {
-  const { data } = useQuery<PortfolioList>(
-    [KEY.PORTFOLIO_LIST_BY_ID, portfolioId],
-    () =>
+const usePortfolioListById = (portfolioId?: number, isMypage?: boolean) => {
+  const getPortfolioList = () => {
+    if (isMypage)
+      return () =>
+        httpClient.portfolio
+          .self({ params: { size: 100 } })
+          .then((r) => r.data);
+    return () =>
       httpClient.portfolioMember
         .getById({ params: { id: portfolioId, size: 100 } })
-        .then((r) => r.data),
+        .then((r) => r.data);
+  };
+
+  const { data } = useQuery<PortfolioList>(
+    [KEY.PORTFOLIO_LIST_BY_ID, portfolioId, isMypage],
+    getPortfolioList(),
     { enabled: !!portfolioId },
   );
   return data || { pagination: null, list: [] };

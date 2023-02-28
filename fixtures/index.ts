@@ -54,15 +54,7 @@ const portfolio: Portfolio = {
   scope: "PUBLIC",
   gitUrl: "",
   skillList: [],
-  contributorList: [
-    {
-      memberId: 0,
-      name: "",
-      profileImageUrl: "",
-      memberType: MemberType.STUDENT,
-      email: "",
-    },
-  ],
+  contributorList: [],
   bookmarks: 0,
   views: 0,
   comments: 0,
@@ -116,6 +108,9 @@ const user: Member = {
   followerCount: 0,
   followingCount: 0,
   followYn: false,
+  schoolGrade: 0,
+  schoolClass: 0,
+  schoolNumber: 0,
 };
 
 const defaultPagination = {

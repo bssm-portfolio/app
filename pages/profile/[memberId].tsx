@@ -14,8 +14,12 @@ interface MemberIdPageProps {
 }
 
 export default function Home({ userInfo }: MemberIdPageProps) {
-  const { list: portfolioList } = usePortfolioListById(userInfo.memberId);
   const { user: myUserInfo } = useUser({ authorizedPage: true });
+  const isMypage = myUserInfo.memberId === userInfo.memberId;
+  const { list: portfolioList } = usePortfolioListById(
+    userInfo.memberId,
+    isMypage,
+  );
   const {
     data: { followYn, followingCount, followerCount },
   } = useMember(userInfo.memberId);
@@ -35,7 +39,7 @@ export default function Home({ userInfo }: MemberIdPageProps) {
         profile={
           <ProfilePageProfile
             userInfo={userInfo}
-            isMypage={myUserInfo.memberId === userInfo.memberId}
+            isMypage={isMypage}
             followYn={followYn}
             followingCount={followingCount}
             followerCount={followerCount}
@@ -44,7 +48,7 @@ export default function Home({ userInfo }: MemberIdPageProps) {
         portfiloList={
           <ProfilePagePortfolioList
             portfolioList={portfolioList}
-            isMypage={myUserInfo.memberId === userInfo.memberId}
+            isMypage={isMypage}
           />
         }
       />

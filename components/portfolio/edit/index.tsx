@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
@@ -13,6 +13,10 @@ import config from "@/config";
 import { getFileDownloadUrl, getFileUidByFileUpload } from "@/utils/file";
 import Textarea from "@/components/atoms/Textarea";
 import useOverlay from "@/hooks/useOverlay";
+import { Member } from "@/types/member.interface";
+import UserSearchForm from "@/components/common/UserSearchForm";
+import LabelForm from "@/components/atoms/LabelForm";
+import { getErrorProperty } from "@/utils/input";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import SkillForm from "../../common/SkillForm";
@@ -29,6 +33,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   const [editVideoFile, setEditVideoFile] = useState<File>();
   const [thumbnailFileUid, setThumbnailFileUid] = useState<string>("");
   const [videoFileUid, setVideoFileUid] = useState<string>("");
+  const [selectedMembers, setSelectedMembers] = useState<Member[]>([]);
 
   const { openToast } = useOverlay();
   const { data: portfolio } = usePortfolio(portfolioId);
@@ -66,7 +71,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         portfolioId,
         portfolioType: getPortfolioType(),
         skillList: selectedSkills,
-        contributorIdList: [],
+        contributorIdList: selectedMembers.map((member) => member.memberId),
         videoFileUid: await getVideoFileUid(),
         thumbnailFileUid: await getThumbnailFileUid(),
       })
@@ -76,24 +81,33 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       );
   };
 
+  const onInValid: SubmitErrorHandler<PortfolioForm> = (inValidData) => {
+    openToast(
+      `${getErrorProperty<PortfolioForm>(inValidData)}을(를) 확인해주세요.`,
+      {
+        type: "danger",
+      },
+    );
+  };
   useEffect(() => {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
     setVideoFileUid(portfolio.video?.fileUid);
     setSelectedSkills(portfolio.skillList);
+    setSelectedMembers(portfolio.contributorList);
     reset(portfolio);
   }, [portfolio, reset]);
 
   return (
-    <form className="p-12">
-      <Input registerReturn={register("title")} placeholder="title" />
-      <Textarea
-        registerReturn={register("description")}
-        placeholder="description"
-      />
+    <form className="flex flex-col gap-3 p-12">
       <Input
-        registerReturn={register("portfolioUrl")}
-        placeholder="portfolioUrl"
+        registerReturn={register("title", { required: "제목" })}
+        placeholder="제목"
       />
+      <Textarea
+        registerReturn={register("description", { required: "소개" })}
+        placeholder="소개"
+      />
+      <Input registerReturn={register("portfolioUrl")} placeholder="웹 주소" />
 
       <EditFileUploadView
         register={register}
@@ -108,11 +122,14 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         editVideoFile={editVideoFile}
         editThumbnailFile={editThumbnailFile}
       />
+      <LabelForm label="참여자 아이디">
+        <UserSearchForm
+          selectedMembers={selectedMembers}
+          setSelectedMembers={setSelectedMembers}
+        />
+      </LabelForm>
 
-      <Input
-        registerReturn={register("gitUrl")}
-        placeholder="https://github.com/"
-      />
+      <Input registerReturn={register("gitUrl")} placeholder="깃허브 주소" />
 
       <SkillForm
         selectedSkills={selectedSkills}
@@ -128,7 +145,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
       <ScopeView register={register} scope={portfolio.scope} />
 
-      <Button type="submit" onClick={handleSubmit(onValid)}>
+      <Button type="submit" onClick={handleSubmit(onValid, onInValid)}>
         수정하기
       </Button>
     </form>

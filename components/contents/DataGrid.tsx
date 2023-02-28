@@ -63,7 +63,7 @@ export default function DataGrid({
   const getHeadCss = () => {
     return `
     grid 
-    grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem] 
+    grid-cols-[3.375rem_1fr_7.75rem_7.75rem_7.75rem_4.2rem] 
     py-6 
     border-y 
     border-y-primary-border_gray 

@@ -16,6 +16,7 @@ import ShareIcon from "../Icon/ShareIcon";
 import PeopleIcon from "../Icon/PeopleIcon";
 import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
 import FilledHeartIcon from "../Icon/FilledHeartIcon";
+import EditIcon from "../Icon/EditIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -110,7 +111,7 @@ export default function Detail({
               <span className="text-small">{bookmarks}</span>
             </Button>
 
-            {!isMyPortfolio && (
+            {!isMyPortfolio ? (
               <Button
                 status="active"
                 onClick={followYn ? handleUnFollow : handleFollow}
@@ -120,6 +121,15 @@ export default function Detail({
                 <span className="text-small">
                   {followYn ? "팔로잉" : "팔로우"}
                 </span>
+              </Button>
+            ) : (
+              <Button
+                status="active"
+                className="text-small"
+                onClick={() => router.push(`${router.asPath}/edit`)}
+              >
+                <EditIcon className="mr-2xsmall w-4 h-4" />
+                수정
               </Button>
             )}
 

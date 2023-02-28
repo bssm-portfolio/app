@@ -18,6 +18,9 @@ export const emptyUser: Member = {
   followingCount: 0,
   portfolioCount: 0,
   followYn: false,
+  schoolGrade: 0,
+  schoolClass: 0,
+  schoolNumber: 0,
 };
 
 export const userState = atom<Member>({

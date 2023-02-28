@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import SignupPopupView from "@/components/common/Auth/SignupPopup";
 import useModal from "@/hooks/useModal";
 import { NextSeo, NextSeoProps } from "next-seo";
+import config from "@/config";
 
 export default function Home() {
   const { openModal } = useModal();
   const seoConfig: NextSeoProps = {
     title: "회원가입",
-    description: "BSSM Portfolio 회원가입",
+    description: `${config.serviceName} 회원가입`,
   };
 
   useEffect(() => {
