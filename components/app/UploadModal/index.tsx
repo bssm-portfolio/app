@@ -64,6 +64,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         queryClient.invalidateQueries([KEY.PORTFOLIO_LIST]);
         queryClient.invalidateQueries([KEY.MY_PORTFOLIO_LIST]);
         queryClient.invalidateQueries([KEY.PORTFOLIO_LIST_BY_ID]);
+        openToast("포트폴리오 업로드에 성공하였습니다");
         closeModal();
       })
       .catch((error) =>
