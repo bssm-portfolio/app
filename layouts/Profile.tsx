@@ -14,9 +14,6 @@ function Frame({ profile, portfiloList }: FrameProps) {
   );
 }
 
-export default function ProfilePageLayout({
-  portfiloList,
-  profile,
-}: FrameProps) {
+export default function ProfileLayout({ portfiloList, profile }: FrameProps) {
   return <Frame profile={profile} portfiloList={portfiloList} />;
 }
