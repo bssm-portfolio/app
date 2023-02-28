@@ -75,14 +75,14 @@ export default function MemberPageProfile({
           </pre>
         </div>
         <div className="flex justify-center mt-auto">
-          {isMypage && (
+          {/* {isMypage && (
             <Button
               varient="secondary"
               className="border border-black !rounded-full !bg-white py-2 px-8"
             >
               수정하기
             </Button>
-          )}
+          )} */}
 
           {!isMypage && followYn && (
             <Button
