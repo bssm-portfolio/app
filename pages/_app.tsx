@@ -23,7 +23,7 @@ const DEFAULT_SEO: DefaultSeoProps = {
     site_name: "BSSM Portfolio",
     images: [
       {
-        url: "https://velog.velcdn.com/images/j1min/post/1235a9a1-debb-4dd4-a92c-029515abbabd/image.png",
+        url: "/assets/images/defaultThumbnail.png",
         width: 320,
         height: 160,
         alt: "BSSM Portfolio",

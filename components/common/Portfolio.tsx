@@ -35,9 +35,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
           fill
           sizes="20rem"
           onError={() => {
-            setImageSrc(
-              "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
-            );
+            setImageSrc("/assets/images/defaultThumbnail.png");
           }}
         />
       </div>

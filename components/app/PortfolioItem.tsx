@@ -47,9 +47,7 @@ export default function PortfolioItem({
           fill
           priority
           onError={() => {
-            setImageSrc(
-              "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
-            );
+            setImageSrc("/assets/images/defaultThumbnail.png");
           }}
         />
       </div>
