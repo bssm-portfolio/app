@@ -1,7 +1,9 @@
 import httpClient from "@/apis";
-import { RefetchType } from "@/types/index.interface";
+import useOverlay from "@/hooks/useOverlay";
+import KEY from "@/models/key";
 import { Portfolio } from "@/types/portfolio.interface";
 import { deepcopy, reorder } from "@/utils/data";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   Dispatch,
   SetStateAction,
@@ -17,19 +19,19 @@ import DataGridItem from "./DataGridItem";
 interface DataGridProps {
   portfolioList: Portfolio[];
   setPortfolioList: Dispatch<SetStateAction<Portfolio[]>>;
-  refetch: RefetchType;
 }
 
 export default function DataGrid({
   portfolioList,
   setPortfolioList,
-  refetch,
 }: DataGridProps) {
   const [checkedPortfolioIdList, setCheckedPortfolioIdList] = useState<
     number[]
   >([]);
   const [isEnabled, setIsEnabled] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+  const { openToast } = useOverlay();
+  const queryClient = useQueryClient();
 
   const getPortfolioIdList = useCallback(
     () => portfolioList.map((portfolio) => portfolio.portfolioId),
@@ -76,8 +78,9 @@ export default function DataGrid({
         }),
       ),
     ).then(() => {
-      refetch();
+      queryClient.invalidateQueries([KEY.MY_PORTFOLIO_LIST]);
       setCheckedPortfolioIdList([]);
+      openToast("삭제가 완료되었습니다.");
     });
   };
 

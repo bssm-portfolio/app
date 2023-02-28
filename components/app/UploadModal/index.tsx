@@ -61,9 +61,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       })
       .then(() => {
         closeModal();
-        queryClient.invalidateQueries({
-          queryKey: [KEY.PORTFOLIO_LIST],
-        });
+        queryClient.invalidateQueries([KEY.PORTFOLIO_LIST]);
+        queryClient.invalidateQueries([KEY.MY_PORTFOLIO_LIST]);
       })
       .catch((error) =>
         openToast(error.response.data.reason, {
