@@ -1,4 +1,5 @@
 import styleConfig from "@/config/style";
+import classNames from "classnames";
 import { ReactNode } from "react";
 
 interface FrameProps {
@@ -24,9 +25,9 @@ const getLayoutCss = () => {
 
 function Frame({ title, app, sidebar, detail, comment }: FrameProps) {
   return (
-    <section className="relative z-10 overflow-hidden min-h-[calc(100vh-5.125rem)]">
+    <section className={classNames(styleConfig.desktopWidth, "mx-auto")}>
       {title}
-      <section className="relative z-10 overflow-hidden flex justify-center min-h-[calc(100vh-5.125rem)]">
+      <div className="relative z-10 overflow-hidden flex justify-center min-h-[calc(100vh-11.4375rem)]">
         <div className={getLayoutCss()}>
           <div className="w-full">
             {app}
@@ -35,8 +36,8 @@ function Frame({ title, app, sidebar, detail, comment }: FrameProps) {
           </div>
           <div className="mt-base xl:mt-0 xl:row-span-2">{sidebar}</div>
         </div>
-        <div className="absolute -top-[15rem] -left-24 rotate-[-7deg] w-[150vw] h-[55rem] bg-background_blue -z-10" />
-      </section>
+      </div>
+      <div className="absolute -top-[15rem] -left-24 rotate-[-7deg] w-[150vw] h-[55rem] bg-background_blue -z-10" />
     </section>
   );
 }
