@@ -21,8 +21,6 @@ export const emptyUser: Member = {
   schoolGrade: 0,
   schoolClass: 0,
   schoolNumber: 0,
-  admissionYear: 0,
-  belong: "부산소프트웨어마이스터고등학교",
 };
 
 export const userState = atom<Member>({

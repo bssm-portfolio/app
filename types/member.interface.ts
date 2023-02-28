@@ -22,8 +22,6 @@ export interface Member {
   schoolGrade: number;
   schoolClass: number;
   schoolNumber: number;
-  admissionYear: number;
-  belong: string;
 }
 
 export type PortfolioWriter = Omit<
