@@ -1,3 +1,4 @@
+import styleConfig from "@/config/style";
 import { ReactNode } from "react";
 
 interface FrameProps {
@@ -5,7 +6,11 @@ interface FrameProps {
 }
 
 function Frame({ app }: FrameProps) {
-  return <section className="min-h-[calc(100vh-5.125rem)]">{app}</section>;
+  return (
+    <section className="flex justify-center min-h-[calc(100vh-5.125rem)]">
+      <div className={styleConfig.desktopWidth}>{app}</div>
+    </section>
+  );
 }
 
 export default function EditLayout({ app }: FrameProps) {
