@@ -60,9 +60,10 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         thumbnailFileUid,
       })
       .then(() => {
-        closeModal();
         queryClient.invalidateQueries([KEY.PORTFOLIO_LIST]);
         queryClient.invalidateQueries([KEY.MY_PORTFOLIO_LIST]);
+        queryClient.invalidateQueries([KEY.PORTFOLIO_LIST_BY_ID]);
+        closeModal();
       })
       .catch((error) =>
         openToast(error.response.data.reason, {
