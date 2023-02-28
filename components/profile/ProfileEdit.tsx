@@ -46,11 +46,11 @@ export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
       className="flex flex-col gap-4"
       onSubmit={handleSubmit(onValid, onInVaild)}
     >
-      <Input registerReturn={register("name")} />
-      <Input registerReturn={register("description")} />
-      <Input registerReturn={register("email")} />
-      <Input registerReturn={register("job")} />
-      <Input registerReturn={register("phone")} />
+      <Input registerReturn={register("name")} placeholder="이름" />
+      <Input registerReturn={register("description")} placeholder="소개" />
+      <Input registerReturn={register("email")} placeholder="이메일" />
+      <Input registerReturn={register("job")} placeholder="분야" />
+      <Input registerReturn={register("phone")} placeholder="전화번호" />
       {isStudent && (
         <div className="flex justify-between gap-1">
           <Select
