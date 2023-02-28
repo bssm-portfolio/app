@@ -1,3 +1,6 @@
+import { Option } from "@/components/common/Select";
+import { PortfolioTheme } from "@/types/portfolio.interface";
+
 interface Config {
   baseURL: string;
   nodeEnv: "development" | "production" | "test";
@@ -6,6 +9,7 @@ interface Config {
   defaultThumbnail: "/assets/images/defaultThumbnail.png";
   defaultProfile: "/assets/images/defaultProfile.png";
   defaultLogo: "/assets/images/logo.png";
+  portfolioThemeOptions: Option[];
 }
 
 const createConfig: () => Config = () => {
@@ -20,6 +24,12 @@ const createConfig: () => Config = () => {
     defaultThumbnail: "/assets/images/defaultThumbnail.png",
     defaultProfile: "/assets/images/defaultProfile.png",
     defaultLogo: "/assets/images/logo.png",
+    portfolioThemeOptions: [
+      { label: "웹", value: PortfolioTheme.WEB },
+      { label: "앱", value: PortfolioTheme.APP },
+      { label: "임베디드", value: PortfolioTheme.EMBEDDED },
+      { label: "로봇", value: PortfolioTheme.ROBOT },
+    ],
   };
 };
 
