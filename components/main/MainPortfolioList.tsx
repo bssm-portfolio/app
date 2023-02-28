@@ -43,7 +43,7 @@ export default function MainPortfolioList({
             className="mt-8 mx-auto"
             width={60}
             height={60}
-            type="spin"
+            color="#FAAF3D"
           />
         )}
       </div>

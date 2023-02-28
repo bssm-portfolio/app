@@ -55,9 +55,7 @@ export default function MemberPageProfile({
             height={128}
           />
           <h2 className="font-bold text-2xl mt-5">{userInfo.name}</h2>
-          <h4 className="font-bold mt-1 text-xs">
-            {userInfo.job ?? "앱개발자"}
-          </h4>
+          <h4 className="font-bold mt-1 text-xs">{userInfo.job}</h4>
         </div>
         <div className="mt-5">
           <div className="w-full flex font-bold">
@@ -116,7 +114,7 @@ export default function MemberPageProfile({
           </Button>
           <Button
             className="bg-primary-dark_gray !rounded-[0.625rem]"
-            onClick={() => router.push("/mypage/edit")}
+            onClick={() => router.push("/profile/edit")}
           >
             내 정보 관리
           </Button>

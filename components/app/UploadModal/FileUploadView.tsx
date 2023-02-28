@@ -88,6 +88,7 @@ export default function FileUploadView({
               src={URL.createObjectURL(thumbnailFile)}
               alt="ddd"
               fill
+              sizes="20rem"
               className="rounded-lg -z-10 opacity-30"
             />
           )}

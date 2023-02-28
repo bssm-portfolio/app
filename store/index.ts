@@ -6,8 +6,8 @@ export { default as modalState } from "./modal";
 
 export const emptyUser: Member = {
   memberId: 0,
-  name: "user",
-  email: "test@test.com",
+  name: "",
+  email: "",
   profileImageUrl: fixture.avatarUrl,
   description: null,
   memberRoleType: "ROLE_NORMAL",

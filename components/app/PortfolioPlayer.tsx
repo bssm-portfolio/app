@@ -1,6 +1,6 @@
 import { PortfolioType } from "@/types/portfolio.interface";
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 
 interface PortfolioProps {
@@ -15,29 +15,20 @@ export default function PortfolioPlayer({
   type,
 }: PortfolioProps) {
   const [selected, setSelected] = useState<"web" | "video">(
-    type === "VIDEO" ? "video" : "web",
+    type === "URL" ? "web" : "video",
   );
+  useEffect(() => {
+    setSelected(type === "URL" ? "web" : "video");
+  }, [type]);
+
   return (
     <div className="w-full relative">
-      {selected === "web" && (
-        <iframe
-          className="w-full h-[50rem]"
-          src={portfolioUrl}
-          title="portfolio"
-        />
-      )}
-      {selected === "video" && (
-        <video src={videoUrl} controls className="w-full h-[50rem]">
-          <track default kind="captions" srcLang="ko" src={videoUrl} />
-        </video>
-      )}
-
-      <div className="flex absolute -top-12 gap-2">
+      <div className="flex items-end gap-1">
         <Button
           className={classNames(
-            "disabled:bg-slate-600 disabled:cursor-not-allowed",
+            "h-10 disabled:bg-slate-600 disabled:text-white disabled:cursor-not-allowed rounded-b-none rounded-t-2xl",
             {
-              "bg-sky-500": selected === "web",
+              "!bg-blue !text-white !h-11": selected === "web",
               "hover:bg-slate-300": selected !== "web",
             },
           )}
@@ -49,9 +40,9 @@ export default function PortfolioPlayer({
         </Button>
         <Button
           className={classNames(
-            "disabled:bg-slate-600 disabled:cursor-not-allowed",
+            "h-10 disabled:bg-slate-600 disabled:text-white disabled:cursor-not-allowed rounded-b-none rounded-t-2xl",
             {
-              "bg-sky-500": selected === "video",
+              "!bg-blue !text-white !h-11": selected === "video",
               "hover:bg-slate-300": selected !== "video",
             },
           )}
@@ -62,6 +53,18 @@ export default function PortfolioPlayer({
           동영상
         </Button>
       </div>
+      {selected === "web" && (
+        <iframe
+          className="w-full h-[50rem]"
+          src={portfolioUrl}
+          title="portfolio"
+        />
+      )}
+      {selected === "video" && (
+        <video src={videoUrl} controls className="w-full">
+          <track default kind="captions" srcLang="ko" src={videoUrl} />
+        </video>
+      )}
     </div>
   );
 }

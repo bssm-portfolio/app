@@ -1,3 +1,4 @@
+import config from "@/config";
 import classNames from "classnames";
 import Image from "next/image";
 
@@ -29,8 +30,7 @@ export default function Avatar({
       sizes="3.125rem"
       priority
       onError={(event) => {
-        event.currentTarget.src =
-          "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg";
+        event.currentTarget.src = config.defaultProfile;
       }}
     />
   );

@@ -6,6 +6,7 @@ import { Avatar, Chip } from "@/components";
 import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
+import config from "@/config";
 
 interface PortfolioProps {
   portfolio: Portfolio;
@@ -34,11 +35,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
           priority
           fill
           sizes="20rem"
-          onError={() => {
-            setImageSrc(
-              "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
-            );
-          }}
+          onError={() => setImageSrc(config.defaultThumbnail)}
         />
       </div>
       <div className="flex mt-3 mb-[3.125rem] ">

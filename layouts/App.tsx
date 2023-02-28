@@ -23,7 +23,7 @@ const getLayoutCss = () => {
 
 function Frame({ app, sidebar, detail, comment }: FrameProps) {
   return (
-    <section className="relative z-10 overflow-hidden">
+    <section className="relative z-10 overflow-hidden min-h-[calc(100vh-5.125rem)]">
       <div className={getLayoutCss()}>
         <div className="w-full">
           {app}

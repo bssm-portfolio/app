@@ -13,9 +13,9 @@ export default function Edit() {
   };
 
   return (
-    <div>
+    <>
       <NextSeo {...seoConfig} />
       <EditLayout app={<PortfolioEdit portfolioId={Number(portfolioId)} />} />
-    </div>
+    </>
   );
 }

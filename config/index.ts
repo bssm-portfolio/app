@@ -3,6 +3,9 @@ interface Config {
   nodeEnv: "development" | "production" | "test";
   clientUrl: string;
   serviceName: string;
+  defaultThumbnail: "/assets/images/defaultThumbnail.png";
+  defaultProfile: "/assets/images/defaultProfile.png";
+  defaultLogo: "/assets/images/logo.png";
 }
 
 const createConfig: () => Config = () => {
@@ -14,6 +17,9 @@ const createConfig: () => Config = () => {
     nodeEnv: process.env.NODE_ENV,
     clientUrl: typeof window !== "undefined" ? window.location.origin : "",
     serviceName: "BSSM Portfolio",
+    defaultThumbnail: "/assets/images/defaultThumbnail.png",
+    defaultProfile: "/assets/images/defaultProfile.png",
+    defaultLogo: "/assets/images/logo.png",
   };
 };
 

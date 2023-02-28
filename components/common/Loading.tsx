@@ -20,7 +20,7 @@ interface LoadingProps {
 }
 
 export default function Loading({
-  type = "bubbles",
+  type = "spin",
   color = "black",
   className = "",
   width = 30,

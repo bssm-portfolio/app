@@ -42,13 +42,15 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
     };
 
     const getVideoFileUid = () => {
-      if (editVideoFile) return getFileUidByFileUpload(editVideoFile);
+      if (editVideoFile)
+        return getFileUidByFileUpload(editVideoFile, openToast);
       if (videoFileUid && !editVideoFile) return videoFileUid;
       return undefined;
     };
 
     const getThumbnailFileUid = () => {
-      if (editThumbnailFile) return getFileUidByFileUpload(editThumbnailFile);
+      if (editThumbnailFile)
+        return getFileUidByFileUpload(editThumbnailFile, openToast);
       return thumbnailFileUid;
     };
 

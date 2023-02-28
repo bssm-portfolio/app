@@ -22,7 +22,7 @@ export default function ToastView({ toastList }: ToastViewProps) {
   };
 
   return (
-    <div className="fixed bottom-6 right-3">
+    <div className="fixed bottom-6 right-3 z-50">
       {toastList.map((toast) => {
         return (
           <div
@@ -33,8 +33,11 @@ export default function ToastView({ toastList }: ToastViewProps) {
             )}
             key={toast.id}
           >
-            <CheckIcon className="mr-5" />
-            <span className="text-lg font-bold">{toast.content}</span>
+            {toast.type === "normal" && <CheckIcon className="mr-5" />}
+
+            <span className="text-lg font-bold">
+              {toast.content || "문제가 발생했습니다."}
+            </span>
           </div>
         );
       })}

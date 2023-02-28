@@ -1,3 +1,4 @@
+import config from "@/config";
 import { Portfolio, PortfolioListType } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
@@ -46,11 +47,7 @@ export default function PortfolioItem({
           sizes="15rem"
           fill
           priority
-          onError={() => {
-            setImageSrc(
-              "https://velog.velcdn.com/images/redjen/post/94ca451b-5a98-4882-96a5-81f028ff0801/image.jpg",
-            );
-          }}
+          onError={() => setImageSrc(config.defaultThumbnail)}
         />
       </div>
 

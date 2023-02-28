@@ -39,7 +39,7 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
 };
 
 const useMyPortfolioList = () => {
-  const { data, refetch, isError } = useQuery<PortfolioList>(
+  const { data, isError } = useQuery<PortfolioList>(
     [KEY.MY_PORTFOLIO_LIST],
     () =>
       httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data),
@@ -47,7 +47,6 @@ const useMyPortfolioList = () => {
   return {
     pagination: data?.pagination || null,
     list: data?.list || [],
-    refetch,
     isError,
   };
 };

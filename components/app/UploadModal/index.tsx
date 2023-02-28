@@ -38,9 +38,10 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   const { openToast } = useOverlay();
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
-    const videoFileUid = videoFile && (await getFileUidByFileUpload(videoFile));
+    const videoFileUid =
+      videoFile && (await getFileUidByFileUpload(videoFile, openToast));
     const thumbnailFileUid =
-      thumbnailFile && (await getFileUidByFileUpload(thumbnailFile));
+      thumbnailFile && (await getFileUidByFileUpload(thumbnailFile, openToast));
 
     const getPortfolioType = (): PortfolioType => {
       if (data.portfolioUrl.length > 0 && videoFileUid) {
@@ -62,13 +63,14 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         thumbnailFileUid,
       })
       .then(() => {
+        queryClient.invalidateQueries([KEY.PORTFOLIO_LIST]);
+        queryClient.invalidateQueries([KEY.MY_PORTFOLIO_LIST]);
+        queryClient.invalidateQueries([KEY.PORTFOLIO_LIST_BY_ID]);
+        openToast("포트폴리오 업로드에 성공하였습니다");
         closeModal();
-        queryClient.invalidateQueries({
-          queryKey: [KEY.PORTFOLIO_LIST],
-        });
       })
       .catch((error) =>
-        openToast(error.response.data.reason, {
+        openToast(error.response.data.message, {
           type: "danger",
         }),
       );

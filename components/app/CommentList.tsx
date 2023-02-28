@@ -14,14 +14,14 @@ interface CommentForm {
 
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const { user } = useUser();
+  const { user: userInfo } = useUser();
   const { list: commentList, refetch } = useCommentList(portfolioId);
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [isWriting, setIsWriting] = useState(false);
   const { ref, ...rest } = register("content", {
     required: "댓글 내용은 필수 항목입니다.",
   });
-  const emptyUser = user.memberId === 0;
+  const emptyUser = userInfo.memberId === 0;
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
     await httpClient.comment.post({
@@ -41,7 +41,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
     <div className="bg-white mt-2 p-3 box-border rounded">
       <form className="flex mt-base relative" onSubmit={handleSubmit(onValid)}>
         <Image
-          src={user.profileImageUrl}
+          src={userInfo.profileImageUrl}
           alt="프로필"
           width={40}
           height={40}
@@ -50,7 +50,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
         />
         <input
           type="text"
-          className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none"
+          className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
           placeholder={!emptyUser ? "댓글 추가.." : "로그인이 필요합니다."}
           {...rest}
           ref={handleInput}
