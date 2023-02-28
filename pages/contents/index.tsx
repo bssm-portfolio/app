@@ -1,6 +1,5 @@
 import DataGrid from "@/components/contents/DataGrid";
 import DataGridTitle from "@/components/contents/DataGridTitle";
-import Filter from "@/components/contents/ContentFilter";
 import useUser from "@/hooks/useUser";
 import ChannelContentLayout from "@/layouts/ChannelContent";
 import { useMyPortfolioList } from "@/models/portfolio";
@@ -27,7 +26,6 @@ export default function Home() {
       <NextSeo {...seoConfig} />
       <ChannelContentLayout
         title={<DataGridTitle />}
-        filter={<Filter />}
         datagrid={
           <DataGrid
             portfolioList={portfolioList}
