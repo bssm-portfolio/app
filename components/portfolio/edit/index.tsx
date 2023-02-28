@@ -83,16 +83,10 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   }, [portfolio, reset]);
 
   return (
-    <form className="p-12">
-      <Input registerReturn={register("title")} placeholder="title" />
-      <Textarea
-        registerReturn={register("description")}
-        placeholder="description"
-      />
-      <Input
-        registerReturn={register("portfolioUrl")}
-        placeholder="portfolioUrl"
-      />
+    <form className="flex flex-col gap-3 p-12">
+      <Input registerReturn={register("title")} placeholder="제목" />
+      <Textarea registerReturn={register("description")} placeholder="소개" />
+      <Input registerReturn={register("portfolioUrl")} placeholder="웹 주소" />
 
       <EditFileUploadView
         register={register}
@@ -107,17 +101,14 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         editVideoFile={editVideoFile}
         editThumbnailFile={editThumbnailFile}
       />
-      <LabelForm label="참여자 아이디" className="mb-6">
+      <LabelForm label="참여자 아이디">
         <UserSearchForm
           selectedMembers={selectedMembers}
           setSelectedMembers={setSelectedMembers}
         />
       </LabelForm>
 
-      <Input
-        registerReturn={register("gitUrl")}
-        placeholder="https://github.com/"
-      />
+      <Input registerReturn={register("gitUrl")} placeholder="깃허브 주소" />
 
       <SkillForm
         selectedSkills={selectedSkills}
