@@ -6,7 +6,7 @@ export default function MainTitle() {
   text-white`;
 
   return (
-    <div>
+    <div className="mt-[2.5rem]">
       <h1 className={h1Style}>BUSAN</h1>
       <h1 className={h1Style}>SOFTWARE MEISTER</h1>
       <h1 className={h1Style}>HIGH SCHOOL</h1>
