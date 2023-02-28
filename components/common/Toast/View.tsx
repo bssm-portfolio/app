@@ -22,7 +22,7 @@ export default function ToastView({ toastList }: ToastViewProps) {
   };
 
   return (
-    <div className="fixed bottom-6 right-3">
+    <div className="fixed bottom-6 right-3 z-50">
       {toastList.map((toast) => {
         return (
           <div
