@@ -1,4 +1,3 @@
-import styleConfig from "@/config/style";
 import { ReactNode } from "react";
 
 interface MainLayoutProps {
