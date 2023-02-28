@@ -21,6 +21,7 @@ export type Portfolio = {
   bookmarkYn: boolean;
   followYn: boolean;
   scope: PortfolioScope;
+  portfolioTheme: PortfolioTheme;
   gitUrl: string;
   video: S3File;
   thumbnail: S3File;
@@ -32,11 +33,19 @@ export type Portfolio = {
   createdDate: Date;
 };
 
+export const enum PortfolioTheme {
+  WEB = "WEB",
+  APP = "APP",
+  EMBEDDED = "EMBEDDED",
+  ROBOT = "ROBOT",
+}
+
 export type PortfolioForm = {
   title: string;
   description: string;
   videoFileUid: string;
   portfolioUrl: string;
+  portfolioTheme: PortfolioTheme;
   thumbnailFileUid: string;
   portfolioScope: PortfolioScope;
   portfolioType: PortfolioType;
