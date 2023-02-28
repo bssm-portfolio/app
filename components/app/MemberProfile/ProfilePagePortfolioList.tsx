@@ -35,7 +35,7 @@ export default function ProfilePagePortfolioList({
       })}
       {isMypage && (
         <div
-          className="w-[20rem] h-[11.25rem] flex items-center justify-center rounded-md border border-blue cursor-pointer"
+          className="w-[22.5rem] h-[23.75rem] flex items-center justify-center rounded-md border border-blue cursor-pointer"
           onClick={openUploadModal}
         >
           <div className="flex flex-col items-center">
