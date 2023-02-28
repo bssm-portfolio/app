@@ -1,6 +1,7 @@
 import httpClient from "@/apis";
 import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
+import { Member } from "@/types/member.interface";
 import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
 import { getFileUidByFileUpload } from "@/utils/file";
@@ -23,6 +24,7 @@ const MAX_NAVIGATOR_LENGTH = 3;
 export default function UploadModal({ closeModal }: UploadModalProps) {
   const [pageIndex, setPageIndex] = useState(0);
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
+  const [selectedMembers, setSelectedMembers] = useState<Member[]>([]);
   const [thumbnailFile, setThumbnailFile] = useState<File>();
   const [videoFile, setVideoFile] = useState<File>();
 
@@ -56,7 +58,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         ...data,
         portfolioType: getPortfolioType(),
         skillList: selectedSkills,
-        contributorIdList: [],
+        contributorIdList: selectedMembers.map((member) => member.memberId),
         videoFileUid,
         thumbnailFileUid,
       })
@@ -103,6 +105,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       <FormView
         className={classNames({ hidden: pageIndex !== 1 })}
         register={register}
+        selectedMembers={selectedMembers}
+        setSelectedMembers={setSelectedMembers}
         selectedSkills={selectedSkills}
         setSelectedSkills={setSelectedSkills}
       />

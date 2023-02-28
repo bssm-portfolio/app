@@ -8,10 +8,14 @@ import { useSkill } from "@/models/skill";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Skill } from "@/types/skill.interface";
 import SkillForm from "@/components/common/SkillForm";
+import UserSearchForm from "@/components/common/UserSearchForm";
+import { Member } from "@/types/member.interface";
 
 interface FormProps {
   register: UseFormRegister<PortfolioForm>;
   className?: string;
+  selectedMembers: Member[];
+  setSelectedMembers: Dispatch<SetStateAction<Member[]>>;
   selectedSkills: Skill[];
   setSelectedSkills: Dispatch<SetStateAction<Skill[]>>;
 }
@@ -19,6 +23,8 @@ interface FormProps {
 function FormView({
   register,
   className,
+  selectedMembers,
+  setSelectedMembers,
   selectedSkills,
   setSelectedSkills,
 }: FormProps) {
@@ -65,7 +71,10 @@ function FormView({
       </LabelForm>
 
       <LabelForm label="참여자 아이디" className="mb-6">
-        <Input className="w-full" placeholder="#해시태그" />
+        <UserSearchForm
+          selectedMembers={selectedMembers}
+          setSelectedMembers={setSelectedMembers}
+        />
       </LabelForm>
       <LabelForm label="Github 주소" className="mb-6">
         <Input
