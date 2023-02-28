@@ -55,15 +55,17 @@ const usePortfolioListById = (portfolioId?: number, isMypage?: boolean) => {
   const getPortfolioList = () => {
     if (isMypage)
       return () =>
-        httpClient.portfolioMember
-          .getById({ params: { id: portfolioId, size: 100 } })
+        httpClient.portfolio
+          .self({ params: { size: 100 } })
           .then((r) => r.data);
     return () =>
-      httpClient.portfolio.self({ params: { size: 100 } }).then((r) => r.data);
+      httpClient.portfolioMember
+        .getById({ params: { id: portfolioId, size: 100 } })
+        .then((r) => r.data);
   };
 
   const { data } = useQuery<PortfolioList>(
-    [KEY.PORTFOLIO_LIST_BY_ID, portfolioId],
+    [KEY.PORTFOLIO_LIST_BY_ID, portfolioId, isMypage],
     getPortfolioList(),
     { enabled: !!portfolioId },
   );
