@@ -111,6 +111,11 @@ const user: Member = {
   followerCount: 0,
   followingCount: 0,
   followYn: false,
+  schoolGrade: 0,
+  schoolClass: 0,
+  schoolNumber: 0,
+  admissionYear: 0,
+  belong: "부산소프트웨어마이스터고등학교",
 };
 
 const defaultPagination = {

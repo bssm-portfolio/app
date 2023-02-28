@@ -36,4 +36,9 @@ export type PortfolioWriter = Omit<
   | "followerCount"
   | "followingCount"
   | "followYn"
+  | "admissionYear"
+  | "schoolGrade"
+  | "schoolClass"
+  | "schoolNumber"
+  | "belong"
 >;
