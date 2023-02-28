@@ -19,6 +19,11 @@ export interface Member {
   followerCount: number;
   followingCount: number;
   followYn: boolean;
+  schoolGrade: number;
+  schoolClass: number;
+  schoolNumber: number;
+  admissionYear: number;
+  belong: string;
 }
 
 export type PortfolioWriter = Omit<
