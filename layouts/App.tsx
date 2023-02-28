@@ -1,3 +1,4 @@
+import styleConfig from "@/config/style";
 import { ReactNode } from "react";
 
 interface FrameProps {
@@ -12,18 +13,15 @@ const getLayoutCss = () => {
   flex
   flex-col
   justify-between
-  pt-[3.25rem] 
-  px-4
   z-20
-  md:px-6
-  xl:px-[6.25rem]
   xl:flex-row
+  ${styleConfig.desktopWidth}
   `;
 };
 
 function Frame({ app, sidebar, detail, comment }: FrameProps) {
   return (
-    <section className="relative z-10 overflow-hidden min-h-[calc(100vh-5.125rem)]">
+    <section className="relative z-10 overflow-hidden flex justify-center min-h-[calc(100vh-5.125rem)]">
       <div className={getLayoutCss()}>
         <div className="w-full">
           {app}

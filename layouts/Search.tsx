@@ -1,3 +1,4 @@
+import styleConfig from "@/config/style";
 import { ReactNode } from "react";
 
 interface SearchPageLayoutProps {
@@ -7,13 +8,17 @@ interface SearchPageLayoutProps {
 
 function Frame({ filter, portfolioList }: SearchPageLayoutProps) {
   return (
-    <div className="relative pt-8 px-32 flex flex-col z-10 overflow-hidden min-h-[calc(100vh-5.125rem)]">
-      <div className="z-20">
-        <div>{filter}</div>
-        <div>{portfolioList}</div>
+    <section className="flex justify-center">
+      <div
+        className={`relative pt-8 flex flex-col justify-center z-10 overflow-hidden min-h-[calc(100vh-5.125rem)] ${styleConfig.desktopWidth}`}
+      >
+        <div className="z-20">
+          <div>{filter}</div>
+          <div>{portfolioList}</div>
+        </div>
       </div>
       <div className="absolute -top-[15rem] -left-24 rotate-[-7deg] w-[150vw] h-[55rem] bg-background_blue -z-10" />
-    </div>
+    </section>
   );
 }
 
