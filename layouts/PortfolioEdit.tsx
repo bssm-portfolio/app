@@ -5,7 +5,7 @@ interface FrameProps {
 }
 
 function Frame({ app }: FrameProps) {
-  return <section>{app}</section>;
+  return <section className="min-h-[calc(100vh-5.125rem)]">{app}</section>;
 }
 
 export default function EditLayout({ app }: FrameProps) {
