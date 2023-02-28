@@ -77,11 +77,13 @@ export default function DataGrid({
           data: { portfolioId: checkedPortfolioId },
         }),
       ),
-    ).then(() => {
-      queryClient.invalidateQueries([KEY.MY_PORTFOLIO_LIST]);
-      setCheckedPortfolioIdList([]);
-      openToast("삭제가 완료되었습니다.");
-    });
+    )
+      .then(() => {
+        queryClient.invalidateQueries([KEY.MY_PORTFOLIO_LIST]);
+        setCheckedPortfolioIdList([]);
+        openToast("삭제가 완료되었습니다.");
+      })
+      .catch(() => openToast("삭제에 실패하였습니다."));
   };
 
   useEffect(() => {
