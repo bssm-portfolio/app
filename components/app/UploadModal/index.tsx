@@ -67,7 +67,7 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
         closeModal();
       })
       .catch((error) =>
-        openToast(error.response.data.reason, {
+        openToast(error.response.data.message, {
           type: "danger",
         }),
       );
