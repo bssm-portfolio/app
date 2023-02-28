@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo, SearchBar, Avatar, HeaderButton } from "@/components";
 import { useRouter } from "next/router";
+import styleConfig from "@/config/style";
 
 interface HeaderProps {
   avatarUrl?: string;
@@ -21,7 +22,9 @@ export default function HeaderView({
 
   return (
     <div className="flex justify-center bg-background_blue z-50">
-      <div className="flex justify-between items-center m-4 w-74 select-none">
+      <div
+        className={`flex justify-between items-center my-4 select-none ${styleConfig.desktopWidth}`}
+      >
         <Link href="/">
           <Logo />
         </Link>

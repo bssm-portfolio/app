@@ -1,3 +1,4 @@
+import styleConfig from "@/config/style";
 import { ReactNode } from "react";
 
 interface FrameProps {
@@ -7,9 +8,11 @@ interface FrameProps {
 
 function Frame({ profile, portfiloList }: FrameProps) {
   return (
-    <section className="flex px-[8.375rem] pb-16 pt-10 min-h-[calc(100vh-5.125rem)]">
-      <div>{profile}</div>
-      <div>{portfiloList}</div>
+    <section className="flex justify-center min-h-[calc(100vh-5.125rem)]">
+      <div className={`flex pb-16 mt-10 ${styleConfig.desktopWidth}`}>
+        <div>{profile}</div>
+        <div>{portfiloList}</div>
+      </div>
     </section>
   );
 }
