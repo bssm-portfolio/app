@@ -9,15 +9,13 @@ import { NextSeo, NextSeoProps } from "next-seo";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { list, refetch, isError } = useMyPortfolioList();
+  const { list: myPortfolioList, isError } = useMyPortfolioList();
   const [portfolioList, setPortfolioList] = useState<Portfolio[]>([]);
   useUser({ authorizedPage: true });
 
   useEffect(() => {
-    if (list.length > 0 && !isError) {
-      setPortfolioList(list);
-    }
-  }, [list, isError]);
+    if (!isError) setPortfolioList(myPortfolioList);
+  }, [myPortfolioList, isError]);
 
   const seoConfig: NextSeoProps = {
     title: "콘텐츠 관리",
@@ -34,7 +32,6 @@ export default function Home() {
           <DataGrid
             portfolioList={portfolioList}
             setPortfolioList={setPortfolioList}
-            refetch={refetch}
           />
         }
       />
