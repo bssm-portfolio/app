@@ -1,6 +1,6 @@
 import { PortfolioType } from "@/types/portfolio.interface";
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 
 interface PortfolioProps {
@@ -15,8 +15,12 @@ export default function PortfolioPlayer({
   type,
 }: PortfolioProps) {
   const [selected, setSelected] = useState<"web" | "video">(
-    type === "VIDEO" ? "video" : "web",
+    type === "URL" ? "web" : "video",
   );
+  useEffect(() => {
+    setSelected(type === "URL" ? "web" : "video");
+  }, [type]);
+
   return (
     <div className="w-full relative">
       {selected === "web" && (
@@ -27,7 +31,7 @@ export default function PortfolioPlayer({
         />
       )}
       {selected === "video" && (
-        <video src={videoUrl} controls className="w-full h-[50rem]">
+        <video src={videoUrl} controls className="w-full">
           <track default kind="captions" srcLang="ko" src={videoUrl} />
         </video>
       )}
