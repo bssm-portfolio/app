@@ -2,8 +2,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
-import { PortfolioForm, PortfolioType } from "@/types/portfolio.interface";
+import {
+  PortfolioForm,
+  PortfolioTheme,
+  PortfolioType,
+} from "@/types/portfolio.interface";
 import httpClient from "@/apis";
+import Select, { Option } from "@/components/common/Select";
+import config from "@/config";
 import { getFileDownloadUrl, getFileUidByFileUpload } from "@/utils/file";
 import Textarea from "@/components/atoms/Textarea";
 import useOverlay from "@/hooks/useOverlay";
@@ -26,7 +32,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
   const { openToast } = useOverlay();
   const { data: portfolio } = usePortfolio(portfolioId);
-  const { register, handleSubmit, reset } = useForm<PortfolioForm>({
+  const { register, handleSubmit, reset, setValue } = useForm<PortfolioForm>({
     defaultValues: portfolio,
   });
 
@@ -111,6 +117,13 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       <SkillForm
         selectedSkills={selectedSkills}
         setSelectedSkills={setSelectedSkills}
+      />
+
+      <Select
+        options={config.portfolioThemeOptions}
+        setValue={(option: Option) =>
+          setValue("portfolioTheme", option.value as PortfolioTheme)
+        }
       />
 
       <ScopeView register={register} scope={portfolio.scope} />
