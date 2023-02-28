@@ -18,3 +18,10 @@ export interface ToastProperty extends Toast {
   id: string;
   position: PositionType;
 }
+
+export type OpenToastType = (
+  content: string,
+  toastConfig?: Toast | undefined,
+) => void;
+
+export type CloseToastType = (id: string, timerId: NodeJS.Timeout) => void;
