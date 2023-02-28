@@ -31,7 +31,7 @@ export default function FileUploadView({
   type FileUploaderType = "thumbnail" | "video";
 
   const getBackgroundImageCss = (varient: FileUploaderType) => {
-    const width = varient === "thumbnail" ? "w-[20rem]" : "w-full";
+    const width = varient === "thumbnail" ? "w-[20rem]" : "w-[30rem]";
     const height = varient === "thumbnail" ? "h-[11.25rem]" : "h-60";
 
     return `
