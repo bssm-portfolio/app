@@ -116,7 +116,7 @@ export default function MemberPageProfile({
           </Button>
           <Button
             className="bg-primary-dark_gray !rounded-[0.625rem]"
-            onClick={() => router.push("/mypage/edit")}
+            onClick={() => router.push("/profile/edit")}
           >
             내 정보 관리
           </Button>
