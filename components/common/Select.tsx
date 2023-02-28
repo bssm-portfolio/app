@@ -13,6 +13,7 @@ interface SelectProps<T> extends SelectHTMLAttributes<HTMLSelectElement> {
   nativeSelect?: boolean;
   registerReturn?: UseFormRegisterReturn;
   setValue?: (v: T) => void;
+  defaultValue?: string;
 }
 
 export default function Select<T>({
@@ -23,6 +24,7 @@ export default function Select<T>({
   options = [],
   registerReturn,
   nativeSelect = false,
+  defaultValue,
   ...props
 }: SelectProps<T>) {
   if (nativeSelect) {
@@ -34,6 +36,7 @@ export default function Select<T>({
             onChange={onChange}
             className="appearance-none pr-8 text-center bg-inherit focus:outline-none"
             {...registerReturn}
+            defaultValue={defaultValue}
           >
             {options.map(({ label, value }) => (
               <option key={label + value} value={value}>
@@ -52,6 +55,7 @@ export default function Select<T>({
       onChange={(v) => setValue?.(v as any)}
       placeholder={props.placeholder}
       options={options}
+      defaultInputValue={defaultValue}
     />
   );
 }
