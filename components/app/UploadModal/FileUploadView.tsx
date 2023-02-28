@@ -40,7 +40,9 @@ export default function FileUploadView({
     <div className={classNames("flex flex-col gap-8", className)} {...props}>
       <div>
         <h2 className="mb-2">동영상</h2>
-        <div className={classNames("w-full h-60", getFileUploaderBorderCss())}>
+        <div
+          className={classNames("w-full h-[11rem]", getFileUploaderBorderCss())}
+        >
           <FileUploader
             id="video-uploader"
             label="동영상 업로드"

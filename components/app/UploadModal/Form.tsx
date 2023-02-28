@@ -1,15 +1,17 @@
 import Input from "@/components/atoms/Input";
 import LabelForm from "@/components/atoms/LabelForm";
 import Textarea from "@/components/atoms/Textarea";
-import { PortfolioForm } from "@/types/portfolio.interface";
+import { PortfolioForm, PortfolioTheme } from "@/types/portfolio.interface";
 import classNames from "classnames";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { useSkill } from "@/models/skill";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Skill } from "@/types/skill.interface";
 import SkillForm from "@/components/common/SkillForm";
 import UserSearchForm from "@/components/common/UserSearchForm";
 import { Member } from "@/types/member.interface";
+import Select, { Option } from "@/components/common/Select";
+import config from "@/config";
 
 interface FormProps {
   register: UseFormRegister<PortfolioForm>;
@@ -18,6 +20,7 @@ interface FormProps {
   setSelectedMembers: Dispatch<SetStateAction<Member[]>>;
   selectedSkills: Skill[];
   setSelectedSkills: Dispatch<SetStateAction<Skill[]>>;
+  setValue: UseFormSetValue<PortfolioForm>;
 }
 
 function FormView({
@@ -27,6 +30,7 @@ function FormView({
   setSelectedMembers,
   selectedSkills,
   setSelectedSkills,
+  setValue,
 }: FormProps) {
   const getFormViewCss = () => {
     return `w-full 
@@ -63,13 +67,21 @@ function FormView({
           })}
         />
       </LabelForm>
+      <LabelForm label="테마" className="mb-6">
+        <Select
+          placeholder=""
+          options={config.portfolioThemeOptions}
+          setValue={(option: Option) =>
+            setValue("portfolioTheme", option.value as PortfolioTheme)
+          }
+        />
+      </LabelForm>
       <LabelForm label="기술스택(중복선택 가능)" className="mb-6">
         <SkillForm
           selectedSkills={selectedSkills}
           setSelectedSkills={setSelectedSkills}
         />
       </LabelForm>
-
       <LabelForm label="참여자 아이디" className="mb-6">
         <UserSearchForm
           selectedMembers={selectedMembers}

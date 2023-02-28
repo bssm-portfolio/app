@@ -10,7 +10,7 @@ function Frame({ filter, portfolioList }: SearchPageLayoutProps) {
   return (
     <section className="flex justify-center">
       <div
-        className={`relative pt-8 flex flex-col justify-center z-10 overflow-hidden min-h-[calc(100vh-5.125rem)] ${styleConfig.desktopWidth}`}
+        className={`relative pt-8 flex flex-col z-10 overflow-hidden min-h-[calc(100vh-5.125rem)] ${styleConfig.desktopWidth}`}
       >
         <div className="z-20">
           <div>{filter}</div>

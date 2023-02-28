@@ -1,6 +1,10 @@
 import config from "@/config";
 import { Member, MemberType } from "@/types/member.interface";
-import { Comment, Portfolio } from "@/types/portfolio.interface";
+import {
+  Comment,
+  Portfolio,
+  PortfolioTheme,
+} from "@/types/portfolio.interface";
 
 const avatarUrl = config.defaultProfile;
 
@@ -28,6 +32,7 @@ const portfolio: Portfolio = {
     email: "",
     memberType: MemberType.STUDENT,
   },
+  portfolioTheme: PortfolioTheme.APP,
   bookmarkYn: false,
   followYn: false,
   portfolioType: "VIDEO",
