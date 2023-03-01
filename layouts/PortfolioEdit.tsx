@@ -7,7 +7,7 @@ interface FrameProps {
 
 function Frame({ app }: FrameProps) {
   return (
-    <section className="flex justify-center min-h-[calc(100vh-5.125rem)]">
+    <section className="flex justify-center min-h-[calc(100vh-4.625rem)]">
       <div className={styleConfig.desktopWidth}>{app}</div>
     </section>
   );

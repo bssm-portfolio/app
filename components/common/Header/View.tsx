@@ -46,6 +46,8 @@ export default function HeaderView({
           <div className="relative cursor-pointer">
             <Avatar
               imageUrl={avatarUrl}
+              width={40}
+              height={40}
               onClick={() => router.push(`/profile/${memberId}`)}
             />
           </div>
