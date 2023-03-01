@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { AppLayout } from "@/layouts";
 import {
   AppComment,
@@ -27,6 +28,12 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
     data: { bookmarkYn, followYn, bookmarks },
   } = usePortfolio(dateParsedPortfolio.portfolioId);
   const { user: userInfo } = useUser();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      httpClient.portfolioViewsAdd.put({ portfolioId: portfolio.portfolioId });
+    }
+  }, [portfolio.portfolioId]);
 
   const seoConfig: NextSeoProps = {
     title: dateParsedPortfolio.title,
