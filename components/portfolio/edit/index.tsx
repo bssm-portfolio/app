@@ -2,6 +2,7 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
+import { useRouter } from "next/router";
 import {
   PortfolioForm,
   PortfolioTheme,
@@ -28,6 +29,7 @@ interface PortfolioEditProps {
 }
 
 export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
+  const router = useRouter();
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
   const [editThumbnailFile, setEditThumbnailFile] = useState<File>();
   const [editVideoFile, setEditVideoFile] = useState<File>();
@@ -75,7 +77,12 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         videoFileUid: await getVideoFileUid(),
         thumbnailFileUid: await getThumbnailFileUid(),
       })
-      .then(() => openToast("수정이 완료되었습니다."))
+      .then(() => {
+        openToast("수정이 완료되었습니다.");
+        httpClient.revalidatePortfolio
+          .post({ portfolioId })
+          .then(() => router.push(`/portfolio/${portfolioId}`));
+      })
       .catch((error) =>
         openToast(error.response.data.message, { type: "danger" }),
       );
