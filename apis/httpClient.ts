@@ -136,4 +136,5 @@ export default {
   file: new HttpClient("/api/file", axiosConfig),
   follow: new HttpClient("/api/follow", axiosConfig),
   refreshToken: new HttpClient("/api/refresh-token", axiosConfig),
+  revalidatePortfolio: new HttpClient("/api/revalidate-portfolio", axiosConfig),
 };
