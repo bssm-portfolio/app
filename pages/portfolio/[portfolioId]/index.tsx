@@ -5,12 +5,10 @@ import {
   PortfolioPlayer,
   AppSideMenu,
 } from "@/components";
-import type { GetServerSideProps } from "next";
-import httpClient from "@/apis";
+import type { GetStaticProps } from "next";
 import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import { getDateParsedData } from "@/utils/date";
-import { deepcopy } from "@/utils/data";
 import { NextSeo, NextSeoProps } from "next-seo";
 import { usePortfolio } from "@/models/portfolio";
 import useUser from "@/hooks/useUser";
@@ -83,20 +81,16 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { portfolioId } = context.query;
-  if (Number.isNaN(Number(portfolioId)))
-    return {
-      notFound: true,
-    };
-
-  const portfolio = (
-    await httpClient.portfolio.getById({ params: { id: portfolioId } })
-  ).data;
-
+export const getStaticPaths = async () => {
   return {
-    props: {
-      portfolio: deepcopy(portfolio),
-    },
+    paths: [],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+    revalidate: 6000,
   };
 };
