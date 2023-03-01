@@ -8,7 +8,7 @@ interface FrameProps {
 
 function Frame({ title, datagrid }: FrameProps) {
   return (
-    <section className="flex justify-center min-h-[calc(100vh-5.125rem)]">
+    <section className="flex justify-center min-h-[calc(100vh-4.625rem)]">
       <div className={`pt-10 pb-10 ${styleConfig.desktopWidth}`}>
         <div>{title}</div>
         <div>{datagrid}</div>

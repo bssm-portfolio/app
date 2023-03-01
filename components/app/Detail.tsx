@@ -141,7 +141,7 @@ export default function Detail({
             </CopyToClipboard>
           </div>
           {portfolio.contributorList.length > 0 && (
-            <div className="mb-large">
+            <div className="mb-large flex justify-end">
               <MemberGroup writers={[userInfo, ...portfolio.contributorList]} />
             </div>
           )}

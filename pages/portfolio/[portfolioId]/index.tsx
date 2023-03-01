@@ -5,7 +5,7 @@ import {
   PortfolioPlayer,
   AppSideMenu,
 } from "@/components";
-import type { GetServerSideProps } from "next";
+import type { GetStaticProps } from "next";
 import httpClient from "@/apis";
 import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
@@ -83,20 +83,24 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { portfolioId } = context.query;
-  if (Number.isNaN(Number(portfolioId)))
-    return {
-      notFound: true,
-    };
+export const getStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
 
-  const portfolio = (
-    await httpClient.portfolio.getById({ params: { id: portfolioId } })
-  ).data;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { data: portfolio } = context.params
+    ? await httpClient.portfolio.getById({
+        params: { id: context.params.portfolioId },
+      })
+    : { data: [] };
 
   return {
     props: {
       portfolio: deepcopy(portfolio),
     },
+    revalidate: 6000,
   };
 };

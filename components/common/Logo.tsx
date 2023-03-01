@@ -7,7 +7,7 @@ export default function Logo() {
       <Image
         src={config.defaultLogo}
         width={240}
-        height={40}
+        height={50}
         alt="BSSM LOGO"
         priority
         sizes="15rem"
