@@ -25,7 +25,12 @@ const getLayoutCss = () => {
 
 function Frame({ title, app, sidebar, detail, comment }: FrameProps) {
   return (
-    <section className={classNames(styleConfig.desktopWidth, "mx-auto")}>
+    <section
+      className={classNames(
+        styleConfig.desktopWidth,
+        "mx-auto overflow-hidden",
+      )}
+    >
       {title}
       <div className="relative z-10 overflow-hidden flex justify-center min-h-[calc(100vh-11.4375rem)]">
         <div className={getLayoutCss()}>

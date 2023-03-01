@@ -6,9 +6,11 @@ import {
   AppSideMenu,
 } from "@/components";
 import type { GetStaticProps } from "next";
+import httpClient from "@/apis";
 import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
 import { getDateParsedData } from "@/utils/date";
+import { deepcopy } from "@/utils/data";
 import { NextSeo, NextSeoProps } from "next-seo";
 import { usePortfolio } from "@/models/portfolio";
 import useUser from "@/hooks/useUser";
@@ -88,9 +90,17 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { data: portfolio } = context.params
+    ? await httpClient.portfolio.getById({
+        params: { id: context.params.portfolioId },
+      })
+    : { data: [] };
+
   return {
-    props: {},
+    props: {
+      portfolio: deepcopy(portfolio),
+    },
     revalidate: 6000,
   };
 };
