@@ -112,5 +112,5 @@ export interface Comment {
   editable: boolean;
 }
 export interface Description {
-  description: string;
+  children: string;
 }

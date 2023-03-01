@@ -147,7 +147,7 @@ export default function Detail({
           )}
         </div>
       </div>
-      <Description description={portfolio.description} />
+      <Description>{portfolio.description}</Description>
     </div>
   );
 }

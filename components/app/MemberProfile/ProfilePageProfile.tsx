@@ -1,10 +1,12 @@
 import httpClient from "@/apis";
 import Button from "@/components/atoms/Button";
 import Avatar from "@/components/common/Avatar";
+import DescriptionView from "@/components/portfolio/Description";
 import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
 import { Member } from "@/types/member.interface";
 import { useQueryClient } from "@tanstack/react-query";
+import Markdown from "marked-react";
 import { useRouter } from "next/router";
 
 interface MemberPageProfileProps {
@@ -70,9 +72,9 @@ export default function MemberPageProfile({
             <span className="mr-3">팔로잉 수</span>
             <span>{followingCount}</span>
           </div>
-          <pre className="overflow-y-scroll max-w-[17.625rem] whitespace-pre-wrap text-xs mb-5">
-            {userInfo.description}
-          </pre>
+          <article className="overflow-y-scroll max-w-[17.625rem] whitespace-pre-wrap text-xs mb-5">
+            <DescriptionView>{userInfo.description || ""}</DescriptionView>
+          </article>
         </div>
         <div className="flex justify-center mt-auto">
           {/* {isMypage && (
