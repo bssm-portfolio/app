@@ -19,20 +19,20 @@ const getLayoutCss = () => {
   px-4
   z-20
   xl:flex-row
-  ${styleConfig.desktopWidth}
+  overflow-hidden
   `;
 };
 
 function Frame({ title, app, sidebar, detail, comment }: FrameProps) {
   return (
-    <section
-      className={classNames(
-        styleConfig.desktopWidth,
-        "mx-auto overflow-hidden",
-      )}
-    >
-      {title}
-      <div className="relative z-10 overflow-hidden flex justify-center min-h-[calc(100vh-11.4375rem)]">
+    <section className={classNames("relative overflow-x-hidden")}>
+      <div
+        className={classNames(
+          styleConfig.desktopWidth,
+          "relative mx-auto z-10 min-h-[calc(100vh-11.4375rem)] ",
+        )}
+      >
+        {title}
         <div className={getLayoutCss()}>
           <div className="w-full">
             {app}
