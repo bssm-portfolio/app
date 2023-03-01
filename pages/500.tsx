@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 export default function Page500() {
   const router = useRouter();
   return (
-    <div className="min-h-[calc(100vh-4.625rem)] pl-36">
-      <h1 className="text-[4rem] text-blue font-bold pt-44 ">500 Error</h1>
+    <div className="min-h-[calc(100vh-4.625rem)] flex flex-col items-center">
+      <h1 className="text-[4rem] text-blue font-bold pt-44">500 Error</h1>
+      <p className="pt-14">죄송합니다. 페이지를 찾을 수 없습니다.</p>
       <Button
-        className="text-3xl mt-24 py-3 px-28 rounded-full font-semibold"
+        className="mt-24 py-3 px-32 rounded-full font-semibold"
         onClick={() => router.push("/")}
       >
-        홈으로 가기
+        <span className="text-base">홈으로 이동</span>
       </Button>
     </div>
   );
