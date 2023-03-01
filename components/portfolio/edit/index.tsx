@@ -79,9 +79,12 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       })
       .then(() => {
         openToast("수정이 완료되었습니다.");
-        httpClient.revalidatePortfolio
-          .post({ portfolioId })
-          .then(() => router.push(`/portfolio/${portfolioId}`));
+
+        httpClient.revalidatePortfolio.post({ portfolioId }).then(() => {
+          setTimeout(() => {
+            router.push(`/portfolio/${portfolioId}`);
+          }, 1000);
+        });
       })
       .catch((error) =>
         openToast(error.response.data.message, { type: "danger" }),
