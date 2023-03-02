@@ -24,7 +24,7 @@ export default function ChipGroup({
         </Chip.Item>
       ))}
       {type !== "detail" && skillList.length > 2 && (
-        <Chip.Item>더보기</Chip.Item>
+        <Chip.Item type={type}>더보기</Chip.Item>
       )}
     </Chip.Group>
   );
