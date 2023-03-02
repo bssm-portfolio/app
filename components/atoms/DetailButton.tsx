@@ -19,6 +19,7 @@ const getButtonCss = (status: ButtonStatus): string => {
     shadow
     flex
     items-center
+    whitespace-nowrap
   `;
 };
 
