@@ -29,7 +29,6 @@ interface PortfolioEditProps {
 }
 
 export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
-  const router = useRouter();
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
   const [editThumbnailFile, setEditThumbnailFile] = useState<File>();
   const [editVideoFile, setEditVideoFile] = useState<File>();

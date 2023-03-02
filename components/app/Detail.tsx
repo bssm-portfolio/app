@@ -24,6 +24,7 @@ interface PortfolioDetailProps {
   followYn: boolean;
   isMyPortfolio: boolean;
   bookmarks: number;
+  views: number;
 }
 
 export default function Detail({
@@ -32,6 +33,7 @@ export default function Detail({
   followYn,
   isMyPortfolio,
   bookmarks,
+  views,
 }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const { user: userInfo } = useUser();
@@ -96,7 +98,7 @@ export default function Detail({
             })}
           </Chip.Group>
           <span className="block my-small">
-            조회수 {portfolio.views}회 · {getKoreanDate(portfolio.createdDate)}
+            조회수 {views}회 · {getKoreanDate(portfolio.createdDate)}
           </span>
         </div>
 
