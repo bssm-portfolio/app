@@ -1,15 +1,22 @@
 import { PortfolioListType } from "@/types/portfolio.interface";
 import { Skill } from "@/types/skill.interface";
+import classNames from "classnames";
 import Chip from "./Chip";
 
 interface ChipGroupProps {
   skillList: Skill[];
   type?: PortfolioListType;
+  className?: string;
+  selectedSkills?: Skill[];
+  setSelectedSkills?: (skill: Skill) => void;
 }
 
 export default function ChipGroup({
   skillList,
   type = "main",
+  className = "",
+  selectedSkills,
+  setSelectedSkills,
 }: ChipGroupProps) {
   const getFilteredSkillList = () => {
     if (type !== "detail") return skillList.filter((_, idx) => idx < 3);
@@ -17,9 +24,18 @@ export default function ChipGroup({
   };
 
   return (
-    <Chip.Group className="pt-2" type={type}>
+    <Chip.Group className={classNames(className, "pt-2")} type={type}>
       {getFilteredSkillList().map((skillData) => (
-        <Chip.Item type={type} key={skillData.skillId}>
+        <Chip.Item
+          type={type}
+          key={skillData.skillId}
+          {...(type === "upload" && {
+            selected: selectedSkills?.some(
+              (selectedSkill) => selectedSkill.skillId === skillData.skillId,
+            ),
+            onClick: () => setSelectedSkills?.(skillData),
+          })}
+        >
           {skillData.skillName}
         </Chip.Item>
       ))}
