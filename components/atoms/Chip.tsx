@@ -8,9 +8,10 @@ interface ChipGroupProps {
   type?: PortfolioListType;
 }
 
-interface ChipProps {
+interface ChipItemProps {
   children: ReactNode;
   type?: PortfolioListType;
+  className?: string;
   selected?: boolean;
   onClick?: (v: unknown) => void;
 }
@@ -20,11 +21,10 @@ function Group({ children, className, type = "main" }: ChipGroupProps) {
     <div
       className={`${classNames(
         className,
-        "flex w-80 overflow-auto scrollbar-hide py-1",
+        "flex flex-wrap gap-1.5 py-1 xl:w-32",
         {
-          "xl:max-w-[8.125rem]": type === "portfolio",
-          "!w-[23rem]": type === "detail",
-          "!w-full": type === "upload",
+          "!w-full": type === "detail" || "upload",
+          "!w-[150px]": type === "portfolio",
         },
       )}`}
     >
@@ -33,17 +33,25 @@ function Group({ children, className, type = "main" }: ChipGroupProps) {
   );
 }
 
-function Item({ children, type = "main", selected, onClick }: ChipProps) {
+function Item({
+  children,
+  type = "main",
+  className,
+  selected,
+  onClick,
+}: ChipItemProps) {
   return (
     <div
       onClick={() => onClick?.(children)}
       className={classNames(
-        "px-3 py-1 border border-blue rounded-full text-sxx whitespace-nowrap mr-1",
+        "px-3 py-1 text-center border border-blue rounded-full text-sxx whitespace-nowrap text-ellipsis overflow-hidden",
+        className,
         {
+          "w-16": type === "portfolio",
           "text-blue": type === "main" || (type === "upload" && !selected),
-          "cursor-pointer h-[2.31rem] whitespace-nowrap text-ellipsis text-[0.875rem] flex items-center":
-            type === "upload",
+          "cursor-pointer !w-24 py-3": type === "upload",
           "bg-blue text-white": type === "upload" && selected,
+          " text-blue": type === "detail",
         },
       )}
     >

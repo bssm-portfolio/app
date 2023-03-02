@@ -78,7 +78,7 @@ export default function Detail({
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="font-bold text-large">
+          <h2 className="font-bold text-large mr-2">
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
             {portfolio.title}
           </h2>
@@ -91,7 +91,7 @@ export default function Detail({
           <Chip.Group className="mt-small" type="detail">
             {portfolio.skillList.map((skillData) => {
               return (
-                <Chip.Item key={skillData.skillId}>
+                <Chip.Item key={skillData.skillId} type="detail">
                   {skillData.skillName}
                 </Chip.Item>
               );
