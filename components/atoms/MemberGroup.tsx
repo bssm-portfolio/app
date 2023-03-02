@@ -9,7 +9,7 @@ interface MemberGroupProps {
 export default function MemberGroup({ writers }: MemberGroupProps) {
   const router = useRouter();
   return (
-    <div className="inline-flex flex-nowrap max-w-[22.5rem] rounded-[0.625rem] bg-primary-light_gray px-small py-xsmall overflow-scroll scrollbar-hide">
+    <div className="inline-flex flex-wrap ml-2 rounded-[0.625rem] bg-primary-light_gray px-small py-xsmall">
       {writers.map((data, idx) => {
         return (
           <span
