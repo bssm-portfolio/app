@@ -33,6 +33,7 @@ export default function PortfolioItem({
     w-96
     overflow-hidden 
     line-clamp-2
+    break-all
     `;
   };
 

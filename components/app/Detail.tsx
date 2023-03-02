@@ -80,7 +80,7 @@ export default function Detail({
         <div>
           <h2 className="font-bold text-large mr-2">
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
-            {portfolio.title}
+            <span className="break-all">{portfolio.title}</span>
           </h2>
           <span
             onClick={() => router.push(`/profile/${portfolio.writer.memberId}`)}
