@@ -49,9 +49,8 @@ function Item({
         {
           "w-16": type === "portfolio",
           "text-blue": type === "main" || (type === "upload" && !selected),
-          "cursor-pointer !w-24 py-3": type === "upload",
+          "cursor-pointer py-3": type === "upload",
           "bg-blue text-white": type === "upload" && selected,
-          " text-blue": type === "detail",
         },
       )}
     >

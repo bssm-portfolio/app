@@ -58,7 +58,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
                     ? `외 ${portfolio.contributorList.length} 명`
                     : ""}
                 </div>
-                <ChipGroup type="portfolio" skillList={portfolio.skillList} />
+                <ChipGroup skillList={portfolio.skillList} />
               </div>
             </div>
             <div className="flex gap-3 items-start">
