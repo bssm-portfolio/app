@@ -48,6 +48,7 @@ function Item({
         className,
         {
           "w-16": type === "portfolio",
+          "w-20": type === "main",
           "text-blue": type === "main" || (type === "upload" && !selected),
           "cursor-pointer py-3": type === "upload",
           "bg-blue text-white": type === "upload" && selected,
