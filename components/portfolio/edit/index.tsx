@@ -2,7 +2,6 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
-import { useRouter } from "next/router";
 import {
   PortfolioForm,
   PortfolioTheme,
