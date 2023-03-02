@@ -49,7 +49,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
                 imageUrl={portfolio.writer.profileImageUrl}
               />
               <div className="flex-1">
-                <div className="font-bold text-sm line-clamp-2">
+                <div className="font-bold text-sm line-clamp-2 break-all">
                   {portfolio.title}
                 </div>
                 <div className="text-xs">
