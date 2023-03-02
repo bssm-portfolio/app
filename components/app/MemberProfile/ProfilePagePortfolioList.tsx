@@ -24,6 +24,17 @@ export default function ProfilePagePortfolioList({
 
   return (
     <div className="flex flex-wrap gap-12 ml-[4.5rem]">
+      {isMypage && (
+        <div
+          className="w-[22.5rem] h-[23.75rem] flex items-center justify-center rounded-md border border-blue cursor-pointer"
+          onClick={openUploadModal}
+        >
+          <div className="flex flex-col items-center">
+            <RoundPlusIcon />
+            <span className="text-blue">업로드</span>
+          </div>
+        </div>
+      )}
       {portfolioList.map((portfolio) => {
         return (
           <PortfolioView
@@ -35,17 +46,6 @@ export default function ProfilePagePortfolioList({
       })}
       {portfolioList.length === 0 && !isMypage && (
         <p className="text-2xl">포트폴리오가 없습니다.</p>
-      )}
-      {isMypage && (
-        <div
-          className="w-[22.5rem] h-[23.75rem] flex items-center justify-center rounded-md border border-blue cursor-pointer"
-          onClick={openUploadModal}
-        >
-          <div className="flex flex-col items-center">
-            <RoundPlusIcon />
-            <span className="text-blue">업로드</span>
-          </div>
-        </div>
       )}
     </div>
   );

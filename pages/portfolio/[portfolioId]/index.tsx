@@ -25,7 +25,7 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
   const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
   const type = dateParsedPortfolio.portfolioType;
   const {
-    data: { bookmarkYn, followYn, bookmarks },
+    data: { bookmarkYn, followYn, bookmarks, views },
   } = usePortfolio(dateParsedPortfolio.portfolioId);
   const { user: userInfo } = useUser();
 
@@ -77,6 +77,7 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
             bookmarkYn={bookmarkYn}
             followYn={followYn}
             bookmarks={bookmarks}
+            views={views}
             isMyPortfolio={
               userInfo.memberId === dateParsedPortfolio.writer.memberId
             }

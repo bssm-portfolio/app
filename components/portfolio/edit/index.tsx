@@ -2,7 +2,6 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/models/portfolio";
 import { Skill } from "@/types/skill.interface";
-import { useRouter } from "next/router";
 import {
   PortfolioForm,
   PortfolioTheme,
@@ -29,7 +28,6 @@ interface PortfolioEditProps {
 }
 
 export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
-  const router = useRouter();
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
   const [editThumbnailFile, setEditThumbnailFile] = useState<File>();
   const [editVideoFile, setEditVideoFile] = useState<File>();

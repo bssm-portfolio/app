@@ -100,7 +100,7 @@ module.exports = {
       },
       colors: {
         blue: "#3E73FB",
-        somago_yellow: "#FAAF3D",
+        somago_yellow: "#FFCA31",
         black: "#000000",
         white: "#FFFFFF",
         background_blue: "#0D3FBF",

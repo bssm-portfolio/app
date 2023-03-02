@@ -6,7 +6,6 @@ import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
 import { Member } from "@/types/member.interface";
 import { useQueryClient } from "@tanstack/react-query";
-import Markdown from "marked-react";
 import { useRouter } from "next/router";
 
 interface MemberPageProfileProps {
@@ -16,6 +15,7 @@ interface MemberPageProfileProps {
   followerCount: number;
   followingCount: number;
 }
+
 export default function MemberPageProfile({
   userInfo,
   isMypage,
