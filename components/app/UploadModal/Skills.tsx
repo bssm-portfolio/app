@@ -1,4 +1,5 @@
 import Chip from "@/components/atoms/Chip";
+import ChipGroup from "@/components/atoms/ChipGroup";
 import { Skill } from "@/types/skill.interface";
 
 interface SkillsProps {
@@ -15,20 +16,13 @@ function SkillsView({
   setSelectedSkills,
 }: SkillsProps) {
   return (
-    <Chip.Group type="upload" className={className}>
-      {skills.map((skill) => (
-        <Chip.Item
-          key={skill.skillId}
-          type="upload"
-          selected={selectedSkills.some(
-            (selectedSkill) => selectedSkill.skillId === skill.skillId,
-          )}
-          onClick={() => setSelectedSkills(skill)}
-        >
-          {skill.skillName}
-        </Chip.Item>
-      ))}
-    </Chip.Group>
+    <ChipGroup
+      skillList={skills}
+      selectedSkills={selectedSkills}
+      setSelectedSkills={setSelectedSkills}
+      type="upload"
+      className={className}
+    />
   );
 }
 

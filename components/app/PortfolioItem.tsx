@@ -5,7 +5,7 @@ import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 import Image from "next/image";
 import { useState } from "react";
-import Chip from "../atoms/Chip";
+import ChipGroup from "../atoms/ChipGroup";
 import { CommentIcon, HeartIcon } from "../Icon";
 
 interface SideMenuPortfolioProps {
@@ -25,6 +25,17 @@ export default function PortfolioItem({
   const countViewCss = `
     flex items-center gap-0.5 text-xs
   `;
+  const getTitleCss = () => {
+    return `
+    font-bold 
+    text-middle 
+    xl:w-36
+    w-96
+    overflow-hidden 
+    line-clamp-2
+    break-all
+    `;
+  };
 
   return (
     <div
@@ -51,9 +62,9 @@ export default function PortfolioItem({
         />
       </div>
 
-      <div className="ml-4">
+      <div className="ml-4 relative">
         <h2
-          className={classNames("font-bold text-middle mb-[.5rem]", {
+          className={classNames(getTitleCss(), {
             "!text-lg": type === "search",
           })}
         >
@@ -66,18 +77,12 @@ export default function PortfolioItem({
         >
           {portfolio.writer.name}
         </span>
+
         {portfolio.skillList.length > 0 && (
-          <Chip.Group className="my-2" type={type}>
-            {portfolio.skillList.map((skillData) => {
-              return (
-                <Chip.Item type={type} key={skillData.skillId}>
-                  {skillData.skillName}
-                </Chip.Item>
-              );
-            })}
-          </Chip.Group>
+          <ChipGroup skillList={portfolio.skillList} type="portfolio" />
         )}
-        <div className="text-xs mt-3">
+
+        <div className="text-xsmall mt-2">
           조회수 {portfolio.views}회 · {getTimeAgo(portfolio.createdDate)}
         </div>
 

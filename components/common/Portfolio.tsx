@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Portfolio } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { CommentIcon, HeartIcon } from "@/components/Icon";
-import { Avatar, Chip } from "@/components";
+import { Avatar } from "@/components";
 import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 import config from "@/config";
+import ChipGroup from "../atoms/ChipGroup";
 
 interface PortfolioProps {
   portfolio: Portfolio;
@@ -48,18 +49,16 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
                 imageUrl={portfolio.writer.profileImageUrl}
               />
               <div className="flex-1">
-                <div className="font-bold text-sm">{portfolio.title}</div>
+                <div className="font-bold text-sm line-clamp-2 break-all">
+                  {portfolio.title}
+                </div>
                 <div className="text-xs">
                   {portfolio.writer.name}
                   {portfolio.contributorList.length > 0
                     ? `외 ${portfolio.contributorList.length} 명`
                     : ""}
                 </div>
-                <Chip.Group className="mt-2 w-[14rem] h-[1.875rem]">
-                  {portfolio.skillList.map((skill) => (
-                    <Chip.Item key={skill.skillId}>{skill.skillName}</Chip.Item>
-                  ))}
-                </Chip.Group>
+                <ChipGroup skillList={portfolio.skillList} />
               </div>
             </div>
             <div className="flex gap-3 items-start">

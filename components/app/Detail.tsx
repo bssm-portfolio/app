@@ -9,7 +9,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import KEY from "@/models/key";
 import useUser from "@/hooks/useUser";
 import Button from "../atoms/DetailButton";
-import Chip from "../atoms/Chip";
 import MemberGroup from "../atoms/MemberGroup";
 import Description from "../portfolio/Description";
 import ShareIcon from "../Icon/ShareIcon";
@@ -17,6 +16,7 @@ import PeopleIcon from "../Icon/PeopleIcon";
 import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
 import FilledHeartIcon from "../Icon/FilledHeartIcon";
 import EditIcon from "../Icon/EditIcon";
+import ChipGroup from "../atoms/ChipGroup";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -78,9 +78,9 @@ export default function Detail({
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="font-bold text-large">
+          <h2 className="font-bold text-large mr-2">
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
-            {portfolio.title}
+            <span className="break-all">{portfolio.title}</span>
           </h2>
           <span
             onClick={() => router.push(`/profile/${portfolio.writer.memberId}`)}
@@ -88,15 +88,11 @@ export default function Detail({
           >
             {portfolio.writer.name}
           </span>
-          <Chip.Group className="mt-small" type="detail">
-            {portfolio.skillList.map((skillData) => {
-              return (
-                <Chip.Item key={skillData.skillId}>
-                  {skillData.skillName}
-                </Chip.Item>
-              );
-            })}
-          </Chip.Group>
+          <ChipGroup
+            skillList={portfolio.skillList}
+            className="mt-small"
+            type="detail"
+          />
           <span className="block my-small">
             조회수 {views}회 · {getKoreanDate(portfolio.createdDate)}
           </span>
