@@ -24,7 +24,7 @@ function Group({ children, className, type = "main" }: ChipGroupProps) {
         "flex flex-wrap gap-1.5 py-1 xl:w-32",
         {
           "!w-full": type === "detail" || "upload",
-          "!w-[150px]": type === "portfolio",
+          "xl:!w-40": type === "portfolio",
         },
       )}`}
     >
