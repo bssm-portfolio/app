@@ -8,12 +8,12 @@ import Loading from "../common/Loading";
 
 export default function MainPortfolioList({
   pages,
-  hasNextPage,
+  customHasNextPage,
   fetchNextPage,
   isFetchingNextPage,
 }: {
   pages: PortfolioList[] | { list: never[] }[];
-  hasNextPage: boolean;
+  customHasNextPage: boolean;
   fetchNextPage: FetchNextPageType;
   isFetchingNextPage: boolean;
 }) {
@@ -21,8 +21,10 @@ export default function MainPortfolioList({
   const [ref, inView] = useInView();
 
   useEffect(() => {
-    if (inView && hasNextPage) fetchNextPage();
-  }, [inView, fetchNextPage, hasNextPage]);
+    if (inView && customHasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, customHasNextPage]);
 
   return (
     <>
