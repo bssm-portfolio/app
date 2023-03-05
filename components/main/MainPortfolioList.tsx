@@ -6,17 +6,19 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Loading from "../common/Loading";
 
+interface MainPortfolioListProps {
+  pages: PortfolioList[] | { list: never[] }[];
+  customHasNextPage: boolean;
+  fetchNextPage: FetchNextPageType;
+  isFetchingNextPage: boolean;
+}
+
 export default function MainPortfolioList({
   pages,
   customHasNextPage,
   fetchNextPage,
   isFetchingNextPage,
-}: {
-  pages: PortfolioList[] | { list: never[] }[];
-  customHasNextPage: boolean;
-  fetchNextPage: FetchNextPageType;
-  isFetchingNextPage: boolean;
-}) {
+}: MainPortfolioListProps) {
   const router = useRouter();
   const [ref, inView] = useInView();
 

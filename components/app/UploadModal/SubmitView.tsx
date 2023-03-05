@@ -2,13 +2,15 @@ import Radio from "@/components/atoms/Radio";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import { UseFormRegister } from "react-hook-form";
 
-export default function SubmitView({
-  register,
-  className,
-}: {
+interface SubmitViewProps {
   register: UseFormRegister<PortfolioForm>;
   className?: string;
-}) {
+}
+
+export default function SubmitView({
+  register,
+  className = "",
+}: SubmitViewProps) {
   return (
     <div className={className}>
       <h2 className="text-base mb-large">공개범위</h2>
