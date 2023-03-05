@@ -28,6 +28,8 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
     data: { bookmarkYn, followYn, bookmarks, views },
   } = usePortfolio(dateParsedPortfolio.portfolioId);
   const { user: userInfo } = useUser();
+  const isMyPortfolio =
+    userInfo.memberId === dateParsedPortfolio.writer.memberId;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -78,9 +80,7 @@ export default function PortfolioIdPage({ portfolio }: PortfolioIdPageProps) {
             followYn={followYn}
             bookmarks={bookmarks}
             views={views}
-            isMyPortfolio={
-              userInfo.memberId === dateParsedPortfolio.writer.memberId
-            }
+            isMyPortfolio={isMyPortfolio}
           />
         }
         comment={
