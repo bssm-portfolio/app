@@ -21,7 +21,7 @@ export default function Avatar({
     <Image
       onClick={onClick}
       className={classNames(className, "rounded-full", {
-        "h-[40px]": height === 40,
+        "h-2.5": height === 40,
       })}
       src={imageUrl || ""}
       alt="사용자 아바타"

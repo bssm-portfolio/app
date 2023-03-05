@@ -28,7 +28,7 @@ export default function PortfolioItem({
   const getTitleCss = () => {
     return `
     font-bold 
-    text-[14px]
+    text-[0.875rem]
     leading-4
     xl:w-36
     w-96
