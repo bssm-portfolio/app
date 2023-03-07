@@ -1,7 +1,7 @@
 import httpClient from "@/apis";
 import fixture from "@/fixtures";
 import {
-  Comment,
+  CommentList,
   Filter,
   PaginationRequest,
   Portfolio,
@@ -10,12 +10,8 @@ import {
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import KEY from "../key";
 
-interface CommentList {
-  list: Comment[];
-}
-
 const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
-  const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
+  const { data, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery<PortfolioList>(
       [KEY.PORTFOLIO_LIST, filter],
       ({ pageParam = 0 }) =>
@@ -30,10 +26,14 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
       },
     );
 
+  const customHasNextPage =
+    (data?.pageParams[data.pageParams.length - 1] || 1) <
+    (data?.pages[0].pagination.totalPages || 0);
+
   return {
-    pages: data?.pages ?? [{ list: [] }],
+    pages: data?.pages || [{ list: [] }],
     isFetchingNextPage,
-    hasNextPage,
+    customHasNextPage,
     fetchNextPage,
   };
 };

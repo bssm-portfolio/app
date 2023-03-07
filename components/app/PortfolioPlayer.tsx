@@ -26,9 +26,9 @@ export default function PortfolioPlayer({
       <div className="flex items-end gap-1">
         <Button
           className={classNames(
-            "h-10 disabled:bg-slate-600 disabled:text-white disabled:cursor-not-allowed rounded-b-none rounded-t-2xl",
+            "h-8 disabled:bg-slate-600 disabled:text-white disabled:cursor-not-allowed rounded-b-none rounded-t-2xl",
             {
-              "!bg-blue !text-white !h-11": selected === "web",
+              "!bg-blue !text-white !h-9": selected === "web",
               "hover:bg-slate-300": selected !== "web",
             },
           )}
@@ -40,9 +40,9 @@ export default function PortfolioPlayer({
         </Button>
         <Button
           className={classNames(
-            "h-10 disabled:bg-slate-600 disabled:text-white disabled:cursor-not-allowed rounded-b-none rounded-t-2xl",
+            "h-8 disabled:bg-slate-600 disabled:text-white disabled:cursor-not-allowed rounded-b-none rounded-t-2xl",
             {
-              "!bg-blue !text-white !h-11": selected === "video",
+              "!bg-blue !text-white !h-9": selected === "video",
               "hover:bg-slate-300": selected !== "video",
             },
           )}

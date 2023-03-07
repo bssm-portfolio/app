@@ -8,7 +8,7 @@ import { SortType } from "@/types/portfolio.interface";
 
 export default function Home() {
   const [keyword, setKeyword] = useState<SortType>("ALL");
-  const { pages, isFetchingNextPage, fetchNextPage, hasNextPage } =
+  const { pages, isFetchingNextPage, fetchNextPage, customHasNextPage } =
     usePortfolioList(
       { size: 12 },
       keyword !== "ALL" ? { sortType: keyword } : {},
@@ -19,7 +19,7 @@ export default function Home() {
       app={
         <MainPortfolioList
           pages={pages}
-          hasNextPage={hasNextPage || false}
+          customHasNextPage={customHasNextPage || false}
           fetchNextPage={fetchNextPage}
           isFetchingNextPage={isFetchingNextPage}
         />
