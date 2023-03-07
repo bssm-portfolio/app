@@ -1,7 +1,7 @@
 import httpClient from "@/apis";
 import fixture from "@/fixtures";
 import {
-  Comment,
+  CommentList,
   Filter,
   PaginationRequest,
   Portfolio,
@@ -9,10 +9,6 @@ import {
 } from "@/types/portfolio.interface";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import KEY from "../key";
-
-interface CommentList {
-  list: Comment[];
-}
 
 const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
   const { data, isFetchingNextPage, fetchNextPage } =
