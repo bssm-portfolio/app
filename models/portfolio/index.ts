@@ -18,7 +18,7 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
   const { data, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery<PortfolioList>(
       [KEY.PORTFOLIO_LIST, filter],
-      ({ pageParam = 1 }) =>
+      ({ pageParam = 0 }) =>
         httpClient.portfolio
           .search({
             pagination: { ...pagination, page: pageParam },
@@ -30,10 +30,14 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
       },
     );
 
+  const customHasNextPage =
+    (data?.pageParams[data.pageParams.length - 1] || 1) <
+    (data?.pages[0].pagination.totalPages || 0);
+
   return {
-    pages: data?.pages ?? [{ list: [] }],
+    pages: data?.pages || [{ list: [] }],
     isFetchingNextPage,
-    customHasNextPage: !!data?.pages[Number(data.pages.length) - 1].list.length,
+    customHasNextPage,
     fetchNextPage,
   };
 };
