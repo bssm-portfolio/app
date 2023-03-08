@@ -24,14 +24,14 @@ export default function PortfolioList({
     return filter;
   };
 
-  const { pages, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { pages, fetchNextPage, customHasNextPage, isFetchingNextPage } =
     usePortfolioList({ size: 12 }, { search: keyword, ...filterSortType() });
 
   const { ref, inView } = useInView();
 
   useEffect(() => {
-    if (inView && hasNextPage) fetchNextPage();
-  }, [inView, hasNextPage, fetchNextPage]);
+    if (inView && customHasNextPage) fetchNextPage();
+  }, [inView, customHasNextPage, fetchNextPage]);
 
   return (
     <div className="flex flex-col items-start">
@@ -49,7 +49,7 @@ export default function PortfolioList({
         <p className="text-white mx-auto text-2xl">검색결과가 없습니다.</p>
       )}
       <div ref={ref} className="h-36 mx-auto">
-        {isFetchingNextPage && hasNextPage && (
+        {isFetchingNextPage && customHasNextPage && (
           <Loading className="mt-8" width={60} height={60} type="spin" />
         )}
       </div>

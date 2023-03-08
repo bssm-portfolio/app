@@ -18,8 +18,9 @@ export default function ChipGroup({
   selectedSkills,
   setSelectedSkills,
 }: ChipGroupProps) {
+  const isShorten = ["main", "portfolio"].includes(type);
   const getFilteredSkillList = () => {
-    if (type !== "detail") return skillList.filter((_, idx) => idx < 3);
+    if (isShorten) return skillList.filter((_, idx) => idx < 3);
     return skillList;
   };
 
@@ -39,7 +40,7 @@ export default function ChipGroup({
           {skillData.skillName}
         </Chip.Item>
       ))}
-      {type !== "detail" && skillList.length > 2 && (
+      {isShorten && skillList.length >= 4 && (
         <Chip.Item type={type}>더보기</Chip.Item>
       )}
     </Chip.Group>

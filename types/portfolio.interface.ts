@@ -111,6 +111,10 @@ export interface Comment {
   createdDate: Date;
   editable: boolean;
 }
+
+export interface CommentList {
+  list: Comment[];
+}
 export interface Description {
   children: string;
 }

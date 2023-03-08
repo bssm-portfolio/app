@@ -12,13 +12,11 @@ export default function Navigator({
   goPrev,
   goNext,
   isLast,
+  className = "",
   ...props
 }: FileUploadViewProps) {
   return (
-    <div
-      {...props}
-      className={classNames("flex justify-between", props.className)}
-    >
+    <div {...props} className={classNames("flex justify-between", className)}>
       {goPrev ? (
         <Button onClick={goPrev} varient="secondary">
           이전

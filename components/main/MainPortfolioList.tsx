@@ -6,23 +6,27 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Loading from "../common/Loading";
 
-export default function MainPortfolioList({
-  pages,
-  hasNextPage,
-  fetchNextPage,
-  isFetchingNextPage,
-}: {
+interface MainPortfolioListProps {
   pages: PortfolioList[] | { list: never[] }[];
-  hasNextPage: boolean;
+  customHasNextPage: boolean;
   fetchNextPage: FetchNextPageType;
   isFetchingNextPage: boolean;
-}) {
+}
+
+export default function MainPortfolioList({
+  pages,
+  customHasNextPage,
+  fetchNextPage,
+  isFetchingNextPage,
+}: MainPortfolioListProps) {
   const router = useRouter();
   const [ref, inView] = useInView();
 
   useEffect(() => {
-    if (inView && hasNextPage) fetchNextPage();
-  }, [inView, fetchNextPage, hasNextPage]);
+    if (inView && customHasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, customHasNextPage]);
 
   return (
     <>
@@ -43,7 +47,7 @@ export default function MainPortfolioList({
             className="mt-8 mx-auto"
             width={60}
             height={60}
-            color="#FAAF3D"
+            color="#FFCA31"
           />
         )}
       </div>
