@@ -23,15 +23,12 @@ export default function Avatar({
       className={classNames(className, "rounded-full", {
         "h-[40px]": height === 40,
       })}
-      src={imageUrl || ""}
+      src={imageUrl || config.defaultProfile}
       alt="사용자 아바타"
       width={width}
       height={height}
       sizes="40px"
       priority
-      onError={(event) => {
-        event.currentTarget.src = config.defaultProfile;
-      }}
     />
   );
 }
