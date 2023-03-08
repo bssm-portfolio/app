@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { checkInputValueIsNull } from "@/utils/input";
 import httpClient from "@/apis";
 import useUser from "@/hooks/useUser";
+import config from "@/config";
 import Comment from "../atoms/Comment";
 import InputButton from "../atoms/InputButton";
 
@@ -41,7 +42,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
     <div className="bg-white mt-2 p-3 box-border rounded">
       <form className="flex mt-base relative" onSubmit={handleSubmit(onValid)}>
         <Image
-          src={userInfo.profileImageUrl}
+          src={userInfo.profileImageUrl || config.defaultProfile}
           alt="프로필"
           width={40}
           height={40}
