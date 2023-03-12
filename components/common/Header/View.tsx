@@ -41,17 +41,17 @@ export default function HeaderView({
               upload +
             </HeaderButton>
           )}
+          {isLogined && (
+            <div className="relative cursor-pointer">
+              <Avatar
+                imageUrl={avatarUrl}
+                width={40}
+                height={40}
+                onClick={() => router.push(`/profile/${memberId}`)}
+              />
+            </div>
+          )}
         </div>
-        {isLogined && (
-          <div className="relative cursor-pointer">
-            <Avatar
-              imageUrl={avatarUrl}
-              width={40}
-              height={40}
-              onClick={() => router.push(`/profile/${memberId}`)}
-            />
-          </div>
-        )}
       </div>
     </div>
   );
