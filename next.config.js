@@ -23,14 +23,6 @@ const nextConfig = {
       { protocol: "https", hostname: "api.project.bssm.io" },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: "http://ec2-3-34-75-45.ap-northeast-2.compute.amazonaws.com:8080/:path*",
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;
