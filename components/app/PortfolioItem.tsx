@@ -30,8 +30,8 @@ export default function PortfolioItem({
     font-bold 
     text-[0.875rem]
     leading-4
-    xl:w-36
-    w-auto
+    xl:w-40
+    w-96
     overflow-hidden 
     line-clamp-2
     break-all
@@ -72,7 +72,7 @@ export default function PortfolioItem({
           {portfolio.title}
         </h2>
         <span
-          className={classNames("font-bold text-small block", {
+          className={classNames("font-bold text-small block mt-1", {
             "!text-base": type === "search",
           })}
         >
