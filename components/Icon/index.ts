@@ -9,4 +9,3 @@ export { default as KakaoIcon } from "./KakaoIcon";
 export { default as PeopleIcon } from "./PeopleIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as ShareIcon } from "./ShareIcon";
-export { default as SchoolSvgIcon } from "./SchoolIcon.svg";

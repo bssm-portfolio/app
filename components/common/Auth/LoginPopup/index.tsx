@@ -5,9 +5,7 @@ import KakaoIcon from "@/components/Icon/KakaoIcon";
 import config from "@/config";
 import { OAuthPlatform } from "@/types/oauth.interface";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import { SchoolSvgIcon } from "@/components/Icon";
-// import SchoolIcon from "@/components/Icon/SchoolIcon";
+import SchoolIcon from "@/components/Icon/SchoolIcon";
 
 export default function LoginPopupView() {
   const router = useRouter();
@@ -24,8 +22,7 @@ export default function LoginPopupView() {
   return (
     <div className="py-12">
       <div className="flex flex-col items-center">
-        <Image src={SchoolSvgIcon} alt="BsmIcon" />
-        {/* <SchoolIcon /> */}
+        <SchoolIcon />
         <h2 className="break-keep text-xlarge text-primary-dark_gray font-bold w-[17.5rem] text-center mt-10 mb-20 leading-[2.5rem]">
           소마고 홈페이지에 오신 것을 환영합니다.
         </h2>
