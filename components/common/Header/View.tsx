@@ -29,7 +29,7 @@ export default function HeaderView({
           <Logo />
         </Link>
         <SearchBar />
-        <div className="flex gap-4">
+        <div className="hidden xl:flex gap-4">
           <HeaderButton onClick={onLeftButtonClick}>
             {isLogined ? "log out" : "log in"}
           </HeaderButton>

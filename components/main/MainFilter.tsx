@@ -43,7 +43,7 @@ export default function MainFilter({
     },
   ];
   return (
-    <div className="flex items-center justify-center gap-3 my-11">
+    <div className="flex flex-wrap items-center justify-center gap-3 my-11">
       {radioPropertyList.map((radioProperty) => (
         <RadioButton
           name="main-radio"

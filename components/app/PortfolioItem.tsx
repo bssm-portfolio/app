@@ -31,7 +31,7 @@ export default function PortfolioItem({
     text-[0.875rem]
     leading-4
     xl:w-36
-    w-96
+    w-auto
     overflow-hidden 
     line-clamp-2
     break-all
