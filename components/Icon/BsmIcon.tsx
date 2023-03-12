@@ -19,7 +19,7 @@ export default function BsmIcon({ ...props }) {
         >
           <use
             xlinkHref="#image0_473_1699"
-            transform="translate(0 -0.58209) scale(0.00195312 0.00425606)"
+            transform="matrix(0.00195312 0 0 0.00425606 0 -0.58209)"
           />
         </pattern>
         <image

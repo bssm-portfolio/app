@@ -1,4 +1,4 @@
-export default function BssmIcon({ ...props }) {
+export default function SchoolIcon({ ...props }) {
   return (
     <svg
       width="88"
