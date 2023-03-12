@@ -31,19 +31,19 @@ export default function MainFilter({
       label: "댓글순",
       value: "COMMENTS",
     },
-    // {
-    //   id: "BOOKMARKS",
-    //   label: "추천순",
-    //   value: "BOOKMARKS",
-    // },
-    // {
-    //   id: "VIEWS",
-    //   label: "조회수순",
-    //   value: "VIEWS",
-    // },
+    {
+      id: "BOOKMARKS",
+      label: "추천순",
+      value: "BOOKMARKS",
+    },
+    {
+      id: "VIEWS",
+      label: "조회수순",
+      value: "VIEWS",
+    },
   ];
   return (
-    <div className="flex items-center justify-center gap-3 my-11">
+    <div className="flex flex-wrap items-center justify-center gap-3 my-11">
       {radioPropertyList.map((radioProperty) => (
         <RadioButton
           name="main-radio"

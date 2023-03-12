@@ -22,7 +22,7 @@ export default function RadioButton({
   ...props
 }: RadioProps) {
   return (
-    <div className="flex items-start">
+    <div className="flex items-start whitespace-nowrap">
       <input
         type="radio"
         className="appearance-none cursor-pointer"

@@ -29,7 +29,7 @@ export default function HeaderView({
           <Logo />
         </Link>
         <SearchBar />
-        <div className="flex gap-4">
+        <div className="hidden md:flex gap-4">
           <HeaderButton onClick={onLeftButtonClick}>
             {isLogined ? "log out" : "log in"}
           </HeaderButton>
@@ -41,17 +41,17 @@ export default function HeaderView({
               upload +
             </HeaderButton>
           )}
+          {isLogined && (
+            <div className="relative cursor-pointer">
+              <Avatar
+                imageUrl={avatarUrl}
+                width={40}
+                height={40}
+                onClick={() => router.push(`/profile/${memberId}`)}
+              />
+            </div>
+          )}
         </div>
-        {isLogined && (
-          <div className="relative cursor-pointer">
-            <Avatar
-              imageUrl={avatarUrl}
-              width={40}
-              height={40}
-              onClick={() => router.push(`/profile/${memberId}`)}
-            />
-          </div>
-        )}
       </div>
     </div>
   );
