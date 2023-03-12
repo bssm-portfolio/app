@@ -81,7 +81,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
         </div>
       </div>
 
-      <div className="text-sxx mt-1">
+      <div className="text-sxx mt-auto mb-0">
         {`조회수 ${portfolio.views}회 · ${getTimeAgo(portfolio.createdDate)}`}
       </div>
     </div>
