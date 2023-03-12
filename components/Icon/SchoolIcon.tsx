@@ -9,10 +9,10 @@ export default function SchoolIcon({ ...props }) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       {...props}
     >
-      <rect width="88" height="59" fill="url(#pattern0)" />
+      <rect width="88" height="59" fill="url(#schoolIcon)" />
       <defs>
         <pattern
-          id="pattern0"
+          id="schoolIcon"
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
