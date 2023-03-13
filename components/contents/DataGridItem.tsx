@@ -88,7 +88,9 @@ export default function DataGridItem({
                   onError={() => setImageUrl(config.defaultThumbnail)}
                 />
               </div>
-              <h2 className="font-bold">{portfolio.title}</h2>
+              <h2 className="font-bold w-96 break-words line-clamp-2">
+                {portfolio.title}
+              </h2>
             </div>
           </div>
           <span>{portfolio.views}</span>
@@ -96,7 +98,7 @@ export default function DataGridItem({
           <span>{portfolio.bookmarks}</span>
           <Button
             varient="secondary"
-            className="!bg-white border border-black"
+            className="!bg-white border border-black whitespace-nowrap"
             onClick={() =>
               router.push(`/portfolio/${portfolio.portfolioId}/edit`)
             }
