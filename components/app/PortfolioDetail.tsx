@@ -146,6 +146,7 @@ export default function Detail({
         </div>
       </div>
       <Description>{portfolio.description}</Description>
+      <Description>{portfolio.gitUrl}</Description>
     </div>
   );
 }

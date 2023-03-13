@@ -6,7 +6,7 @@ export { default as Menu } from "./common/Menu";
 export { default as SearchBar } from "./common/SearchBar";
 export { default as Portfolio } from "./common/Portfolio";
 
-export { default as AppDetail } from "./app/Detail";
+export { default as AppDetail } from "./app/PortfolioDetail";
 export { default as PortfolioPlayer } from "./app/PortfolioPlayer";
 export { default as AppSideMenu } from "./app/SideMenu";
 export { default as AppComment } from "./app/CommentList";
