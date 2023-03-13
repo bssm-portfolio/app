@@ -22,7 +22,7 @@ export default function ProfileDescription({
 }: ProfileDescriptionProps) {
   return (
     <div className="flex flex-col items-center py-8 px-14 bg-primary-light_gray max-h-[33.75rem]">
-      <Avatar className="mb-5" imageUrl={avatarUrl} width={128} height={128} />
+      <Avatar className="mb-5" imageUrl={avatarUrl} sizes="128px" />
       <h2 className="text-2xl font-bold mb-1">{username}</h2>
       <h3 className="text-xs font-bold mb-5">{role}</h3>
       <div className="w-full flex font-bold">
