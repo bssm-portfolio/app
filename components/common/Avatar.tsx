@@ -8,14 +8,16 @@ interface AvatarProps {
   height?: number;
   onClick?: () => void;
   className?: string;
+  sizes?: string;
 }
 
 export default function Avatar({
-  imageUrl = "",
+  imageUrl,
   width = 50,
   height = 50,
   onClick,
   className,
+  sizes,
 }: AvatarProps) {
   return (
     <Image
@@ -24,10 +26,10 @@ export default function Avatar({
         "h-[40px]": height === 40,
       })}
       src={imageUrl || config.defaultProfile}
-      alt="사용자 아바타"
+      alt="사용자"
       width={width}
       height={height}
-      sizes="40px"
+      sizes={sizes}
       priority
     />
   );
