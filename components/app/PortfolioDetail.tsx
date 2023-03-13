@@ -1,6 +1,7 @@
 import { getKoreanDate } from "@/utils/date";
 import type { Portfolio } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
@@ -17,6 +18,7 @@ import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
 import FilledHeartIcon from "../Icon/FilledHeartIcon";
 import EditIcon from "../Icon/EditIcon";
 import ChipGroup from "../atoms/ChipGroup";
+import GithubIcon from "../Icon/GithubIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -78,7 +80,10 @@ export default function Detail({
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="font-bold text-large mr-2">
+          <h2 className="flex gap-1 font-bold text-large mr-2">
+            <Link href={portfolio.gitUrl}>
+              <GithubIcon />
+            </Link>
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
             <span className="break-all">{portfolio.title}</span>
           </h2>
@@ -146,7 +151,6 @@ export default function Detail({
         </div>
       </div>
       <Description>{portfolio.description}</Description>
-      <Description>{portfolio.gitUrl}</Description>
     </div>
   );
 }
