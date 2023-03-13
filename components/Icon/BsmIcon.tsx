@@ -9,17 +9,17 @@ export default function BsmIcon({ ...props }) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       {...props}
     >
-      <rect x="0.125" width="46.75" height="22" fill="url(#pattern0)" />
+      <rect x="0.125" width="46.75" height="22" fill="url(#bsmIcon)" />
       <defs>
         <pattern
-          id="pattern0"
+          id="bsmIcon"
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
         >
           <use
             xlinkHref="#image0_473_1699"
-            transform="translate(0 -0.58209) scale(0.00195312 0.00425606)"
+            transform="matrix(0.00195312 0 0 0.00425606 0 -0.58209)"
           />
         </pattern>
         <image

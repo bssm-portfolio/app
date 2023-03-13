@@ -32,7 +32,7 @@ export default function SearchBar() {
 
   const getSearchBarCss = () => {
     return `
-    flex 
+    hidden 
     items-center 
     bg-white
     text-primary-dark_gray
@@ -40,7 +40,9 @@ export default function SearchBar() {
     border-primary-dark_gray
     rounded-full
     px-[1.5rem]
-    py-[0.5rem]`;
+    py-[0.5rem]
+    xl:flex
+  `;
   };
 
   const handleKeyword = (event: ChangeEvent<HTMLInputElement>) =>
