@@ -25,7 +25,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
 
   return (
     <div
-      className="flex flex-col cursor-pointer w-[22.5rem] shadow p-[1.25rem] rounded-lg bg-white"
+      className="flex flex-col flex-1 cursor-pointer min-w-[22.5rem] max-w-[30rem] shadow p-[1.25rem] rounded-lg bg-white"
       onClick={onClick}
     >
       <div className="relative h-[11.25rem]">
