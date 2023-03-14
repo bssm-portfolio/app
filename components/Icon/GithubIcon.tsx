@@ -1,8 +1,14 @@
-export default function GithubIcon() {
+export default function GithubIcon({
+  width = 30,
+  height = 30,
+}: {
+  width?: number;
+  height?: number;
+}) {
   return (
     <svg
-      width="30"
-      height="30"
+      width={width}
+      height={height}
       viewBox="0 0 30 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
