@@ -62,10 +62,11 @@ export class HttpClient {
     });
   }
 
-  delete(requestConfig?: AxiosRequestConfig) {
+  delete(requestConfig?: AxiosRequestConfig, data?: unknown) {
     return this.api.delete("", {
       ...HttpClient.clientConfig,
       ...requestConfig,
+      data,
     });
   }
 

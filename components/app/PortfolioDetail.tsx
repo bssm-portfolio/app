@@ -79,6 +79,14 @@ export default function Detail({
     openToast("복사가 완료되었습니다.");
   };
 
+  const deletePortfolio = () => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("정말로 삭제하시겠습니까?")) {
+      httpClient.portfolio.delete({}, { portfolioId: portfolio.portfolioId });
+      router.push("/");
+    }
+  };
+
   return (
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
@@ -154,36 +162,28 @@ export default function Detail({
               </Button>
             </CopyToClipboard>
 
-            {userInfo.memberRoleType === "ROLE_ADMIN" ||
-              (true && (
-                <>
-                  <div className="flex items-center bg-primary-dark_gray px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]">
-                    <span className="text-[0.75rem] font-normal">
-                      노출순위 변경하기:
-                    </span>
-                    <Input className="w-[1.25rem] h-[1.25rem]" />
-                    <PencelIcon />
-                  </div>
-                  <Kebab.Provider className="z-30">
-                    <Kebab.Menu className="rounded">
-                      <Kebab.Item
-                        className="pb-[0.3125rem] rounded-t bg-white"
-                        onClick={() => 1}
-                      >
-                        <EditIcon className="w-3 h-3 mr-3" />
-                        <span>수정</span>
-                      </Kebab.Item>
-                      <Kebab.Item
-                        className="pt-[0.3125rem] rounded-b bg-white"
-                        onClick={() => 1}
-                      >
-                        <TrashCanIcon className="w-3 h-3 mr-3" />
-                        <span>삭제</span>
-                      </Kebab.Item>
-                    </Kebab.Menu>
-                  </Kebab.Provider>
-                </>
-              ))}
+            {userInfo.memberRoleType === "ROLE_ADMIN" && (
+              <>
+                <div className="flex items-center bg-primary-dark_gray px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]">
+                  <span className="text-[0.75rem] font-normal">
+                    노출순위 변경하기:
+                  </span>
+                  <Input className="w-[1.25rem] h-[1.25rem]" />
+                  <PencelIcon />
+                </div>
+                <Kebab.Provider className="z-30">
+                  <Kebab.Menu className="rounded">
+                    <Kebab.Item
+                      className="pt-[0.3125rem] rounded-b bg-white"
+                      onClick={() => deletePortfolio()}
+                    >
+                      <TrashCanIcon className="w-3 h-3 mr-3" />
+                      <span>삭제</span>
+                    </Kebab.Item>
+                  </Kebab.Menu>
+                </Kebab.Provider>
+              </>
+            )}
           </div>
           {portfolio.contributorList.length > 0 && (
             <div className="mb-large flex justify-end">
