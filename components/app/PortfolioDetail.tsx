@@ -1,5 +1,5 @@
 import { getKoreanDate } from "@/utils/date";
-import type { Portfolio } from "@/types/portfolio.interface";
+import type { Portfolio, RecommendType } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
@@ -18,8 +18,6 @@ import FilledHeartIcon from "../Icon/FilledHeartIcon";
 import EditIcon from "../Icon/EditIcon";
 import ChipGroup from "../atoms/ChipGroup";
 import GithubIcon from "../Icon/GithubIcon";
-import PencelIcon from "../Icon/PencelIcon";
-import Input from "../atoms/Input";
 import Kebab from "../common/KebabMenu";
 import TrashCanIcon from "../Icon/TrashCanIcon";
 
@@ -30,6 +28,7 @@ interface PortfolioDetailProps {
   isMyPortfolio: boolean;
   bookmarks: number;
   views: number;
+  recommendType: RecommendType;
 }
 
 export default function Detail({
@@ -39,6 +38,7 @@ export default function Detail({
   isMyPortfolio,
   bookmarks,
   views,
+  recommendType,
 }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const { user: userInfo } = useUser();
@@ -75,11 +75,17 @@ export default function Detail({
       );
   };
 
+  const handleRecommend = () => {
+    httpClient.portfolioRecommend
+      .put({ portfolioId: portfolio.portfolioId })
+      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]));
+  };
+
   const handleShare = () => {
     openToast("복사가 완료되었습니다.");
   };
 
-  const deletePortfolio = () => {
+  const handleDelete = () => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm("정말로 삭제하시겠습니까?")) {
       httpClient.portfolio.delete({}, { portfolioId: portfolio.portfolioId });
@@ -164,18 +170,17 @@ export default function Detail({
 
             {userInfo.memberRoleType === "ROLE_ADMIN" && (
               <>
-                <div className="flex items-center bg-primary-dark_gray px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]">
-                  <span className="text-[0.75rem] font-normal">
-                    노출순위 변경하기:
-                  </span>
-                  <Input className="w-[1.25rem] h-[1.25rem]" />
-                  <PencelIcon />
-                </div>
+                <Button
+                  onClick={handleRecommend}
+                  className="flex items-center bg-primary-dark_gray px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]"
+                >
+                  추천 {recommendType === "NONE" ? "등록" : "해제"}
+                </Button>
                 <Kebab.Provider className="z-30">
                   <Kebab.Menu className="rounded">
                     <Kebab.Item
                       className="pt-[0.3125rem] rounded-b bg-white"
-                      onClick={() => deletePortfolio()}
+                      onClick={handleDelete}
                     >
                       <TrashCanIcon className="w-3 h-3 mr-3" />
                       <span>삭제</span>

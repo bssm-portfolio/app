@@ -10,12 +10,14 @@ export type PortfolioListType =
   | "upload"
   | "detail"
   | "search";
+export type RecommendType = "NONE" | "RECOMMEND";
 
 export type Portfolio = {
   portfolioId: number;
   writer: PortfolioWriter;
   portfolioUrl: string;
   portfolioType: PortfolioType;
+  recommendType: RecommendType;
   title: string;
   description: string;
   bookmarkYn: boolean;
