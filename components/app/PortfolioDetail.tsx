@@ -1,5 +1,5 @@
 import { getKoreanDate } from "@/utils/date";
-import type { Portfolio, RecommendType } from "@/types/portfolio.interface";
+import type { Portfolio, RecommendStatus } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
@@ -28,7 +28,7 @@ interface PortfolioDetailProps {
   isMyPortfolio: boolean;
   bookmarks: number;
   views: number;
-  recommendType: RecommendType;
+  recommendStatus: RecommendStatus;
 }
 
 export default function Detail({
@@ -38,7 +38,7 @@ export default function Detail({
   isMyPortfolio,
   bookmarks,
   views,
-  recommendType,
+  recommendStatus,
 }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const { user: userInfo } = useUser();
@@ -174,7 +174,7 @@ export default function Detail({
                   onClick={handleRecommend}
                   className="flex items-center bg-primary-dark_gray px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]"
                 >
-                  추천 {recommendType === "NONE" ? "등록" : "해제"}
+                  추천 {recommendStatus === "NONE" ? "등록" : "해제"}
                 </Button>
                 <Kebab.Provider className="z-30">
                   <Kebab.Menu className="rounded">

@@ -18,6 +18,7 @@ export default function Home() {
       { size: 12 },
       keyword !== "ALL" ? { sortType: keyword } : {},
     );
+
   const { data } = useQuery(["recommendPortfolio"], () =>
     httpClient.portfolio
       .search({

@@ -10,14 +10,14 @@ export type PortfolioListType =
   | "upload"
   | "detail"
   | "search";
-export type RecommendType = "NONE" | "RECOMMEND";
+export type RecommendStatus = "NONE" | "RECOMMEND";
 
 export type Portfolio = {
   portfolioId: number;
   writer: PortfolioWriter;
   portfolioUrl: string;
   portfolioType: PortfolioType;
-  recommendType: RecommendType;
+  recommendStatus: RecommendStatus;
   title: string;
   description: string;
   bookmarkYn: boolean;
@@ -89,6 +89,7 @@ export interface Filter {
   schoolGrade?: SchoolGradeType;
   sortType?: SortType;
   sortDirectionType?: SortDirectionType;
+  recommendStatus?: RecommendStatus;
 }
 export type SearchFilterPropertyType =
   | "uploadDateType"
