@@ -30,7 +30,7 @@ export default function MainPortfolioList({
 
   return (
     <>
-      <div className="flex flex-wrap gap-12">
+      <div className="flex flex-wrap gap-[1.5rem]">
         {pages.map((page) =>
           page.list.map((portfolio) => (
             <Portfolio
