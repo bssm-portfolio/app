@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 type ButtonStatus = "active" | "disabled";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  status: ButtonStatus;
+  status?: ButtonStatus;
   children: ReactNode;
   className?: string;
 }
