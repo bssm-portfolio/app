@@ -20,6 +20,7 @@ import ChipGroup from "../atoms/ChipGroup";
 import GithubIcon from "../Icon/GithubIcon";
 import Kebab from "../common/KebabMenu";
 import TrashCanIcon from "../Icon/TrashCanIcon";
+import RecommendIcon from "../Icon/RecommendIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -172,9 +173,10 @@ export default function Detail({
               <>
                 <Button
                   onClick={handleRecommend}
-                  className="flex items-center bg-primary-dark_gray px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]"
+                  className="flex items-center bg-blue px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]"
                 >
-                  추천 {recommendStatus === "NONE" ? "등록" : "해제"}
+                  <RecommendIcon size={24} fill="white" />
+                  프로젝트 추천 {recommendStatus === "NONE" ? "하기" : "해제"}
                 </Button>
                 <Kebab.Provider className="z-30">
                   <Kebab.Menu className="rounded">
