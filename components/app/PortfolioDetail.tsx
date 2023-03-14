@@ -1,7 +1,6 @@
 import { getKoreanDate } from "@/utils/date";
 import type { Portfolio } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
@@ -19,6 +18,10 @@ import FilledHeartIcon from "../Icon/FilledHeartIcon";
 import EditIcon from "../Icon/EditIcon";
 import ChipGroup from "../atoms/ChipGroup";
 import GithubIcon from "../Icon/GithubIcon";
+import PencelIcon from "../Icon/PencelIcon";
+import Input from "../atoms/Input";
+import Kebab from "../common/KebabMenu";
+import TrashCanIcon from "../Icon/TrashCanIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -80,12 +83,20 @@ export default function Detail({
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="flex gap-1 font-bold text-large mr-2">
-            <Link href={portfolio.gitUrl}>
-              <GithubIcon />
-            </Link>
+          <h2 className="flex gap-1 font-bold text-large mr-2 items-center">
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
             <span className="break-all">{portfolio.title}</span>
+            {portfolio.gitUrl && (
+              <a
+                href={portfolio.gitUrl}
+                className="flex items-center bg-primary-light_gray rounded-full px-[0.5rem] py-[0.1rem] gap-[0.125rem] h-[1.5rem]"
+              >
+                <GithubIcon width={14} height={14} />
+                <span className="text-primary-dark_gray text-[0.625rem] font-normal">
+                  GitHub
+                </span>
+              </a>
+            )}
           </h2>
           <span
             onClick={() => router.push(`/profile/${portfolio.writer.memberId}`)}
@@ -104,7 +115,7 @@ export default function Detail({
         </div>
 
         <div>
-          <div className="flex justify-end gap-small mb-large">
+          <div className="flex justify-end items-center gap-small mb-large h-[2.25rem]">
             <Button status="active" onClick={handleLike}>
               {bookmarkYn ? (
                 <FilledHeartIcon className="mr-2xsmall" />
@@ -142,6 +153,37 @@ export default function Detail({
                 <span className="text-small">공유</span>
               </Button>
             </CopyToClipboard>
+
+            {userInfo.memberRoleType === "ROLE_ADMIN" ||
+              (true && (
+                <>
+                  <div className="flex items-center bg-primary-dark_gray px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]">
+                    <span className="text-[0.75rem] font-normal">
+                      노출순위 변경하기:
+                    </span>
+                    <Input className="w-[1.25rem] h-[1.25rem]" />
+                    <PencelIcon />
+                  </div>
+                  <Kebab.Provider className="z-30">
+                    <Kebab.Menu className="rounded">
+                      <Kebab.Item
+                        className="pb-[0.3125rem] rounded-t bg-white"
+                        onClick={() => 1}
+                      >
+                        <EditIcon className="w-3 h-3 mr-3" />
+                        <span>수정</span>
+                      </Kebab.Item>
+                      <Kebab.Item
+                        className="pt-[0.3125rem] rounded-b bg-white"
+                        onClick={() => 1}
+                      >
+                        <TrashCanIcon className="w-3 h-3 mr-3" />
+                        <span>삭제</span>
+                      </Kebab.Item>
+                    </Kebab.Menu>
+                  </Kebab.Provider>
+                </>
+              ))}
           </div>
           {portfolio.contributorList.length > 0 && (
             <div className="mb-large flex justify-end">
