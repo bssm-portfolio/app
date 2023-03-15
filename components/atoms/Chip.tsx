@@ -44,7 +44,7 @@ function Item({
     <div
       onClick={() => onClick?.(children)}
       className={classNames(
-        "px-3 py-1 text-center text-blue border border-blue rounded-full text-sxx whitespace-nowrap text-ellipsis overflow-hidden",
+        "px-3 py-1 text-center text-blue border border-blue rounded-full text-2xs whitespace-nowrap text-ellipsis overflow-hidden",
         className,
         {
           "w-16": type === "portfolio",
