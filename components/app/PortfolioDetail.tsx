@@ -8,6 +8,7 @@ import httpClient from "@/apis";
 import { useQueryClient } from "@tanstack/react-query";
 import KEY from "@/models/key";
 import useUser from "@/hooks/useUser";
+import classNames from "classnames";
 import Button from "../atoms/DetailButton";
 import MemberGroup from "../atoms/MemberGroup";
 import Description from "../portfolio/Description";
@@ -173,13 +174,24 @@ export default function Detail({
 
             {userInfo.memberRoleType === "ROLE_ADMIN" && (
               <>
-                <Button
+                <button
+                  type="button"
                   onClick={handleRecommend}
-                  className="flex items-center bg-blue px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]"
+                  className={classNames(
+                    "flex items-center p-[0.65rem] rounded-full text-black gap-[0.375rem] shadow text-[0.75rem]",
+                    {
+                      "bg-primary-light_gray text-black border-black border-[0.5px]":
+                        recommendStatus === "NONE",
+                      "bg-blue text-white": recommendStatus === "RECOMMEND",
+                    },
+                  )}
                 >
-                  <RecommendIcon size={24} fill="white" />
-                  프로젝트 추천 {recommendStatus === "NONE" ? "하기" : "해제"}
-                </Button>
+                  <RecommendIcon
+                    size={18}
+                    fill={recommendStatus === "NONE" ? "black" : "white"}
+                  />
+                  프로젝트 추천
+                </button>
                 <Kebab.Provider className="z-30">
                   <Kebab.Menu className="rounded">
                     <Kebab.Item
@@ -187,7 +199,7 @@ export default function Detail({
                       onClick={handleDelete}
                     >
                       <TrashCanIcon className="w-3 h-3 mr-3" />
-                      <span>삭제</span>
+                      <span>관리자 권한으로 삭제</span>
                     </Kebab.Item>
                   </Kebab.Menu>
                 </Kebab.Provider>
