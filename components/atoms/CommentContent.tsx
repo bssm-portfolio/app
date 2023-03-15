@@ -23,9 +23,9 @@ export default function CommentContent({
 }: CommentContentProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
-  const originalContent = useRef<string>(comment.content);
+  const originalContent = useRef(comment.content);
 
   const moveToProfile = () =>
     router.push(`/profile/${comment.writer.memberId}`);
