@@ -120,7 +120,7 @@ export default function CommentContent({
         </div>
 
         {comment.deletable && !isEdit && (
-          <Kebab.Provider className="z-10">
+          <Kebab.Provider className="ml-2 z-10  bg-white">
             <Kebab.Menu className="rounded">
               {comment.editable && (
                 <Kebab.Item
