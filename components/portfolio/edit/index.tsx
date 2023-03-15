@@ -100,6 +100,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       },
     );
   };
+
   useEffect(() => {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
     setVideoFileUid(portfolio.video?.fileUid);
@@ -109,56 +110,97 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
   }, [portfolio, reset]);
 
   return (
-    <form className="flex flex-col gap-3 p-12">
-      <Input
-        registerReturn={register("title", { required: "제목" })}
-        placeholder="제목"
-      />
-      <Textarea
-        registerReturn={register("description", { required: "소개" })}
-        placeholder="소개"
-      />
-      <Input registerReturn={register("portfolioUrl")} placeholder="웹 주소" />
+    <form className="flex flex-col items-center gap-3 p-12">
+      <div className="max-w-[25rem]">
+        <h1 className="w-full mb-8 font-bold text-xl">포트폴리오 수정</h1>
+        <LabelForm label="제목" className="mb-4">
+          <Input
+            className="w-full"
+            registerReturn={register("title", { required: "제목" })}
+            placeholder="제목"
+          />
+        </LabelForm>
+        <LabelForm label="설명" className="mb-4">
+          <Textarea
+            className="w-full"
+            registerReturn={register("description", { required: "설명" })}
+            placeholder="설명"
+          />
+        </LabelForm>
+        <LabelForm label="웹 주소" className="mb-4">
+          <Input
+            className="w-full"
+            registerReturn={register("portfolioUrl")}
+            placeholder="웹 주소"
+          />
+        </LabelForm>
 
-      <EditFileUploadView
-        register={register}
-        thumbnailFileUid={thumbnailFileUid}
-        videoFileUid={videoFileUid}
-        setThumbnailFile={setEditThumbnailFile}
-        setVideoFile={setEditVideoFile}
-        thumbnailUrl={getFileDownloadUrl(portfolio.thumbnail)}
-        videoUrl={
-          portfolio.video ? getFileDownloadUrl(portfolio.video) : undefined
-        }
-        editVideoFile={editVideoFile}
-        editThumbnailFile={editThumbnailFile}
-      />
-      <LabelForm label="참여자 아이디">
-        <UserSearchForm
-          selectedMembers={selectedMembers}
-          setSelectedMembers={setSelectedMembers}
+        <hr className="my-6" />
+
+        <EditFileUploadView
+          register={register}
+          thumbnailFileUid={thumbnailFileUid}
+          videoFileUid={videoFileUid}
+          setThumbnailFile={setEditThumbnailFile}
+          setVideoFile={setEditVideoFile}
+          thumbnailUrl={getFileDownloadUrl(portfolio.thumbnail)}
+          videoUrl={
+            portfolio.video ? getFileDownloadUrl(portfolio.video) : undefined
+          }
+          editVideoFile={editVideoFile}
+          editThumbnailFile={editThumbnailFile}
         />
-      </LabelForm>
 
-      <Input registerReturn={register("gitUrl")} placeholder="깃허브 주소" />
+        <hr className="my-6" />
 
-      <SkillForm
-        selectedSkills={selectedSkills}
-        setSelectedSkills={setSelectedSkills}
-      />
+        <LabelForm label="참여자 아이디" className="mb-4">
+          <UserSearchForm
+            selectedMembers={selectedMembers}
+            setSelectedMembers={setSelectedMembers}
+          />
+        </LabelForm>
 
-      <Select
-        options={config.portfolioThemeOptions}
-        setValue={(option: Option) =>
-          setValue("portfolioTheme", option.value as PortfolioTheme)
-        }
-      />
+        <hr className="my-6" />
 
-      <ScopeView register={register} scope={portfolio.scope} />
+        <LabelForm label="Github 주소" className="mb-4">
+          <Input
+            className="w-full"
+            registerReturn={register("gitUrl")}
+            placeholder="깃허브 주소"
+          />
+        </LabelForm>
 
-      <Button type="submit" onClick={handleSubmit(onValid, onInValid)}>
-        수정하기
-      </Button>
+        <LabelForm label="기술 스택" className="mb-4">
+          <SkillForm
+            selectedSkills={selectedSkills}
+            setSelectedSkills={setSelectedSkills}
+          />
+        </LabelForm>
+
+        <hr className="my-6" />
+
+        <LabelForm label="테마" className="mb-4">
+          <Select
+            placeholder="테마를 선택하세요."
+            options={config.portfolioThemeOptions}
+            setValue={(option: Option) =>
+              setValue("portfolioTheme", option.value as PortfolioTheme)
+            }
+          />
+        </LabelForm>
+
+        <hr className="my-6" />
+
+        <ScopeView register={register} scope={portfolio.scope} />
+
+        <Button
+          type="submit"
+          className="w-full"
+          onClick={handleSubmit(onValid, onInValid)}
+        >
+          수정하기
+        </Button>
+      </div>
     </form>
   );
 }
