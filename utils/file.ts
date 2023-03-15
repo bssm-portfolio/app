@@ -4,7 +4,7 @@ import { S3File } from "@/types/file.interface";
 import { OpenToastType } from "@/types/toast.interface";
 
 export const getFileDownloadUrl = (file: S3File) => {
-  return `${config.baseURL}/api/file/download/${file.fileUid}`;
+  return `${config.baseURL}/api/file/download/${file?.fileUid}`;
 };
 
 export const getFormData = (file: File) => {
