@@ -1,5 +1,6 @@
 import FileUploader from "@/components/atoms/FileUploader";
 import Input from "@/components/atoms/Input";
+import LabelForm from "@/components/atoms/LabelForm";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
@@ -32,7 +33,7 @@ export default function FileUploadView({
 
   const getBackgroundImageCss = (varient: FileUploaderType) => {
     const width = varient === "thumbnail" ? "w-[20rem]" : "w-[30rem]";
-    const height = varient === "thumbnail" ? "h-[11.25rem]" : "h-60";
+    const height = varient === "thumbnail" ? "h-[11.25rem]" : "h-[11.25rem]";
 
     return `
     relative 
@@ -50,44 +51,50 @@ export default function FileUploadView({
 
   return (
     <div>
-      <div className={getBackgroundImageCss("thumbnail")}>
-        <FileUploader
-          id="edit-thumbnail-uploader"
-          label="썸네일 업로드"
-          onChange={(event) => {
-            if (event.target.files) setThumbnailFile(event.target.files[0]);
-          }}
-        />
-        <Image
-          src={
-            editThumbnailFile
-              ? URL.createObjectURL(editThumbnailFile)
-              : thumbnailUrl
-          }
-          fill
-          alt="썸네일"
-          className="rounded-lg -z-10 opacity-30"
-        />
-      </div>
-
-      <div className={getBackgroundImageCss("video")}>
-        <FileUploader
-          id="edit-video-uploader"
-          label="동영상 업로드"
-          onChange={(event) => {
-            if (event.target.files) setVideoFile(event.target.files[0]);
-          }}
-        />
-        <video
-          src={editVideoFile ? URL.createObjectURL(editVideoFile) : videoUrl}
-          className="w-full h-60 -z-10 absolute object-cover rounded-lg opacity-30"
-        >
-          <track
-            kind="captions"
-            src={editVideoFile ? URL.createObjectURL(editVideoFile) : videoUrl}
+      <LabelForm label="썸네일 업로드" className="mb-4">
+        <div className={`${getBackgroundImageCss("thumbnail")} w-full`}>
+          <FileUploader
+            id="edit-thumbnail-uploader"
+            label="썸네일 업로드"
+            onChange={(event) => {
+              if (event.target.files) setThumbnailFile(event.target.files[0]);
+            }}
           />
-        </video>
-      </div>
+          <Image
+            src={
+              editThumbnailFile
+                ? URL.createObjectURL(editThumbnailFile)
+                : thumbnailUrl
+            }
+            fill
+            alt="썸네일"
+            className="rounded-lg -z-10 opacity-30"
+          />
+        </div>
+      </LabelForm>
+
+      <LabelForm label="동영상 업로드" className="mb-4">
+        <div className={`${getBackgroundImageCss("video")} w-full`}>
+          <FileUploader
+            id="edit-video-uploader"
+            label="동영상 업로드"
+            onChange={(event) => {
+              if (event.target.files) setVideoFile(event.target.files[0]);
+            }}
+          />
+          <video
+            src={editVideoFile ? URL.createObjectURL(editVideoFile) : videoUrl}
+            className="w-full h-full -z-10 absolute object-cover rounded-lg opacity-30"
+          >
+            <track
+              kind="captions"
+              src={
+                editVideoFile ? URL.createObjectURL(editVideoFile) : videoUrl
+              }
+            />
+          </video>
+        </div>
+      </LabelForm>
 
       <Input
         registerReturn={register("thumbnailFileUid")}

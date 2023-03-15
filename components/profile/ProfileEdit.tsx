@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
+import LabelForm from "../atoms/LabelForm";
+import Textarea from "../atoms/Textarea";
 import Select, { Option } from "../common/Select";
 
 export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
@@ -43,60 +45,105 @@ export default function ProfileEdit({ userInfo }: { userInfo: Member }) {
 
   return (
     <form
-      className="flex flex-col gap-4"
+      className="flex justify-center gap-4"
       onSubmit={handleSubmit(onValid, onInValid)}
     >
-      <Input registerReturn={register("name")} placeholder="이름" />
-      <Input registerReturn={register("description")} placeholder="소개" />
-      <Input registerReturn={register("email")} placeholder="이메일" />
-      <Input registerReturn={register("job")} placeholder="분야" />
-      <Input registerReturn={register("phone")} placeholder="전화번호" />
-      {isStudent && (
-        <div className="flex justify-between gap-1">
-          <Select
+      <div className="min-w-[25rem] max-w-[30rem]">
+        <h1 className="w-full mb-8 font-bold text-xl">프로필 수정</h1>
+        <LabelForm label="이름" className="mb-4">
+          <Input
             className="w-full"
-            placeholder="학년"
-            setValue={(v: Option) =>
-              typeof v.value === "number" && setValue("schoolGrade", v.value)
-            }
-            options={Array(3)
-              .fill(null)
-              .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
-            defaultValue={
-              userInfo.schoolGrade ? userInfo.schoolGrade.toString() : undefined
-            }
+            registerReturn={register("name")}
+            placeholder="이름"
           />
-          <Select
+        </LabelForm>
+        <LabelForm label="소개" className="mb-4">
+          <Textarea
+            className="w-full h-60"
+            registerReturn={register("description")}
+            placeholder="소개"
+          />
+        </LabelForm>
+        <LabelForm label="소개" className="mb-4">
+          <Input
             className="w-full"
-            placeholder="반"
-            setValue={(v: Option) =>
-              typeof v.value === "number" && setValue("schoolClass", v.value)
-            }
-            options={Array(4)
-              .fill(null)
-              .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
-            defaultValue={
-              userInfo.schoolClass ? userInfo.schoolClass.toString() : undefined
-            }
+            disabled
+            registerReturn={register("email")}
+            placeholder="이메일"
           />
-          <Select
+        </LabelForm>
+        <LabelForm label="분야" className="mb-4">
+          <Input
             className="w-full"
-            placeholder="번호"
-            setValue={(v: Option) =>
-              typeof v.value === "number" && setValue("schoolNumber", v.value)
-            }
-            options={Array(20)
-              .fill(null)
-              .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
-            defaultValue={
-              userInfo.schoolNumber
-                ? userInfo.schoolNumber.toString()
-                : undefined
-            }
+            registerReturn={register("job")}
+            placeholder="분야"
           />
-        </div>
-      )}
-      <Button type="submit">제출</Button>
+        </LabelForm>
+        <LabelForm label="전화번호" className="mb-4">
+          <Input
+            className="w-full"
+            registerReturn={register("phone")}
+            placeholder="전화번호"
+          />
+        </LabelForm>
+        {isStudent && (
+          <LabelForm label="학년/반/번호" className="mb-4">
+            <div className="flex justify-between gap-1">
+              <Select
+                className="w-full"
+                placeholder="학년"
+                setValue={(v: Option) =>
+                  typeof v.value === "number" &&
+                  setValue("schoolGrade", v.value)
+                }
+                options={Array(3)
+                  .fill(null)
+                  .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
+                defaultValue={
+                  userInfo.schoolGrade
+                    ? userInfo.schoolGrade.toString()
+                    : undefined
+                }
+              />
+              <Select
+                className="w-full"
+                placeholder="반"
+                setValue={(v: Option) =>
+                  typeof v.value === "number" &&
+                  setValue("schoolClass", v.value)
+                }
+                options={Array(4)
+                  .fill(null)
+                  .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
+                defaultValue={
+                  userInfo.schoolClass
+                    ? userInfo.schoolClass.toString()
+                    : undefined
+                }
+              />
+              <Select
+                className="w-full"
+                placeholder="번호"
+                setValue={(v: Option) =>
+                  typeof v.value === "number" &&
+                  setValue("schoolNumber", v.value)
+                }
+                options={Array(20)
+                  .fill(null)
+                  .map((_, i) => ({ label: String(i + 1), value: i + 1 }))}
+                defaultValue={
+                  userInfo.schoolNumber
+                    ? userInfo.schoolNumber.toString()
+                    : undefined
+                }
+              />
+            </div>
+          </LabelForm>
+        )}
+        <Button type="submit" className="w-full">
+          제출
+        </Button>
+      </div>
     </form>
   );
 }
