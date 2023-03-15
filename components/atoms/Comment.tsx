@@ -5,7 +5,7 @@ import { Comment, CommentForm } from "@/types/portfolio.interface";
 import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import Avatar from "../common/Avatar";
 import { DownIcon, EmptyHeartIcon } from "../Icon";
@@ -29,8 +29,14 @@ export default function CommentView({
   const queryClient = useQueryClient();
   const { openToast } = useOverlay();
   const { register, handleSubmit, reset } = useForm<CommentForm>();
-  const [isReplyListOpen, setIsReplyListOpen] = useState<boolean>(false);
-  const [isCommentFormOpen, setIsCommentFormOpen] = useState<boolean>(false);
+  const [isReplyListOpen, toggleReplyListOpen] = useReducer(
+    (state) => !state,
+    false,
+  );
+  const [isCommentFormOpen, toggleCommentForm] = useReducer(
+    (state) => !state,
+    false,
+  );
 
   const handleLike = () => {
     httpClient.comment
@@ -60,8 +66,8 @@ export default function CommentView({
     );
   };
 
-  const handleReplyListOpen = () => setIsReplyListOpen((prev) => !prev);
-  const handlesetCommentFormOpen = () => setIsCommentFormOpen((prev) => !prev);
+  const handleReplyListOpen = () => toggleReplyListOpen();
+  const handlesetCommentFormOpen = () => toggleCommentForm();
 
   return (
     <div className="flex flex-col mb-[22px]">
