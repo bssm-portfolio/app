@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useCommentList } from "@/models/portfolio";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRef, useState } from "react";
@@ -9,6 +8,7 @@ import { CommentForm } from "@/types/portfolio.interface";
 import config from "@/config";
 import InputButton from "../atoms/InputButton";
 import CommentView from "../atoms/Comment";
+import Avatar from "../common/Avatar";
 
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -40,9 +40,8 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   return (
     <div className="bg-white mt-2 p-3 box-border rounded">
       <form className="flex mt-base relative" onSubmit={handleSubmit(onValid)}>
-        <Image
-          src={userInfo.profileImageUrl || config.defaultProfile}
-          alt="프로필"
+        <Avatar
+          imageUrl={userInfo.profileImageUrl || config.defaultProfile}
           width={40}
           height={40}
           className="rounded-full"
