@@ -178,20 +178,20 @@ export default function Detail({
                   type="button"
                   onClick={handleRecommend}
                   className={classNames(
-                    "flex items-center p-[0.65rem] rounded-full text-black gap-[0.375rem] shadow text-[0.75rem]",
+                    "flex items-center bg-blue text-white px-[0.75rem] py-[0.75rem] rounded-full gap-[0.5rem]",
                     {
-                      "bg-primary-light_gray text-black border-black border-[0.5px]":
-                        recommendStatus === "NONE",
-                      "bg-blue text-white": recommendStatus === "RECOMMEND",
+                      "!bg-white !text-black border border-black":
+                        recommendStatus === "RECOMMEND",
                     },
                   )}
                 >
                   <RecommendIcon
-                    size={18}
-                    fill={recommendStatus === "NONE" ? "black" : "white"}
+                    size={24}
+                    fill={recommendStatus === "RECOMMEND" ? "black" : "white"}
                   />
                   프로젝트 추천
                 </button>
+
                 <Kebab.Provider className="z-30">
                   <Kebab.Menu className="rounded">
                     <Kebab.Item
