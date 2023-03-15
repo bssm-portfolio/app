@@ -100,7 +100,7 @@ export default function CommentView({
                 type="text"
                 className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
                 placeholder={
-                  !isEmptyUser ? "댓글 추가.." : "로그인이 필요합니다."
+                  !isEmptyUser ? "답글 추가.." : "로그인이 필요합니다."
                 }
                 {...register("content", {
                   required: "답글 내용은 필수 항목입니다.",
