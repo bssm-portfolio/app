@@ -59,6 +59,7 @@ const portfolio: Portfolio = {
   views: 0,
   comments: 0,
   createdDate: new Date(),
+  recommendStatus: "NONE",
 };
 
 const profileDescription = {

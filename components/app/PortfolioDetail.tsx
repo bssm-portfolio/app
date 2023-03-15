@@ -1,7 +1,6 @@
 import { getKoreanDate } from "@/utils/date";
-import type { Portfolio } from "@/types/portfolio.interface";
+import type { Portfolio, RecommendStatus } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
@@ -9,6 +8,7 @@ import httpClient from "@/apis";
 import { useQueryClient } from "@tanstack/react-query";
 import KEY from "@/models/key";
 import useUser from "@/hooks/useUser";
+import classNames from "classnames";
 import Button from "../atoms/DetailButton";
 import MemberGroup from "../atoms/MemberGroup";
 import Description from "../portfolio/Description";
@@ -19,6 +19,9 @@ import FilledHeartIcon from "../Icon/FilledHeartIcon";
 import EditIcon from "../Icon/EditIcon";
 import ChipGroup from "../atoms/ChipGroup";
 import GithubIcon from "../Icon/GithubIcon";
+import Kebab from "../common/KebabMenu";
+import TrashCanIcon from "../Icon/TrashCanIcon";
+import RecommendIcon from "../Icon/RecommendIcon";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -27,6 +30,7 @@ interface PortfolioDetailProps {
   isMyPortfolio: boolean;
   bookmarks: number;
   views: number;
+  recommendStatus: RecommendStatus;
 }
 
 export default function Detail({
@@ -36,6 +40,7 @@ export default function Detail({
   isMyPortfolio,
   bookmarks,
   views,
+  recommendStatus,
 }: PortfolioDetailProps) {
   const { openToast } = useOverlay();
   const { user: userInfo } = useUser();
@@ -72,20 +77,44 @@ export default function Detail({
       );
   };
 
+  const handleRecommend = () => {
+    httpClient.portfolioRecommend
+      .put({ portfolioId: portfolio.portfolioId })
+      .then(() => queryClient.invalidateQueries([KEY.PORTFOLIO]));
+  };
+
   const handleShare = () => {
     openToast("복사가 완료되었습니다.");
+  };
+
+  const handleDelete = () => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("정말로 삭제하시겠습니까?")) {
+      httpClient.portfolio.delete({
+        data: { portfolioId: portfolio.portfolioId },
+      });
+      router.push("/");
+    }
   };
 
   return (
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="flex gap-1 font-bold text-large mr-2">
-            <Link href={portfolio.gitUrl}>
-              <GithubIcon />
-            </Link>
+          <h2 className="flex gap-1 font-bold text-large mr-2 items-center">
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
             <span className="break-all">{portfolio.title}</span>
+            {portfolio.gitUrl && (
+              <a
+                href={portfolio.gitUrl}
+                className="flex items-center bg-primary-light_gray rounded-full px-[0.5rem] py-[0.1rem] gap-[0.125rem] h-[1.5rem]"
+              >
+                <GithubIcon width={14} height={14} />
+                <span className="text-primary-dark_gray text-[0.625rem] font-normal">
+                  GitHub
+                </span>
+              </a>
+            )}
           </h2>
           <span
             onClick={() => router.push(`/profile/${portfolio.writer.memberId}`)}
@@ -104,7 +133,7 @@ export default function Detail({
         </div>
 
         <div>
-          <div className="flex justify-end gap-small mb-large">
+          <div className="flex justify-end items-center gap-small mb-large h-[2.25rem]">
             <Button status="active" onClick={handleLike}>
               {bookmarkYn ? (
                 <FilledHeartIcon className="mr-2xsmall" />
@@ -142,6 +171,40 @@ export default function Detail({
                 <span className="text-small">공유</span>
               </Button>
             </CopyToClipboard>
+
+            {userInfo.memberRoleType === "ROLE_ADMIN" && (
+              <>
+                <button
+                  type="button"
+                  onClick={handleRecommend}
+                  className={classNames(
+                    "flex items-center p-[0.65rem] rounded-full text-black gap-[0.375rem] shadow text-[0.75rem]",
+                    {
+                      "bg-primary-light_gray text-black border-black border-[0.5px]":
+                        recommendStatus === "NONE",
+                      "bg-blue text-white": recommendStatus === "RECOMMEND",
+                    },
+                  )}
+                >
+                  <RecommendIcon
+                    size={18}
+                    fill={recommendStatus === "NONE" ? "black" : "white"}
+                  />
+                  프로젝트 추천
+                </button>
+                <Kebab.Provider className="z-30">
+                  <Kebab.Menu className="rounded">
+                    <Kebab.Item
+                      className="pt-[0.3125rem] rounded-b bg-white"
+                      onClick={handleDelete}
+                    >
+                      <TrashCanIcon className="w-3 h-3 mr-3" />
+                      <span>관리자 권한으로 삭제</span>
+                    </Kebab.Item>
+                  </Kebab.Menu>
+                </Kebab.Provider>
+              </>
+            )}
           </div>
           {portfolio.contributorList.length > 0 && (
             <div className="mb-large flex justify-end">

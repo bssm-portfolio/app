@@ -128,6 +128,7 @@ export default {
   portfolio: new HttpClient("/api/portfolio", axiosConfig),
   portfolioViewsAdd: new HttpClient("/api/portfolio/views/add", axiosConfig),
   portfolioMember: new HttpClient("/api/portfolio/member", axiosConfig),
+  portfolioRecommend: new HttpClient("/api/portfolio/recommend", axiosConfig),
   oauth: new HttpClient("/api/login/oauth2", axiosConfig),
   skill: new HttpClient("/api/skill", axiosConfig),
   member: new HttpClient("/api/member", axiosConfig),

@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 type ButtonStatus = "active" | "disabled";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  status: ButtonStatus;
+  status?: ButtonStatus;
   children: ReactNode;
   className?: string;
 }
@@ -14,8 +14,7 @@ const getButtonCss = (status: ButtonStatus): string => {
     bg-${status === "active" ? "primary-light_gray" : "primary-dark_gray"}
     text-${status === "active" ? "primary-dark_gray" : "primary-light_gray"}
     rounded-full
-    px-[0.65rem]
-    py-small
+    p-[0.75rem]
     shadow
     flex
     items-center
@@ -34,7 +33,7 @@ export default function DetailButton({
     <button
       type={type === "submit" ? "submit" : "button"}
       onClick={onClick}
-      className={classNames(getButtonCss(status), className)}
+      className={classNames(className, getButtonCss(status))}
     >
       {children}
     </button>
