@@ -5,7 +5,7 @@ import { Comment, CommentForm } from "@/types/portfolio.interface";
 import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import Avatar from "../common/Avatar";
 import { DownIcon, EmptyHeartIcon } from "../Icon";
