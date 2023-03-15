@@ -6,14 +6,16 @@ interface AvatarProps {
   imageUrl?: string;
   onClick?: () => void;
   className?: string;
-  sizes?: number;
+  width: number;
+  height: number;
 }
 
 export default function Avatar({
   imageUrl,
   onClick,
   className,
-  sizes = 40,
+  width,
+  height,
 }: AvatarProps) {
   return (
     <Image
@@ -21,9 +23,8 @@ export default function Avatar({
       className={classNames(className, "rounded-full")}
       src={imageUrl || config.defaultProfile}
       alt="사용자"
-      width={sizes}
-      height={sizes}
-      sizes={sizes.toString()}
+      width={width}
+      height={height}
       priority
     />
   );

@@ -6,8 +6,8 @@ import { checkInputValueIsNull } from "@/utils/input";
 import httpClient from "@/apis";
 import useUser from "@/hooks/useUser";
 import config from "@/config";
-import Comment from "../atoms/Comment";
 import InputButton from "../atoms/InputButton";
+import CommentView from "../atoms/Comment";
 
 interface CommentForm {
   content: string;
@@ -19,6 +19,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const { list: commentList, refetch } = useCommentList(portfolioId);
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [isWriting, setIsWriting] = useState(false);
+
   const { ref, ...rest } = register("content", {
     required: "댓글 내용은 필수 항목입니다.",
   });
@@ -69,13 +70,10 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           </InputButton>
         )}
       </form>
+
       <div className="mt-2xlarge">
         {commentList.map((comment) => (
-          <Comment
-            comment={comment}
-            refetch={refetch}
-            key={comment.commentId}
-          />
+          <CommentView comment={comment} key={comment.commentId} />
         ))}
       </div>
     </div>

@@ -111,7 +111,6 @@ export interface CommentWriter {
 
 export interface Comment {
   writer: CommentWriter;
-  parentId: number | null;
   commentId: number;
   content: string;
   createdDate: Date;

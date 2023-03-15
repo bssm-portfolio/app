@@ -17,6 +17,7 @@ const nextConfig = {
       },
       { protocol: "http", hostname: "k.kakaocdn.net" },
       { protocol: "http", hostname: "10.150.149.2" },
+      { protocol: "https", hostname: "www.google.com" },
       { protocol: "http", hostname: "asdf.com" },
       { protocol: "https", hostname: "bssm.kro.kr" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
