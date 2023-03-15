@@ -42,7 +42,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
       </div>
       <div className="mt-3 mb-[3.125rem]">
         <div className="flex justify-between">
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-start">
             <Avatar
               width={40}
               height={40}
