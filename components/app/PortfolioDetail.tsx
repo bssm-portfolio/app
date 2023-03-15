@@ -177,7 +177,7 @@ export default function Detail({
                   className={classNames(
                     "flex items-center !bg-blue text-white px-[0.75rem] py-[0.75rem] rounded-full gap-[0.5rem]",
                     {
-                      "!bg-white !text-black": recommendStatus !== "NONE",
+                      "!bg-white !text-black": recommendStatus === "RECOMMEND",
                     },
                   )}
                 >
