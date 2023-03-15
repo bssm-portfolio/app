@@ -60,13 +60,8 @@ export default function CommentView({
     );
   };
 
-  const handleReplyListOpen = () => {
-    setIsReplyListOpen((prev) => !prev);
-  };
-
-  const handlesetCommentFormOpen = () => {
-    setIsCommentFormOpen((prev) => !prev);
-  };
+  const handleReplyListOpen = () => setIsReplyListOpen((prev) => !prev);
+  const handlesetCommentFormOpen = () => setIsCommentFormOpen((prev) => !prev);
 
   return (
     <div className="flex flex-col mb-[22px]">
