@@ -48,7 +48,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
         />
         <input
           type="text"
-          className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
+          className="w-full ml-base pr-14 border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
           placeholder={!isEmptyUser ? "댓글 추가.." : "로그인이 필요합니다."}
           {...rest}
           ref={handleInput}
@@ -58,7 +58,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
         {isWriting && (
           <InputButton
             type="submit"
-            className="absolute top-0 right-1"
+            className="absolute top-1 right-1"
             onClick={handleSubmit(onValid)}
             disabled={isEmptyUser}
           >

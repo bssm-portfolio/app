@@ -101,7 +101,7 @@ export default function CommentView({
               <Avatar imageUrl={profileImageUrl} width={30} height={30} />
               <input
                 type="text"
-                className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
+                className="w-full pr-14 ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
                 placeholder={
                   !isEmptyUser ? "답글 추가.." : "로그인이 필요합니다."
                 }
@@ -111,7 +111,7 @@ export default function CommentView({
                 disabled={isEmptyUser}
               />
               <InputButton
-                className="absolute top-0 right-1"
+                className="absolute top-1 right-1"
                 onClick={handleSubmit(onValid, onInValid)}
                 disabled={isEmptyUser}
               >
