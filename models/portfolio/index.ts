@@ -96,10 +96,25 @@ const usePortfolio = (portfolioId?: number) => {
   return { data: data || fixture.portfolio };
 };
 
+const useRecommendPortfolio = () => {
+  const { data } = useQuery(["recommendPortfolio"], () =>
+    httpClient.portfolio
+      .search({
+        pagination: { size: 6, page: 0 },
+        filter: {
+          recommendStatus: "RECOMMEND",
+        },
+      })
+      .then((r) => r.data),
+  );
+  return { data };
+};
+
 export {
   usePortfolio,
   usePortfolioList,
   usePortfolioListById,
   useCommentList,
   useMyPortfolioList,
+  useRecommendPortfolio,
 };
