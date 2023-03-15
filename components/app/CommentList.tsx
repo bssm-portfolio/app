@@ -73,7 +73,9 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
 
       <div className="mt-2xlarge">
         {commentList.map((comment) => (
-          <CommentView comment={comment} key={comment.commentId} />
+          <div>
+            <CommentView comment={comment} key={comment.commentId} />
+          </div>
         ))}
       </div>
     </div>
