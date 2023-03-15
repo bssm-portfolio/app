@@ -93,7 +93,10 @@ export default function CommentView({
         </div>
 
         {isCommentFormOpen && (
-          <form className="flex mt-base relative">
+          <form
+            className="flex mt-base relative"
+            onSubmit={(event) => event.preventDefault()}
+          >
             <div className="w-full flex items-center mt-2.5">
               <Avatar imageUrl={profileImageUrl} width={30} height={30} />
               <input
