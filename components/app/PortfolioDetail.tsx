@@ -178,7 +178,7 @@ export default function Detail({
                   type="button"
                   onClick={handleRecommend}
                   className={classNames(
-                    "flex box-border items-center border border-black bg-white text-black px-[0.75rem] py-[0.75rem] rounded-full gap-[0.5rem]",
+                    "flex whitespace-nowrap items-center border border-black bg-white text-black px-[0.75rem] py-[0.75rem] rounded-full gap-[0.5rem]",
                     {
                       "!bg-blue !text-white !border-none":
                         recommendStatus === "RECOMMEND",
