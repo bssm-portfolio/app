@@ -80,7 +80,7 @@ module.exports = {
         "2xlarge": "2.25rem", // 36px
       },
       fontSize: {
-        sxx: [
+        "2xs": [
           "0.625rem",
           {
             lineHeight: "0.75rem",
