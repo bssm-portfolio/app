@@ -45,7 +45,7 @@ export default function CommentContent({
   };
 
   const handleDelete = async (commentId: number) => {
-    await httpClient.comment.delete({}, { commentId });
+    await httpClient.comment.delete({ data: { commentId } });
     setIsEdit(false);
     queryClient.invalidateQueries([KEY.COMMENT]);
   };
