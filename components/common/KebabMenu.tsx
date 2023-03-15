@@ -19,7 +19,7 @@ function Provider({ children, className = "" }: KebabProviderProps) {
     <div
       onClick={handleMenuClick}
       className={classNames(
-        "relative text-sm cursor-pointer select-none",
+        "relative text-sm cursor-pointer select-none bg-white",
         className,
       )}
     >
@@ -33,7 +33,7 @@ function Menu({ children, className = "" }: KebabMenuProps) {
   return (
     <ul
       className={classNames(
-        "absolute top-6 right-0 shadow-sm shadow-[#00000040]",
+        "absolute top-6 right-0 shadow-sm shadow-[#00000040]  z-50",
         className,
       )}
     >

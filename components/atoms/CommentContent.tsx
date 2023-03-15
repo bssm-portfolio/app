@@ -88,7 +88,7 @@ export default function CommentContent({
             <div className="relative">
               <input
                 type="text"
-                className="w-full border-b border-b-primary-border_gray mb-1 pb-3 pr-8 focus:outline-none"
+                className="w-full border-b pr-24 pb-3 border-b-primary-border_gray mb-1 focus:outline-none"
                 value={editContent}
                 onChange={(event) => setEditContent(event.target.value)}
               />
