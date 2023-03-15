@@ -2,6 +2,7 @@ import { getKoreanDate } from "@/utils/date";
 import type { Portfolio, RecommendStatus } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
+import classNames from "classnames";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
 import httpClient from "@/apis";
@@ -173,11 +174,20 @@ export default function Detail({
               <>
                 <Button
                   onClick={handleRecommend}
-                  className="flex items-center bg-blue px-[0.75rem] py-[0.75rem] rounded-full text-white gap-[0.5rem]"
+                  className={classNames(
+                    "flex items-center !bg-blue text-white px-[0.75rem] py-[0.75rem] rounded-full gap-[0.5rem]",
+                    {
+                      "!bg-white !text-black": recommendStatus !== "NONE",
+                    },
+                  )}
                 >
-                  <RecommendIcon size={24} fill="white" />
-                  프로젝트 추천 {recommendStatus === "NONE" ? "하기" : "해제"}
+                  <RecommendIcon
+                    size={24}
+                    fill={recommendStatus === "NONE" ? "white" : "black"}
+                  />
+                  프로젝트 추천
                 </Button>
+
                 <Kebab.Provider className="z-30">
                   <Kebab.Menu className="rounded">
                     <Kebab.Item

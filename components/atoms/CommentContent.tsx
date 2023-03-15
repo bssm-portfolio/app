@@ -76,9 +76,12 @@ export default function CommentContent({
               {comment.writer.name}
             </span>
             <span
-              className={classNames("ml-1 text-primary-dark_gray text-2xs", {
-                "!text-[0.5rem]": isReply,
-              })}
+              className={classNames(
+                "ml-1 break-all text-primary-dark_gray text-2xs",
+                {
+                  "!text-[0.5rem]": isReply,
+                },
+              )}
             >
               · {getTimeAgo(comment.createdDate)}
             </span>
@@ -109,13 +112,13 @@ export default function CommentContent({
               </div>
             </div>
           ) : (
-            <p
-              className={classNames("text-sm", {
+            <span
+              className={classNames("break-all text-sm", {
                 "!text-xs": isReply,
               })}
             >
               {comment.content}
-            </p>
+            </span>
           )}
         </div>
 
