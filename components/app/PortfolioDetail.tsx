@@ -2,13 +2,13 @@ import { getKoreanDate } from "@/utils/date";
 import type { Portfolio, RecommendStatus } from "@/types/portfolio.interface";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useRouter } from "next/router";
+import classNames from "classnames";
 import useOverlay from "@/hooks/useOverlay";
 import config from "@/config";
 import httpClient from "@/apis";
 import { useQueryClient } from "@tanstack/react-query";
 import KEY from "@/models/key";
 import useUser from "@/hooks/useUser";
-import classNames from "classnames";
 import Button from "../atoms/DetailButton";
 import MemberGroup from "../atoms/MemberGroup";
 import Description from "../portfolio/Description";
@@ -178,20 +178,20 @@ export default function Detail({
                   type="button"
                   onClick={handleRecommend}
                   className={classNames(
-                    "flex items-center p-[0.65rem] rounded-full text-black gap-[0.375rem] shadow text-[0.75rem]",
+                    "flex whitespace-nowrap items-center border border-black bg-white text-black px-[0.75rem] py-[0.75rem] rounded-full gap-[0.5rem]",
                     {
-                      "bg-primary-light_gray text-black border-black border-[0.5px]":
-                        recommendStatus === "NONE",
-                      "bg-blue text-white": recommendStatus === "RECOMMEND",
+                      "!bg-blue !text-white !border-none":
+                        recommendStatus === "RECOMMEND",
                     },
                   )}
                 >
                   <RecommendIcon
-                    size={18}
-                    fill={recommendStatus === "NONE" ? "black" : "white"}
+                    size={24}
+                    fill={recommendStatus === "RECOMMEND" ? "white" : "black"}
                   />
                   프로젝트 추천
                 </button>
+
                 <Kebab.Provider className="z-30">
                   <Kebab.Menu className="rounded">
                     <Kebab.Item

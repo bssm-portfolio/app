@@ -31,11 +31,11 @@ export default function MainFilter({
       label: "댓글순",
       value: "COMMENTS",
     },
-    {
-      id: "BOOKMARKS",
-      label: "추천순",
-      value: "BOOKMARKS",
-    },
+    // {
+    //   id: "BOOKMARKS",
+    //   label: "추천순",
+    //   value: "BOOKMARKS",
+    // },
     {
       id: "VIEWS",
       label: "조회수순",

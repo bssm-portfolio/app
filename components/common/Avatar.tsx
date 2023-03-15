@@ -4,32 +4,27 @@ import Image from "next/image";
 
 interface AvatarProps {
   imageUrl?: string;
-  width?: number;
-  height?: number;
   onClick?: () => void;
   className?: string;
-  sizes?: string;
+  width: number;
+  height: number;
 }
 
 export default function Avatar({
   imageUrl,
-  width = 50,
-  height = 50,
   onClick,
   className,
-  sizes,
+  width,
+  height,
 }: AvatarProps) {
   return (
     <Image
       onClick={onClick}
-      className={classNames(className, "rounded-full", {
-        "h-[40px]": height === 40,
-      })}
+      className={classNames(className, "rounded-full")}
       src={imageUrl || config.defaultProfile}
       alt="사용자"
       width={width}
       height={height}
-      sizes={sizes}
       priority
     />
   );

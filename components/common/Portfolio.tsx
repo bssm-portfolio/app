@@ -42,7 +42,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
       </div>
       <div className="mt-3 mb-[3.125rem]">
         <div className="flex justify-between">
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-start">
             <Avatar
               width={40}
               height={40}
@@ -82,9 +82,9 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
         </div>
       </div>
 
-      <div className="flex text-sxx mt-auto mb-0 gap-[0.625rem]">
+      <div className="flex text-2xs mt-auto mb-0 gap-[0.625rem]">
         {portfolio.recommendStatus === "RECOMMEND" && (
-          <div className="flex gap-[0.25rem] text-blue font-bold">
+          <div className="flex gap-[0.25rem] text-blue font-bold items-center">
             <RecommendIcon />
             [추천 프로젝트]
           </div>

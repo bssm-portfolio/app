@@ -102,17 +102,23 @@ export interface PortfolioList {
   pagination: PaginationResponse;
 }
 
+export interface CommentWriter {
+  memberId: number;
+  name: string;
+  profileImageUrl: string;
+  email: string;
+}
+
 export interface Comment {
-  writer: {
-    memberId: number;
-    name: string;
-    profileImageUrl: string;
-    email: string;
-  };
+  writer: CommentWriter;
   commentId: number;
   content: string;
   createdDate: Date;
   editable: boolean;
+  deletable: boolean;
+  bookmarks: number;
+  bookmarkYn: boolean;
+  replyList: Comment[];
 }
 
 export interface CommentList {
@@ -120,4 +126,8 @@ export interface CommentList {
 }
 export interface Description {
   children: string;
+}
+
+export interface CommentForm {
+  content: string;
 }
