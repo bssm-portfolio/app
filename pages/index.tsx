@@ -1,12 +1,10 @@
 import { MainLayout } from "@/layouts";
 import MainTitle from "@/components/main/MainTitle";
 import MainFilter from "@/components/main/MainFilter";
-import { usePortfolioList } from "@/models/portfolio";
+import { usePortfolioList, useRecommendPortfolio } from "@/models/portfolio";
 import { MainPortfolioList, Portfolio as PortfolioView } from "@/components";
 import { useState } from "react";
 import { Portfolio, SortType } from "@/types/portfolio.interface";
-import { useQuery } from "@tanstack/react-query";
-import httpClient from "@/apis";
 import { useRouter } from "next/router";
 import RecommendIcon from "@/components/Icon/RecommendIcon";
 
@@ -18,17 +16,7 @@ export default function Home() {
       { size: 12 },
       keyword !== "ALL" ? { sortType: keyword } : {},
     );
-
-  const { data } = useQuery(["recommendPortfolio"], () =>
-    httpClient.portfolio
-      .search({
-        pagination: { size: 6, page: 0 },
-        filter: {
-          recommendStatus: "RECOMMEND",
-        },
-      })
-      .then((r) => r.data),
-  );
+  const { data } = useRecommendPortfolio();
 
   return (
     <MainLayout

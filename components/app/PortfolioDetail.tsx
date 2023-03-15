@@ -9,6 +9,7 @@ import httpClient from "@/apis";
 import { useQueryClient } from "@tanstack/react-query";
 import KEY from "@/models/key";
 import useUser from "@/hooks/useUser";
+import classNames from "classnames";
 import Button from "../atoms/DetailButton";
 import MemberGroup from "../atoms/MemberGroup";
 import Description from "../portfolio/Description";
@@ -90,7 +91,9 @@ export default function Detail({
   const handleDelete = () => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm("정말로 삭제하시겠습니까?")) {
-      httpClient.portfolio.delete({}, { portfolioId: portfolio.portfolioId });
+      httpClient.portfolio.delete({
+        data: { portfolioId: portfolio.portfolioId },
+      });
       router.push("/");
     }
   };
@@ -172,7 +175,8 @@ export default function Detail({
 
             {userInfo.memberRoleType === "ROLE_ADMIN" && (
               <>
-                <Button
+                <button
+                  type="button"
                   onClick={handleRecommend}
                   className={classNames(
                     "flex items-center !bg-blue text-white px-[0.75rem] py-[0.75rem] rounded-full gap-[0.5rem]",
@@ -195,7 +199,7 @@ export default function Detail({
                       onClick={handleDelete}
                     >
                       <TrashCanIcon className="w-3 h-3 mr-3" />
-                      <span>삭제</span>
+                      <span>관리자 권한으로 삭제</span>
                     </Kebab.Item>
                   </Kebab.Menu>
                 </Kebab.Provider>
