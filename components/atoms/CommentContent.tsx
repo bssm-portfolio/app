@@ -5,7 +5,7 @@ import { Comment } from "@/types/portfolio.interface";
 import { getTimeAgo } from "@/utils/date";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Avatar from "../common/Avatar";
 import InputButton from "./InputButton";
 import Kebab from "../common/KebabMenu";
@@ -25,7 +25,7 @@ export default function CommentContent({
   const queryClient = useQueryClient();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editContent, setEditContent] = useState(comment.content);
-  const [originalContent] = useState<string>(comment.content);
+  const originalContent = useRef<string>(comment.content);
 
   const moveToProfile = () =>
     router.push(`/profile/${comment.writer.memberId}`);
@@ -40,7 +40,7 @@ export default function CommentContent({
   };
 
   const handleEditCancel = () => {
-    setEditContent(originalContent);
+    setEditContent(originalContent.current);
     setIsEdit(false);
   };
 
