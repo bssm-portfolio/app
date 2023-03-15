@@ -119,16 +119,18 @@ export default function CommentContent({
           )}
         </div>
 
-        {comment.editable && !isEdit && (
+        {comment.deletable && !isEdit && (
           <Kebab.Provider className="z-10">
             <Kebab.Menu className="rounded">
-              <Kebab.Item
-                className="pb-[0.3125rem] rounded-t"
-                onClick={() => setIsEdit(true)}
-              >
-                <EditIcon className="w-3 h-3 mr-3" />
-                <span>수정</span>
-              </Kebab.Item>
+              {comment.editable && (
+                <Kebab.Item
+                  className="pb-[0.3125rem] rounded-t"
+                  onClick={() => setIsEdit(true)}
+                >
+                  <EditIcon className="w-3 h-3 mr-3" />
+                  <span>수정</span>
+                </Kebab.Item>
+              )}
               <Kebab.Item
                 className="pt-[0.3125rem] rounded-b"
                 onClick={() => handleDelete(comment.commentId)}
