@@ -89,7 +89,9 @@ export default function Detail({
   const handleDelete = () => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm("정말로 삭제하시겠습니까?")) {
-      httpClient.portfolio.delete({}, { portfolioId: portfolio.portfolioId });
+      httpClient.portfolio.delete({
+        data: { portfolioId: portfolio.portfolioId },
+      });
       router.push("/");
     }
   };
