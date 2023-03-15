@@ -62,17 +62,25 @@ export default function CommentContent({
         height={40}
       />
       <div className="w-full flex justify-between items-center">
-        <div>
+        <div className="w-full">
           <div className="flex items-center">
             <span
-              className="font-bold text-small mr-xsmall cursor-pointer"
+              className={classNames(
+                "font-bold text-[12px] mr-xsmall cursor-pointer",
+                {
+                  "!text-[10px]": isReply,
+                },
+              )}
               onClick={moveToProfile}
             >
               {comment.writer.name}
             </span>
-            <span>·</span>
-            <span className="ml-1 text-primary-dark_gray text-xsmall">
-              {getTimeAgo(comment.createdDate)}
+            <span
+              className={classNames("ml-1 text-primary-dark_gray text-[10px]", {
+                "!text-[8px]": isReply,
+              })}
+            >
+              · {getTimeAgo(comment.createdDate)}
             </span>
           </div>
 
@@ -101,7 +109,13 @@ export default function CommentContent({
               </div>
             </div>
           ) : (
-            <p className="text-middle">{comment.content}</p>
+            <p
+              className={classNames("text-[14px]", {
+                "!text-[12px]": isReply,
+              })}
+            >
+              {comment.content}
+            </p>
           )}
         </div>
 

@@ -50,6 +50,11 @@ export default function CommentView({ comment }: CommentViewProps) {
           <InputButton className="font-normal">답글</InputButton>
         </div>
 
+        <input
+          type="text"
+          className="w-full border-b border-b-primary-border_gray mb-1 pb-3 pr-8 focus:outline-none"
+        />
+
         {!!comment.replyList.length && (
           <div
             className="select-none flex items-center cursor-pointer mt-2.5"
