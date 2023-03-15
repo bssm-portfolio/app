@@ -1,10 +1,13 @@
 import httpClient from "@/apis";
 import useOverlay from "@/hooks/useOverlay";
 import KEY from "@/models/key";
-import { Comment } from "@/types/portfolio.interface";
+import { Comment, CommentForm } from "@/types/portfolio.interface";
+import { getErrorProperty } from "@/utils/input";
 import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useState } from "react";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import Avatar from "../common/Avatar";
 import { DownIcon, EmptyHeartIcon } from "../Icon";
 import FilledHeartIcon from "../Icon/FilledHeartIcon";
 import CommentContent from "./CommentContent";
@@ -12,11 +15,20 @@ import InputButton from "./InputButton";
 
 interface CommentViewProps {
   comment: Comment;
+  profileImageUrl: string;
+  isEmptyUser: boolean;
+  portfolioId: number;
 }
 
-export default function CommentView({ comment }: CommentViewProps) {
+export default function CommentView({
+  comment,
+  profileImageUrl,
+  isEmptyUser,
+  portfolioId,
+}: CommentViewProps) {
   const queryClient = useQueryClient();
   const { openToast } = useOverlay();
+  const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [isReplyListOpen, setIsReplyListOpen] = useState<boolean>(false);
 
   const handleLike = () => {
@@ -26,6 +38,25 @@ export default function CommentView({ comment }: CommentViewProps) {
       .catch((error) =>
         openToast(error.response.data.message, { type: "danger" }),
       );
+  };
+
+  const onValid: SubmitHandler<CommentForm> = async (submitData) => {
+    await httpClient.comment.post({
+      portfolioId,
+      parentId: comment.commentId,
+      ...submitData,
+    });
+    reset();
+    queryClient.invalidateQueries([KEY.COMMENT]);
+  };
+
+  const onInValid: SubmitErrorHandler<CommentForm> = (inValidData) => {
+    openToast(
+      `${getErrorProperty<CommentForm>(inValidData)}을(를) 확인해주세요.`,
+      {
+        type: "danger",
+      },
+    );
   };
 
   const handleReplyListOpen = () => {
@@ -50,10 +81,29 @@ export default function CommentView({ comment }: CommentViewProps) {
           <InputButton className="font-normal">답글</InputButton>
         </div>
 
-        <input
-          type="text"
-          className="w-full border-b border-b-primary-border_gray mb-1 pb-3 pr-8 focus:outline-none"
-        />
+        <form className="flex mt-base relative">
+          <div className="w-full flex items-center mt-2.5">
+            <Avatar imageUrl={profileImageUrl} width={30} height={30} />
+            <input
+              type="text"
+              className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
+              placeholder={
+                !isEmptyUser ? "댓글 추가.." : "로그인이 필요합니다."
+              }
+              {...register("content", {
+                required: "답글 내용은 필수 항목입니다.",
+              })}
+              disabled={isEmptyUser}
+            />
+            <InputButton
+              className="absolute top-0 right-1"
+              onClick={handleSubmit(onValid, onInValid)}
+              disabled={isEmptyUser}
+            >
+              입력
+            </InputButton>
+          </div>
+        </form>
 
         {!!comment.replyList.length && (
           <div

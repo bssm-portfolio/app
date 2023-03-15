@@ -5,13 +5,10 @@ import { useRef, useState } from "react";
 import { checkInputValueIsNull } from "@/utils/input";
 import httpClient from "@/apis";
 import useUser from "@/hooks/useUser";
+import { CommentForm } from "@/types/portfolio.interface";
 import config from "@/config";
 import InputButton from "../atoms/InputButton";
 import CommentView from "../atoms/Comment";
-
-interface CommentForm {
-  content: string;
-}
 
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -19,15 +16,16 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const { list: commentList, refetch } = useCommentList(portfolioId);
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [isWriting, setIsWriting] = useState(false);
+  const isEmptyUser = userInfo.memberId === 0;
 
   const { ref, ...rest } = register("content", {
     required: "댓글 내용은 필수 항목입니다.",
   });
-  const isEmptyUser = userInfo.memberId === 0;
 
   const onValid: SubmitHandler<CommentForm> = async (submitData) => {
     await httpClient.comment.post({
       portfolioId,
+      parentId: null,
       ...submitData,
     });
     reset();
@@ -47,7 +45,6 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
           alt="프로필"
           width={40}
           height={40}
-          sizes="2.5rem"
           className="rounded-full"
         />
         <input
@@ -73,7 +70,13 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
 
       <div className="mt-2xlarge">
         {commentList.map((comment) => (
-          <CommentView comment={comment} key={comment.commentId} />
+          <CommentView
+            comment={comment}
+            profileImageUrl={userInfo.profileImageUrl || config.defaultProfile}
+            isEmptyUser={isEmptyUser}
+            portfolioId={Number(portfolioId)}
+            key={comment.commentId}
+          />
         ))}
       </div>
     </div>

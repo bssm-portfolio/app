@@ -127,3 +127,7 @@ export interface CommentList {
 export interface Description {
   children: string;
 }
+
+export interface CommentForm {
+  content: string;
+}
