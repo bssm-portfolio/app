@@ -30,6 +30,7 @@ export default function CommentView({
   const { openToast } = useOverlay();
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [isReplyListOpen, setIsReplyListOpen] = useState<boolean>(false);
+  const [isCommentFormOpen, setIsCommentFormOpen] = useState<boolean>(false);
 
   const handleLike = () => {
     httpClient.comment
@@ -63,6 +64,10 @@ export default function CommentView({
     setIsReplyListOpen((prev) => !prev);
   };
 
+  const handlesetCommentFormOpen = () => {
+    setIsCommentFormOpen((prev) => !prev);
+  };
+
   return (
     <div className="flex flex-col mb-[22px]">
       <CommentContent comment={comment} />
@@ -78,32 +83,39 @@ export default function CommentView({
             {comment.bookmarks}
           </InputButton>
 
-          <InputButton className="font-normal">답글</InputButton>
+          <InputButton
+            className="font-normal"
+            onClick={handlesetCommentFormOpen}
+          >
+            답글
+          </InputButton>
         </div>
 
-        <form className="flex mt-base relative">
-          <div className="w-full flex items-center mt-2.5">
-            <Avatar imageUrl={profileImageUrl} width={30} height={30} />
-            <input
-              type="text"
-              className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
-              placeholder={
-                !isEmptyUser ? "댓글 추가.." : "로그인이 필요합니다."
-              }
-              {...register("content", {
-                required: "답글 내용은 필수 항목입니다.",
-              })}
-              disabled={isEmptyUser}
-            />
-            <InputButton
-              className="absolute top-0 right-1"
-              onClick={handleSubmit(onValid, onInValid)}
-              disabled={isEmptyUser}
-            >
-              입력
-            </InputButton>
-          </div>
-        </form>
+        {isCommentFormOpen && (
+          <form className="flex mt-base relative">
+            <div className="w-full flex items-center mt-2.5">
+              <Avatar imageUrl={profileImageUrl} width={30} height={30} />
+              <input
+                type="text"
+                className="w-full ml-base border-b-[0.0625rem] border-b-border-gray outline-none disabled:bg-white disabled:cursor-not-allowed"
+                placeholder={
+                  !isEmptyUser ? "댓글 추가.." : "로그인이 필요합니다."
+                }
+                {...register("content", {
+                  required: "답글 내용은 필수 항목입니다.",
+                })}
+                disabled={isEmptyUser}
+              />
+              <InputButton
+                className="absolute top-0 right-1"
+                onClick={handleSubmit(onValid, onInValid)}
+                disabled={isEmptyUser}
+              >
+                입력
+              </InputButton>
+            </div>
+          </form>
+        )}
 
         {!!comment.replyList.length && (
           <div
