@@ -101,7 +101,7 @@ export default function Detail({
     <div className="mt-small bg-white p-4 rounded">
       <div className="w-full h-full flex justify-between flex-col sm:flex-row">
         <div>
-          <h2 className="flex gap-1 font-bold text-large mr-2 items-center">
+          <h2 className="flex gap-1 items-start font-bold text-large mr-2">
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
             <span className="break-all">{portfolio.title}</span>
             {portfolio.gitUrl && (
