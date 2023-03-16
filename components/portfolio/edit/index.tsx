@@ -43,7 +43,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     const getPortfolioType = (): PortfolioType => {
-      if (data.portfolioUrl.length > 0 && videoFileUid) {
+      if (data.portfolioUrl.length > 0 && (videoFileUid || editVideoFile)) {
         return "ALL";
       }
       if (videoFileUid) {
