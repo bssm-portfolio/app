@@ -19,9 +19,9 @@ export const getFileUidByFileUpload = async (
 ) => {
   return httpClient.file
     .upload(getFormData(file))
-    .then(({ data }) => {
+    .then((r) => {
       openToast("파일 업로드에 성공하였습니다.");
-      return data.fileUid;
+      return r.data.fileUid;
     })
     .catch(() =>
       openToast("파일 업로드에 실패하였습니다.", { type: "danger" }),
