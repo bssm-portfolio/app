@@ -53,7 +53,7 @@ export default function PortfolioItem({
         })}
       >
         <Image
-          className="rounded-[0.625rem]"
+          className="rounded-[0.625rem] object-cover"
           src={imageSrc}
           alt={portfolio.title}
           sizes="15rem"
