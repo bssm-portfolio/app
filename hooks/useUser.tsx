@@ -1,4 +1,5 @@
 import httpClient, { HttpClient } from "@/apis/httpClient";
+import KEY from "@/models/key";
 import { Storage } from "@/models/storage";
 import { emptyUser, userState } from "@/store";
 import { Member } from "@/types/member.interface";
@@ -18,9 +19,9 @@ const useUser = (options?: UseUserOptions) => {
   const {
     data: userInfo,
     remove,
-    isFetching,
+    isLoading,
   } = useQuery<Member>(
-    ["get userData"],
+    [KEY.USER],
     async () => {
       HttpClient.setAccessToken();
       return httpClient.member.self().then((r) => r.data);
@@ -39,7 +40,7 @@ const useUser = (options?: UseUserOptions) => {
   }, [router.query, setUser, userInfo]);
 
   useEffect(() => {
-    if (options?.authorizedPage && !isFetching && !userInfo && !visible) {
+    if (options?.authorizedPage && !isLoading && !userInfo && !visible) {
       openModal({
         title: "로그인",
         content: (
@@ -52,7 +53,7 @@ const useUser = (options?: UseUserOptions) => {
         },
       });
     }
-  }, [options, userInfo, isFetching, router, visible, openModal]);
+  }, [options, userInfo, isLoading, router, visible, openModal]);
 
   useEffect(() => {
     if (
