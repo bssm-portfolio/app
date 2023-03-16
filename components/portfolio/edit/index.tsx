@@ -56,7 +56,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       if (editVideoFile)
         return getFileUidByFileUpload(editVideoFile, openToast);
       if (videoFileUid && !editVideoFile) return videoFileUid;
-      return undefined;
+      return "299ae74e-dbda-4def-a3b0-0939aadd997c.mp4";
     };
 
     const getThumbnailFileUid = () => {
@@ -72,8 +72,20 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         portfolioType: getPortfolioType(),
         skillList: selectedSkills,
         contributorIdList: selectedMembers.map((member) => member.memberId),
-        videoFileUid: await getVideoFileUid(),
-        thumbnailFileUid: await getThumbnailFileUid(),
+        videoFileUid: (await getVideoFileUid()) || undefined,
+        thumbnailFileUid: (await getThumbnailFileUid()) || "ㅇㅇㅇ",
+        video: undefined,
+        thumbnail: undefined,
+        writer: undefined,
+        scope: undefined,
+        contributorList: undefined,
+        bookmarks: undefined,
+        bookmarkYn: undefined,
+        followYn: undefined,
+        views: undefined,
+        comments: undefined,
+        recommendStatus: undefined,
+        createdDate: undefined,
       })
       .then(() => {
         openToast("수정이 완료되었습니다.");
