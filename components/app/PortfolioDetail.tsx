@@ -210,7 +210,9 @@ export default function Detail({
           </div>
           {portfolio.contributorList.length > 0 && (
             <div className="mb-large flex justify-end">
-              <MemberGroup writers={[userInfo, ...portfolio.contributorList]} />
+              <MemberGroup
+                writers={[portfolio.writer, ...portfolio.contributorList]}
+              />
             </div>
           )}
         </div>
