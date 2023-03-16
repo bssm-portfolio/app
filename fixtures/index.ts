@@ -21,6 +21,10 @@ const comment: Comment = {
   content: "댓글 내용입니다.",
   createdDate: new Date("2022-12-01"),
   editable: false,
+  deletable: false,
+  bookmarks: 0,
+  bookmarkYn: false,
+  replyList: [],
 };
 
 const portfolio: Portfolio = {
