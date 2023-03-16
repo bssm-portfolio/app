@@ -7,6 +7,7 @@ const KEY = {
   SKILL: "useSkill",
   COMMENT: "useCommentList",
   MEMBER: "useMember",
+  USER: "useUser",
 };
 
 export default KEY;
