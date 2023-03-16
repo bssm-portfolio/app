@@ -103,18 +103,20 @@ export default function Detail({
         <div>
           <h2 className="flex gap-1 items-start font-bold text-large mr-2">
             <span className="text-blue">({portfolio.portfolioTheme}) </span>
-            <span className="break-all">{portfolio.title}</span>
-            {portfolio.gitUrl && (
-              <a
-                href={portfolio.gitUrl}
-                className="flex items-center bg-primary-light_gray rounded-full px-[0.5rem] py-[0.1rem] gap-[0.125rem] h-[1.5rem]"
-              >
-                <GithubIcon width={14} height={14} />
-                <span className="text-primary-dark_gray text-[0.625rem] font-normal">
-                  GitHub
-                </span>
-              </a>
-            )}
+            <div className="flex items-center gap-1">
+              <span className="break-all">{portfolio.title}</span>
+              {portfolio.gitUrl && (
+                <a
+                  href={portfolio.gitUrl}
+                  className="flex items-center bg-primary-light_gray rounded-full px-[0.5rem] py-[0.1rem] gap-[0.125rem] h-[1.5rem]"
+                >
+                  <GithubIcon width={14} height={14} />
+                  <span className="text-primary-dark_gray text-[0.625rem] font-normal">
+                    GitHub
+                  </span>
+                </a>
+              )}
+            </div>
           </h2>
           <span
             onClick={() => router.push(`/profile/${portfolio.writer.memberId}`)}
