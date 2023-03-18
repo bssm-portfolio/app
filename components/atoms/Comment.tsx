@@ -136,7 +136,7 @@ export default function CommentView({
         )}
         {isReplyListOpen &&
           comment.replyList.map((reply) => (
-            <CommentContent comment={reply} isReply />
+            <CommentContent comment={reply} isReply key={reply.commentId} />
           ))}
       </div>
     </div>
