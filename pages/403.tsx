@@ -1,7 +1,7 @@
 import Button from "@/components/atoms/Button";
 import { useRouter } from "next/router";
 
-export default function Page500() {
+export default function Page403() {
   const router = useRouter();
   return (
     <div className="min-h-[calc(100vh-4.625rem)] flex flex-col items-center">
