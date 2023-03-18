@@ -115,10 +115,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   } catch {
     return {
-      redirect: {
-        permanent: true,
-        destination: "/403",
-      },
       props: {},
     };
   }
