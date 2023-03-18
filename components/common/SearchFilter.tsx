@@ -27,6 +27,9 @@ const enum PropertyEnum {
 
 export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
   const [isOpen, toggleOpen] = useReducer((state) => !state, false);
+  const [uploadDatePropertyId, setUploadDatePropertyId] = useState("");
+  const [gradePropertyId, setGradePropertyId] = useState("");
+  const [sortTypePropertyId, setSortTypePropertyId] = useState("");
 
   const datePropertyList = [
     {
@@ -78,9 +81,6 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
     },
   ];
 
-  const [selectedSortTypePropertyId, setSelectedSortTypePropertyId] =
-    useState("");
-
   return (
     <div className="flex flex-col mb-small cursor-pointer text-white">
       <div className="flex items-center select-none" onClick={toggleOpen}>
@@ -117,8 +117,8 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
                 value={value}
                 filter={filter}
                 setFilter={setFilter}
-                checkedId={selectedSortTypePropertyId}
-                setCheckedId={setSelectedSortTypePropertyId}
+                checkBoxPropertyId={uploadDatePropertyId}
+                setCheckBoxPropertyId={setUploadDatePropertyId}
               />
             ))}
           </div>
@@ -134,8 +134,8 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
                 value={value}
                 filter={filter}
                 setFilter={setFilter}
-                checkedId={selectedSortTypePropertyId}
-                setCheckedId={setSelectedSortTypePropertyId}
+                checkBoxPropertyId={gradePropertyId}
+                setCheckBoxPropertyId={setGradePropertyId}
               />
             ))}
           </div>
@@ -151,8 +151,8 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
                 value={value}
                 filter={filter}
                 setFilter={setFilter}
-                checkedId={selectedSortTypePropertyId}
-                setCheckedId={setSelectedSortTypePropertyId}
+                checkBoxPropertyId={sortTypePropertyId}
+                setCheckBoxPropertyId={setSortTypePropertyId}
               />
             ))}
           </div>
