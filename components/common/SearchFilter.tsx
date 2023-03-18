@@ -64,7 +64,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
     {
       id: PropertyEnum.SORT_ALL,
       label: "전체",
-      value: PropertyEnum.SORT_ALL,
+      value: undefined,
     },
     {
       id: PropertyEnum.SORT_UPLOAD_DATE,
@@ -78,8 +78,6 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
     },
   ];
 
-  const [selectedDatePropertyId, setSelectedDatePropertyId] = useState("");
-  const [selectedGradePropertyId, setSelectedGradePropertyId] = useState("");
   const [selectedSortTypePropertyId, setSelectedSortTypePropertyId] =
     useState("");
 
@@ -112,17 +110,15 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {datePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                {...{
-                  name: "uploadDateType",
-                  key: id,
-                  id,
-                  label,
-                  value,
-                  filter,
-                  setFilter,
-                  checkedId: selectedDatePropertyId,
-                  setCheckedId: setSelectedDatePropertyId,
-                }}
+                name="uploadDateType"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkedId={selectedSortTypePropertyId}
+                setCheckedId={setSelectedSortTypePropertyId}
               />
             ))}
           </div>
@@ -131,17 +127,15 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {gradePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                {...{
-                  name: "schoolGrade",
-                  key: id,
-                  id,
-                  label,
-                  value,
-                  filter,
-                  setFilter,
-                  checkedId: selectedGradePropertyId,
-                  setCheckedId: setSelectedGradePropertyId,
-                }}
+                name="schoolGrade"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkedId={selectedSortTypePropertyId}
+                setCheckedId={setSelectedSortTypePropertyId}
               />
             ))}
           </div>
@@ -150,17 +144,15 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {sortTypePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                {...{
-                  name: "sortType",
-                  key: id,
-                  id,
-                  label,
-                  value,
-                  filter,
-                  setFilter,
-                  checkedId: selectedSortTypePropertyId,
-                  setCheckedId: setSelectedSortTypePropertyId,
-                }}
+                name="sortType"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkedId={selectedSortTypePropertyId}
+                setCheckedId={setSelectedSortTypePropertyId}
               />
             ))}
           </div>
