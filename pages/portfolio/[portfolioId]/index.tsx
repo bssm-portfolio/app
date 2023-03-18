@@ -116,7 +116,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     })
     .then((r) => ({ is403: false, data: deepcopy(r.data) }))
     .catch(() => ({ is403: true, data: {} }));
-
   return {
     props: {
       portfolio,
