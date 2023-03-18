@@ -114,7 +114,7 @@ export default function CommentView({
           width={40}
           height={40}
         />
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-start">
           <div className="w-full">
             <div className="flex items-center">
               <span
