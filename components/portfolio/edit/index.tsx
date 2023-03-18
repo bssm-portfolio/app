@@ -69,20 +69,8 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         portfolioType: getPortfolioType(),
         skillList: selectedSkills,
         contributorIdList: selectedMembers.map((member) => member.memberId),
-        videoFileUid: (await getVideoFileUid()) || undefined,
-        thumbnailFileUid: (await getThumbnailFileUid()) || "ㅇㅇㅇ",
-        video: undefined,
-        thumbnail: undefined,
-        writer: undefined,
-        scope: undefined,
-        contributorList: undefined,
-        bookmarks: undefined,
-        bookmarkYn: undefined,
-        followYn: undefined,
-        views: undefined,
-        comments: undefined,
-        recommendStatus: undefined,
-        createdDate: undefined,
+        videoFileUid: await getVideoFileUid(),
+        thumbnailFileUid: await getThumbnailFileUid(),
       })
       .then(() => {
         openToast("수정이 완료되었습니다.");
