@@ -8,7 +8,10 @@ import { useEffect, useState } from "react";
 
 export default function SearchPage() {
   const router = useRouter();
-  const [filter, setFilter] = useState<Filter>({ searchType: "TITLE" });
+  const [filter, setFilter] = useState<Filter>({
+    search: "",
+    searchType: "TITLE",
+  });
 
   useEffect(() => {
     setFilter((prev) => ({
