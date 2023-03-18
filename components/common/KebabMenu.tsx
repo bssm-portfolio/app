@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { HTMLProps, ReactNode, useState } from "react";
+import { HTMLProps, ReactNode, useEffect, useRef, useState } from "react";
 import KebabIcon from "../Icon/KebabIcon";
 
 interface KebabProps {
@@ -13,11 +13,24 @@ interface KebabItemProps extends HTMLProps<HTMLLIElement>, KebabProps {}
 
 function Provider({ children, className = "" }: KebabProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const handleMenuClick = () => setIsOpen((prev) => !prev);
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      const target = event.target as Node;
+      if (divRef.current && !divRef.current.contains(target)) setIsOpen(false);
+    };
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [divRef]);
 
   return (
     <div
-      onClick={handleMenuClick}
+      ref={divRef}
+      onClick={() => setIsOpen((prev) => !prev)}
       className={classNames(
         "relative text-sm cursor-pointer select-none",
         className,
