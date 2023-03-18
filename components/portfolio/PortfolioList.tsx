@@ -7,25 +7,18 @@ import PortfolioItem from "../app/PortfolioItem";
 import Loading from "../common/Loading";
 
 interface PortfolioListProps {
-  keyword?: string;
   type?: PortfolioListType;
   filter?: Filter;
 }
 
 export default function PortfolioList({
-  keyword = "",
   type = "main",
   filter,
 }: PortfolioListProps) {
   const router = useRouter();
 
-  const filterSortType = () => {
-    if (filter?.sortType && filter.sortType === "ALL") delete filter.sortType;
-    return filter;
-  };
-
   const { pages, fetchNextPage, customHasNextPage, isFetchingNextPage } =
-    usePortfolioList({ size: 12 }, { search: keyword, ...filterSortType() });
+    usePortfolioList({ size: 12 }, filter);
 
   const { ref, inView } = useInView();
 

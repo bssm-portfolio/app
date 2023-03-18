@@ -7,7 +7,7 @@ interface RadioProps {
   id: string;
   label: string;
   name: SearchFilterPropertyType;
-  value: string;
+  value?: string;
   checkedId: string;
   setCheckedId: Dispatch<SetStateAction<string>>;
   filter: Filter;
