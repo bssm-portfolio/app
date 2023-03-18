@@ -24,12 +24,12 @@ export default function SearchPage() {
   };
 
   return (
-    <div>
+    <>
       <NextSeo {...seoConfig} />
       <SearchPageLayout
         filter={<SearchFilter filter={filter} setFilter={setFilter} />}
         portfolioList={<PortfolioList type="search" filter={filter} />}
       />
-    </div>
+    </>
   );
 }
