@@ -1,6 +1,10 @@
 import classNames from "classnames";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { Filter, SearchFilterPropertyType } from "@/types/portfolio.interface";
+import {
+  CheckBoxProperty,
+  Filter,
+  SearchFilterPropertyType,
+} from "@/types/portfolio.interface";
 import { XIcon } from "../Icon";
 
 interface RadioProps {
@@ -8,10 +12,10 @@ interface RadioProps {
   label: string;
   name: SearchFilterPropertyType;
   value?: string;
-  checkedId: string;
-  setCheckedId: Dispatch<SetStateAction<string>>;
   filter: Filter;
   setFilter: Dispatch<SetStateAction<Filter>>;
+  checkBoxPropertyId: string;
+  setCheckBoxPropertyId: Dispatch<SetStateAction<string>>;
 }
 
 export default function CheckBoxText({
@@ -19,20 +23,20 @@ export default function CheckBoxText({
   label,
   name,
   value,
-  checkedId,
-  setCheckedId,
   filter,
   setFilter,
+  checkBoxPropertyId,
+  setCheckBoxPropertyId,
   ...props
 }: RadioProps) {
-  const isChecked = checkedId === id;
+  const isChecked = checkBoxPropertyId === id;
   const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (checkedId === id) {
-      setCheckedId("");
+    if (checkBoxPropertyId === id) {
+      setCheckBoxPropertyId("");
       setFilter((prev) => ({ ...prev, [name]: undefined }));
       return;
     }
-    setCheckedId(id);
+    setCheckBoxPropertyId(id);
     setFilter((prev) => ({ ...prev, [name]: event.target.value }));
   };
 

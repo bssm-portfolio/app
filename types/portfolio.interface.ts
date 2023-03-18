@@ -142,3 +142,16 @@ export interface Description {
 export interface CommentForm {
   content: string;
 }
+
+export type CheckBoxPropertyType = {
+  id?: string;
+  value: string;
+  label: string;
+};
+
+export interface CheckBoxProperty {
+  uploadDateType: CheckBoxPropertyType;
+  schoolGrade: CheckBoxPropertyType;
+  sortType: CheckBoxPropertyType;
+  sortDirectionType: CheckBoxPropertyType;
+}
