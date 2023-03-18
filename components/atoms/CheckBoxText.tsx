@@ -1,10 +1,6 @@
 import classNames from "classnames";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import {
-  CheckBoxProperty,
-  Filter,
-  SearchFilterPropertyType,
-} from "@/types/portfolio.interface";
+import { Filter, SearchFilterPropertyType } from "@/types/portfolio.interface";
 import { XIcon } from "../Icon";
 
 interface RadioProps {
@@ -37,7 +33,11 @@ export default function CheckBoxText({
       return;
     }
     setCheckBoxPropertyId(id);
-    setFilter((prev) => ({ ...prev, [name]: event.target.value }));
+    setFilter((prev) => {
+      if (name === "sortType" && event.target.value === "ALL")
+        return { ...prev, [name]: undefined };
+      return { ...prev, [name]: event.target.value };
+    });
   };
 
   return (

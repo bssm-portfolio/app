@@ -67,7 +67,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
     {
       id: PropertyEnum.SORT_ALL,
       label: "전체",
-      value: undefined,
+      value: PropertyEnum.SORT_ALL,
     },
     {
       id: PropertyEnum.SORT_UPLOAD_DATE,
