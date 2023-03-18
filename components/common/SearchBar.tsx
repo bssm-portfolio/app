@@ -16,10 +16,6 @@ const searchOptions: SearchOptions[] = [
     value: "TITLE",
   },
   {
-    label: "테마",
-    value: "THEME",
-  },
-  {
     label: "기여자",
     value: "CONTRIBUTOR",
   },
