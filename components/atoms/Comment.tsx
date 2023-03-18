@@ -241,7 +241,6 @@ export default function CommentView({
               )}
 
               {isReplyListOpen &&
-                !isReply &&
                 comment.replyList.map((reply) => (
                   <CommentView
                     comment={reply}
