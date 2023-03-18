@@ -82,15 +82,26 @@ export type SortType =
   | "VIEWS"
   | "ALL";
 export type SortDirectionType = "ASC" | "DESC";
-export type SchoolGradeType = 1 | 2 | 3;
+export type SchoolGradeType = 0 | 1 | 2 | 3;
+export type PortfolioThemeType = "WEB" | "APP" | "EMBEDDED" | "ROBOT";
+export type SearchType =
+  | "TITLE"
+  | "THEME"
+  | "CREATOR"
+  | "CONTRIBUTOR"
+  | "CREATOR_AND_CONTRIBUTOR ";
+
 export interface Filter {
   search?: string;
+  searchType?: SearchType;
   uploadDateType?: UploadDateType;
   schoolGrade?: SchoolGradeType;
+  portfolioThemeType?: PortfolioThemeType;
   sortType?: SortType;
   sortDirectionType?: SortDirectionType;
   recommendStatus?: RecommendStatus;
 }
+
 export type SearchFilterPropertyType =
   | "uploadDateType"
   | "schoolGrade"
