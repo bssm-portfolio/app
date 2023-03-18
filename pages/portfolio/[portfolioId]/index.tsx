@@ -20,19 +20,24 @@ import Page403 from "@/pages/403";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
+  portfolioId: number;
   is403: boolean;
 }
 
 export default function PortfolioIdPage({
   portfolio,
+  portfolioId,
   is403,
 }: PortfolioIdPageProps) {
-  const dateParsedPortfolio: Portfolio = getDateParsedData(portfolio);
+  const { data: csrPortfolio } = usePortfolio(portfolioId);
+  const { user: userInfo, isLogined } = useUser();
+  const isMyPortfolio =
+    userInfo.memberId === csrPortfolio.writer.memberId && isLogined;
+
+  const dateParsedPortfolio: Portfolio = getDateParsedData(
+    !isMyPortfolio ? portfolio : csrPortfolio,
+  );
   const type = dateParsedPortfolio.portfolioType;
-  const {
-    data: { bookmarkYn, followYn, bookmarks, views, recommendStatus },
-  } = usePortfolio(dateParsedPortfolio.portfolioId);
-  const { user: userInfo } = useUser();
 
   useEffect(() => {
     if (typeof window !== "undefined" && !is403) {
@@ -40,12 +45,9 @@ export default function PortfolioIdPage({
     }
   }, [portfolio.portfolioId, is403]);
 
-  if (is403) {
+  if (is403 && !isMyPortfolio) {
     return <Page403 />;
   }
-
-  const isMyPortfolio =
-    userInfo.memberId === dateParsedPortfolio.writer.memberId;
 
   const seoConfig: NextSeoProps = {
     title: dateParsedPortfolio.title,
@@ -86,12 +88,12 @@ export default function PortfolioIdPage({
         detail={
           <AppDetail
             portfolio={dateParsedPortfolio}
-            bookmarkYn={bookmarkYn}
-            followYn={followYn}
-            bookmarks={bookmarks}
-            views={views}
+            bookmarkYn={csrPortfolio.bookmarkYn}
+            followYn={csrPortfolio.followYn}
+            bookmarks={csrPortfolio.bookmarks}
+            views={csrPortfolio.views}
             isMyPortfolio={isMyPortfolio}
-            recommendStatus={recommendStatus}
+            recommendStatus={csrPortfolio.recommendStatus}
           />
         }
         comment={
@@ -110,15 +112,18 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  const portfolioId = context.params ? context.params.portfolioId : 0;
   const { data: portfolio, is403 } = await httpClient.portfolio
     .getById({
-      params: { id: context.params ? context.params.portfolioId : 0 },
+      params: { id: portfolioId },
     })
     .then((r) => ({ is403: false, data: deepcopy(r.data) }))
     .catch(() => ({ is403: true, data: {} }));
+
   return {
     props: {
       portfolio,
+      portfolioId,
       is403,
     },
     revalidate: 6000,
