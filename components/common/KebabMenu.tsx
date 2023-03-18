@@ -33,7 +33,7 @@ function Menu({ children, className = "" }: KebabMenuProps) {
   return (
     <ul
       className={classNames(
-        "z-[100] absolute top-6 right-0 shadow-sm shadow-[#00000040]",
+        "absolute top-6 right-0 shadow-sm shadow-[#00000040] z-50",
         className,
       )}
     >
