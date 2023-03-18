@@ -100,16 +100,26 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { data: portfolio } = context.params
-    ? await httpClient.portfolio.getById({
-        params: { id: context.params.portfolioId },
-      })
-    : { data: [] };
+  try {
+    const { data: portfolio } = context.params
+      ? await httpClient.portfolio.getById({
+          params: { id: context.params.portfolioId },
+        })
+      : { data: {} };
 
-  return {
-    props: {
-      portfolio: deepcopy(portfolio),
-    },
-    revalidate: 6000,
-  };
+    return {
+      props: {
+        portfolio: deepcopy(portfolio),
+      },
+      revalidate: 6000,
+    };
+  } catch {
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/403",
+      },
+      props: {},
+    };
+  }
 };
