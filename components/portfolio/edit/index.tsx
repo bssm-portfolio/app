@@ -53,7 +53,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
       if (editVideoFile)
         return getFileUidByFileUpload(editVideoFile, openToast);
       if (videoFileUid && !editVideoFile) return videoFileUid;
-      return "299ae74e-dbda-4def-a3b0-0939aadd997c.mp4";
+      return undefined;
     };
 
     const getThumbnailFileUid = () => {
