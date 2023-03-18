@@ -1,21 +1,31 @@
+import { SearchType } from "@/types/portfolio.interface";
 import { focusInput } from "@/utils/input";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import SearchIcon from "../Icon/SearchIcon";
 import Select from "./Select";
 
-const searchOptions = [
+interface SearchOptions {
+  label: string;
+  value: SearchType;
+}
+
+const searchOptions: SearchOptions[] = [
   {
     label: "제목",
-    value: "제목",
+    value: "TITLE",
   },
   {
-    label: "제작자별",
-    value: "제작자별",
+    label: "테마",
+    value: "THEME",
   },
   {
-    label: "학생별",
-    value: "학생별",
+    label: "기여자",
+    value: "CONTRIBUTOR",
+  },
+  {
+    label: "제작자",
+    value: "CREATOR",
   },
 ];
 
@@ -40,15 +50,18 @@ export default function SearchBar() {
   };
 
   const handleKeyword = (event: ChangeEvent<HTMLInputElement>) =>
-    setSearchProperty((prev) => ({ keyword: event.target.value, ...prev }));
+    setSearchProperty((prev) => ({ ...prev, keyword: event.target.value }));
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) =>
-    setSearchProperty((prev) => ({ searchType: event.target.value, ...prev }));
+    setSearchProperty((prev) => ({
+      ...prev,
+      searchType: event.target.value as SearchType,
+    }));
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     router.push({
-      pathname: `/search`,
+      pathname: "/search",
       query: searchProperty,
     });
   };
