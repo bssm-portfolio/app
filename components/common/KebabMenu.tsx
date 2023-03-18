@@ -1,3 +1,4 @@
+import useOutsideClick from "@/hooks/useOutsideClick";
 import classNames from "classnames";
 import { HTMLProps, ReactNode, useState } from "react";
 import KebabIcon from "../Icon/KebabIcon";
@@ -13,11 +14,15 @@ interface KebabItemProps extends HTMLProps<HTMLLIElement>, KebabProps {}
 
 function Provider({ children, className = "" }: KebabProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const handleMenuClick = () => setIsOpen((prev) => !prev);
+
+  const { ref } = useOutsideClick<HTMLDivElement>({
+    click: () => setIsOpen(false),
+  });
 
   return (
     <div
-      onClick={handleMenuClick}
+      ref={ref}
+      onClick={() => setIsOpen((prev) => !prev)}
       className={classNames(
         "relative text-sm cursor-pointer select-none",
         className,
@@ -33,7 +38,7 @@ function Menu({ children, className = "" }: KebabMenuProps) {
   return (
     <ul
       className={classNames(
-        "z-[100] absolute top-6 right-0 shadow-sm shadow-[#00000040]",
+        "absolute top-6 right-0 shadow-sm shadow-[#00000040] z-50",
         className,
       )}
     >

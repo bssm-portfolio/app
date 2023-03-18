@@ -75,6 +75,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
             isEmptyUser={isEmptyUser}
             portfolioId={Number(portfolioId)}
             key={comment.commentId}
+            isReply={false}
           />
         ))}
       </div>
