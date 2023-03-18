@@ -8,9 +8,9 @@ interface SearchPageLayoutProps {
 
 function Frame({ filter, portfolioList }: SearchPageLayoutProps) {
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center relative overflow-hidden">
       <div
-        className={`relative pt-8 flex flex-col z-10 overflow-hidden min-h-[calc(100vh-4.625rem)] ${styleConfig.desktopWidth}`}
+        className={`relative pt-8 flex flex-col z-10 min-h-[calc(100vh-4.625rem)] ${styleConfig.desktopWidth}`}
       >
         <div className="z-20">
           <div>{filter}</div>
