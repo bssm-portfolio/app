@@ -50,7 +50,7 @@ function Item({
           "w-16": type === "portfolio",
           "w-20": type === "main",
           "cursor-pointer py-3": type === "upload",
-          "bg-blue text-white": type === "upload" && selected,
+          "bg-blue text-white": selected,
         },
       )}
     >
