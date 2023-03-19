@@ -45,8 +45,8 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
     const getPortfolioType = (): PortfolioType => {
       if (data.portfolioUrl.length > 0 && (videoFileUid || editVideoFile))
         return "ALL";
-      if (videoFileUid) return "VIDEO";
-      return "URL";
+      if (data.portfolioUrl.length > 0) return "URL";
+      return "VIDEO";
     };
 
     const getVideoFileUid = () => {
