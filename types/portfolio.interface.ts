@@ -105,7 +105,8 @@ export type SearchFilterPropertyType =
   | "uploadDateType"
   | "schoolGrade"
   | "sortType"
-  | "sortDirectionType";
+  | "sortDirectionType"
+  | "portfolioTheme";
 
 export interface PortfolioList {
   list: Portfolio[];

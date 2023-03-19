@@ -23,6 +23,10 @@ const enum PropertyEnum {
   SORT_ALL = "ALL",
   SORT_UPLOAD_DATE = "UPLOAD_DATE",
   SORT_COMMENTS = "COMMENTS",
+  THEME_WEB = "WEB",
+  THEME_APP = "APP",
+  THEME_EMBEDDED = "EMBEDDED",
+  THEME_ROBOT = "ROBOT",
 }
 
 export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
@@ -30,6 +34,7 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
   const [uploadDatePropertyId, setUploadDatePropertyId] = useState("");
   const [gradePropertyId, setGradePropertyId] = useState("");
   const [sortTypePropertyId, setSortTypePropertyId] = useState("");
+  const [theme, setTheme] = useState("");
 
   const datePropertyList = [
     {
@@ -78,6 +83,28 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
       id: PropertyEnum.SORT_COMMENTS,
       label: "댓글순",
       value: PropertyEnum.SORT_COMMENTS,
+    },
+  ];
+  const themeList = [
+    {
+      id: PropertyEnum.THEME_WEB,
+      label: "웹",
+      value: PropertyEnum.THEME_WEB,
+    },
+    {
+      id: PropertyEnum.THEME_APP,
+      label: "앱",
+      value: PropertyEnum.THEME_APP,
+    },
+    {
+      id: PropertyEnum.THEME_EMBEDDED,
+      label: "임베디드",
+      value: PropertyEnum.THEME_EMBEDDED,
+    },
+    {
+      id: PropertyEnum.THEME_ROBOT,
+      label: "로봇",
+      value: PropertyEnum.THEME_ROBOT,
     },
   ];
 
@@ -153,6 +180,23 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
                 setFilter={setFilter}
                 checkBoxPropertyId={sortTypePropertyId}
                 setCheckBoxPropertyId={setSortTypePropertyId}
+              />
+            ))}
+          </div>
+          <div>
+            <h2 className="font-semibold">테마</h2>
+            <hr className="my-2.5 text-white w-40" />
+            {themeList.map(({ id, label, value }) => (
+              <CheckBoxText
+                name="portfolioTheme"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkBoxPropertyId={theme}
+                setCheckBoxPropertyId={setTheme}
               />
             ))}
           </div>
