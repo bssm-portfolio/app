@@ -2,7 +2,7 @@ import { PortfolioListType } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import Chip from "./Chip";
 
-interface ChipItem {
+export interface ChipItem {
   id: number | string;
   label: string;
   selected?: boolean;
