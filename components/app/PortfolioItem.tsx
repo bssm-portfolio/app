@@ -5,7 +5,7 @@ import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 import Image from "next/image";
 import { useState } from "react";
-import ChipGroup from "../atoms/ChipGroup";
+import SkillList from "../common/Portfolio/SkillList";
 import { CommentIcon, HeartIcon } from "../Icon";
 
 interface SideMenuPortfolioProps {
@@ -80,7 +80,11 @@ export default function PortfolioItem({
         </span>
 
         {portfolio.skillList.length > 0 && (
-          <ChipGroup skillList={portfolio.skillList} type="portfolio" />
+          <SkillList
+            skillList={portfolio.skillList}
+            type="portfolio"
+            isShorten
+          />
         )}
 
         <div className="text-xsmall mt-2">
