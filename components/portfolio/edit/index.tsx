@@ -43,20 +43,17 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     const getPortfolioType = (): PortfolioType => {
-      if (data.portfolioUrl.length > 0 && (videoFileUid || editVideoFile)) {
+      if (data.portfolioUrl.length > 0 && (videoFileUid || editVideoFile))
         return "ALL";
-      }
-      if (videoFileUid) {
-        return "VIDEO";
-      }
-      return "URL";
+      if (data.portfolioUrl.length > 0) return "URL";
+      return "VIDEO";
     };
 
     const getVideoFileUid = () => {
       if (editVideoFile)
         return getFileUidByFileUpload(editVideoFile, openToast);
       if (videoFileUid && !editVideoFile) return videoFileUid;
-      return "299ae74e-dbda-4def-a3b0-0939aadd997c.mp4";
+      return undefined;
     };
 
     const getThumbnailFileUid = () => {
@@ -72,20 +69,8 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
         portfolioType: getPortfolioType(),
         skillList: selectedSkills,
         contributorIdList: selectedMembers.map((member) => member.memberId),
-        videoFileUid: (await getVideoFileUid()) || undefined,
-        thumbnailFileUid: (await getThumbnailFileUid()) || "ㅇㅇㅇ",
-        video: undefined,
-        thumbnail: undefined,
-        writer: undefined,
-        scope: undefined,
-        contributorList: undefined,
-        bookmarks: undefined,
-        bookmarkYn: undefined,
-        followYn: undefined,
-        views: undefined,
-        comments: undefined,
-        recommendStatus: undefined,
-        createdDate: undefined,
+        videoFileUid: await getVideoFileUid(),
+        thumbnailFileUid: await getThumbnailFileUid(),
       })
       .then(() => {
         openToast("수정이 완료되었습니다.");

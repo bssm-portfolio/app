@@ -7,8 +7,8 @@ import { getTimeAgo } from "@/utils/date";
 import { getFileDownloadUrl } from "@/utils/file";
 import classNames from "classnames";
 import config from "@/config";
-import ChipGroup from "../atoms/ChipGroup";
 import RecommendIcon from "../Icon/RecommendIcon";
+import SkillList from "./Portfolio/SkillList";
 
 interface PortfolioProps {
   portfolio: Portfolio;
@@ -58,7 +58,7 @@ export default function PortfolioView({ portfolio, onClick }: PortfolioProps) {
                   ? `외 ${portfolio.contributorList.length} 명`
                   : ""}
               </div>
-              <ChipGroup skillList={portfolio.skillList} />
+              <SkillList skillList={portfolio.skillList} isShorten />
             </div>
           </div>
 

@@ -1,34 +1,38 @@
 import SearchFilter from "@/components/common/SearchFilter";
 import PortfolioList from "@/components/portfolio/PortfolioList";
 import SearchPageLayout from "@/layouts/Search";
-import { Filter } from "@/types/portfolio.interface";
+import { Filter, SearchType } from "@/types/portfolio.interface";
 import { NextSeo, NextSeoProps } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function SearchPage() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState<string>("");
-  const [filter, setFilter] = useState<Filter>({});
+  const [filter, setFilter] = useState<Filter>({
+    search: "",
+    searchType: "TITLE",
+  });
 
   useEffect(() => {
-    setKeyword((router.query.keyword as string) || "");
+    setFilter((prev) => ({
+      ...prev,
+      search: router.query.keyword as string,
+      searchType: (router.query.searchType as SearchType) || "TITLE",
+    }));
   }, [router.query]);
 
   const seoConfig: NextSeoProps = {
-    title: `검색 결과 : ${keyword}`,
-    description: `${keyword}에 대한 검색 결과입니다.`,
+    title: `검색 결과 : ${router.query.keyword}`,
+    description: `${router.query.keyword}에 대한 검색 결과입니다.`,
   };
 
   return (
-    <div>
+    <>
       <NextSeo {...seoConfig} />
       <SearchPageLayout
         filter={<SearchFilter filter={filter} setFilter={setFilter} />}
-        portfolioList={
-          <PortfolioList keyword={keyword} type="search" filter={filter} />
-        }
+        portfolioList={<PortfolioList type="search" filter={filter} />}
       />
-    </div>
+    </>
   );
 }

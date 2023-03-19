@@ -23,10 +23,18 @@ const enum PropertyEnum {
   SORT_ALL = "ALL",
   SORT_UPLOAD_DATE = "UPLOAD_DATE",
   SORT_COMMENTS = "COMMENTS",
+  THEME_WEB = "WEB",
+  THEME_APP = "APP",
+  THEME_EMBEDDED = "EMBEDDED",
+  THEME_ROBOT = "ROBOT",
 }
 
 export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
   const [isOpen, toggleOpen] = useReducer((state) => !state, false);
+  const [uploadDatePropertyId, setUploadDatePropertyId] = useState("");
+  const [gradePropertyId, setGradePropertyId] = useState("");
+  const [sortTypePropertyId, setSortTypePropertyId] = useState("");
+  const [theme, setTheme] = useState("");
 
   const datePropertyList = [
     {
@@ -77,11 +85,28 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
       value: PropertyEnum.SORT_COMMENTS,
     },
   ];
-
-  const [selectedDatePropertyId, setSelectedDatePropertyId] = useState("");
-  const [selectedGradePropertyId, setSelectedGradePropertyId] = useState("");
-  const [selectedSortTypePropertyId, setSelectedSortTypePropertyId] =
-    useState("");
+  const themeList = [
+    {
+      id: PropertyEnum.THEME_WEB,
+      label: "웹",
+      value: PropertyEnum.THEME_WEB,
+    },
+    {
+      id: PropertyEnum.THEME_APP,
+      label: "앱",
+      value: PropertyEnum.THEME_APP,
+    },
+    {
+      id: PropertyEnum.THEME_EMBEDDED,
+      label: "임베디드",
+      value: PropertyEnum.THEME_EMBEDDED,
+    },
+    {
+      id: PropertyEnum.THEME_ROBOT,
+      label: "로봇",
+      value: PropertyEnum.THEME_ROBOT,
+    },
+  ];
 
   return (
     <div className="flex flex-col mb-small cursor-pointer text-white">
@@ -112,17 +137,15 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {datePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                {...{
-                  name: "uploadDateType",
-                  key: id,
-                  id,
-                  label,
-                  value,
-                  filter,
-                  setFilter,
-                  checkedId: selectedDatePropertyId,
-                  setCheckedId: setSelectedDatePropertyId,
-                }}
+                name="uploadDateType"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkBoxPropertyId={uploadDatePropertyId}
+                setCheckBoxPropertyId={setUploadDatePropertyId}
               />
             ))}
           </div>
@@ -131,17 +154,15 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {gradePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                {...{
-                  name: "schoolGrade",
-                  key: id,
-                  id,
-                  label,
-                  value,
-                  filter,
-                  setFilter,
-                  checkedId: selectedGradePropertyId,
-                  setCheckedId: setSelectedGradePropertyId,
-                }}
+                name="schoolGrade"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkBoxPropertyId={gradePropertyId}
+                setCheckBoxPropertyId={setGradePropertyId}
               />
             ))}
           </div>
@@ -150,17 +171,32 @@ export default function SearchFilter({ filter, setFilter }: SearchFilterProps) {
             <hr className="my-2.5 text-white w-40" />
             {sortTypePropertyList.map(({ id, label, value }) => (
               <CheckBoxText
-                {...{
-                  name: "sortType",
-                  key: id,
-                  id,
-                  label,
-                  value,
-                  filter,
-                  setFilter,
-                  checkedId: selectedSortTypePropertyId,
-                  setCheckedId: setSelectedSortTypePropertyId,
-                }}
+                name="sortType"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkBoxPropertyId={sortTypePropertyId}
+                setCheckBoxPropertyId={setSortTypePropertyId}
+              />
+            ))}
+          </div>
+          <div>
+            <h2 className="font-semibold">테마</h2>
+            <hr className="my-2.5 text-white w-40" />
+            {themeList.map(({ id, label, value }) => (
+              <CheckBoxText
+                name="portfolioTheme"
+                key={id}
+                id={id}
+                label={label}
+                value={value}
+                filter={filter}
+                setFilter={setFilter}
+                checkBoxPropertyId={theme}
+                setCheckBoxPropertyId={setTheme}
               />
             ))}
           </div>

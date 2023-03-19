@@ -5,7 +5,7 @@ import LoginPopupView from "../Auth/LoginPopup";
 import HeaderView from "./View";
 
 export default function Header() {
-  const { user, isLogined, logout } = useUser();
+  const { user: userInfo, isLogined, logout } = useUser();
   const { openModal, closeModal } = useModal();
 
   const openLoginModal = () =>
@@ -21,9 +21,9 @@ export default function Header() {
 
   return (
     <HeaderView
-      avatarUrl={user.profileImageUrl}
+      avatarUrl={userInfo.profileImageUrl}
       isLogined={isLogined}
-      memberId={user.memberId}
+      memberId={userInfo.memberId}
       onLeftButtonClick={isLogined ? logout : openLoginModal}
       onRightButtonClick={isLogined ? openUploadModal : openLoginModal}
     />

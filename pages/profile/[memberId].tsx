@@ -14,7 +14,7 @@ interface MemberIdPageProps {
 }
 
 export default function Home({ userInfo }: MemberIdPageProps) {
-  const { user: myUserInfo } = useUser({ authorizedPage: true });
+  const { user: myUserInfo } = useUser();
   const isMypage = myUserInfo.memberId === userInfo.memberId;
   const { list: portfolioList } = usePortfolioListById(
     userInfo.memberId,

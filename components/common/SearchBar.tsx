@@ -1,33 +1,33 @@
-import { clearInput, focusInput } from "@/utils/input";
+import { SearchType } from "@/types/portfolio.interface";
+import { focusInput } from "@/utils/input";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
-import { XIcon } from "../Icon";
 import SearchIcon from "../Icon/SearchIcon";
 import Select from "./Select";
 
-const searchOptions = [
+interface SearchOptions {
+  label: string;
+  value: SearchType;
+}
+
+const searchOptions: SearchOptions[] = [
   {
     label: "제목",
-    value: "제목",
+    value: "TITLE",
   },
   {
-    label: "테마별",
-    value: "테마별",
+    label: "기여자",
+    value: "CONTRIBUTOR",
   },
   {
-    label: "제작자별",
-    value: "제작자별",
-  },
-  {
-    label: "학생별",
-    value: "학생별",
+    label: "제작자",
+    value: "CREATOR",
   },
 ];
 
 export default function SearchBar() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [searchProperty, setSearchProperty] = useState({});
   const inputRef = useRef<HTMLInputElement>(null);
 
   const getSearchBarCss = () => {
@@ -46,14 +46,20 @@ export default function SearchBar() {
   };
 
   const handleKeyword = (event: ChangeEvent<HTMLInputElement>) =>
-    setKeyword(event.target.value);
+    setSearchProperty((prev) => ({ ...prev, keyword: event.target.value }));
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) =>
-    setCategory(event.target.value);
+    setSearchProperty((prev) => ({
+      ...prev,
+      searchType: event.target.value as SearchType,
+    }));
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push({ pathname: `/search`, query: { keyword } });
+    router.push({
+      pathname: "/search",
+      query: searchProperty,
+    });
   };
 
   return (
@@ -61,7 +67,6 @@ export default function SearchBar() {
       <Select
         className="text-middle"
         name="category"
-        value={category}
         onChange={(event) => handleSelect(event)}
         options={searchOptions}
         nativeSelect
@@ -73,21 +78,8 @@ export default function SearchBar() {
         name="keyword"
         className="w-[13.875rem] focus:outline-none "
         placeholder="검색"
-        value={keyword}
         onChange={(event) => handleKeyword(event)}
       />
-
-      {keyword ? (
-        <button
-          type="button"
-          className="ml-3"
-          onClick={() => clearInput(inputRef)}
-        >
-          <XIcon className="w-base h-base" />
-        </button>
-      ) : (
-        <div className="w-4 h-4 ml-3" />
-      )}
     </form>
   );
 }

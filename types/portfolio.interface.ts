@@ -83,19 +83,30 @@ export type SortType =
   | "ALL";
 export type SortDirectionType = "ASC" | "DESC";
 export type SchoolGradeType = 1 | 2 | 3;
+export type PortfolioThemeType = "WEB" | "APP" | "EMBEDDED" | "ROBOT";
+export type SearchType =
+  | "TITLE"
+  | "CREATOR"
+  | "CONTRIBUTOR"
+  | "CREATOR_AND_CONTRIBUTOR ";
+
 export interface Filter {
   search?: string;
+  searchType?: SearchType;
   uploadDateType?: UploadDateType;
   schoolGrade?: SchoolGradeType;
+  portfolioThemeType?: PortfolioThemeType;
   sortType?: SortType;
   sortDirectionType?: SortDirectionType;
   recommendStatus?: RecommendStatus;
 }
+
 export type SearchFilterPropertyType =
   | "uploadDateType"
   | "schoolGrade"
   | "sortType"
-  | "sortDirectionType";
+  | "sortDirectionType"
+  | "portfolioTheme";
 
 export interface PortfolioList {
   list: Portfolio[];
@@ -130,4 +141,17 @@ export interface Description {
 
 export interface CommentForm {
   content: string;
+}
+
+export type CheckBoxPropertyType = {
+  id?: string;
+  value: string;
+  label: string;
+};
+
+export interface CheckBoxProperty {
+  uploadDateType: CheckBoxPropertyType;
+  schoolGrade: CheckBoxPropertyType;
+  sortType: CheckBoxPropertyType;
+  sortDirectionType: CheckBoxPropertyType;
 }

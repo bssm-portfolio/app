@@ -7,8 +7,8 @@ import useUser from "@/hooks/useUser";
 import { CommentForm } from "@/types/portfolio.interface";
 import config from "@/config";
 import InputButton from "../atoms/InputButton";
-import CommentView from "../atoms/Comment";
 import Avatar from "../common/Avatar";
+import CommentView from "../atoms/Comment";
 
 export default function CommentList({ portfolioId }: { portfolioId?: number }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -75,6 +75,7 @@ export default function CommentList({ portfolioId }: { portfolioId?: number }) {
             isEmptyUser={isEmptyUser}
             portfolioId={Number(portfolioId)}
             key={comment.commentId}
+            isReply={false}
           />
         ))}
       </div>
