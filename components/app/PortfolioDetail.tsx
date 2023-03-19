@@ -17,11 +17,11 @@ import PeopleIcon from "../Icon/PeopleIcon";
 import EmptyHeartIcon from "../Icon/EmptyHeartIcon";
 import FilledHeartIcon from "../Icon/FilledHeartIcon";
 import EditIcon from "../Icon/EditIcon";
-import ChipGroup from "../atoms/ChipGroup";
 import GithubIcon from "../Icon/GithubIcon";
 import Kebab from "../common/KebabMenu";
 import TrashCanIcon from "../Icon/TrashCanIcon";
 import RecommendIcon from "../Icon/RecommendIcon";
+import SkillList from "../common/Portfolio/SkillList";
 
 interface PortfolioDetailProps {
   portfolio: Portfolio;
@@ -124,7 +124,7 @@ export default function Detail({
           >
             {portfolio.writer.name}
           </span>
-          <ChipGroup
+          <SkillList
             skillList={portfolio.skillList}
             className="mt-small"
             type="detail"

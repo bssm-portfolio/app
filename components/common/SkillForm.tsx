@@ -22,13 +22,7 @@ export default function SkillForm({
       <Skills
         skills={selectedSkills}
         selectedSkills={selectedSkills}
-        setSelectedSkills={(skill) =>
-          setSelectedSkills((s) =>
-            s.filter(
-              (selectedSkill) => selectedSkill.skillId !== skill.skillId,
-            ),
-          )
-        }
+        setSelectedSkills={setSelectedSkills}
       />
       <div className="relative">
         <SearchIcon className="absolute top-2 left-3 w-[0.8125rem]" />
@@ -41,14 +35,7 @@ export default function SkillForm({
       <Skills
         skills={skills}
         selectedSkills={selectedSkills}
-        setSelectedSkills={(v) =>
-          setSelectedSkills((s) => {
-            if (s.includes(v)) {
-              return s.filter((sv) => sv !== v);
-            }
-            return [...s, v];
-          })
-        }
+        setSelectedSkills={setSelectedSkills}
       />
     </>
   );

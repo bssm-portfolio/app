@@ -1,46 +1,46 @@
 import { PortfolioListType } from "@/types/portfolio.interface";
-import { Skill } from "@/types/skill.interface";
 import classNames from "classnames";
 import Chip from "./Chip";
 
+export interface ChipItem {
+  id: number | string;
+  label: string;
+  selected?: boolean;
+  onClick?: () => void;
+}
 interface ChipGroupProps {
-  skillList: Skill[];
+  items: ChipItem[];
   type?: PortfolioListType;
   className?: string;
-  selectedSkills?: Skill[];
-  setSelectedSkills?: (skill: Skill) => void;
+  isShorten?: boolean;
 }
 
 export default function ChipGroup({
-  skillList,
+  items,
   type = "main",
   className = "",
-  selectedSkills,
-  setSelectedSkills,
+  isShorten = false,
 }: ChipGroupProps) {
-  const isShorten = ["main", "portfolio"].includes(type);
-  const getFilteredSkillList = () => {
-    if (isShorten) return skillList.filter((_, idx) => idx < 3);
-    return skillList;
+  const getFilteredItems = () => {
+    if (isShorten) return items.filter((_, idx) => idx < 3);
+    return items;
   };
 
   return (
     <Chip.Group className={classNames(className, "pt-2")} type={type}>
-      {getFilteredSkillList().map((skillData) => (
+      {getFilteredItems().map((item) => (
         <Chip.Item
           type={type}
-          key={skillData.skillId}
-          {...(type === "upload" && {
-            selected: selectedSkills?.some(
-              (selectedSkill) => selectedSkill.skillId === skillData.skillId,
-            ),
-            onClick: () => setSelectedSkills?.(skillData),
-          })}
+          key={item.id}
+          {...{
+            selected: item.selected,
+            onClick: item.onClick,
+          }}
         >
-          {skillData.skillName}
+          {item.label}
         </Chip.Item>
       ))}
-      {isShorten && skillList.length >= 4 && (
+      {isShorten && items.length >= 4 && (
         <Chip.Item type={type}>더보기</Chip.Item>
       )}
     </Chip.Group>
