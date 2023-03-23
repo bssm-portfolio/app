@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ChangeEventHandler, InputHTMLAttributes } from "react";
+import { ChangeEventHandler, InputHTMLAttributes, RefObject } from "react";
 
 type ButtonVarient = "primary" | "secondary";
 interface FileUploaderProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,6 +8,7 @@ interface FileUploaderProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   varient?: ButtonVarient;
   id?: string;
+  inputRef?: RefObject<HTMLInputElement>;
 }
 
 const getFileUploaderCss = (varient: ButtonVarient) => {
@@ -30,6 +31,7 @@ export default function FileUploader({
   label,
   className = "",
   id = "file-uploader",
+  inputRef,
 }: FileUploaderProps) {
   return (
     <>
@@ -40,9 +42,10 @@ export default function FileUploader({
         {label}
       </label>
       <input
+        ref={inputRef}
         type="file"
         id={id}
-        className={classNames("hidden")}
+        className="hidden"
         onChange={onChange}
       />
     </>
