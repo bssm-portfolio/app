@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Options {
   accept?: string;
-  isMultiple?: boolean;
   isSingleFile?: boolean;
 }
 
@@ -76,7 +75,7 @@ function useFileDrop(options?: Options) {
   useEffect(() => {
     if (!inputRef.current || !options) return;
     if (options.accept) inputRef.current.setAttribute("accept", options.accept);
-    if (options.isMultiple)
+    if (!options.isSingleFile)
       inputRef.current.setAttribute("multiple", "multiple");
   }, [inputRef, options]);
 
