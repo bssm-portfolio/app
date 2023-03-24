@@ -51,14 +51,14 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
     const getVideoFileUid = () => {
       if (editVideoFile)
-        return getFileUidByFileUpload(editVideoFile, openToast);
+        return getFileUidByFileUpload(editVideoFile, openToast, "video");
       if (videoFileUid && !editVideoFile) return videoFileUid;
       return undefined;
     };
 
     const getThumbnailFileUid = () => {
       if (editThumbnailFile)
-        return getFileUidByFileUpload(editThumbnailFile, openToast);
+        return getFileUidByFileUpload(editThumbnailFile, openToast, "image");
       return thumbnailFileUid;
     };
 

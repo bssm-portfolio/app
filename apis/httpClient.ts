@@ -97,15 +97,15 @@ export class HttpClient {
     });
   }
 
-  video(requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/video", {
+  video(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/video", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
   }
 
-  image(requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/image", {
+  image(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/image", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
