@@ -1,7 +1,8 @@
 import classNames from "classnames";
+import { InputHTMLAttributes } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-interface RadioProps {
+interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
   description?: string;
