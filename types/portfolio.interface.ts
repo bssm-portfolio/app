@@ -25,7 +25,7 @@ export type Portfolio = {
   scope: PortfolioScope;
   portfolioTheme: PortfolioTheme;
   gitUrl: string;
-  video: S3File;
+  video: string;
   thumbnail: S3File;
   skillList: Skill[];
   contributorList: Member[];

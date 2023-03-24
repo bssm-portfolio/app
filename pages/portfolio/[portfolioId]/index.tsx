@@ -73,7 +73,7 @@ export default function PortfolioIdPage({
           <PortfolioPlayer
             videoUrl={
               dateParsedPortfolio.portfolioType !== "URL"
-                ? getFileDownloadUrl(dateParsedPortfolio.video)
+                ? dateParsedPortfolio.video
                 : undefined
             }
             portfolioUrl={

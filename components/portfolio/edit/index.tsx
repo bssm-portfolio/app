@@ -100,7 +100,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
 
   useEffect(() => {
     setThumbnailFileUid(portfolio.thumbnail.fileUid);
-    setVideoFileUid(portfolio.video?.fileUid);
+    setVideoFileUid(portfolio.video);
     setSelectedSkills(portfolio.skillList);
     setSelectedMembers(portfolio.contributorList);
     reset(portfolio);
@@ -141,9 +141,7 @@ export default function PortfolioEdit({ portfolioId }: PortfolioEditProps) {
           setThumbnailFile={setEditThumbnailFile}
           setVideoFile={setEditVideoFile}
           thumbnailUrl={getFileDownloadUrl(portfolio.thumbnail)}
-          videoUrl={
-            portfolio.video ? getFileDownloadUrl(portfolio.video) : undefined
-          }
+          videoUrl={portfolio.video ? portfolio.video : undefined}
           editVideoFile={editVideoFile}
           editThumbnailFile={editThumbnailFile}
         />
