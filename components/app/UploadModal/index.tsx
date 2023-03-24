@@ -34,9 +34,11 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     const videoFileUid =
-      videoFile && (await getFileUidByFileUpload(videoFile, openToast));
+      videoFile &&
+      (await getFileUidByFileUpload(videoFile, openToast, "video"));
     const thumbnailFileUid =
-      thumbnailFile && (await getFileUidByFileUpload(thumbnailFile, openToast));
+      thumbnailFile &&
+      (await getFileUidByFileUpload(thumbnailFile, openToast, "image"));
 
     const getPortfolioType = (): PortfolioType => {
       if (data.portfolioUrl.length > 0 && videoFileUid) {
