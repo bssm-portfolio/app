@@ -2,8 +2,8 @@ import useWindow from "@/hooks/useWindow";
 import { PortfolioType } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player/lazy";
 import Button from "../atoms/Button";
+import Video from "../atoms/Video";
 
 interface PortfolioProps {
   type: PortfolioType;
@@ -65,13 +65,7 @@ export default function PortfolioPlayer({
         />
       )}
       {selected === "video" && isWindow && (
-        <ReactPlayer
-          width="100%"
-          height="auto"
-          url={videoUrl}
-          controls // 플레이어 컨트롤 노출 여부
-          light={false} // 플레이어 모드
-        />
+        <Video width="100%" height="auto" src={videoUrl} controls />
       )}
     </div>
   );
