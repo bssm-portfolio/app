@@ -17,6 +17,7 @@ import { usePortfolio } from "@/models/portfolio";
 import useUser from "@/hooks/useUser";
 import PortfolioTitle from "@/components/app/PortfolioTitle";
 import Page403 from "@/pages/403";
+import useWindow from "@/hooks/useWindow";
 
 interface PortfolioIdPageProps {
   portfolio: Portfolio;
@@ -31,6 +32,7 @@ export default function PortfolioIdPage({
 }: PortfolioIdPageProps) {
   const { data: csrPortfolio } = usePortfolio(portfolioId);
   const { user: userInfo, isLogined } = useUser();
+  const { isWindow } = useWindow();
   const isMyPortfolio =
     userInfo.memberId === csrPortfolio.writer.memberId && isLogined;
 
@@ -40,10 +42,10 @@ export default function PortfolioIdPage({
   const type = dateParsedPortfolio.portfolioType;
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !is403) {
+    if (isWindow && !is403) {
       httpClient.portfolioViewsAdd.put({ portfolioId: portfolio.portfolioId });
     }
-  }, [portfolio.portfolioId, is403]);
+  }, [portfolio.portfolioId, is403, isWindow]);
 
   if (is403 && !isMyPortfolio) {
     return <Page403 />;

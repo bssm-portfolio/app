@@ -1,6 +1,8 @@
+import useWindow from "@/hooks/useWindow";
 import { PortfolioType } from "@/types/portfolio.interface";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
+import ReactPlayer from "react-player/lazy";
 import Button from "../atoms/Button";
 
 interface PortfolioProps {
@@ -17,6 +19,8 @@ export default function PortfolioPlayer({
   const [selected, setSelected] = useState<"web" | "video">(
     type === "URL" ? "web" : "video",
   );
+  const { isWindow } = useWindow();
+
   useEffect(() => {
     setSelected(type === "URL" ? "web" : "video");
   }, [type]);
@@ -60,10 +64,14 @@ export default function PortfolioPlayer({
           title="portfolio"
         />
       )}
-      {selected === "video" && (
-        <video src={videoUrl} controls className="w-full">
-          <track default kind="captions" srcLang="ko" src={videoUrl} />
-        </video>
+      {selected === "video" && isWindow && (
+        <ReactPlayer
+          width="100%"
+          height="auto"
+          url={videoUrl}
+          controls // 플레이어 컨트롤 노출 여부
+          light={false} // 플레이어 모드
+        />
       )}
     </div>
   );
