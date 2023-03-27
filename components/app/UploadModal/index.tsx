@@ -25,8 +25,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
   const [pageIndex, setPageIndex] = useState(0);
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<Member[]>([]);
-  const [thumbnailFile, setThumbnailFile] = useState<File>();
-  const [videoFile, setVideoFile] = useState<File>();
+  const [videoFileList, setVideoFileList] = useState<File[]>([]);
+  const [thumbnailFileList, setThumbnailFileList] = useState<File[]>([]);
 
   const { register, handleSubmit, setValue } = useForm<PortfolioForm>();
   const queryClient = useQueryClient();
@@ -34,9 +34,11 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
 
   const onValid: SubmitHandler<PortfolioForm> = async (data) => {
     const videoFileUid =
-      videoFile && (await getFileUidByFileUpload(videoFile, openToast));
+      videoFileList.length &&
+      (await getFileUidByFileUpload(videoFileList[0], openToast, "video"));
     const thumbnailFileUid =
-      thumbnailFile && (await getFileUidByFileUpload(thumbnailFile, openToast));
+      thumbnailFileList.length &&
+      (await getFileUidByFileUpload(thumbnailFileList[0], openToast, "image"));
 
     const getPortfolioType = (): PortfolioType => {
       if (data.portfolioUrl.length > 0 && videoFileUid) {
@@ -92,10 +94,8 @@ export default function UploadModal({ closeModal }: UploadModalProps) {
       <FileUploadView
         className={classNames({ hidden: pageIndex !== 0 })}
         register={register}
-        videoFile={videoFile}
-        setVideoFile={setVideoFile}
-        thumbnailFile={thumbnailFile}
-        setThumbnailFile={setThumbnailFile}
+        setThumbnailFileList={setThumbnailFileList}
+        setVideoFileList={setVideoFileList}
       />
       <FormView
         className={classNames({ hidden: pageIndex !== 1 })}

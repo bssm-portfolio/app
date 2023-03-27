@@ -4,6 +4,7 @@ import CheckBox from "@/components/atoms/CheckBox";
 import Input from "@/components/atoms/Input";
 import Radio from "@/components/atoms/Radio";
 import useOverlay from "@/hooks/useOverlay";
+import useWindow from "@/hooks/useWindow";
 import { MemberType } from "@/types/member.interface";
 import Link from "next/link";
 import { useState } from "react";
@@ -28,6 +29,7 @@ export default function SignupPopupView() {
   });
   const [isPrivacyAgree, setIsPrivacyAgree] = useState(false);
   const { openToast } = useOverlay();
+  const { isWindow } = useWindow();
 
   const onSubmit: SubmitHandler<SignupForm> = (data) => {
     if (!isPrivacyAgree) return openToast("개인정보 이용 동의가 필요합니다.");
@@ -42,7 +44,7 @@ export default function SignupPopupView() {
     httpClient.memberSignup
       .post(payload)
       .then(() => {
-        if (typeof window !== "undefined") window.location.href = "/";
+        if (isWindow) window.location.href = "/";
       })
       .catch(() => openToast("잘못된 정보가 있습니다.", { type: "danger" }));
   };

@@ -13,17 +13,24 @@ export const getFormData = (file: File) => {
   return formData;
 };
 
+type FileType = "image" | "video";
 export const getFileUidByFileUpload = async (
   file: File,
   openToast: OpenToastType,
+  fileType: FileType,
 ) => {
-  return httpClient.file
-    .upload(getFormData(file))
+  const getFileUploadRequest = () => {
+    if (fileType === "image")
+      return httpClient.fileUpload.image(getFormData(file));
+    return httpClient.fileUpload.video(getFormData(file));
+  };
+
+  return getFileUploadRequest()
     .then((r) => {
       openToast("파일 업로드에 성공하였습니다.");
       return r.data.fileUid;
     })
-    .catch(() =>
-      openToast("파일 업로드에 실패하였습니다.", { type: "danger" }),
+    .catch((error) =>
+      openToast(error.response.data.message, { type: "danger" }),
     );
 };

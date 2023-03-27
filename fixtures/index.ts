@@ -43,12 +43,7 @@ const portfolio: Portfolio = {
   portfolioUrl: "",
   title: "",
   description: "",
-  video: {
-    fileName: "",
-    filePath: "",
-    fileUid: "",
-    fileSize: 0,
-  },
+  video: "",
   thumbnail: {
     fileName: "",
     filePath: "",

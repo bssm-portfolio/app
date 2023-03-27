@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import useModal from "./useModal";
+import useWindow from "./useWindow";
 
 interface UseUserOptions {
   authorizedPage?: boolean;
@@ -16,6 +17,7 @@ const useUser = (options?: UseUserOptions) => {
   const [user, setUser] = useRecoilState(userState);
   const router = useRouter();
   const { openModal, visible } = useModal();
+  const { isWindow } = useWindow();
   const {
     data: userInfo,
     remove,
@@ -49,11 +51,11 @@ const useUser = (options?: UseUserOptions) => {
           </p>
         ),
         onClose: () => {
-          if (typeof window !== "undefined") window.location.href = "/";
+          if (isWindow) window.location.href = "/";
         },
       });
     }
-  }, [options, userInfo, isLoading, router, visible, openModal]);
+  }, [options, userInfo, isLoading, router, visible, openModal, isWindow]);
 
   useEffect(() => {
     if (
