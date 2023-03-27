@@ -47,7 +47,6 @@ export default function PortfolioIdPage({
     }
   }, [portfolio.portfolioId, is403, isWindow]);
 
-
   if (is403 && !isMyPortfolio) {
     return <Page403 />;
   }
