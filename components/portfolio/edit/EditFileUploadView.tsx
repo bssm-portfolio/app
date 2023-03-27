@@ -1,9 +1,10 @@
 import FileUploader from "@/components/atoms/FileUploader";
 import Input from "@/components/atoms/Input";
 import LabelForm from "@/components/atoms/LabelForm";
+import Video from "@/components/atoms/Video";
 import { PortfolioForm } from "@/types/portfolio.interface";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { CSSProperties, Dispatch, SetStateAction } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 interface FileUploadViewProps {
@@ -48,6 +49,12 @@ export default function FileUploadView({
     object-cover
     `;
   };
+  const videoStyle: CSSProperties = {
+    position: "absolute",
+    objectFit: "cover",
+    zIndex: "-10",
+    opacity: "0.3",
+  };
 
   return (
     <div>
@@ -82,10 +89,8 @@ export default function FileUploadView({
               if (event.target.files) setVideoFile(event.target.files[0]);
             }}
           />
-          <video
-            src={editVideoFile ? URL.createObjectURL(editVideoFile) : videoUrl}
-            className="w-full h-full -z-10 absolute object-cover rounded-lg opacity-30"
-          >
+
+          <video className="w-full h-full -z-10 !absolute object-cover rounded-lg opacity-30">
             <track
               kind="captions"
               src={
@@ -93,6 +98,11 @@ export default function FileUploadView({
               }
             />
           </video>
+
+          <Video
+            style={videoStyle}
+            src={editVideoFile ? URL.createObjectURL(editVideoFile) : videoUrl}
+          />
         </div>
       </LabelForm>
 

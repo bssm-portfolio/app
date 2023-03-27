@@ -34,13 +34,6 @@ export class HttpClient {
     });
   }
 
-  search(data: unknown, requestConfig?: AxiosRequestConfig) {
-    return this.api.post("/search", data, {
-      ...HttpClient.clientConfig,
-      ...requestConfig,
-    });
-  }
-
   post(data: unknown, requestConfig?: AxiosRequestConfig) {
     return this.api.post("", data, {
       ...HttpClient.clientConfig,
@@ -57,6 +50,13 @@ export class HttpClient {
 
   put(data: unknown, requestConfig?: AxiosRequestConfig) {
     return this.api.put("", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
+  search(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/search", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
@@ -92,6 +92,20 @@ export class HttpClient {
 
   unfollow(requestConfig?: AxiosRequestConfig) {
     return this.api.delete("/unfollow", {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
+  video(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/video", data, {
+      ...HttpClient.clientConfig,
+      ...requestConfig,
+    });
+  }
+
+  image(data: unknown, requestConfig?: AxiosRequestConfig) {
+    return this.api.post("/image", data, {
       ...HttpClient.clientConfig,
       ...requestConfig,
     });
@@ -136,6 +150,7 @@ export default {
   memberName: new HttpClient("/api/member/name", axiosConfig),
   comment: new HttpClient("/api/comment", axiosConfig),
   file: new HttpClient("/api/file", axiosConfig),
+  fileUpload: new HttpClient("/api/file/upload", axiosConfig),
   follow: new HttpClient("/api/follow", axiosConfig),
   refreshToken: new HttpClient("/api/refresh-token", axiosConfig),
   revalidatePortfolio: new HttpClient("/api/revalidate-portfolio", axiosConfig),

@@ -52,7 +52,7 @@ export default function Select<T>({
   return (
     <ReactSelect
       id={name}
-      onChange={(v) => setValue?.(v as any)}
+      onChange={(v) => setValue?.(v as T)}
       placeholder={props.placeholder}
       options={options}
       defaultInputValue={defaultValue}
