@@ -27,7 +27,7 @@ const usePortfolioList = (pagination: PaginationRequest, filter?: Filter) => {
     );
 
   const customHasNextPage =
-    (data?.pageParams[data.pageParams.length - 1] || 1) <
+    ((data?.pageParams[data.pageParams.length - 1] as number) || 1) <
     (data?.pages[0].pagination.totalPages || 0);
 
   return {
