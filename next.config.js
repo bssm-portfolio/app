@@ -21,7 +21,7 @@ const nextConfig = {
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
       { protocol: "https", hostname: "velog.velcdn.com" },
       { protocol: "https", hostname: "auth.bssm.kro.kr" },
-      { protocol: "https", hostname: "api.project.bssm.io" },
+      { protocol: "https", hostname: "portfolio.bssm.io" },
     ],
   },
 };
