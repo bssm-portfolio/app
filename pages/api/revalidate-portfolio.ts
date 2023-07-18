@@ -14,6 +14,6 @@ export default async function handler(
     await res.revalidate(`/portfolio/${req.body.portfolioId}`);
     return res.json({ revalidated: true });
   } catch (err) {
-    return res.status(500).send("Error revalidating");
+    return res.status(500).send(`Error revalidating: ${err}`);
   }
 }
