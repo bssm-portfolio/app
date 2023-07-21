@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Logo, SearchBar, Avatar, HeaderButton } from "@/components";
 import { useRouter } from "next/router";
 import styleConfig from "@/config/style";
+import classNames from "classnames";
 
 interface HeaderProps {
   avatarUrl?: string;
@@ -23,13 +24,16 @@ export default function HeaderView({
   return (
     <div className="flex justify-center bg-background_blue z-50">
       <div
-        className={`flex justify-between items-center my-4 select-none ${styleConfig.desktopWidth}`}
+        className={classNames(
+          "flex flex-col justify-between items-start gap-3 my-4 select-none lg:flex-row lg:items-center",
+          styleConfig.desktopWidth,
+        )}
       >
         <Link href="/">
           <Logo />
         </Link>
         <SearchBar />
-        <div className="hidden md:flex gap-4">
+        <div className="flex gap-4">
           <HeaderButton onClick={onLeftButtonClick}>
             {isLogined ? "log out" : "log in"}
           </HeaderButton>

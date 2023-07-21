@@ -32,8 +32,9 @@ export default function SearchBar() {
 
   const getSearchBarCss = () => {
     return `
-    hidden 
+    flex 
     items-center 
+    w-full
     bg-white
     text-primary-dark_gray
     border
@@ -41,7 +42,7 @@ export default function SearchBar() {
     rounded-full
     px-[1.5rem]
     py-[0.5rem]
-    xl:flex
+    lg:w-auto
   `;
   };
 
