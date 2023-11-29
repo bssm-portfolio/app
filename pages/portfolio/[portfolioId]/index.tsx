@@ -6,7 +6,7 @@ import {
   PortfolioPlayer,
   AppSideMenu,
 } from "@/components";
-import type { GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 import httpClient from "@/apis";
 import { Portfolio } from "@/types/portfolio.interface";
 import { getFileDownloadUrl } from "@/utils/file";
@@ -106,15 +106,9 @@ export default function PortfolioIdPage({
   );
 }
 
-export const getStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-};
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { portfolioId } = context.query;
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const portfolioId = context.params ? context.params.portfolioId : 0;
   const { data: portfolio, is403 } = await httpClient.portfolio
     .getById({
       params: { id: portfolioId },
@@ -128,6 +122,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
       portfolioId,
       is403,
     },
-    revalidate: 6000,
   };
 };
